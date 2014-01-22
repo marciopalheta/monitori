@@ -1,7 +1,7 @@
 package br.fucapi.fapeam.monitori.model.bean;
 
 @SuppressWarnings("serial")
-public class Agente extends AbstractEntityBean {
+public class Agente extends Usuario {
 
 	private String matricula;
 

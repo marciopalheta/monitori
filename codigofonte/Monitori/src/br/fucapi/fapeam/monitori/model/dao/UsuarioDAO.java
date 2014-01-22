@@ -1,5 +1,5 @@
 package br.fucapi.fapeam.monitori.model.dao;
 
-public class PacienteDAO {
+public class UsuarioDAO {
 
 }

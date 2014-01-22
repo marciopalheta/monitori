@@ -9,5 +9,4 @@
 
     <!-- Informacoes pessoais que todos usuarios irao ter-->
     <string name="nome">Nome</string>
-    <string name="endereco">Endereco</string>
 </resources>

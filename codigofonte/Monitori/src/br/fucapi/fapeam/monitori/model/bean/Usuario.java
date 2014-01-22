@@ -16,6 +16,11 @@ public class Usuario extends AbstractEntityBean {
 	private String observacao;
 	private String login;
 	private String senha;
+	
+	@Override
+	public String toString() {
+		return nome;
+	}
 
 	public String getLogin() {
 		return login;

@@ -3,7 +3,7 @@ package br.fucapi.fapeam.monitori.model.bean;
 import java.util.Calendar;
 
 @SuppressWarnings("serial")
-public class Usuario extends AbstractEntityBean{
+public class Usuario extends AbstractEntityBean {
 
 	private String nome;
 	private String endereco;
@@ -14,6 +14,29 @@ public class Usuario extends AbstractEntityBean{
 	private String telefone;
 	private Calendar dataNascimento;
 	private String observacao;
+	private String login;
+	private String senha;
+	
+	@Override
+	public String toString() {
+		return nome;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
 
 	public String getNome() {
 		return nome;
@@ -22,7 +45,6 @@ public class Usuario extends AbstractEntityBean{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
 
 	public UnidadeSaude getUnidadeSaude() {
 		return unidadeSaude;

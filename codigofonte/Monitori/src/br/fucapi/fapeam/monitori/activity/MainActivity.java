@@ -1,5 +1,8 @@
-package br.fucapi.fapeam.monitori;
+package br.fucapi.fapeam.monitori.activity;
 
+import br.fucapi.fapeam.monitori.R;
+import br.fucapi.fapeam.monitori.R.layout;
+import br.fucapi.fapeam.monitori.R.menu;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;

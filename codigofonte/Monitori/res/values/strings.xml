@@ -6,8 +6,10 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_paciente_dados">Dados do Paciente</string>
     <string name="title_activity_paciente">Lista de Pacientes</string>
-
-    <!-- Informacoes pessoais que todos usuarios irao ter-->
+	<string name="title_activity_medico">Lista de Medicos</string>
+    <string name="title_activity_medico_dados">Dados do Medico</string>
+    
+    <!-- Informacoes pessoais que todos usuarios irao ter -->
     <string name="nome">Nome</string>
     <string name="endereco">Endereco</string>
     <string name="bairro">Bairro</string>
@@ -21,6 +23,10 @@
     <string name="salvar">Salvar Dados</string>
     <string name="feminino">Feminino</string>
     <string name="masculino">Masculino</string>
-    <string name="sexo">Sexo</string>
+    <string name="sexo">Sexo</string>    
+
+    <!-- Informacoes do Medico -->
+    <string name="crm">CRM</string>
+    
     
 </resources>

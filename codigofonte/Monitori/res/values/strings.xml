@@ -9,4 +9,18 @@
 
     <!-- Informacoes pessoais que todos usuarios irao ter-->
     <string name="nome">Nome</string>
+    <string name="endereco">Endereco</string>
+    <string name="bairro">Bairro</string>
+    <string name="cep">Cep</string>
+    <string name="telefone">Telefone</string>
+    <string name="celular">Celular</string>
+    <string name="dtNascimento">Data Nascimento</string>
+    <string name="observacao">Observacao</string>
+    <string name="unidadeSaude">Unidade Basica de Saude</string>
+    <string name="foto">Foto</string>
+    <string name="salvar">Salvar Dados</string>
+    <string name="feminino">Feminino</string>
+    <string name="masculino">Masculino</string>
+    <string name="sexo">Sexo</string>
+    
 </resources>

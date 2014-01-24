@@ -9,6 +9,10 @@
 	<string name="title_activity_medico">Lista de Medicos</string>
     <string name="title_activity_medico_dados">Dados do Medico</string>
     
+    <!-- Strings para itens de menu -->
+    <string name="novo">Novo Paciente</string>
+    <string name="sincronizar">Sincronizar</string>
+    
     <!-- Informacoes pessoais que todos usuarios irao ter -->
     <string name="nome">Nome</string>
     <string name="endereco">Endereco</string>

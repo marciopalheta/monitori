@@ -20,16 +20,15 @@
         <activity
             android:name="br.fucapi.fapeam.monitori.activity.PacienteDadosActivity"
             android:label="@string/title_activity_paciente_dados" >
-            
         </activity>
         <activity
             android:name="br.fucapi.fapeam.monitori.activity.PacienteActivity"
             android:label="@string/title_activity_paciente" >
-			<intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>        
+            </intent-filter>
         </activity>
         <activity
             android:name="br.fucapi.fapeam.monitori.activity.MedicoActivity"
@@ -38,6 +37,15 @@
         <activity
             android:name="br.fucapi.fapeam.monitori.activity.MedicoDadosActivity"
             android:label="@string/title_activity_medico_dados" >
+        </activity>
+        <activity
+            android:name="br.fucapi.fapeam.monitori.activity.LoginActivity"
+            android:label="@string/title_activity_login" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

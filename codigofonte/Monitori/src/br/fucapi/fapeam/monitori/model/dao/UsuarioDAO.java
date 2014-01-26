@@ -76,8 +76,6 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 		values.put("telefone", paciente.getTelefone());
 		values.put("login", paciente.getLogin());
 		values.put("senha", paciente.getSenha());
-		values.put("masculino", paciente.getMasculino());
-		values.put("feminino", paciente.getFeminino());
 		
 		//Inserir dados do usuario
 		getWritableDatabase().insert(TABELA, null, values);

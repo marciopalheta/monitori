@@ -17,7 +17,33 @@ public class Usuario extends AbstractEntityBean {
 	private String login;
 	private String senha;
 	private String foto;
+	private String masculino;
+	private String feminino;
 	
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
+	public String getMasculino() {
+		return masculino;
+	}
+
+	public void setMasculino(String masculino) {
+		this.masculino = masculino;
+	}
+
+	public String getFeminino() {
+		return feminino;
+	}
+
+	public void setFeminino(String feminino) {
+		this.feminino = feminino;
+	}
+
 	@Override
 	public String toString() {
 		return nome;

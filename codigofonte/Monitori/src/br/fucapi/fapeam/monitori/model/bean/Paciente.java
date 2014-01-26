@@ -6,6 +6,9 @@ public class Paciente extends Usuario {
 	private boolean diabetico1;
 	private boolean diabetico2;
 
+	public String toString(){
+		return getNome();
+	}
 	public boolean isHipertenso() {
 		return hipertenso;
 	}

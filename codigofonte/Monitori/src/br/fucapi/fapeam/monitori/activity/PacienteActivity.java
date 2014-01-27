@@ -32,10 +32,10 @@ public class PacienteActivity extends Activity {
 	private ListView lvListagem;
 	
 	//Colecao de pacientes a serem exibidos na tela
-	private List<Paciente> listaPaciente;
+	private List<Usuario> listaPaciente;
 	
 	//ArrayAdapter para adaptar lista em View
-	private ArrayAdapter<Paciente> adapter;
+	private ArrayAdapter<Usuario> adapter;
 	
 	//Definicao do Layout de exibicao da lista
 	private int adapterLayout = android.R.layout.simple_list_item_1;
@@ -105,7 +105,7 @@ public class PacienteActivity extends Activity {
 		dao.close();
 		
 		//O objeto arrayadapter converte lista em view
-		this.adapter = new ArrayAdapter<Paciente>(this, adapterLayout, listaPaciente);
+		this.adapter = new ArrayAdapter<Usuario>(this, adapterLayout, listaPaciente);
 		//associacao do adapter ao listView
 		this.lvListagem.setAdapter(adapter);
 	}

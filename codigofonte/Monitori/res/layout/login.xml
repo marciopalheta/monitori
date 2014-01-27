@@ -17,19 +17,18 @@
   
      
     <EditText 
+        android:id="@+id/edt_login"
         android:layout_width="@dimen/login_Editext_width"
         android:layout_height="@dimen/senha_Editext_heigth"
         android:hint="@string/login"
         android:background="#e1e0e0"
         android:layout_below="@id/txv_monitori"
         android:layout_centerHorizontal="true"
-        android:id="@+id/edt_login"
         android:layout_marginTop="5dp"
-    
-        
         />
     
     <EditText 
+        android:id="@+id/edt_senha"
         android:layout_width="@dimen/login_Editext_width"
         android:layout_height="@dimen/senha_Editext_heigth"
         android:hint="@string/senha"
@@ -37,12 +36,11 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/edt_login"
         android:layout_marginTop="5dp"
-        android:id="@+id/edt_senha"
         android:password="true"
-        
         />
 
     <Button
+        android:id="@+id/btValidar"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/senha_Editext_heigth"
         android:layout_alignRight="@id/edt_login"
@@ -52,7 +50,6 @@
         android:layout_marginTop="5dp"
         android:textColor="#ffffff"
         android:textSize="@dimen/fonte_bts_texts"
-        
         />
     
 

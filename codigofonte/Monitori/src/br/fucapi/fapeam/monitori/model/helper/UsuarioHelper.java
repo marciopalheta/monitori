@@ -49,12 +49,10 @@ public class UsuarioHelper {
 		paciente.setEndereco(endereco.getText().toString());
 		//paciente.setBairro(bairro.getText().toString());
 		paciente.setCep(cep.getText().toString());
-		//paciente.setUnidadeSaude(unidadeSaude.getText().toString());
+		//paciente.setUnidadeSaude(unidadeSaude.isActivated());
 		paciente.setCelular(celular.getText().toString());
 		paciente.setTelefone(telefone.getText().toString());
 		//paciente.setDataNascimento(dataNascimento.getText().toString());
-		paciente.setMasculino(masculino.getText().toString());
-		paciente.setFeminino(feminino.getText().toString());
 
 		return (Paciente) paciente;		
 	}

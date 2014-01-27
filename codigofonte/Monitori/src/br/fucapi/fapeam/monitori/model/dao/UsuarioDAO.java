@@ -65,26 +65,31 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 		onCreate(database);
 	}
 	
-	public void cadastrar (Paciente paciente){
+	public void cadastrar (Usuario usuario){
 		//objeto para armazenar os valores dos camopos
 		ContentValues values = new ContentValues();
 		//Definicao dos valores dos campos
-		values.put("nome", paciente.getNome());
-		values.put("endereco", paciente.getEndereco());
-		values.put("cep", paciente.getCep());
-		values.put("celular", paciente.getCelular());
-		values.put("telefone", paciente.getTelefone());
-		values.put("login", paciente.getLogin());
-		values.put("senha", paciente.getSenha());
-		
+		values.put("nome", usuario.getNome());
+		values.put("endereco", usuario.getEndereco());
+		values.put("cep", usuario.getCep());
+		values.put("celular", usuario.getCelular());
+		values.put("telefone", usuario.getTelefone());
+		values.put("login", usuario.getLogin());
+		values.put("senha", usuario.getSenha());
+		if(usuario instanceof Paciente){
+			Paciente paciente = (Paciente)usuario;
+			values.put("hipertenso", paciente.isHipertenso());
+			
+			
+		}
 		//Inserir dados do usuario
 		getWritableDatabase().insert(TABELA, null, values);
-		Log.i(TAG, "Usuario Cadastrado: "+ paciente.getNome());
+		Log.i(TAG, "Usuario Cadastrado: "+ usuario.getNome());
 	}
 	
-	public List<Paciente> listar(){
+	public List<Usuario> listar(){
 		//Colecao de usuarios
-		List<Paciente> lista = new ArrayList<Paciente>();
+		List<Usuario> lista = new ArrayList<Usuario>();
 		
 		//Definicao da instrucao SQL
 		String sql = "Select * from Usuario order by nome";
@@ -101,8 +106,6 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 				paciente.setCep(cursor.getString(3));
 				paciente.setCelular(cursor.getString(4));
 				paciente.setTelefone(cursor.getString(5));
-				paciente.setMasculino(cursor.getString(6));
-				paciente.setFeminino(cursor.getString(7));
 				//Adiciona um novo usuario a lista
 				lista.add(paciente);
 			}

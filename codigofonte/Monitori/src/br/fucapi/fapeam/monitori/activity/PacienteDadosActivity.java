@@ -6,6 +6,7 @@ import br.fucapi.fapeam.monitori.R.menu;
 import br.fucapi.fapeam.monitori.model.bean.Paciente;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import br.fucapi.fapeam.monitori.model.dao.UsuarioDAO;
+import br.fucapi.fapeam.monitori.model.helper.PacienteHelper;
 import br.fucapi.fapeam.monitori.model.helper.UsuarioHelper;
 import android.os.Bundle;
 import android.app.Activity;
@@ -21,20 +22,20 @@ public class PacienteDadosActivity extends Activity {
 
 	//Atributos para manipulacao de tela
 	private Button botao;
-	private UsuarioHelper helper;
+	private PacienteHelper helper;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.pacientedados);
 		//Criacao do objeto helper
-		helper = new UsuarioHelper(this);
+		helper = new PacienteHelper(this);
 		botao = (Button) findViewById(R.id.sbSalvar);
 		botao.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View arg0) {
 				//Utilizando o helper
-				Paciente paciente = (Paciente) helper.getUsuario();
+				Paciente paciente = (Paciente) helper.getPaciente();
 				//Criacao do objeto DAO
 				UsuarioDAO dao = new UsuarioDAO(PacienteDadosActivity.this);
 				//Chamado do metodo cadastrar

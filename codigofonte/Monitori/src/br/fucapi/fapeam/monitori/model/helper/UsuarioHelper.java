@@ -1,9 +1,8 @@
 package br.fucapi.fapeam.monitori.model.helper;
 
 import br.fucapi.fapeam.monitori.R;
-import br.fucapi.fapeam.monitori.activity.PacienteDadosActivity;
-import br.fucapi.fapeam.monitori.model.bean.Paciente;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
+import android.app.Activity;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -23,9 +22,9 @@ public class UsuarioHelper {
 	private RadioButton masculino;
 	private RadioButton feminino;
 	
-	private Paciente paciente;
+	private Usuario usuario;
 	
-	public UsuarioHelper(PacienteDadosActivity activity){
+	public UsuarioHelper(Activity activity){
 		//Associacao de campos de tela ao controller
 		nome = (EditText) activity.findViewById(R.id.edNome);
 		endereco = (EditText) activity.findViewById(R.id.edEndereco);
@@ -40,30 +39,136 @@ public class UsuarioHelper {
 		foto = (ImageView) activity.findViewById(R.id.foto);
 		
 		//criacao do objeto paciente
-		paciente = new Paciente();
+		usuario = new Usuario();
 	}
 
-	public Paciente getUsuario(){
+	public Usuario getUsuario(){
 		
-		paciente.setNome(nome.getText().toString());
-		paciente.setEndereco(endereco.getText().toString());
+		usuario.setNome(nome.getText().toString());
+		usuario.setEndereco(endereco.getText().toString());
 		//paciente.setBairro(bairro.getText().toString());
-		paciente.setCep(cep.getText().toString());
+		usuario.setCep(cep.getText().toString());
 		//paciente.setUnidadeSaude(unidadeSaude.isActivated());
-		paciente.setCelular(celular.getText().toString());
-		paciente.setTelefone(telefone.getText().toString());
+		usuario.setCelular(celular.getText().toString());
+		usuario.setTelefone(telefone.getText().toString());
 		//paciente.setDataNascimento(dataNascimento.getText().toString());
 
-		return (Paciente) paciente;		
+		return usuario;		
 	}
 	
-	public void setPaciente(Paciente paciente){
+	public void setUsuario(Usuario usuario){
 		
-		nome.setText(paciente.getNome());
-		telefone.setText(paciente.getTelefone());
-		endereco.setText(paciente.getEndereco());
+		nome.setText(usuario.getNome());
+		telefone.setText(usuario.getTelefone());
+		endereco.setText(usuario.getEndereco());
 		
-		this.paciente = paciente;
+		this.usuario = usuario;
 		
 	}
+	
+	
+	public EditText getNome() {
+		return nome;
+	}
+
+	public void setNome(EditText nome) {
+		this.nome = nome;
+	}
+
+	public EditText getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(EditText endereco) {
+		this.endereco = endereco;
+	}
+
+	public EditText getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(EditText bairro) {
+		this.bairro = bairro;
+	}
+
+	public EditText getCep() {
+		return cep;
+	}
+
+	public void setCep(EditText cep) {
+		this.cep = cep;
+	}
+
+	public EditText getUnidadeSaude() {
+		return unidadeSaude;
+	}
+
+	public void setUnidadeSaude(EditText unidadeSaude) {
+		this.unidadeSaude = unidadeSaude;
+	}
+
+	public EditText getCelular() {
+		return celular;
+	}
+
+	public void setCelular(EditText celular) {
+		this.celular = celular;
+	}
+
+	public EditText getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(EditText telefone) {
+		this.telefone = telefone;
+	}
+
+	public EditText getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(EditText dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+
+	public EditText getLogin() {
+		return login;
+	}
+
+	public void setLogin(EditText login) {
+		this.login = login;
+	}
+
+	public EditText getSenha() {
+		return senha;
+	}
+
+	public void setSenha(EditText senha) {
+		this.senha = senha;
+	}
+
+	public ImageView getFoto() {
+		return foto;
+	}
+
+	public void setFoto(ImageView foto) {
+		this.foto = foto;
+	}
+
+	public RadioButton getMasculino() {
+		return masculino;
+	}
+
+	public void setMasculino(RadioButton masculino) {
+		this.masculino = masculino;
+	}
+
+	public RadioButton getFeminino() {
+		return feminino;
+	}
+
+	public void setFeminino(RadioButton feminino) {
+		this.feminino = feminino;
+	}
+	
 }

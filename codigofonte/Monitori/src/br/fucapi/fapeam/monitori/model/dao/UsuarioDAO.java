@@ -5,6 +5,7 @@ import java.util.List;
 
 import br.fucapi.fapeam.monitori.activity.PacienteDadosActivity;
 import br.fucapi.fapeam.monitori.model.bean.Paciente;
+import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import android.content.ContentValues;
 import android.content.Context;
@@ -19,7 +20,7 @@ import android.util.Log;
 public class UsuarioDAO extends SQLiteOpenHelper{
 	
 	//Constantes para auxiliar o controle de versoes
-	private static final int VERSAO = 1;
+	private static final int VERSAO = 2;
 	private static final String TABELA = "Usuario";
 	private static final String DATABASE = "Pacientes";
 	
@@ -41,7 +42,8 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 				+ "nome TEXT, endereco TEXT, bairro TEXT, "
 				+ "cep TEXT, unidadeSaude TEXT, celular TEXT, "
 				+ "telefone TEXT, dataMascimento TEXT, login TEXT, "
-				+ "senha TEXT, foto TEXT)";
+				+ "senha TEXT, foto TEXT, hipertenso TEXT, sexo TEXT, "
+				+ "observacao TEXT, diabetico1 TEXT, diabetico2 TEXT)";
 		
 		//Execucao do comando no SQLite
 		database.execSQL(ddl);		
@@ -64,6 +66,9 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 		//Chamando o metodo de construcao da base de dados
 		onCreate(database);
 	}
+	/** 
+	 * metodo responsavel pelo cadastro do usuario
+	 * */
 	
 	public void cadastrar (Usuario usuario){
 		//objeto para armazenar os valores dos camopos
@@ -78,27 +83,28 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 		values.put("senha", usuario.getSenha());
 		if(usuario instanceof Paciente){
 			Paciente paciente = (Paciente)usuario;
-			values.put("hipertenso", paciente.isHipertenso());
-			
-			
+			values.put("hipertenso", paciente.isHipertenso());	
 		}
 		//Inserir dados do usuario
 		getWritableDatabase().insert(TABELA, null, values);
 		Log.i(TAG, "Usuario Cadastrado: "+ usuario.getNome());
 	}
 	
+	/** 
+	 * metodo responsavel pela listagem dos alunos na tela
+	 * */
 	public List<Usuario> listar(){
 		//Colecao de usuarios
 		List<Usuario> lista = new ArrayList<Usuario>();
-		
+		TipoUsuario tipo;
 		//Definicao da instrucao SQL
 		String sql = "Select * from Usuario order by nome";
 		
-		//Objeto que recebe os registros do banco de dados
+		//Objeto que reebe os registros do banco de dados
 		Cursor cursor = getReadableDatabase().rawQuery(sql, null);
 		try{
 			while(cursor.moveToNext()){
-				Paciente paciente = new Paciente();
+				Usuario paciente = new Usuario();
 				//Carregar os atributos dos usuarios
 				paciente.setId(cursor.getLong(0));
 				paciente.setNome(cursor.getString(1));

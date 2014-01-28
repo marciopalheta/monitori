@@ -28,7 +28,11 @@
     <string name="feminino">Feminino</string>
     <string name="masculino">Masculino</string>
     <string name="sexo">Sexo</string>
-
+    <string name="hipertenso">Hipertensao</string>
+    <string name="diabetes">Diabetes</string>
+	<string name="tipo1">Tipo 1</string>
+	<string name="tipo2">Tipo 2</string>
+	
     <!-- Informacoes do Medico -->
     <string name="crm">CRM</string>
 

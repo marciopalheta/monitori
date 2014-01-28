@@ -1,7 +1,9 @@
 package br.fucapi.fapeam.monitori.model.bean;
 
+import java.io.Serializable;
+
 @SuppressWarnings("serial")
-public class Paciente extends Usuario {
+public class Paciente extends Usuario implements Serializable{
 	private boolean hipertenso;
 	private boolean diabetico1;
 	private boolean diabetico2;

@@ -45,6 +45,39 @@
 			android:hint="@string/telefone"/>
 		
 		<TextView
+		    android:id="@+id/tvHipertensao"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+			android:text="@string/hipertenso"/>
+		
+		<CheckBox
+		    android:id="@+id/chbHipertenso"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+			android:ems="10"
+			android:text="@string/hipertenso"/>
+		
+		<TextView
+		    android:id="@+id/tvDiabetes"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+			android:text="@string/diabetes"/>
+		
+		<CheckBox
+		    android:id="@+id/chbTipo1"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+			android:ems="10"
+			android:text="@string/tipo1"/>
+		
+		<CheckBox
+		    android:id="@+id/chbTipo2"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+			android:ems="10"
+			android:text="@string/tipo2"/>
+		
+		<TextView
 		    android:id="@+id/tvCelular"
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
@@ -69,6 +102,7 @@
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
 			android:ems="10"
+			android:inputType="date"
 			android:hint="@string/dtNascimento"/>
 		
 		<TextView
@@ -78,11 +112,10 @@
 			android:text="@string/bairro"/>
 		
 		<EditText
-		    android:id="@+id/edBairro"
+		    android:id="@+id/chbBairro"
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
 			android:ems="10"
-			android:inputType="textPostalAddress"
 			android:hint="@string/bairro"/>
 		
 		<TextView
@@ -148,12 +181,12 @@
 			android:text="@string/unidadeSaude"/>
 		
 		<EditText
-		    android:id="@+id/edUnidadeSaude"
+		    android:id="@+id/chbUnidadeSaude"
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
 			android:ems="10"
-			android:inputType="phone"
 			android:hint="@string/unidadeSaude"/>
+		
         <Button
 		    android:id="@+id/sbSalvar"
 		    android:layout_width="match_parent"

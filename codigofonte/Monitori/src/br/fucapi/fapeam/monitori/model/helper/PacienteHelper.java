@@ -4,6 +4,7 @@ import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.activity.PacienteDadosActivity;
 import br.fucapi.fapeam.monitori.model.bean.Paciente;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -11,12 +12,15 @@ import android.widget.RadioButton;
 public class PacienteHelper extends UsuarioHelper {
 		
 	private Paciente paciente;
+	private CheckBox hipertenso;
 	
 	public PacienteHelper(PacienteDadosActivity activity){
 		super(activity);
 						
 		//criacao do objeto paciente
 		paciente = new Paciente();
+		
+		hipertenso =(CheckBox) activity.findViewById(R.id.chbHipertenso);
 	}
 
 	public Paciente getPaciente(){
@@ -29,6 +33,7 @@ public class PacienteHelper extends UsuarioHelper {
 		paciente.setCelular(getCelular().getText().toString());
 		paciente.setTelefone(getTelefone().getText().toString());
 		//paciente.setDataNascimento(dataNascimento.getText().toString());
+		paciente.setHipertenso(hipertenso.isChecked());
 
 		return (Paciente) paciente;		
 	}

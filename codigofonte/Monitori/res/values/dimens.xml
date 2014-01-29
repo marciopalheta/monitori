@@ -11,5 +11,11 @@
     <dimen name="margin_left">25dp</dimen>
     <dimen name="margin_top">30dp</dimen>
     <dimen name="logot_minitori">24sp</dimen>
-
+    <dimen name="heigth_editext">55dp</dimen>
+    <dimen name="fontes_para_textos">16sp</dimen>
+    <dimen name="margem_editext">50dp</dimen>
+    <dimen name="padding">10dp</dimen>
+    <dimen name="cadastrarpaciente">30sp</dimen>
+    <dimen name="bt_width">110dp</dimen>
+    <dimen name="bt_heigth">45dp</dimen>
 </resources>

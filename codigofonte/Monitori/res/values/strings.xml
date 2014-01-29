@@ -24,7 +24,7 @@
     <string name="observacao">Observacao</string>
     <string name="unidadeSaude">Unidade Basica de Saude</string>
     <string name="foto">Foto</string>
-    <string name="salvar">Salvar Dados</string>
+    <string name="salvar">Salvar</string>
     <string name="feminino">Feminino</string>
     <string name="masculino">Masculino</string>
     <string name="sexo">Sexo</string>
@@ -32,6 +32,8 @@
     <string name="diabetes">Diabetes</string>
 	<string name="tipo1">Tipo 1</string>
 	<string name="tipo2">Tipo 2</string>
+	<string name="cadastrar_paciente">Cadastrar paciente</string>
+	
 	
     <!-- Informacoes do Medico -->
     <string name="crm">CRM</string>

@@ -35,7 +35,7 @@ public class UsuarioHelper {
 		telefone = (EditText) activity.findViewById(R.id.edTefone);
 		dataNascimento = (EditText) activity.findViewById(R.id.edDataNascimento);
 		masculino = (RadioButton) activity.findViewById(R.id.rbMasc);
-		feminino = (RadioButton) activity.findViewById(R.id.rbFeminino);
+		//feminino = (RadioButton) activity.findViewById(R.id.rbFeminino);
 		foto = (ImageView) activity.findViewById(R.id.foto);
 		
 		//criacao do objeto paciente

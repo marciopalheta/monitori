@@ -46,5 +46,7 @@
     
     <string name="lista_pacientes">Listar Pacientes</string>
     
+    <!-- Menu de contexto -->
+    <string name="deletar">Deletar</string>
 
 </resources>

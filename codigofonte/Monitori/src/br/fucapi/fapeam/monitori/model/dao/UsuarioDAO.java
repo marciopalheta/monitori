@@ -104,7 +104,7 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 	}
 	
 	/** 
-	 * metodo responsavel pela listagem dos alunos na tela
+	 * metodo responsavel pela listagem dos usuarios na tela
 	 * */
 	public List<Usuario> listar(){
 		//Colecao de usuarios
@@ -136,10 +136,17 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 		return lista;
 	}
 	
-	
 	/** 
-	 * metodo responsavel pela listagem dos alunos na tela
+	 * metodo responsavel pela exclusao de usuarios
 	 * */
+	public void deletar(Usuario usuario) {
+		//Array de parametros
+		String[] args = {usuario.getId().toString()};
+		
+		//Exclusao do usuario
+		getWritableDatabase().delete(TABELA, "id=?", args);
+		Log.i(TAG, "Usuario Deletado: " +usuario.getNome());
+	}
 	public Object getUsuario(String login, String senha){
 		//Colecao de usuarios
 		Object usuario = null;

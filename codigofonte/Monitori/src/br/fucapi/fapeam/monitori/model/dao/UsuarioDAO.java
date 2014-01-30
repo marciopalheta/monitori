@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.fucapi.fapeam.monitori.activity.PacienteDadosActivity;
+import br.fucapi.fapeam.monitori.model.bean.AbstractEntityBean;
+import br.fucapi.fapeam.monitori.model.bean.Medico;
 import br.fucapi.fapeam.monitori.model.bean.Paciente;
 import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
@@ -80,14 +82,25 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 		values.put("celular", usuario.getCelular());
 		values.put("telefone", usuario.getTelefone());
 		values.put("login", usuario.getLogin());
-		values.put("senha", usuario.getSenha());
+		values.put("senha", usuario.getNome());
 		if(usuario instanceof Paciente){
 			Paciente paciente = (Paciente)usuario;
 			values.put("hipertenso", paciente.isHipertenso());	
 		}
 		//Inserir dados do usuario
 		getWritableDatabase().insert(TABELA, null, values);
-		Log.i(TAG, "Usuario Cadastrado: "+ usuario.getNome());
+		Log.i(TAG, "Usuario Cadastrado: "+ usuario.getNome() );
+		Log.i(TAG, "Login: "+ usuario.getLogin() );
+		Log.i(TAG, "Senha: "+ usuario.getSenha() );
+		Log.i(TAG, "endereco: "+ usuario.getEndereco() );
+		Log.i(TAG, "cep: "+ usuario.getCep() );
+		Log.i(TAG, "celular: "+ usuario.getCelular() );
+		Log.i(TAG, "telefone: "+ usuario.getTelefone() );
+		
+						
+		
+		
+		
 	}
 	
 	/** 
@@ -122,4 +135,48 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 		}
 		return lista;
 	}
+	
+	
+	/** 
+	 * metodo responsavel pela listagem dos alunos na tela
+	 * */
+	public Object getUsuario(String login, String senha){
+		//Colecao de usuarios
+		Object usuario = null;
+		TipoUsuario tipo;
+		//Definicao da instrucao SQL
+		String sql = "Select * from Usuario where login='"+login+"' and senha='"+senha+"' ";
+		
+		//Objeto que reebe os registros do banco de dados
+		Cursor cursor = getReadableDatabase().rawQuery(sql, null);
+		try{
+			if(cursor.moveToNext()){				
+				
+				
+				//if( cursor.getString(13) == null ){
+					usuario = new Usuario();
+				//}else{
+					//usuario = new Medico();
+					//((Medico) usuario).setCrm(crm);
+				//}
+				//Carregar os atributos dos usuarios
+				((Usuario) usuario).setId(cursor.getLong(0));
+				((Usuario) usuario).setNome(cursor.getString(1));
+				((Usuario) usuario).setEndereco(cursor.getString(2));
+				((Usuario) usuario).setCep(cursor.getString(3));
+				((Usuario) usuario).setCelular(cursor.getString(4));
+				((Usuario) usuario).setTelefone(cursor.getString(5));
+				
+				//Adiciona um novo usuario a lista
+				
+			}
+		}catch(SQLException e){
+			Log.e(TAG, e.getMessage());
+		}finally{
+			cursor.close();
+		}
+		return usuario;
+	}
+	
+	
 }

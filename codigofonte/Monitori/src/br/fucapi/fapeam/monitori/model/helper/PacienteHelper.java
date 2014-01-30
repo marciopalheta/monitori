@@ -33,6 +33,9 @@ public class PacienteHelper extends UsuarioHelper {
 		paciente.setCelular(getCelular().getText().toString());
 		paciente.setTelefone(getTelefone().getText().toString());
 		//paciente.setDataNascimento(dataNascimento.getText().toString());
+		paciente.setLogin(paciente.getNome());
+		paciente.setSenha(paciente.getNome());
+		
 		paciente.setHipertenso(hipertenso.isChecked());
 
 		return (Paciente) paciente;		

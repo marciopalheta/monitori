@@ -43,5 +43,8 @@
     <string name="senha">senha</string>
     <string name="entrar">entrar</string>
     <string name="title_activity_login">Login</string>
+    
+    <string name="lista_pacientes">Listar Pacientes</string>
+    
 
 </resources>

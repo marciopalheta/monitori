@@ -15,9 +15,7 @@ public class UsuarioHelper {
 	private EditText unidadeSaude;
 	private EditText celular;
 	private EditText telefone;
-	private EditText dataNascimento;
-	private EditText login;
-	private EditText senha;
+	private EditText dataNascimento;	
 	private ImageView foto;
 	private RadioButton masculino;
 	private RadioButton feminino;
@@ -27,42 +25,16 @@ public class UsuarioHelper {
 	public UsuarioHelper(Activity activity){
 		//Associacao de campos de tela ao controller
 		nome = (EditText) activity.findViewById(R.id.edNome);
-		endereco = (EditText) activity.findViewById(R.id.edEndereco);
-		bairro = (EditText) activity.findViewById(R.id.edBairro);
+		endereco = (EditText) activity.findViewById(R.id.edEndereco);			
+		bairro = (EditText) activity.findViewById(R.id.chbBairro);
 		cep = (EditText) activity.findViewById(R.id.edCep);
-		unidadeSaude = (EditText) activity.findViewById(R.id.edUnidadeSaude);
+		unidadeSaude = (EditText) activity.findViewById(R.id.chbUnidadeSaude);
 		celular = (EditText) activity.findViewById(R.id.edCelular);
 		telefone = (EditText) activity.findViewById(R.id.edTefone);
 		dataNascimento = (EditText) activity.findViewById(R.id.edDataNascimento);
 		masculino = (RadioButton) activity.findViewById(R.id.rbMasc);
 		//feminino = (RadioButton) activity.findViewById(R.id.rbFeminino);
-		foto = (ImageView) activity.findViewById(R.id.foto);
-		
-		//criacao do objeto paciente
-		usuario = new Usuario();
-	}
-
-	public Usuario getUsuario(){
-		
-		usuario.setNome(nome.getText().toString());
-		usuario.setEndereco(endereco.getText().toString());
-		//paciente.setBairro(bairro.getText().toString());
-		usuario.setCep(cep.getText().toString());
-		//paciente.setUnidadeSaude(unidadeSaude.isActivated());
-		usuario.setCelular(celular.getText().toString());
-		usuario.setTelefone(telefone.getText().toString());
-		//paciente.setDataNascimento(dataNascimento.getText().toString());
-
-		return usuario;		
-	}
-	
-	public void setUsuario(Usuario usuario){
-		
-		nome.setText(usuario.getNome());
-		telefone.setText(usuario.getTelefone());
-		endereco.setText(usuario.getEndereco());
-		
-		this.usuario = usuario;
+		//foto = (ImageView) activity.findViewById(R.id.foto);				
 		
 	}
 	
@@ -129,22 +101,6 @@ public class UsuarioHelper {
 
 	public void setDataNascimento(EditText dataNascimento) {
 		this.dataNascimento = dataNascimento;
-	}
-
-	public EditText getLogin() {
-		return login;
-	}
-
-	public void setLogin(EditText login) {
-		this.login = login;
-	}
-
-	public EditText getSenha() {
-		return senha;
-	}
-
-	public void setSenha(EditText senha) {
-		this.senha = senha;
 	}
 
 	public ImageView getFoto() {

@@ -5,6 +5,7 @@ import java.util.List;
 
 import br.fucapi.fapeam.monitori.activity.PacienteDadosActivity;
 import br.fucapi.fapeam.monitori.model.bean.AbstractEntityBean;
+import br.fucapi.fapeam.monitori.model.bean.Agente;
 import br.fucapi.fapeam.monitori.model.bean.Medico;
 import br.fucapi.fapeam.monitori.model.bean.Paciente;
 import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
@@ -45,7 +46,7 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 				+ "cep TEXT, unidadeSaude TEXT, celular TEXT, "
 				+ "telefone TEXT, dataMascimento TEXT, login TEXT, "
 				+ "senha TEXT, foto TEXT, hipertenso TEXT, sexo TEXT, "
-				+ "observacao TEXT, diabetico1 TEXT, diabetico2 TEXT)";
+				+ "observacao TEXT, diabetico1 TEXT, diabetico2 TEXT, crm TEXT, matricula TEXT, tipoUsuario TEXT)";
 		
 		//Execucao do comando no SQLite
 		database.execSQL(ddl);		
@@ -83,10 +84,21 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 		values.put("telefone", usuario.getTelefone());
 		values.put("login", usuario.getLogin());
 		values.put("senha", usuario.getNome());
-		if(usuario instanceof Paciente){
-			Paciente paciente = (Paciente)usuario;
-			values.put("hipertenso", paciente.isHipertenso());	
+		values.put("tipoUsuario", usuario.getTipoUsuario().toString() );
+		
+		if(usuario instanceof Paciente){			
+			values.put("hipertenso", ((Paciente)usuario).isHipertenso());			
+			
 		}
+		
+		if(usuario instanceof Medico){			
+			values.put("crm", ((Medico)usuario).getCrm() );	
+		}
+		
+		if(usuario instanceof Agente){			
+			values.put("matricula", ((Agente)usuario).getMatricula() );	
+		}
+		
 		//Inserir dados do usuario
 		getWritableDatabase().insert(TABELA, null, values);
 		Log.i(TAG, "Usuario Cadastrado: "+ usuario.getNome() );
@@ -96,37 +108,72 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 		Log.i(TAG, "cep: "+ usuario.getCep() );
 		Log.i(TAG, "celular: "+ usuario.getCelular() );
 		Log.i(TAG, "telefone: "+ usuario.getTelefone() );
+		Log.i(TAG, "tipoUsuario: "+ usuario.getTipoUsuario().toString() );
 		
-						
 		
-		
+		if(usuario instanceof Paciente){						
+			Log.i(TAG, "hipertenso: "+ ((Paciente)usuario).isHipertenso() );
+		}				
+		if(usuario instanceof Medico){						
+			Log.i(TAG, "crm: "+ ((Medico)usuario).getCrm() );
+		}
+		if(usuario instanceof Agente){						
+			Log.i(TAG, "matricula: "+ ((Agente)usuario).getMatricula() );
+		}
 		
 	}
 	
 	/** 
 	 * metodo responsavel pela listagem dos usuarios na tela
 	 * */
-	public List<Usuario> listar(){
+	public List<Usuario> listar(TipoUsuario tipoUsuario){
 		//Colecao de usuarios
 		List<Usuario> lista = new ArrayList<Usuario>();
 		TipoUsuario tipo;
 		//Definicao da instrucao SQL
-		String sql = "Select * from Usuario order by nome";
+		String sql = null;
+		if(tipoUsuario == TipoUsuario.PACIENTE){
+			sql = "Select * from Usuario where tipoUsuario = '"+TipoUsuario.PACIENTE+"' order by nome";
+		}else if(tipoUsuario == TipoUsuario.AGENTE){
+			sql = "Select * from Usuario where tipoUsuario = '"+TipoUsuario.AGENTE+"' order by nome";					
+		}else if(tipoUsuario == TipoUsuario.MEDICO){
+			sql = "Select * from Usuario where tipoUsuario = '"+TipoUsuario.MEDICO+"' order by nome";					
+		}
 		
 		//Objeto que reebe os registros do banco de dados
 		Cursor cursor = getReadableDatabase().rawQuery(sql, null);
 		try{
 			while(cursor.moveToNext()){
-				Usuario paciente = new Usuario();
+				Usuario usuario = null;
+				
+				if(tipoUsuario == TipoUsuario.PACIENTE){
+					usuario = new Paciente();					
+				}else if(tipoUsuario == TipoUsuario.AGENTE){
+					usuario = new Agente();					
+				}else if(tipoUsuario == TipoUsuario.MEDICO){
+					usuario = new Medico();					
+				}
+																				 
+				
 				//Carregar os atributos dos usuarios
-				paciente.setId(cursor.getLong(0));
-				paciente.setNome(cursor.getString(1));
-				paciente.setEndereco(cursor.getString(2));
-				paciente.setCep(cursor.getString(3));
-				paciente.setCelular(cursor.getString(4));
-				paciente.setTelefone(cursor.getString(5));
+				usuario.setId(cursor.getLong(cursor.getColumnIndex("id") )); 
+				usuario.setNome(cursor.getString(cursor.getColumnIndex("nome")));
+				usuario.setEndereco(cursor.getString(cursor.getColumnIndex("endereco")));
+				//usuario.setBairro(cursor.getString(3)); //BAIRRO	
+				usuario.setCep(cursor.getString(cursor.getColumnIndex("cep"))); 
+				//usuario.setUnidadeSaude(cursor.getString(5) );
+				
+				usuario.setCelular(cursor.getString(cursor.getColumnIndex("celular")));
+				
+				usuario.setTelefone(cursor.getString(cursor.getColumnIndex("telefone")));
+				//usuario.setDataNascimento(cursor.getString(8) );
+				usuario.setSexo( cursor.getString(cursor.getColumnIndex("sexo")) );
+				usuario.setObservacao( cursor.getString(cursor.getColumnIndex("observacao")) ); 
+				
+				
+				
 				//Adiciona um novo usuario a lista
-				lista.add(paciente);
+				lista.add(usuario);
 			}
 		}catch(SQLException e){
 			Log.e(TAG, e.getMessage());

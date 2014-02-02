@@ -3,6 +3,7 @@ package br.fucapi.fapeam.monitori.model.helper;
 import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.activity.PacienteDadosActivity;
 import br.fucapi.fapeam.monitori.model.bean.Paciente;
+import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -37,6 +38,7 @@ public class PacienteHelper extends UsuarioHelper {
 		paciente.setSenha(paciente.getNome());
 		
 		paciente.setHipertenso(hipertenso.isChecked());
+		paciente.setTipoUsuario(TipoUsuario.PACIENTE);
 
 		return (Paciente) paciente;		
 	}

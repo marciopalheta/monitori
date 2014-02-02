@@ -57,17 +57,27 @@ public class LoginActivity extends Activity {
 	}
 	
 	public boolean onOptionsItemSelected(MenuItem item){
+		Intent intent;
 		//Verifica o item do menu selecionado
 		switch(item.getItemId()){
 			//Verifica se foi selecionado um item novo
-			case R.id.menu_listar:
+			case R.id.menu_paciente:
 				//Especialista em mudanca de tela
-				Intent intent = new Intent(LoginActivity.this,
+				intent = new Intent(LoginActivity.this,
 						PacienteActivity.class);
 				//Carrega a nova tela
 				startActivity(intent);
 				
 				return false;
+			case R.id.menu_medico:
+				//Especialista em mudanca de tela
+				intent = new Intent(LoginActivity.this,
+						MedicoActivity.class);
+				//Carrega a nova tela
+				startActivity(intent);
+				
+				return false;
+			
 			default:
 				return super.onOptionsItemSelected(item);
 		}

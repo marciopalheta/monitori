@@ -8,6 +8,7 @@ import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.R.layout;
 import br.fucapi.fapeam.monitori.R.menu;
 import br.fucapi.fapeam.monitori.model.bean.Paciente;
+import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import br.fucapi.fapeam.monitori.model.dao.UsuarioDAO;
 import android.os.Bundle;
@@ -124,7 +125,7 @@ public class PacienteActivity extends Activity {
 		//Criacao do objeto DAO
 		UsuarioDAO dao = new UsuarioDAO(this);
 		//Chamado do metodo listar
-		this.listaPaciente = dao.listar();
+		this.listaPaciente = dao.listar(TipoUsuario.PACIENTE);
 		//fim da conexao do DB
 		dao.close();
 		

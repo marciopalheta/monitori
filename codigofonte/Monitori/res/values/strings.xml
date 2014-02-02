@@ -48,5 +48,7 @@
     
     <!-- Menu de contexto -->
     <string name="deletar">Deletar</string>
+    
+    <string name="cadastrar_medico">Cadastrar Medico</string>
 
 </resources>

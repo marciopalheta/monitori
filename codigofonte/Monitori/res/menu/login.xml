@@ -1,9 +1,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
         
     <item
-        android:id="@+id/menu_listar"
+        android:id="@+id/menu_paciente"
         android:orderInCategory="100"
         android:showAsAction="always"
         android:title="@string/lista_pacientes"/>
+    <item
+        android:id="@+id/menu_medico"               
+        android:title="@string/title_activity_medico"/>
 
 </menu>

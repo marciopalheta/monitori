@@ -3,9 +3,11 @@ package br.fucapi.fapeam.monitori.model.helper;
 import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import android.app.Activity;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 public class UsuarioHelper {
 	private EditText nome;
@@ -19,7 +21,8 @@ public class UsuarioHelper {
 	private ImageView foto;
 	private RadioButton masculino;
 	private RadioButton feminino;
-	
+	private RadioButton sexo;	
+	private RadioGroup rgSexo;
 	private Usuario usuario;
 	
 	public UsuarioHelper(Activity activity){
@@ -33,7 +36,12 @@ public class UsuarioHelper {
 		telefone = (EditText) activity.findViewById(R.id.edTefone);
 		dataNascimento = (EditText) activity.findViewById(R.id.edDataNascimento);
 		masculino = (RadioButton) activity.findViewById(R.id.rbMasc);
-		//feminino = (RadioButton) activity.findViewById(R.id.rbFeminino);
+		feminino = (RadioButton) activity.findViewById(R.id.rbFeminino);
+		rgSexo = (RadioGroup) activity.findViewById(R.id.radioSex);
+		sexo = (RadioButton) activity.findViewById(rgSexo.getCheckedRadioButtonId());
+		
+		Log.i("TESTE", "Sexo: " +sexo.getText() );
+		
 		//foto = (ImageView) activity.findViewById(R.id.foto);				
 		
 	}
@@ -125,6 +133,25 @@ public class UsuarioHelper {
 
 	public void setFeminino(RadioButton feminino) {
 		this.feminino = feminino;
+	}
+
+	public RadioButton getSexo() {
+		return sexo;
+	}
+
+
+	public void setSexo(RadioButton sexo) {
+		this.sexo = sexo;
+	}
+
+
+	public RadioGroup getRgSexo() {
+		return rgSexo;
+	}
+
+
+	public void setRgSexo(RadioGroup rgSexo) {
+		this.rgSexo = rgSexo;
 	}
 	
 }

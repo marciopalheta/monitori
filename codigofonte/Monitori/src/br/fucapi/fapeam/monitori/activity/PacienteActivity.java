@@ -3,7 +3,6 @@ package br.fucapi.fapeam.monitori.activity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.Inflater;
-
 import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.R.layout;
 import br.fucapi.fapeam.monitori.R.menu;
@@ -48,7 +47,7 @@ public class PacienteActivity extends Activity {
 	private int adapterLayout = android.R.layout.simple_list_item_1;
 	
 	//Usuario selecionando com o click longo
-	private Usuario usuarioSelecionado = null;
+	private Paciente pacienteSelecionado = null;	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -66,23 +65,32 @@ public class PacienteActivity extends Activity {
 			public boolean onItemLongClick(AdapterView<?> adapter, View view,
 					int posicao, long id) {
 				//Marca o usuario selecionado
-				usuarioSelecionado = (Usuario) adapter.getItemAtPosition(posicao);
+				pacienteSelecionado = (Paciente) adapter.getItemAtPosition(posicao);
 				Log.i(TAG, "Usuario Selecionado ListView.LongClick()"
-						+ usuarioSelecionado.getNome());
+						+ pacienteSelecionado.getNome());
 				return false;
 			}
 			
 		});
-		//Metodo do click simples
-		lvListagem.setOnItemClickListener(new OnItemClickListener(){
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-				// TODO Auto-generated method stub
+
+		// Metodo que "escuta" o evento de Click SIMPLES
+				lvListagem.setOnItemClickListener(new OnItemClickListener() {
+					@Override
+					public void onItemClick(AdapterView<?> adapter, View view,
+							int posicao, long id) {
+
+						Intent form = new Intent(PacienteActivity.this,
+								PacienteDadosActivity.class);
+
+						pacienteSelecionado = (Paciente) lvListagem
+								.getItemAtPosition(posicao);
+
+						form.putExtra("PACIENTE_SELECIONADO", pacienteSelecionado);
+
+						startActivity(form);
+					}
+				});
 				
-			}
-			
-		});
 	}
 
 	protected void onSaveInstanceState(Bundle outState){
@@ -138,16 +146,16 @@ public class PacienteActivity extends Activity {
 	private void excluirUsuario() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setMessage("Confirma a exclusao de: "
-				+ usuarioSelecionado.getNome());
+				+ pacienteSelecionado.getNome());
 
 		builder.setPositiveButton("Sim", new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int witch) {
 				UsuarioDAO dao = new UsuarioDAO(PacienteActivity.this);
-				dao.deletar(usuarioSelecionado);
+				dao.deletar(pacienteSelecionado);
 				dao.close();
 				carregarLista();
-				usuarioSelecionado = null;
+				pacienteSelecionado = null;
 			}
 		});
 

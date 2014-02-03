@@ -98,7 +98,7 @@ public class LoginActivity extends Activity {
 		UsuarioDAO dao = new UsuarioDAO(this);
 		Usuario usuario = new Usuario();
 		//Chamado do metodo listar
-		usuario = (Usuario) dao.getUsuario(login.getText().toString(), senha.getText().toString());
+		usuario = dao.getUsuario(login.getText().toString(), senha.getText().toString());
 		//fim da conexao do DB
 		dao.close();
 				

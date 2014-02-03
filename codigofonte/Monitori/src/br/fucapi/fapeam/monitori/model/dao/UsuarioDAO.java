@@ -84,6 +84,8 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 		values.put("telefone", usuario.getTelefone());
 		values.put("login", usuario.getLogin());
 		values.put("senha", usuario.getNome());
+		values.put("sexo", usuario.getSexo() );
+		
 		values.put("tipoUsuario", usuario.getTipoUsuario().toString() );
 		
 		if(usuario instanceof Paciente){			
@@ -108,6 +110,7 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 		Log.i(TAG, "cep: "+ usuario.getCep() );
 		Log.i(TAG, "celular: "+ usuario.getCelular() );
 		Log.i(TAG, "telefone: "+ usuario.getTelefone() );
+		Log.i(TAG, "sexo: "+ usuario.getSexo() );		
 		Log.i(TAG, "tipoUsuario: "+ usuario.getTipoUsuario().toString() );
 		
 		
@@ -147,7 +150,10 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 				Usuario usuario = null;
 				
 				if(tipoUsuario == TipoUsuario.PACIENTE){
-					usuario = new Paciente();					
+					usuario = new Paciente();
+					
+					((Paciente)usuario).setHipertenso( Boolean.parseBoolean( cursor.getString(cursor.getColumnIndex("hipertenso"))  ) );
+					
 				}else if(tipoUsuario == TipoUsuario.AGENTE){
 					usuario = new Agente();					
 				}else if(tipoUsuario == TipoUsuario.MEDICO){
@@ -168,7 +174,8 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 				usuario.setTelefone(cursor.getString(cursor.getColumnIndex("telefone")));
 				//usuario.setDataNascimento(cursor.getString(8) );
 				usuario.setSexo( cursor.getString(cursor.getColumnIndex("sexo")) );
-				usuario.setObservacao( cursor.getString(cursor.getColumnIndex("observacao")) ); 
+				usuario.setObservacao( cursor.getString(cursor.getColumnIndex("observacao")) );
+								
 				
 				
 				
@@ -194,9 +201,46 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 		getWritableDatabase().delete(TABELA, "id=?", args);
 		Log.i(TAG, "Usuario Deletado: " +usuario.getNome());
 	}
-	public Object getUsuario(String login, String senha){
+	
+	/** 
+	 * metodo responsavel pela atualizacao de usuarios
+	 * */
+	public void alterar(Usuario usuario) {
+		ContentValues values = new ContentValues();
+		values.put("nome", usuario.getNome());
+		values.put("endereco", usuario.getEndereco());
+		values.put("cep", usuario.getCep());
+		values.put("celular", usuario.getCelular());
+		values.put("telefone", usuario.getTelefone());
+		values.put("login", usuario.getLogin());
+		values.put("senha", usuario.getNome());
+		values.put("sexo", usuario.getSexo() );
+		values.put("tipoUsuario", usuario.getTipoUsuario().toString() );
+		
+		if(usuario instanceof Paciente){			
+			values.put("hipertenso", ((Paciente)usuario).isHipertenso());			
+			
+		}
+		
+		if(usuario instanceof Medico){			
+			values.put("crm", ((Medico)usuario).getCrm() );	
+		}
+		
+		if(usuario instanceof Agente){			
+			values.put("matricula", ((Agente)usuario).getMatricula() );	
+		}
+
+		// Colecao de valores de parametros do SQL
+		String[] args = { usuario.getId().toString() };
+
+		// Altera dados do Aluno no BD
+		getWritableDatabase().update(TABELA, values, "id=?", args);
+		Log.i(TAG, "Usuario alterado: " + usuario.getNome());
+	}
+	
+	public Usuario getUsuario(String login, String senha){
 		//Colecao de usuarios
-		Object usuario = null;
+		Usuario usuario = null;
 		TipoUsuario tipo;
 		//Definicao da instrucao SQL
 		String sql = "Select * from Usuario where login='"+login+"' and senha='"+senha+"' ";
@@ -206,20 +250,10 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 		try{
 			if(cursor.moveToNext()){				
 				
+				usuario = new Usuario();
 				
-				//if( cursor.getString(13) == null ){
-					usuario = new Usuario();
-				//}else{
-					//usuario = new Medico();
-					//((Medico) usuario).setCrm(crm);
-				//}
-				//Carregar os atributos dos usuarios
-				((Usuario) usuario).setId(cursor.getLong(0));
-				((Usuario) usuario).setNome(cursor.getString(1));
-				((Usuario) usuario).setEndereco(cursor.getString(2));
-				((Usuario) usuario).setCep(cursor.getString(3));
-				((Usuario) usuario).setCelular(cursor.getString(4));
-				((Usuario) usuario).setTelefone(cursor.getString(5));
+				usuario.setId(cursor.getLong(cursor.getColumnIndex("id") ));							
+				usuario.setNome(cursor.getString(cursor.getColumnIndex("nome") ));				
 				
 				//Adiciona um novo usuario a lista
 				

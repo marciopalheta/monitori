@@ -5,6 +5,7 @@ import br.fucapi.fapeam.monitori.activity.PacienteDadosActivity;
 import br.fucapi.fapeam.monitori.model.bean.Paciente;
 import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
+import android.util.Log;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -13,7 +14,7 @@ import android.widget.RadioButton;
 public class PacienteHelper extends UsuarioHelper {
 		
 	private Paciente paciente;
-	private CheckBox hipertenso;
+	private CheckBox hipertenso;	
 	
 	public PacienteHelper(PacienteDadosActivity activity){
 		super(activity);
@@ -21,7 +22,7 @@ public class PacienteHelper extends UsuarioHelper {
 		//criacao do objeto paciente
 		paciente = new Paciente();
 		
-		hipertenso =(CheckBox) activity.findViewById(R.id.chbHipertenso);
+		hipertenso =(CheckBox) activity.findViewById(R.id.chbHipertenso);		
 	}
 
 	public Paciente getPaciente(){
@@ -33,7 +34,12 @@ public class PacienteHelper extends UsuarioHelper {
 		//paciente.setUnidadeSaude(unidadeSaude.isActivated());
 		paciente.setCelular(getCelular().getText().toString());
 		paciente.setTelefone(getTelefone().getText().toString());
-		//paciente.setDataNascimento(dataNascimento.getText().toString());
+		
+		
+		
+		//paciente.setDataNascimento( getDataNascimento().toString()); 
+		paciente.setSexo(getSexo().getText().toString() );
+		
 		paciente.setLogin(paciente.getNome());
 		paciente.setSenha(paciente.getNome());
 		
@@ -44,11 +50,28 @@ public class PacienteHelper extends UsuarioHelper {
 	}
 	
 	public void setPaciente(Paciente paciente){
-		
+						
 		getNome().setText(paciente.getNome());		
 		getTelefone().setText(paciente.getTelefone());
-		getEndereco().setText(paciente.getEndereco());
+		getEndereco().setText(paciente.getEndereco());		
+		getCep().setText(paciente.getCep() );
+		getCelular().setText(paciente.getCelular());
+		getTelefone().setText(paciente.getTelefone());										
 		
+		Log.i("TESTE", "Sexo do Paciente: " +paciente.getSexo());
+		
+		if(paciente.getSexo().equals("Masculino")){
+			//getSexo().check(getMasculino().getId());
+			getMasculino().setChecked(true);
+			
+		}else{ 
+			//getSexo().check(getFeminino().getId());
+			getFeminino().setChecked(true);
+			
+		}
+		
+		hipertenso.setChecked(paciente.isHipertenso() );
+						
 		this.paciente = paciente;
 		
 	}

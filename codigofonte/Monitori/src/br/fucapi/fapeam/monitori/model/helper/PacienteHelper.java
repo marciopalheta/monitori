@@ -5,6 +5,7 @@ import br.fucapi.fapeam.monitori.activity.PacienteDadosActivity;
 import br.fucapi.fapeam.monitori.model.bean.Paciente;
 import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
+import android.content.Context;
 import android.util.Log;
 import android.widget.CheckBox;
 import android.widget.EditText;

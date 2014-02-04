@@ -4,6 +4,6 @@
         android:id="@+id/menu_novo"
         android:orderInCategory="100"
         android:showAsAction="always"
-        android:title="@string/novo"/>
+        android:title="@string/cadastrar_medico"/>
 
 </menu>

@@ -4,6 +4,7 @@ import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.activity.MedicoDadosActivity;
 import br.fucapi.fapeam.monitori.model.bean.Medico;
 import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
+import android.content.Context;
 import android.widget.EditText;
 
 

@@ -62,17 +62,17 @@
 			android:hint="@string/crm"
 			android:layout_marginBottom="10dp" />
         
-        <EditText
-		    android:id="@+id/edDataNascimento"
-		    android:background="#ebeaea"
+        <Button              
+            android:id="@+id/btDataNascimento"
+			android:background="#ebeaea"
 		    android:layout_width="180dp"
 		    android:layout_height="@dimen/heigth_editext"
 			android:layout_marginLeft="@dimen/margem_editext"
 			android:padding="@dimen/padding"
 			android:textSize="@dimen/fontes_para_textos"
 			android:layout_marginBottom="10dp"
-			android:inputType="date"
-			android:hint="@string/dtNascimento"/>
+			android:text="@string/dtNascimento" 
+			 />
         
         <EditText
 		    android:id="@+id/edTefone"

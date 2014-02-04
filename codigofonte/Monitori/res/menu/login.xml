@@ -6,7 +6,9 @@
         android:showAsAction="always"
         android:title="@string/lista_pacientes"/>
     <item
-        android:id="@+id/menu_medico"               
+        android:id="@+id/menu_medico"
+        android:orderInCategory="100"
+        android:showAsAction="always"               
         android:title="@string/title_activity_medico"/>
 
 </menu>

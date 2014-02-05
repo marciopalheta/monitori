@@ -1,7 +1,9 @@
 package br.fucapi.fapeam.monitori.model.helper;
 
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.activity.PacienteDadosActivity;
@@ -9,6 +11,8 @@ import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.net.ParseException;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -28,20 +32,17 @@ public class UsuarioHelper {
 	private EditText celular;
 	private EditText telefone;
 	//private EditText dataNascimento;	
-	private Button dataNascimento;
-	
+	private Button btDataNascimento;
+	private Calendar dataNascimento = Calendar.getInstance();	
 	private ImageView foto;
 	private RadioButton masculino;
 	private RadioButton feminino;
 	private RadioButton sexo;	
 	private RadioGroup rgSexo;
 	private Usuario usuario;
-	private Context context;
+	private Context context;		        	
 	
-	private static final String DATE_FORMAT = "dd-MM-yyyy";
-    private static final String TIME_FORMAT = "kk:mm";
-	
-	private Calendar myCalendar = Calendar.getInstance();
+    //private Calendar myCalendar;
 
 	private DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
@@ -49,9 +50,9 @@ public class UsuarioHelper {
 	    public void onDateSet(DatePicker view, int year, int monthOfYear,
 	            int dayOfMonth) {
 	        // TODO Auto-generated method stub
-	        myCalendar.set(Calendar.YEAR, year);
-	        myCalendar.set(Calendar.MONTH, monthOfYear);
-	        myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+	    	dataNascimento.set(Calendar.YEAR, year);
+	    	dataNascimento.set(Calendar.MONTH, monthOfYear);
+	    	dataNascimento.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 	        updateLabel();
 	    }
 
@@ -60,7 +61,7 @@ public class UsuarioHelper {
 	
 	public UsuarioHelper(final Activity activity){
 		//Associacao de campos de tela ao controller
-		this.context = context;
+		this.context = activity;
 		
 		nome = (EditText) activity.findViewById(R.id.edNome);
 		endereco = (EditText) activity.findViewById(R.id.edEndereco);			
@@ -69,21 +70,22 @@ public class UsuarioHelper {
 		unidadeSaude = (EditText) activity.findViewById(R.id.chbUnidadeSaude);
 		celular = (EditText) activity.findViewById(R.id.edCelular);
 		telefone = (EditText) activity.findViewById(R.id.edTefone);
-		dataNascimento = (Button) activity.findViewById(R.id.btDataNascimento);
+		
 		masculino = (RadioButton) activity.findViewById(R.id.rbMasc);
 		feminino = (RadioButton) activity.findViewById(R.id.rbFeminino);
 		rgSexo = (RadioGroup) activity.findViewById(R.id.radioSex);
 		sexo = (RadioButton) activity.findViewById(rgSexo.getCheckedRadioButtonId());
 		
-		dataNascimento = (Button) activity.findViewById(R.id.btDataNascimento);
-		dataNascimento.setOnClickListener(new OnClickListener() {
+		btDataNascimento= (Button) activity.findViewById(R.id.btDataNascimento);
+		
+		btDataNascimento.setOnClickListener(new OnClickListener() {
 
 	        @Override
 	        public void onClick(View v) {
 	            // TODO Auto-generated method stub
-	            new DatePickerDialog( activity, date, myCalendar
-	                    .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-	                    myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+	            new DatePickerDialog( activity, date, dataNascimento
+	                    .get(Calendar.YEAR), dataNascimento.get(Calendar.MONTH),
+	                    dataNascimento.get(Calendar.DAY_OF_MONTH)).show();
 	        }
 	    });
 		
@@ -94,10 +96,10 @@ public class UsuarioHelper {
 	}
 
 	 private void updateLabel() {
-
-		 	SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
-	        String dateForButton = dateFormat.format(myCalendar.getTime());
-	        dataNascimento.setText(dateForButton);	        	       
+		 			 			 
+		 	String dateForButton = null;		 			 			 			 			 	
+		 	dateForButton = DateUtils.formatDateTime(context, dataNascimento.getTimeInMillis(), DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_NUMERIC_DATE | DateUtils.FORMAT_SHOW_YEAR);		 	
+	        btDataNascimento.setText(dateForButton);	        	       
 	 }
 	
 	
@@ -200,5 +202,17 @@ public class UsuarioHelper {
 	public void setRgSexo(RadioGroup rgSexo) {
 		this.rgSexo = rgSexo;
 	}
+
+	public Calendar getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(Calendar dataNascimento) {
+		if(dataNascimento!=null){
+			this.dataNascimento = dataNascimento;
+			updateLabel();
+		}
+	}
+
 	
 }

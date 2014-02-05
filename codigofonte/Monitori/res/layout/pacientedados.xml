@@ -61,7 +61,7 @@
 			android:padding="@dimen/padding"
 			android:textSize="@dimen/fontes_para_textos"
 			android:layout_marginBottom="10dp"
-			android:text="04-02-1988" 
+			android:text="@string/dtNascimento" 
 			 />
         
         <EditText

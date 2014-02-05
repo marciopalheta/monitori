@@ -1,6 +1,9 @@
 package br.fucapi.fapeam.monitori.model.dao;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import br.fucapi.fapeam.monitori.activity.PacienteDadosActivity;
@@ -29,6 +32,10 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 	
 	//Constante para log no LogCat
 	private static final String TAG = "CADASTRO_USUARIO";
+	
+	private static final String DATE_FORMAT = "dd-MM-yyyy";
+    private static final String TIME_FORMAT = "kk:mm";
+    private SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
 	
 	public UsuarioDAO (Context context){
 		
@@ -78,6 +85,11 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 		ContentValues values = new ContentValues();
 		//Definicao dos valores dos campos
 		values.put("nome", usuario.getNome());
+		
+		String dataForDB=null;		
+		dataForDB = dateFormat.format(usuario.getDataNascimento().getTime());
+		values.put("dataMascimento", dataForDB);
+				
 		values.put("endereco", usuario.getEndereco());
 		values.put("cep", usuario.getCep());
 		values.put("celular", usuario.getCelular());
@@ -104,6 +116,8 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 		//Inserir dados do usuario
 		getWritableDatabase().insert(TABELA, null, values);
 		Log.i(TAG, "Usuario Cadastrado: "+ usuario.getNome() );
+		Log.i(TAG, "dataMascimento: "+ dataForDB );		
+		
 		Log.i(TAG, "Login: "+ usuario.getLogin() );
 		Log.i(TAG, "Senha: "+ usuario.getSenha() );
 		Log.i(TAG, "endereco: "+ usuario.getEndereco() );
@@ -165,11 +179,27 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 				usuario.setId(cursor.getLong(cursor.getColumnIndex("id") )); 
 				usuario.setNome(cursor.getString(cursor.getColumnIndex("nome")));
 				usuario.setEndereco(cursor.getString(cursor.getColumnIndex("endereco")));
+				
 				//usuario.setBairro(cursor.getString(3)); //BAIRRO	
 				usuario.setCep(cursor.getString(cursor.getColumnIndex("cep"))); 
 				//usuario.setUnidadeSaude(cursor.getString(5) );
 				
 				usuario.setCelular(cursor.getString(cursor.getColumnIndex("celular")));
+				String dtNascto=null;
+				
+				dtNascto = cursor.getString(cursor.getColumnIndex("dataMascimento"));
+				
+				//usuario.setDataNascimento(dataNascimento);
+				Log.i(TAG, "dt Nascimento = "+ dtNascto);
+					
+					if(dtNascto !=null){
+						Calendar cal = Calendar.getInstance();
+						cal.setTime(dateFormat.parse(dtNascto));
+						usuario.setDataNascimento(cal);
+					}
+				
+				
+				
 				
 				usuario.setTelefone(cursor.getString(cursor.getColumnIndex("telefone")));
 				//usuario.setDataNascimento(cursor.getString(8) );
@@ -183,6 +213,9 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 				lista.add(usuario);
 			}
 		}catch(SQLException e){
+			Log.e(TAG, e.getMessage());
+		} catch (ParseException e) {
+			e.printStackTrace();
 			Log.e(TAG, e.getMessage());
 		}finally{
 			cursor.close();
@@ -208,12 +241,17 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 	public void alterar(Usuario usuario) {
 		ContentValues values = new ContentValues();
 		values.put("nome", usuario.getNome());
+		
+		String dataForDB=null;		
+		dataForDB = dateFormat.format(usuario.getDataNascimento().getTime());
+		values.put("dataMascimento", dataForDB);
+		
 		values.put("endereco", usuario.getEndereco());
 		values.put("cep", usuario.getCep());
 		values.put("celular", usuario.getCelular());
 		values.put("telefone", usuario.getTelefone());
-		values.put("login", usuario.getLogin());
-		values.put("senha", usuario.getNome());
+		//values.put("login", usuario.getLogin());
+		//values.put("senha", usuario.getNome());
 		values.put("sexo", usuario.getSexo() );
 		values.put("tipoUsuario", usuario.getTipoUsuario().toString() );
 		

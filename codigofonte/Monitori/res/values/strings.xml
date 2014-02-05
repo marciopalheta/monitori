@@ -32,6 +32,9 @@
     <string name="diabetes">Diabetes</string>
 	<string name="tipo1">Tipo 1</string>
 	<string name="tipo2">Tipo 2</string>
+	<string name="enviar">Enviar</string>
+	<string name="sus">Adicione o numero do SUS</string>
+	<string name="nome_mae">Nome da Mae</string>
 	<string name="cadastrar_paciente">Cadastrar paciente</string>
 	
 	

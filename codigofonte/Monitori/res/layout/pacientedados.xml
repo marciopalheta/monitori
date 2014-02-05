@@ -189,9 +189,7 @@
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
 			android:layout_marginLeft="@dimen/margem_editext"
-			android:padding="@dimen/padding"
-			android:textSize="@dimen/fontes_para_textos"
-			android:layout_marginBottom="10dp"
+			android:layout_marginBottom="15dp"
 			android:text="@string/tipo1"/>
 		
 		<CheckBox
@@ -199,12 +197,20 @@
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
 			android:layout_marginLeft="@dimen/margem_editext"
-			android:padding="@dimen/padding"
-			android:paddingLeft="5dp"
-			android:textSize="@dimen/fontes_para_textos"
-			android:layout_marginBottom="10dp"
+			android:layout_marginBottom="15dp"
 			android:text="@string/tipo2"/>
 		
+		 <EditText
+                android:id="@+id/edNomedamae"
+                android:layout_width="370dp"
+                android:layout_height="@dimen/heigth_editext"
+                android:layout_marginLeft="@dimen/margem_editext"
+                android:layout_marginBottom="10dp"
+                android:background="#ebedea"
+                android:hint="@string/nome_mae"
+                android:padding="@dimen/padding"
+                android:textSize="@dimen/fontes_para_textos" />
+		 
         <EditText
 		    android:id="@+id/chbUnidadeSaude"
 		    android:background="#ebeaea"
@@ -215,7 +221,24 @@
 			android:textSize="@dimen/fontes_para_textos"
 			android:layout_marginBottom="10dp"
 			android:hint="@string/unidadeSaude"/>
-		
+        
+        <EditText
+                android:id="@+id/edit_sus"
+                android:layout_width="370dp"
+                android:layout_height="@dimen/heigth_editext"
+           		android:layout_marginLeft="@dimen/margem_editext"
+                android:layout_marginBottom="10dp"
+                android:background="#ebeaea"
+                android:hint="@string/sus"
+                android:padding="@dimen/padding"
+                android:textSize="@dimen/fontes_para_textos" />
+	</LinearLayout> 
+    
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" >
+         	
         <Button
 		    android:id="@+id/sbSalvar"
 		    android:layout_width="@dimen/bt_width"
@@ -225,37 +248,18 @@
 		    android:textColor="#ffffff"
 		    android:layout_marginBottom="10dp"
 		    android:layout_gravity="center_horizontal"/>
-		
-    </LinearLayout>    
-    
-       
-
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
         
-		
-		
-        
+        <Button
+                android:id="@+id/sbenviar"
+                android:layout_width="@dimen/bt_width"
+                android:layout_height="@dimen/bt_heigth"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="#000000"
+                android:text="@string/enviar"
+                android:textColor="#ffffff" />
+		 
+    </LinearLayout>           
 	</LinearLayout>
 </ScrollView>

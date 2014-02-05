@@ -78,5 +78,9 @@ public class PacienteHelper extends UsuarioHelper {
 						
 		this.paciente = paciente;
 		
-	}
+	
+	//Validando dados
+	
+			
+			}
 }

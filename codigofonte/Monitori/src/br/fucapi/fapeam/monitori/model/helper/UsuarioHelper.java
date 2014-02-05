@@ -12,6 +12,8 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.net.ParseException;
+import android.text.Editable;
+import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
@@ -64,6 +66,8 @@ public class UsuarioHelper {
 		this.context = activity;
 		
 		nome = (EditText) activity.findViewById(R.id.edNome);
+		
+			
 		endereco = (EditText) activity.findViewById(R.id.edEndereco);			
 		bairro = (EditText) activity.findViewById(R.id.chbBairro);
 		cep = (EditText) activity.findViewById(R.id.edCep);
@@ -102,7 +106,24 @@ public class UsuarioHelper {
 	        btDataNascimento.setText(dateForButton);	        	       
 	 }
 	
-	
+	 public boolean validarDados(View view, String mensagem) {
+		  if (view instanceof EditText) {
+		   EditText edTexto = (EditText) view;
+		   Editable texto = edTexto.getText();
+		   if (texto != null) {
+		    String strTexto = texto.toString();
+		    if (!TextUtils.isEmpty(strTexto)) {
+		     return true;
+		    }
+		   }
+		   // em qualquer outra condição é gerado um erro
+		   edTexto.setError(mensagem);
+		   edTexto.setFocusable(true);
+		   edTexto.requestFocus();
+		   return false;
+		  }
+		  return false;
+		 }
 	
 	public EditText getNome() {
 		return nome;

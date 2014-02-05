@@ -64,19 +64,19 @@ public class PacienteDadosActivity extends Activity {
 				//Criacao do objeto DAO
 				UsuarioDAO dao = new UsuarioDAO(PacienteDadosActivity.this);
 				
-				
+				if(helper.validarDados(helper.getNome(), "campo obrigatorio")){
+					if(helper.validarDados(helper.getEndereco(), "Preencher o campo")){
 				// Verificacao para salvar ou cadastrar o aluno
 				if (paciente.getId() == null) {
 					dao.cadastrar(paciente);
 				} else {
 					dao.alterar(paciente);
-				}
-
-				//Fechando a conexao com o BD
+				}//Fechando a conexao com o BD
 				dao.close();
 				//Encerrando a activity
 				finish();
-			}
+				}
+			}}
 		});
 	}
 		

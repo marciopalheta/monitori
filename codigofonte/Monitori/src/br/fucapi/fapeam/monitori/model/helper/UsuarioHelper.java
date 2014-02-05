@@ -235,5 +235,15 @@ public class UsuarioHelper {
 		}
 	}
 
+	public boolean validar(){
+		if(validarDados(getNome(), "campo obrigatorio")){
+			if(validarDados(getTelefone(), "campo obrigatorio")){
+				if(validarDados(getEndereco(), "Preencher o campo")){
+					
+				
+		return true;}}}
+		return false;
+		
+	}
 	
 }

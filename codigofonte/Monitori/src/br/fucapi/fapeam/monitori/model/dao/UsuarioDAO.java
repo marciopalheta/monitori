@@ -26,7 +26,7 @@ import android.util.Log;
 public class UsuarioDAO extends SQLiteOpenHelper{
 	
 	//Constantes para auxiliar o controle de versoes
-	private static final int VERSAO = 4;
+	private static final int VERSAO = 6;
 	private static final String TABELA = "Usuario";
 	private static final String DATABASE = "Pacientes";
 	

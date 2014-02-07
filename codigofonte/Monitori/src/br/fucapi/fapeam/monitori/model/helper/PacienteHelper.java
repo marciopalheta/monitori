@@ -35,7 +35,8 @@ public class PacienteHelper extends UsuarioHelper {
 		//paciente.setUnidadeSaude(unidadeSaude.isActivated());
 		paciente.setCelular(getCelular().getText().toString());
 		paciente.setTelefone(getTelefone().getText().toString());
-		
+		paciente.setNomeMae(getNomeMae().getText().toString());
+		paciente.setNumSus(getNumSus().getText().toString());
 		paciente.setDataNascimento(getDataNascimento());
 		
 		
@@ -59,7 +60,8 @@ public class PacienteHelper extends UsuarioHelper {
 		getCep().setText(paciente.getCep() );
 		getCelular().setText(paciente.getCelular());
 		getTelefone().setText(paciente.getTelefone());										
-		
+		getNomeMae().setText(paciente.getNomeMae());
+		getNumSus().setText(paciente.getNumSus());
 		setDataNascimento(paciente.getDataNascimento());
 		
 		Log.i("TESTE", "Sexo do Paciente: " +paciente.getSexo());

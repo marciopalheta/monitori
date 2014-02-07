@@ -26,7 +26,7 @@ import android.util.Log;
 public class UsuarioDAO extends SQLiteOpenHelper{
 	
 	//Constantes para auxiliar o controle de versoes
-	private static final int VERSAO = 6;
+	private static final int VERSAO = 9;
 	private static final String TABELA = "Usuario";
 	private static final String DATABASE = "Pacientes";
 	
@@ -52,6 +52,7 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 				+ "nome TEXT, endereco TEXT, bairro TEXT, "
 				+ "cep TEXT, unidadeSaude TEXT, celular TEXT, "
 				+ "telefone TEXT, dataMascimento TEXT, login TEXT, "
+				+ "nomeMae TEXT, numSus TEXT, "
 				+ "senha TEXT, foto TEXT, hipertenso TEXT, sexo TEXT, "
 				+ "observacao TEXT, diabetico1 TEXT, diabetico2 TEXT, crm TEXT, matricula TEXT, tipoUsuario TEXT)";
 		
@@ -97,6 +98,8 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 		values.put("login", usuario.getLogin());
 		values.put("senha", usuario.getNome());
 		values.put("sexo", usuario.getSexo() );
+		values.put("nomeMae", usuario.getNomeMae());
+		values.put("numSus", usuario.getNumSus());
 		
 		values.put("tipoUsuario", usuario.getTipoUsuario().toString() );
 		
@@ -179,7 +182,8 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 				usuario.setId(cursor.getLong(cursor.getColumnIndex("id") )); 
 				usuario.setNome(cursor.getString(cursor.getColumnIndex("nome")));
 				usuario.setEndereco(cursor.getString(cursor.getColumnIndex("endereco")));
-				
+				usuario.setNomeMae(cursor.getString(cursor.getColumnIndex("nomeMae")));
+				usuario.setNumSus(cursor.getString(cursor.getColumnIndex("numSus")));
 				//usuario.setBairro(cursor.getString(3)); //BAIRRO	
 				usuario.setCep(cursor.getString(cursor.getColumnIndex("cep"))); 
 				//usuario.setUnidadeSaude(cursor.getString(5) );
@@ -250,6 +254,8 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 		values.put("cep", usuario.getCep());
 		values.put("celular", usuario.getCelular());
 		values.put("telefone", usuario.getTelefone());
+		values.put("nomeMae", usuario.getNomeMae());
+		values.put("numSus", usuario.getNumSus());
 		//values.put("login", usuario.getLogin());
 		//values.put("senha", usuario.getNome());
 		values.put("sexo", usuario.getSexo() );

@@ -12,6 +12,8 @@ public class Usuario extends AbstractEntityBean {
 	private String cep;
 	private String celular;
 	private String telefone;
+	private String nomeMae;
+	private String numSus;
 	private Calendar dataNascimento;
 	private String observacao;
 	private String login;
@@ -20,6 +22,23 @@ public class Usuario extends AbstractEntityBean {
 	private String sexo;
 	private TipoUsuario tipoUsuario;
 	
+	
+	public String getNomeMae() {
+		return nomeMae;
+	}
+
+	public void setNomeMae(String nomeMae) {
+		this.nomeMae = nomeMae;
+	}
+
+	public String getNumSus() {
+		return numSus;
+	}
+
+	public void setNumSus(String numSus) {
+		this.numSus = numSus;
+	}
+
 	public String getFoto() {
 		return foto;
 	}

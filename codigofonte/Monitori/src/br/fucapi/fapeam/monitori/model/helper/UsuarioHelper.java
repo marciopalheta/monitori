@@ -33,6 +33,8 @@ public class UsuarioHelper {
 	private EditText unidadeSaude;
 	private EditText celular;
 	private EditText telefone;
+	private EditText nomeMae;
+	private EditText numSus;
 	//private EditText dataNascimento;	
 	private Button btDataNascimento;
 	private Calendar dataNascimento = Calendar.getInstance();	
@@ -74,7 +76,8 @@ public class UsuarioHelper {
 		unidadeSaude = (EditText) activity.findViewById(R.id.chbUnidadeSaude);
 		celular = (EditText) activity.findViewById(R.id.edCelular);
 		telefone = (EditText) activity.findViewById(R.id.edTefone);
-		
+		nomeMae = (EditText) activity.findViewById(R.id.edNomedamae);
+		numSus = (EditText) activity.findViewById(R.id.edit_sus);
 		masculino = (RadioButton) activity.findViewById(R.id.rbMasc);
 		feminino = (RadioButton) activity.findViewById(R.id.rbFeminino);
 		rgSexo = (RadioGroup) activity.findViewById(R.id.radioSex);
@@ -125,6 +128,30 @@ public class UsuarioHelper {
 		  return false;
 		 }
 	
+	public EditText getNomeMae() {
+		return nomeMae;
+	}
+
+	public void setNomeMae(EditText nomeMae) {
+		this.nomeMae = nomeMae;
+	}
+
+	public EditText getNumSus() {
+		return numSus;
+	}
+
+	public void setNumSus(EditText numSus) {
+		this.numSus = numSus;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
 	public EditText getNome() {
 		return nome;
 	}

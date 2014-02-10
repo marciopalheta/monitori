@@ -30,14 +30,13 @@
     <string name="sexo">Sexo</string>
     <string name="hipertenso">Hipertensao</string>
     <string name="diabetes">Diabetes</string>
-	<string name="tipo1">Tipo 1</string>
-	<string name="tipo2">Tipo 2</string>
-	<string name="enviar">Enviar</string>
-	<string name="sus">Adicione o numero do SUS</string>
-	<string name="nome_mae">Nome da Mae</string>
-	<string name="cadastrar_paciente">Cadastrar paciente</string>
-	
-	
+    <string name="tipo1">Tipo 1</string>
+    <string name="tipo2">Tipo 2</string>
+    <string name="enviar">Enviar</string>
+    <string name="sus">Adicione o numero do SUS</string>
+    <string name="nome_mae">Nome da Mae</string>
+    <string name="cadastrar_paciente">Cadastrar paciente</string>
+
     <!-- Informacoes do Medico -->
     <string name="crm">CRM</string>
 
@@ -46,14 +45,32 @@
     <string name="senha">senha</string>
     <string name="entrar">entrar</string>
     <string name="title_activity_login">Login</string>
-    
     <string name="lista_pacientes">Listar Pacientes</string>
-    
+
     <!-- Menu de contexto -->
     <string name="deletar">Deletar</string>
-    
     <string name="cadastrar_medico">Cadastrar Medico</string>
-    
     <string name="cancelar">Cancelar</string>
+    <string name="title_activity_coletar_dados">ColetarDados</string>
+
+    <!-- coletar dados -->
+    <string name="coletar_dados">Coletada dados</string>
+    <string name="pa">PA</string>
+    <string name="sis">SIS</string>
+    <string name="glicose">Glicose</string>
+    <string name="jejum">Jejum</string>
+    <string name="pos_pandrial">Pós-pandrial</string>
+    <string name="data_coleta">15 de Fevereiro de 2014</string>
+    <string name="title_activity_diagnosticar">Diagnosticar</string>
+
+    <!-- historico diagnostico -->
+    <string name="historico_diagnostico">Histórico de diagnóstico</string>
+    <string name="lorem_ipsum">Lorem ipsum loren</string>
+    <string name="data">23/02/2014</string>
+
+    <!-- diagnosticar -->
+    <string name="diagnosticar">Diagnósticar</string>
+    <string name="descrever">Descrever diagnóstico:</string>
+    <string name="title_activity_historico">Historico</string>
 
 </resources>

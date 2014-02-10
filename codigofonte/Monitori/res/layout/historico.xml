@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    
+   <RelativeLayout 
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       >
+       
+   <LinearLayout 
+       android:id="@+id/barraPreta"
+       android:layout_width="fill_parent"
+       android:layout_height="@dimen/barraPreta_heigth"
+       android:background="#000000"
+       android:orientation="horizontal"
+       >   
+   </LinearLayout>
+   
+   <TextView 
+       android:id="@+id/historico"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="@string/historico_diagnostico"
+       android:textSize="@dimen/cadastrarpaciente"
+       android:layout_below="@id/barraPreta"
+       android:layout_marginBottom="20dp"
+       android:layout_marginLeft="30dp"
+       android:layout_marginTop="45dp"/>
+   
+   <Button 
+       android:id="@+id/bthistorico"
+       android:layout_width="@dimen/bthistorico_largura"
+       android:layout_height="@dimen/bthistorico_altura"
+       android:background="#ebeaea"
+       android:text="@string/lorem_ipsum"
+       android:layout_below="@id/historico"
+       android:layout_marginLeft="30dp"
+       android:layout_marginBottom="@dimen/magem_bthistorico"
+       />
+   
+   <Button 
+       android:id="@+id/data"
+       android:layout_width="@dimen/btdata_largura"
+       android:layout_height="@dimen/bthistorico_altura"
+       android:background="#d4d5d6"
+       android:text="@string/data"
+       android:layout_toRightOf="@id/bthistorico"
+       android:layout_below="@id/historico"
+       android:layout_marginBottom="@dimen/magem_bthistorico"
+       />
+       
+  <Button 
+       android:id="@+id/bthistorico1"
+       android:layout_width="@dimen/bthistorico_largura"
+       android:layout_height="@dimen/bthistorico_altura"
+       android:background="#ebeaea"
+       android:text="@string/lorem_ipsum"
+       android:layout_below="@id/bthistorico"
+       android:layout_marginLeft="30dp"
+       android:layout_marginBottom="@dimen/magem_bthistorico"
+       />
+   
+   <Button 
+       android:id="@+id/data1"
+       android:layout_width="@dimen/btdata_largura"
+       android:layout_height="@dimen/bthistorico_altura"
+       android:background="#d4d5d6"
+       android:text="@string/data"
+       android:layout_toRightOf="@id/bthistorico1"
+       android:layout_below="@id/bthistorico"
+       android:layout_marginBottom="@dimen/magem_bthistorico"
+       />
+   
+    <Button 
+       android:id="@+id/bthistorico2"
+       android:layout_width="@dimen/bthistorico_largura"
+       android:layout_height="@dimen/bthistorico_altura"
+       android:background="#ebeaea"
+       android:text="@string/lorem_ipsum"
+       android:layout_below="@id/bthistorico1"
+       android:layout_marginLeft="30dp"
+       android:layout_marginBottom="@dimen/magem_bthistorico"
+       />
+   
+   <Button 
+       android:id="@+id/data2"
+       android:layout_width="@dimen/btdata_largura"
+       android:layout_height="@dimen/bthistorico_altura"
+       android:background="#d4d5d6"
+       android:text="@string/data"
+       android:layout_toRightOf="@id/bthistorico1"
+       android:layout_below="@id/bthistorico1"
+       android:layout_marginBottom="@dimen/magem_bthistorico"
+       />
+   
+   <Button 
+       android:id="@+id/bthistorico3"
+       android:layout_width="@dimen/bthistorico_largura"
+       android:layout_height="@dimen/bthistorico_altura"
+       android:background="#ebeaea"
+       android:text="@string/lorem_ipsum"
+       android:layout_below="@id/bthistorico2"
+       android:layout_marginLeft="30dp"
+       android:layout_marginBottom="@dimen/magem_bthistorico"
+       />
+   
+   <Button 
+       android:id="@+id/data3"
+       android:layout_width="@dimen/btdata_largura"
+       android:layout_height="@dimen/bthistorico_altura"
+       android:background="#d4d5d6"
+       android:text="@string/data"
+       android:layout_toRightOf="@id/bthistorico2"
+       android:layout_below="@id/bthistorico2"
+       android:layout_marginBottom="@dimen/magem_bthistorico"
+       />
+   
+    <Button 
+       android:id="@+id/bthistorico4"
+       android:layout_width="@dimen/bthistorico_largura"
+       android:layout_height="@dimen/bthistorico_altura"
+       android:background="#ebeaea"
+       android:text="@string/lorem_ipsum"
+       android:layout_below="@id/bthistorico3"
+       android:layout_marginLeft="30dp"
+       android:layout_marginBottom="@dimen/magem_bthistorico"
+       />
+   
+   <Button 
+       android:id="@+id/data4"
+       android:layout_width="@dimen/btdata_largura"
+       android:layout_height="@dimen/bthistorico_altura"
+       android:background="#d4d5d6"
+       android:text="@string/data"
+       android:layout_toRightOf="@id/bthistorico3"
+       android:layout_below="@id/bthistorico3"
+       android:layout_marginBottom="@dimen/magem_bthistorico"
+       />
+   
+   <Button 
+       android:id="@+id/bthistorico5"
+       android:layout_width="@dimen/bthistorico_largura"
+       android:layout_height="@dimen/bthistorico_altura"
+       android:background="#ebeaea"
+       android:text="@string/lorem_ipsum"
+       android:layout_below="@id/bthistorico4"
+       android:layout_marginLeft="30dp"
+       android:layout_marginBottom="@dimen/magem_bthistorico"
+       />
+   
+   <Button 
+       android:id="@+id/data5"
+       android:layout_width="@dimen/btdata_largura"
+       android:layout_height="@dimen/bthistorico_altura"
+       android:background="#d4d5d6"
+       android:text="@string/data"
+       android:layout_toRightOf="@id/bthistorico4"
+       android:layout_below="@id/bthistorico4"
+       android:layout_marginBottom="@dimen/magem_bthistorico"
+       />
+   
+   <Button 
+       android:id="@+id/bthistorico6"
+       android:layout_width="@dimen/bthistorico_largura"
+       android:layout_height="@dimen/bthistorico_altura"
+       android:background="#ebeaea"
+       android:text="@string/lorem_ipsum"
+       android:layout_below="@id/bthistorico5"
+       android:layout_marginLeft="30dp"
+       android:layout_marginBottom="@dimen/magem_bthistorico"
+       />
+   
+   <Button 
+       android:id="@+id/data6"
+       android:layout_width="@dimen/btdata_largura"
+       android:layout_height="@dimen/bthistorico_altura"
+       android:background="#d4d5d6"
+       android:text="@string/data"
+       android:layout_toRightOf="@id/bthistorico5"
+       android:layout_below="@id/bthistorico5"
+       android:layout_marginBottom="@dimen/magem_bthistorico"
+       />
+   
+   <Button 
+       android:id="@+id/bthistorico7"
+       android:layout_width="@dimen/bthistorico_largura"
+       android:layout_height="@dimen/bthistorico_altura"
+       android:background="#ebeaea"
+       android:text="@string/lorem_ipsum"
+       android:layout_below="@id/bthistorico6"
+       android:layout_marginLeft="30dp"
+       android:layout_marginBottom="@dimen/magem_bthistorico"
+       />
+   
+   <Button 
+       android:id="@+id/data7"
+       android:layout_width="@dimen/btdata_largura"
+       android:layout_height="@dimen/bthistorico_altura"
+       android:background="#d4d5d6"
+       android:text="@string/data"
+       android:layout_toRightOf="@id/bthistorico6"
+       android:layout_below="@id/bthistorico6"
+       android:layout_marginBottom="@dimen/magem_bthistorico"
+       />
+   
+   
+   <Button 
+       android:id="@+id/bthistorico8"
+       android:layout_width="@dimen/bthistorico_largura"
+       android:layout_height="@dimen/bthistorico_altura"
+       android:background="#ebeaea"
+       android:text="@string/lorem_ipsum"
+       android:layout_below="@id/bthistorico7"
+       android:layout_marginLeft="30dp"
+       android:layout_marginBottom="@dimen/magem_bthistorico"
+       />
+   
+   <Button 
+       android:id="@+id/data8"
+       android:layout_width="@dimen/btdata_largura"
+       android:layout_height="@dimen/bthistorico_altura"
+       android:background="#d4d5d6"
+       android:text="@string/data"
+       android:layout_toRightOf="@id/bthistorico7"
+       android:layout_below="@id/bthistorico7"
+       android:layout_marginBottom="@dimen/magem_bthistorico"
+       />
+   
+   
+   </RelativeLayout>    
+          
+     
+</ScrollView>

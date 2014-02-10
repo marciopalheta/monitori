@@ -18,4 +18,10 @@
     <dimen name="cadastrarpaciente">30sp</dimen>
     <dimen name="bt_width">110dp</dimen>
     <dimen name="bt_heigth">45dp</dimen>
+    <dimen name="barraPreta_heigth">75dp</dimen>
+ 	<dimen name="bthistorico_largura">300dp</dimen>
+    <dimen name="bthistorico_altura">50dp</dimen>
+    <dimen name="btdata_largura">120dp</dimen>
+ 	<dimen name="magem_bthistorico">10dp</dimen>
+ 	
 </resources>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"    
+    android:background="#f7f6f6"
+    android:layout_centerHorizontal="true"
+    android:layout_centerVertical="true"
+    >
+    
+     <LinearLayout 
+       android:id="@+id/barraPreta"
+       android:layout_width="fill_parent"
+       android:layout_height="@dimen/barraPreta_heigth"
+       android:background="#000000"
+       android:orientation="horizontal"
+       >   
+   </LinearLayout>  
+    
+    <TextView 
+        android:layout_below="@id/barraPreta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/coletar_dados"
+        android:id="@+id/text_coletar"
+        android:textColor="#000000"
+        android:textSize="@dimen/cadastrarpaciente"
+        android:layout_marginTop="45dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="30dp"/>
+    
+   
+ <RelativeLayout
+        android:id="@+id/fundo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="#ffffff"
+        android:paddingTop="20dp"
+        android:paddingRight="50dp"
+        android:paddingLeft="50dp"
+        android:paddingBottom="20dp"
+        android:layout_marginBottom="15dp"
+        
+        >
+         
+ <LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:orientation="vertical">
+     
+      <TextView 
+         android:id="@+id/pa"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:textSize="@dimen/cadastrarpaciente"
+         android:text="@string/pa"/>
+     
+     <EditText 
+        android:id="@+id/edt_sis"
+        android:layout_width="250dp"
+	    android:layout_height="@dimen/heigth_editext"
+        android:hint="@string/sis"
+        android:background="#e1e0e0"
+        android:layout_marginTop="10dp"
+        android:padding="@dimen/padding"/>
+     
+     <EditText 
+        android:id="@+id/edt_glicose"
+        android:layout_width="250dp"
+		android:layout_height="@dimen/heigth_editext"
+        android:hint="@string/glicose"
+        android:background="#e1e0e0"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15dp"
+        android:padding="@dimen/padding"/>
+     
+     <LinearLayout 
+	   android:layout_width="wrap_content"
+	   android:layout_height="wrap_content"
+	   android:orientation="horizontal"
+	   >
+		
+		<CheckBox
+		    android:id="@+id/chbjejum"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+			android:layout_marginBottom="10dp"
+			android:text="@string/jejum"
+			android:textSize="@dimen/fontes_para_textos"/>
+
+		<CheckBox
+		    android:id="@+id/chbpos_pandrial"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_marginLeft="5dp"
+		    android:layout_marginBottom="30dp"
+		    android:text="@string/pos_pandrial" 
+		    android:textSize="@dimen/fontes_para_textos"/>
+
+		</LinearLayout>	
+		
+     <TextView 
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_gravity="right"
+         android:textSize="@dimen/fontes_para_textos"
+         android:text="@string/data_coleta"
+         android:textColor="#a39e9e"
+         android:paddingRight="10dp"/>
+        
+ </LinearLayout>    
+</RelativeLayout>
+
+ <LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:layout_below="@id/fundo"
+     >
+    
+    <Button 
+    	android:layout_width="@dimen/bt_width"
+    	android:layout_height="@dimen/bt_heigth"
+    	android:background="#000000"
+    	android:text="@string/salvar"
+    	android:textSize="@dimen/fontes_para_textos"   
+    	android:textColor="#ffffff" 
+    	android:id="@+id/btsalvar"
+    	android:layout_marginBottom="10dp"/>
+    
+    <Button 
+    	android:layout_width="@dimen/bt_width"
+    	android:layout_height="@dimen/bt_heigth"
+    	android:background="#000000"
+    	android:text="@string/enviar"
+    	android:textSize="@dimen/fontes_para_textos"   
+    	android:textColor="#ffffff" 
+    	android:id="@+id/btenviar"
+    	android:layout_marginLeft="10dp"
+    	android:layout_marginBottom="10dp"  />
+   
+  </LinearLayout>
+</RelativeLayout>

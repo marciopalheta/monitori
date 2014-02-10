@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
-         
-    
-    <item 
-        android:id="@+id/menu_salvar"
-        android:orderInCategory="2"
-        android:showAsAction="always"
-        android:title="@string/salvar"/>
-    <item 
-        android:id="@+id/menu_cancelar"
-        android:orderInCategory="1"
-        android:showAsAction="always"
-        android:title="@string/cancelar"/>
 
+    <menu xmlns:android="http://schemas.android.com/apk/res/android">
+            
+     <item android:id="@+id/menu_cancelar"
+          android:icon="@android:drawable/ic_delete"
+          android:title="@string/cancelar"
+          android:alphabeticShortcut="r"
+          android:showAsAction="always|withText" />          
+     
+     <item android:id="@+id/menu_salvar"
+          android:icon="@android:drawable/ic_menu_save"
+          android:title="@string/salvar"
+          android:alphabeticShortcut="r"
+          android:showAsAction="always|withText" />                
+        
 </menu>
+   
+
+

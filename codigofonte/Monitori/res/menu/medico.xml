@@ -2,8 +2,9 @@
 
     <item
         android:id="@+id/menu_novo"
-        android:orderInCategory="100"
-        android:showAsAction="always"
-        android:title="@string/cadastrar_medico"/>
+		android:icon="@android:drawable/ic_input_add"
+        android:title="@string/cadastrar_medico"        
+    	android:showAsAction="always|withText" />
+            
 
 </menu>

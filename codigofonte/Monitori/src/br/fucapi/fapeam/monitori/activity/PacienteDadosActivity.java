@@ -17,8 +17,11 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -78,12 +81,48 @@ public class PacienteDadosActivity extends Activity {
 				}}
 		});
 	}
-		
+			
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.paciente_dados, menu);
+		//Definicao do menu inflater
+		MenuInflater inflater = this.getMenuInflater();
+		
+		//Inflar um XML
+		inflater.inflate(R.menu.menu_formularios, menu);
+		
 		return true;
 	}
-
+	
+	public boolean onOptionsItemSelected(MenuItem item){
+		//Verifica o item do menu selecionado
+		switch(item.getItemId()){
+			//Verifica se foi selecionado um item novo			
+			case R.id.menu_salvar:			
+				//Utilizando o helper
+				Paciente paciente = (Paciente) helper.getPaciente();
+				//Criacao do objeto DAO
+				UsuarioDAO dao = new UsuarioDAO(PacienteDadosActivity.this);
+				
+				//Validando os campos
+				if(helper.validar()==true){		
+					// Verificacao para salvar ou cadastrar o aluno
+					if (paciente.getId() == null) {
+						dao.cadastrar(paciente);
+					} else {
+						dao.alterar(paciente);
+					}//Fechando a conexao com o BD
+					dao.close();
+					//Encerrando a activity
+					finish();
+				}
+				return false;
+			case R.id.menu_cancelar:			
+				finish();
+				return false;
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+	}
+	
 }

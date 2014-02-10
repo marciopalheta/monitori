@@ -87,8 +87,11 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 		//Definicao dos valores dos campos
 		values.put("nome", usuario.getNome());
 		
-		String dataForDB=null;		
-		dataForDB = dateFormat.format(usuario.getDataNascimento().getTime());
+		String dataForDB=null;	
+		Calendar cal =  usuario.getDataNascimento();
+		if(cal!=null){
+			dataForDB = dateFormat.format(usuario.getDataNascimento().getTime());
+		}
 		values.put("dataMascimento", dataForDB);
 				
 		values.put("endereco", usuario.getEndereco());
@@ -200,6 +203,8 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 						Calendar cal = Calendar.getInstance();
 						cal.setTime(dateFormat.parse(dtNascto));
 						usuario.setDataNascimento(cal);
+					}else{
+						usuario.setDataNascimento(null);
 					}
 				
 				

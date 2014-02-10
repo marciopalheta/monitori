@@ -53,5 +53,7 @@
     <string name="deletar">Deletar</string>
     
     <string name="cadastrar_medico">Cadastrar Medico</string>
+    
+    <string name="cancelar">Cancelar</string>
 
 </resources>

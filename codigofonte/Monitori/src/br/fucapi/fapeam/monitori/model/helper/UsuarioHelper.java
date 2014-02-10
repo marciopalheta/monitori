@@ -2,8 +2,14 @@ package br.fucapi.fapeam.monitori.model.helper;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.activity.PacienteDadosActivity;
@@ -38,6 +44,7 @@ public class UsuarioHelper {
 	//private EditText dataNascimento;	
 	private Button btDataNascimento;
 	private Calendar dataNascimento = Calendar.getInstance();	
+	private Calendar dtaNascimento = null;
 	private ImageView foto;
 	private RadioButton masculino;
 	private RadioButton feminino;
@@ -105,8 +112,13 @@ public class UsuarioHelper {
 	 private void updateLabel() {
 		 			 			 
 		 	String dateForButton = null;		 			 			 			 			 	
-		 	dateForButton = DateUtils.formatDateTime(context, dataNascimento.getTimeInMillis(), DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_NUMERIC_DATE | DateUtils.FORMAT_SHOW_YEAR);		 	
-	        btDataNascimento.setText(dateForButton);	        	       
+		 	if(dataNascimento !=null){
+		 		dateForButton = DateUtils.formatDateTime(context, dataNascimento.getTimeInMillis(), DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_NUMERIC_DATE | DateUtils.FORMAT_SHOW_YEAR);		 	
+		 	}else{
+		 		dateForButton = context.getString(R.string.dtNascimento); 
+		 				
+		 	}
+		 	btDataNascimento.setText(dateForButton);	        	       
 	 }
 	
 	 public boolean validarDados(View view, String mensagem) {
@@ -119,7 +131,7 @@ public class UsuarioHelper {
 		     return true;
 		    }
 		   }
-		   // em qualquer outra condição é gerado um erro
+		   // em qualquer outra condiï¿½ï¿½o ï¿½ gerado um erro
 		   edTexto.setError(mensagem);
 		   edTexto.setFocusable(true);
 		   edTexto.requestFocus();
@@ -252,24 +264,37 @@ public class UsuarioHelper {
 	}
 
 	public Calendar getDataNascimento() {
-		return dataNascimento;
+		return dtaNascimento;
 	}
 
 	public void setDataNascimento(Calendar dataNascimento) {
-		if(dataNascimento!=null){
+		//if(dataNascimento!=null){
 			this.dataNascimento = dataNascimento;
+			this.dtaNascimento = dataNascimento;
 			updateLabel();
-		}
+		//}
 	}
 
 	public boolean validar(){
-		if(validarDados(getNome(), "campo obrigatorio")){
-			if(validarDados(getTelefone(), "campo obrigatorio")){
-				if(validarDados(getEndereco(), "Preencher o campo")){
-					
+		List<View> listview;
+		
+		
+		// cria o mapa
+		Map<View, String> mapaDeCampos = new LinkedHashMap<View, String>();
+		mapaDeCampos.put(telefone, "Telefone obrigatorio");
+		mapaDeCampos.put(nome, "Nome obrigatorio");
+		mapaDeCampos.put(cep, "Cep obrigatorio");
+		
+		
+		
+		for(View chave: mapaDeCampos.keySet()){
+		    //System.out.println("chave: "+chave+", valor: "+mapaDeCampos.get(chave)+".");
+		    if(validarDados(chave,  mapaDeCampos.get(chave) ) == false){
+				return false;
+			}
+		}
 				
-		return true;}}}
-		return false;
+			return true;		
 		
 	}
 	

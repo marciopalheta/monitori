@@ -7,6 +7,7 @@ import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import android.content.Context;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -40,8 +41,9 @@ public class PacienteHelper extends UsuarioHelper {
 		paciente.setDataNascimento(getDataNascimento());
 		
 		
-		//paciente.setDataNascimento( getDataNascimento().toString()); 
-		paciente.setSexo(getSexo().getText().toString() );
+		//paciente.setDataNascimento( getDataNascimento().toString());
+		
+		paciente.setSexo( String.valueOf(getSexo().getSelectedItem()) );
 		
 		paciente.setLogin(paciente.getNome());
 		paciente.setSenha(paciente.getNome());
@@ -64,18 +66,11 @@ public class PacienteHelper extends UsuarioHelper {
 		getNumSus().setText(paciente.getNumSus());
 		setDataNascimento(paciente.getDataNascimento());
 		
+		ArrayAdapter<String> array_spinner=(ArrayAdapter<String>)getSexo().getAdapter();
+		getSexo().setSelection(array_spinner.getPosition( paciente.getSexo() ));
+	    	
 		Log.i("TESTE", "Sexo do Paciente: " +paciente.getSexo());
-		
-		if(paciente.getSexo().equals("Masculino")){
-			//getSexo().check(getMasculino().getId());
-			getMasculino().setChecked(true);
-			
-		}else{ 
-			//getSexo().check(getFeminino().getId());
-			getFeminino().setChecked(true);
-			
-		}
-		
+						
 		hipertenso.setChecked(paciente.isHipertenso() );
 						
 		this.paciente = paciente;

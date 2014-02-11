@@ -45,6 +45,9 @@ public class PacienteDadosActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.pacientedados);
+		
+		getActionBar().setHomeButtonEnabled(true);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 		//Criacao do objeto helper
 		helper = new PacienteHelper(this);
 		botao = (Button) findViewById(R.id.sbSalvar);
@@ -94,11 +97,19 @@ public class PacienteDadosActivity extends Activity {
 		return true;
 	}
 	
-	public boolean onOptionsItemSelected(MenuItem item){
-		//Verifica o item do menu selecionado
-		switch(item.getItemId()){
-			//Verifica se foi selecionado um item novo			
-			case R.id.menu_salvar:			
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+	        case android.R.id.home:
+	            // go home
+	        	// ir Para o menu principal	            
+	            /*
+	        	Intent intent = new Intent(this, PacienteActivity.class);
+	            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	            startActivity(intent);*/
+	            return true;
+	        case R.id.menu_salvar:			
 				//Utilizando o helper
 				Paciente paciente = (Paciente) helper.getPaciente();
 				//Criacao do objeto DAO
@@ -116,13 +127,13 @@ public class PacienteDadosActivity extends Activity {
 					//Encerrando a activity
 					finish();
 				}
-				return false;
+				return true;
 			case R.id.menu_cancelar:			
 				finish();
-				return false;
-			default:
-				return super.onOptionsItemSelected(item);
-		}
+				return true;
+	    }
+
+	    return super.onOptionsItemSelected(item);
 	}
-	
+		
 }

@@ -176,11 +176,21 @@ public class PacienteActivity extends Activity {
 	public boolean onContextItemSelected(MenuItem item) {
 		Intent intent;
 		switch (item.getItemId()) {
-		case R.id.menu_deletar:
-			excluirUsuario();
-			break;
-		default:
-			break;
+			case R.id.menu_editar:
+				
+				Intent form = new Intent(PacienteActivity.this,
+						PacienteDadosActivity.class);				
+				form.putExtra("PACIENTE_SELECIONADO", pacienteSelecionado);
+
+				startActivity(form);
+
+				
+				break;
+			case R.id.menu_deletar:
+				excluirUsuario();
+				break;
+			default:
+				break;
 		}
 		return super.onContextItemSelected(item);
 	}

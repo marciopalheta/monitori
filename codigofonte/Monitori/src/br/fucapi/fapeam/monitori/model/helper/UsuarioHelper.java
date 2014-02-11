@@ -14,22 +14,33 @@ import java.util.Map;
 import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.activity.PacienteDadosActivity;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
+import br.fucapi.fapeam.monitori.utils.Mask;
+import br.fucapi.fapeam.monitori.utils.SpinnerAdapter;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.database.DataSetObserver;
 import android.net.ParseException;
 import android.text.Editable;
 import android.text.TextUtils;
+import android.text.format.DateFormat;
 import android.text.format.DateUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.widget.Adapter;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 public class UsuarioHelper {
 	private EditText nome;
@@ -41,17 +52,19 @@ public class UsuarioHelper {
 	private EditText telefone;
 	private EditText nomeMae;
 	private EditText numSus;
-	//private EditText dataNascimento;	
-	private Button btDataNascimento;
-	private Calendar dataNascimento = Calendar.getInstance();	
-	private Calendar dtaNascimento = null;
+	
+	private EditText dataNascimento;		
+	private ImageButton ibDataNascimento;	
+	
+	private static final String DATE_FORMAT = "dd/MM/yyyy";	    
+    private SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);           
+    
+	private Calendar dtCalendar = Calendar.getInstance();			
+	
 	private ImageView foto;
-	private RadioButton masculino;
-	private RadioButton feminino;
-	private RadioButton sexo;	
-	private RadioGroup rgSexo;
+	private Spinner sexo;	
 	private Usuario usuario;
-	private Context context;		        	
+	private Context context;		        		        
 	
     //private Calendar myCalendar;
 
@@ -61,18 +74,19 @@ public class UsuarioHelper {
 	    public void onDateSet(DatePicker view, int year, int monthOfYear,
 	            int dayOfMonth) {
 	        // TODO Auto-generated method stub
-	    	dataNascimento.set(Calendar.YEAR, year);
-	    	dataNascimento.set(Calendar.MONTH, monthOfYear);
-	    	dataNascimento.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+	    	dtCalendar.set(Calendar.YEAR, year);
+	    	dtCalendar.set(Calendar.MONTH, monthOfYear);
+	    	dtCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 	        updateLabel();
 	    }
 
 	};
 
+	private ArrayAdapter<String> adapter;
 	
 	public UsuarioHelper(final Activity activity){
 		//Associacao de campos de tela ao controller
-		this.context = activity;
+		this.context = activity;						
 		
 		nome = (EditText) activity.findViewById(R.id.edNome);
 		
@@ -85,25 +99,37 @@ public class UsuarioHelper {
 		telefone = (EditText) activity.findViewById(R.id.edTefone);
 		nomeMae = (EditText) activity.findViewById(R.id.edNomedamae);
 		numSus = (EditText) activity.findViewById(R.id.edit_sus);
-		masculino = (RadioButton) activity.findViewById(R.id.rbMasc);
-		feminino = (RadioButton) activity.findViewById(R.id.rbFeminino);
-		rgSexo = (RadioGroup) activity.findViewById(R.id.radioSex);
-		sexo = (RadioButton) activity.findViewById(rgSexo.getCheckedRadioButtonId());
 		
-		btDataNascimento= (Button) activity.findViewById(R.id.btDataNascimento);
+		dataNascimento = (EditText) activity.findViewById(R.id.edDataNascimento); 				
+		dataNascimento.addTextChangedListener(Mask.insert("##/##/####", dataNascimento));
 		
-		btDataNascimento.setOnClickListener(new OnClickListener() {
+		ibDataNascimento= (ImageButton) activity.findViewById(R.id.ibDataNascimento);
+		
+		ibDataNascimento.setOnClickListener(new OnClickListener() {
 
 	        @Override
 	        public void onClick(View v) {
 	            // TODO Auto-generated method stub
-	            new DatePickerDialog( activity, date, dataNascimento
-	                    .get(Calendar.YEAR), dataNascimento.get(Calendar.MONTH),
-	                    dataNascimento.get(Calendar.DAY_OF_MONTH)).show();
+	            new DatePickerDialog( activity, date, dtCalendar
+	                    .get(Calendar.YEAR), dtCalendar.get(Calendar.MONTH),
+	                    dtCalendar.get(Calendar.DAY_OF_MONTH)).show();
 	        }
 	    });
 		
-		Log.i("TESTE", "Sexo: " +sexo.getText() );
+		
+		sexo = (Spinner) activity.findViewById(R.id.spinSexo);		
+		
+		String[] list = activity.getResources().getStringArray(R.array.sexo_arrays);
+		Integer[] imageSexo={R.drawable.ic_man,R.drawable.ic_woman};
+				
+		//adapter = new SpinnerAdapter(activity, R.layout.spinner_item,data1);
+		adapter = new SpinnerAdapter(activity, R.layout.spinner_item,list,imageSexo);
+	    sexo.setAdapter(adapter);
+	    //sexo.setAdapter(new MyAdapter(activity, R.layout.spinner_item, data1));
+	    
+		//Log.i("TESTE", "Sexo: " +sexo.getText() );
+		Log.e("TESTE", "Sexo: " + String.valueOf(sexo.getSelectedItem()) );
+		
 		
 		//foto = (ImageView) activity.findViewById(R.id.foto);				
 		
@@ -112,13 +138,14 @@ public class UsuarioHelper {
 	 private void updateLabel() {
 		 			 			 
 		 	String dateForButton = null;		 			 			 			 			 	
-		 	if(dataNascimento !=null){
-		 		dateForButton = DateUtils.formatDateTime(context, dataNascimento.getTimeInMillis(), DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_NUMERIC_DATE | DateUtils.FORMAT_SHOW_YEAR);		 	
-		 	}else{
-		 		dateForButton = context.getString(R.string.dtNascimento); 
-		 				
-		 	}
-		 	btDataNascimento.setText(dateForButton);	        	       
+		 			 					
+			if(dtCalendar!=null){
+				dateForButton = dateFormat.format(dtCalendar.getTime());
+			}else{
+				dateForButton = context.getString(R.string.dtNascimento);
+			}
+		 			 	
+			dataNascimento.setText(dateForButton);	        	       
 	 }
 	
 	 public boolean validarDados(View view, String mensagem) {
@@ -228,51 +255,29 @@ public class UsuarioHelper {
 		this.foto = foto;
 	}
 
-	public RadioButton getMasculino() {
-		return masculino;
-	}
-
-	public void setMasculino(RadioButton masculino) {
-		this.masculino = masculino;
-	}
-
-	public RadioButton getFeminino() {
-		return feminino;
-	}
-
-	public void setFeminino(RadioButton feminino) {
-		this.feminino = feminino;
-	}
-
-	public RadioButton getSexo() {
-		return sexo;
-	}
-
-
-	public void setSexo(RadioButton sexo) {
-		this.sexo = sexo;
-	}
-
-
-	public RadioGroup getRgSexo() {
-		return rgSexo;
-	}
-
-
-	public void setRgSexo(RadioGroup rgSexo) {
-		this.rgSexo = rgSexo;
-	}
-
 	public Calendar getDataNascimento() {
-		return dtaNascimento;
+			String dtNascto = null;				
+			dtNascto = dataNascimento.getText().toString();		
+			
+			try {
+				if(dtNascto !=null){
+					dtCalendar.setTime(dateFormat.parse(dtNascto));
+					return dtCalendar;
+				}
+			} catch (java.text.ParseException e) {
+				
+				Log.e("ERRO PARSE", e.getMessage());
+			}
+										
+		return null;
 	}
 
 	public void setDataNascimento(Calendar dataNascimento) {
-		//if(dataNascimento!=null){
-			this.dataNascimento = dataNascimento;
-			this.dtaNascimento = dataNascimento;
+		if(dataNascimento!=null){
+			this.dtCalendar = dataNascimento;			
 			updateLabel();
-		//}
+		}
+		
 	}
 
 	public boolean validar(){
@@ -281,8 +286,9 @@ public class UsuarioHelper {
 		
 		// cria o mapa
 		Map<View, String> mapaDeCampos = new LinkedHashMap<View, String>();
-		mapaDeCampos.put(telefone, "Telefone obrigatorio");
 		mapaDeCampos.put(nome, "Nome obrigatorio");
+		mapaDeCampos.put(dataNascimento, "Campo obrigatorio");
+		mapaDeCampos.put(telefone, "Telefone obrigatorio");		
 		mapaDeCampos.put(cep, "Cep obrigatorio");
 		
 		
@@ -297,5 +303,14 @@ public class UsuarioHelper {
 			return true;		
 		
 	}
+
+	public Spinner getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(Spinner sexo) {
+		this.sexo = sexo;
+	}
+	
 	
 }

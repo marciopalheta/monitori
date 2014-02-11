@@ -72,5 +72,15 @@
     <string name="diagnosticar">Diagnósticar</string>
     <string name="descrever">Descrever diagnóstico:</string>
     <string name="title_activity_historico">Historico</string>
+    
+    <string name="editar">Editar</string>
+	
+    <string name="sexo_prompt">Selecione um sexo</string>	
+    
+    <string-array name="sexo_arrays">        
+        <item>@string/masculino</item>
+        <item>@string/feminino</item>        
+    </string-array>
+    
 
 </resources>

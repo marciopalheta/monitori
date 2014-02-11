@@ -194,10 +194,7 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 				usuario.setCelular(cursor.getString(cursor.getColumnIndex("celular")));
 				String dtNascto=null;
 				
-				dtNascto = cursor.getString(cursor.getColumnIndex("dataMascimento"));
-				
-				//usuario.setDataNascimento(dataNascimento);
-				Log.i(TAG, "dt Nascimento = "+ dtNascto);
+				dtNascto = cursor.getString(cursor.getColumnIndex("dataMascimento"));								
 					
 					if(dtNascto !=null){
 						Calendar cal = Calendar.getInstance();
@@ -206,12 +203,8 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 					}else{
 						usuario.setDataNascimento(null);
 					}
-				
-				
-				
-				
+								
 				usuario.setTelefone(cursor.getString(cursor.getColumnIndex("telefone")));
-				//usuario.setDataNascimento(cursor.getString(8) );
 				usuario.setSexo( cursor.getString(cursor.getColumnIndex("sexo")) );
 				usuario.setObservacao( cursor.getString(cursor.getColumnIndex("observacao")) );
 								
@@ -251,9 +244,13 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 		ContentValues values = new ContentValues();
 		values.put("nome", usuario.getNome());
 		
-		String dataForDB=null;		
-		dataForDB = dateFormat.format(usuario.getDataNascimento().getTime());
-		values.put("dataMascimento", dataForDB);
+		
+		String dataForDB=null;	
+		Calendar cal =  usuario.getDataNascimento();
+		if(cal!=null){
+			dataForDB = dateFormat.format(usuario.getDataNascimento().getTime());
+		}
+		values.put("dataMascimento", dataForDB);		
 		
 		values.put("endereco", usuario.getEndereco());
 		values.put("cep", usuario.getCep());

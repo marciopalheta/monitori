@@ -14,7 +14,4 @@
           android:alphabeticShortcut="r"
           android:showAsAction="always|withText" />                
         
-</menu>
-   
-
-
+</menu>  

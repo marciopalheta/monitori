@@ -107,7 +107,10 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 		values.put("tipoUsuario", usuario.getTipoUsuario().toString() );
 		
 		if(usuario instanceof Paciente){			
-			values.put("hipertenso", ((Paciente)usuario).isHipertenso());			
+			values.put("hipertenso", String.valueOf( ((Paciente)usuario).isHipertenso() ) );
+			values.put("diabetico1", String.valueOf( ((Paciente)usuario).isDiabetico1() ) );
+			values.put("diabetico2", String.valueOf( ((Paciente)usuario).isDiabetico2() ) );
+			
 			
 		}
 		
@@ -136,6 +139,8 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 		
 		if(usuario instanceof Paciente){						
 			Log.i(TAG, "hipertenso: "+ ((Paciente)usuario).isHipertenso() );
+			Log.i(TAG, "diabetico1: "+ ((Paciente)usuario).isDiabetico1() );
+			Log.i(TAG, "diabetico2: "+ ((Paciente)usuario).isDiabetico2() );
 		}				
 		if(usuario instanceof Medico){						
 			Log.i(TAG, "crm: "+ ((Medico)usuario).getCrm() );
@@ -170,10 +175,10 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 				Usuario usuario = null;
 				
 				if(tipoUsuario == TipoUsuario.PACIENTE){
-					usuario = new Paciente();
-					
+					usuario = new Paciente();					
 					((Paciente)usuario).setHipertenso( Boolean.parseBoolean( cursor.getString(cursor.getColumnIndex("hipertenso"))  ) );
-					
+					((Paciente)usuario).setDiabetico1( Boolean.parseBoolean( cursor.getString(cursor.getColumnIndex("diabetico1"))  ) );
+					((Paciente)usuario).setDiabetico2( Boolean.parseBoolean( cursor.getString(cursor.getColumnIndex("diabetico2"))  ) );
 				}else if(tipoUsuario == TipoUsuario.AGENTE){
 					usuario = new Agente();					
 				}else if(tipoUsuario == TipoUsuario.MEDICO){
@@ -263,9 +268,11 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 		values.put("sexo", usuario.getSexo() );
 		values.put("tipoUsuario", usuario.getTipoUsuario().toString() );
 		
-		if(usuario instanceof Paciente){			
-			values.put("hipertenso", ((Paciente)usuario).isHipertenso());			
-			
+		if(usuario instanceof Paciente){									
+			values.put("hipertenso", String.valueOf( ((Paciente)usuario).isHipertenso() ) );
+			values.put("diabetico1", String.valueOf( ((Paciente)usuario).isDiabetico1() ) );
+			values.put("diabetico2", String.valueOf( ((Paciente)usuario).isDiabetico2() ) );
+
 		}
 		
 		if(usuario instanceof Medico){			

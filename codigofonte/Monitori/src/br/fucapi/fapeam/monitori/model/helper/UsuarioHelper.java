@@ -33,6 +33,7 @@ import android.view.View.OnClickListener;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -54,7 +55,9 @@ public class UsuarioHelper {
 	private EditText numSus;
 	
 	private EditText dataNascimento;		
-	private ImageButton ibDataNascimento;	
+	private ImageButton ibDataNascimento;
+	private CheckBox isHipertenso;
+	
 	
 	private static final String DATE_FORMAT = "dd/MM/yyyy";	    
     private SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);           

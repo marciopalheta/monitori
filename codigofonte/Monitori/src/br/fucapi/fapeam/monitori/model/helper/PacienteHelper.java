@@ -16,7 +16,9 @@ import android.widget.RadioButton;
 public class PacienteHelper extends UsuarioHelper {
 		
 	private Paciente paciente;
-	private CheckBox hipertenso;	
+	private CheckBox hipertenso;
+	private CheckBox diabetico1;
+	private CheckBox diabetico2;
 	
 	public PacienteHelper(PacienteDadosActivity activity){
 		super(activity);
@@ -24,7 +26,9 @@ public class PacienteHelper extends UsuarioHelper {
 		//criacao do objeto paciente
 		paciente = new Paciente();
 		
-		hipertenso =(CheckBox) activity.findViewById(R.id.chbHipertenso);		
+		hipertenso =(CheckBox) activity.findViewById(R.id.chbHipertenso);
+		diabetico1 =(CheckBox) activity.findViewById(R.id.chbTipo1);
+		diabetico2 =(CheckBox) activity.findViewById(R.id.chbTipo2);
 	}
 
 	public Paciente getPaciente(){
@@ -49,6 +53,9 @@ public class PacienteHelper extends UsuarioHelper {
 		paciente.setSenha(paciente.getNome());
 		
 		paciente.setHipertenso(hipertenso.isChecked());
+		paciente.setDiabetico1(diabetico1.isChecked());
+		paciente.setDiabetico2(diabetico2.isChecked());
+		
 		paciente.setTipoUsuario(TipoUsuario.PACIENTE);
 
 		return (Paciente) paciente;		
@@ -69,10 +76,13 @@ public class PacienteHelper extends UsuarioHelper {
 		ArrayAdapter<String> array_spinner=(ArrayAdapter<String>)getSexo().getAdapter();
 		getSexo().setSelection(array_spinner.getPosition( paciente.getSexo() ));
 	    	
-		Log.i("TESTE", "Sexo do Paciente: " +paciente.getSexo());
-						
+		//Log.i("TESTE", "Sexo do Paciente: " +paciente.getSexo());
+		Log.e("TESTE", "is Hipertenso: " + paciente.isHipertenso() );
 		hipertenso.setChecked(paciente.isHipertenso() );
-						
+		diabetico1.setChecked(paciente.isDiabetico1() );
+		diabetico2.setChecked(paciente.isDiabetico2() );
+		
+		
 		this.paciente = paciente;
 		
 	

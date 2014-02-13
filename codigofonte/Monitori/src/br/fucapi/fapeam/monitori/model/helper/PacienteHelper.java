@@ -20,15 +20,15 @@ public class PacienteHelper extends UsuarioHelper {
 	private CheckBox diabetico1;
 	private CheckBox diabetico2;
 	
-	public PacienteHelper(PacienteDadosActivity activity){
-		super(activity);
+	public PacienteHelper(PacienteDadosActivity fragmentActivity){
+		super(fragmentActivity);
 						
 		//criacao do objeto paciente
 		paciente = new Paciente();
 		
-		hipertenso =(CheckBox) activity.findViewById(R.id.chbHipertenso);
-		diabetico1 =(CheckBox) activity.findViewById(R.id.chbTipo1);
-		diabetico2 =(CheckBox) activity.findViewById(R.id.chbTipo2);
+		hipertenso =(CheckBox) fragmentActivity.findViewById(R.id.chbHipertenso);
+		diabetico1 =(CheckBox) fragmentActivity.findViewById(R.id.chbTipo1);
+		diabetico2 =(CheckBox) fragmentActivity.findViewById(R.id.chbTipo2);
 	}
 
 	public Paciente getPaciente(){

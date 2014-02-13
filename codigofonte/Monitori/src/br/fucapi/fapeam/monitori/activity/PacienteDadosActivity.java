@@ -18,6 +18,7 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -29,7 +30,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class PacienteDadosActivity extends Activity {
+public class PacienteDadosActivity extends FragmentActivity {
 
 	//Atributos para manipulacao de tela
 	private Button botao;
@@ -45,9 +46,7 @@ public class PacienteDadosActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.pacientedados);
-		
-		getActionBar().setHomeButtonEnabled(true);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
+				
 		//Criacao do objeto helper
 		helper = new PacienteHelper(this);
 		botao = (Button) findViewById(R.id.sbSalvar);

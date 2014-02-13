@@ -1,0 +1,40 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"         
+        >
+  
+        <TextView
+            android:id="@+id/tvNome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margem_editext"
+            android:layout_marginRight="@dimen/margem_editext"
+            android:text="@string/nome" />
+        		
+        <EditText
+		    android:id="@+id/edNome"
+		    android:background="#ebedea"
+		    android:layout_width="match_parent"
+		    android:layout_height="@dimen/heigth_editext"
+            android:textSize="@dimen/fontes_para_textos"
+            android:layout_marginLeft="@dimen/margem_editext"
+            android:layout_marginRight="@dimen/margem_editext"
+            android:padding="@dimen/padding"
+			android:hint="@string/nome"
+			android:layout_marginBottom="10dp"
+			android:focusable="true"			
+			android:focusableInTouchMode="true"			
+			>
+            <requestFocus />
+        </EditText> 
+			
+			
+        
+    </LinearLayout>
+
+</ScrollView>

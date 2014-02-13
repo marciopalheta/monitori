@@ -1,47 +1,56 @@
 package br.fucapi.fapeam.monitori.model.helper;
 
-import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
+import org.xml.sax.DTDHandler;
+
 import br.fucapi.fapeam.monitori.R;
-import br.fucapi.fapeam.monitori.activity.PacienteDadosActivity;
+import br.fucapi.fapeam.monitori.R.layout;
+import br.fucapi.fapeam.monitori.R.menu;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
+import br.fucapi.fapeam.monitori.utils.BairroDialog;
+import br.fucapi.fapeam.monitori.utils.Funcoes;
 import br.fucapi.fapeam.monitori.utils.Mask;
 import br.fucapi.fapeam.monitori.utils.SpinnerAdapter;
+
+import android.os.Bundle;
+import android.os.Handler;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.app.FragmentTransaction;
 import android.content.Context;
-import android.database.DataSetObserver;
-import android.net.ParseException;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextUtils;
-import android.text.format.DateFormat;
-import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
-import android.widget.Adapter;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.TextView;
+import android.widget.Toast;
 
 public class UsuarioHelper {
 	private EditText nome;
@@ -57,7 +66,8 @@ public class UsuarioHelper {
 	private EditText dataNascimento;		
 	private ImageButton ibDataNascimento;
 	private CheckBox isHipertenso;
-	
+	private Button novoBairro;
+	private EditText nomeBairro; 		
 	
 	private static final String DATE_FORMAT = "dd/MM/yyyy";	    
     private SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);           
@@ -68,6 +78,7 @@ public class UsuarioHelper {
 	private Spinner sexo;	
 	private Usuario usuario;
 	private Context context;		        		        
+	private FragmentActivity fragmentActivity;
 	
     //private Calendar myCalendar;
 
@@ -87,46 +98,56 @@ public class UsuarioHelper {
 
 	private ArrayAdapter<String> adapter;
 	
-	public UsuarioHelper(final Activity activity){
+	public UsuarioHelper(final FragmentActivity fragmentActivity){
 		//Associacao de campos de tela ao controller
-		this.context = activity;						
-		
-		nome = (EditText) activity.findViewById(R.id.edNome);
+		this.context = fragmentActivity;						
+		this.fragmentActivity = fragmentActivity;
+		nome = (EditText) fragmentActivity.findViewById(R.id.edNome);
 		
 			
-		endereco = (EditText) activity.findViewById(R.id.edEndereco);			
-		bairro = (EditText) activity.findViewById(R.id.chbBairro);
-		cep = (EditText) activity.findViewById(R.id.edCep);
-		unidadeSaude = (EditText) activity.findViewById(R.id.chbUnidadeSaude);
-		celular = (EditText) activity.findViewById(R.id.edCelular);
-		telefone = (EditText) activity.findViewById(R.id.edTefone);
-		nomeMae = (EditText) activity.findViewById(R.id.edNomedamae);
-		numSus = (EditText) activity.findViewById(R.id.edit_sus);
+		endereco = (EditText) fragmentActivity.findViewById(R.id.edEndereco);			
+		bairro = (EditText) fragmentActivity.findViewById(R.id.chbBairro);
+		cep = (EditText) fragmentActivity.findViewById(R.id.edCep);
+		unidadeSaude = (EditText) fragmentActivity.findViewById(R.id.chbUnidadeSaude);
+		celular = (EditText) fragmentActivity.findViewById(R.id.edCelular);
+		telefone = (EditText) fragmentActivity.findViewById(R.id.edTefone);
+		nomeMae = (EditText) fragmentActivity.findViewById(R.id.edNomedamae);
+		numSus = (EditText) fragmentActivity.findViewById(R.id.edit_sus);
 		
-		dataNascimento = (EditText) activity.findViewById(R.id.edDataNascimento); 				
+		dataNascimento = (EditText) fragmentActivity.findViewById(R.id.edDataNascimento); 				
 		dataNascimento.addTextChangedListener(Mask.insert("##/##/####", dataNascimento));
 		
-		ibDataNascimento= (ImageButton) activity.findViewById(R.id.ibDataNascimento);
+		novoBairro = (Button) fragmentActivity.findViewById(R.id.novoBairro);
+		novoBairro.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				getNovoBairro();
+				
+			}
+		});
+		
+		ibDataNascimento= (ImageButton) fragmentActivity.findViewById(R.id.ibDataNascimento);
 		
 		ibDataNascimento.setOnClickListener(new OnClickListener() {
 
 	        @Override
 	        public void onClick(View v) {
 	            // TODO Auto-generated method stub
-	            new DatePickerDialog( activity, date, dtCalendar
+	            new DatePickerDialog( fragmentActivity, date, dtCalendar
 	                    .get(Calendar.YEAR), dtCalendar.get(Calendar.MONTH),
 	                    dtCalendar.get(Calendar.DAY_OF_MONTH)).show();
 	        }
 	    });
 		
 		
-		sexo = (Spinner) activity.findViewById(R.id.spinSexo);		
+		sexo = (Spinner) fragmentActivity.findViewById(R.id.spinSexo);		
 		
-		String[] list = activity.getResources().getStringArray(R.array.sexo_arrays);
+		String[] list = fragmentActivity.getResources().getStringArray(R.array.sexo_arrays);
 		Integer[] imageSexo={R.drawable.ic_man,R.drawable.ic_woman};
 				
 		//adapter = new SpinnerAdapter(activity, R.layout.spinner_item,data1);
-		adapter = new SpinnerAdapter(activity, R.layout.spinner_item,list,imageSexo);
+		adapter = new SpinnerAdapter(fragmentActivity, R.layout.spinner_item,list,imageSexo);
 	    sexo.setAdapter(adapter);
 	    //sexo.setAdapter(new MyAdapter(activity, R.layout.spinner_item, data1));
 	    
@@ -149,26 +170,7 @@ public class UsuarioHelper {
 			}
 		 			 	
 			dataNascimento.setText(dateForButton);	        	       
-	 }
-	
-	 public boolean validarDados(View view, String mensagem) {
-		  if (view instanceof EditText) {
-		   EditText edTexto = (EditText) view;
-		   Editable texto = edTexto.getText();
-		   if (texto != null) {
-		    String strTexto = texto.toString();
-		    if (!TextUtils.isEmpty(strTexto)) {
-		     return true;
-		    }
-		   }
-		   // em qualquer outra condi��o � gerado um erro
-		   edTexto.setError(mensagem);
-		   edTexto.setFocusable(true);
-		   edTexto.requestFocus();
-		   return false;
-		  }
-		  return false;
-		 }
+	 }		
 	
 	public EditText getNomeMae() {
 		return nomeMae;
@@ -283,6 +285,16 @@ public class UsuarioHelper {
 		
 	}
 
+	
+	private void getNovoBairro() {
+				
+		BairroDialog diag = BairroDialog.newInstance();
+		
+		diag.show(fragmentActivity.getSupportFragmentManager(), "dialg");
+		
+		
+	}
+	
 	public boolean validar(){
 		List<View> listview;
 		
@@ -298,7 +310,7 @@ public class UsuarioHelper {
 		
 		for(View chave: mapaDeCampos.keySet()){
 		    //System.out.println("chave: "+chave+", valor: "+mapaDeCampos.get(chave)+".");
-		    if(validarDados(chave,  mapaDeCampos.get(chave) ) == false){
+		    if(Funcoes.validarDados(chave,  mapaDeCampos.get(chave) ) == false){
 				return false;
 			}
 		}

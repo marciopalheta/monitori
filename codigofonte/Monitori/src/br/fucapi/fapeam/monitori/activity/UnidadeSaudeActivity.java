@@ -177,7 +177,7 @@ public class UnidadeSaudeActivity extends Activity {
 			case R.id.menu_editar:
 				
 				Intent form = new Intent(UnidadeSaudeActivity.this,
-						PacienteDadosActivity.class);				
+						UnidadeSaudeDadosActivity.class);				
 				form.putExtra("UBS_SELECIONADO", ubsSelecionado);
 
 				startActivity(form);

@@ -54,6 +54,9 @@ public class PacienteActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.paciente);
 		
+		//getActionBar().setHomeButtonEnabled(true);
+		//getActionBar().setDisplayHomeAsUpEnabled(true);
+		
 		//Ligacao dos componentes de TELA aos atributos da Activity
 		lvListagem = (ListView) findViewById(R.id.lvListagem);
 		//Informa que a ListView tem um menu de contexto

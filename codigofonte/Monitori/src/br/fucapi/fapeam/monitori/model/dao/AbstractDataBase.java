@@ -38,19 +38,11 @@ public class AbstractDataBase extends SQLiteOpenHelper{
     public static final String TABLE_USUARIO = "Usuario";
     public static final String TABLE_UBS = "UnidadeSaude";
     public static final String TABLE_BAIRRO = "Bairro";
-	
+    
 	//Constantes para auxiliar o controle de versoes
-	private static final int VERSAO = 9;
-	private static final String TABELA = "Usuario";
-	private static final String DATABASE = "Pacientes";
 	
 	 // Common column names
-    private static final String KEY_ID = "id";
-    
- 
-    // NOTE_TAGS Table - column names
-    private static final String KEY_TODO_ID = "todo_id";
-    private static final String KEY_TAG_ID = "tag_id";
+    private static final String KEY_ID = "id";    
  
     // Table Create Statements
     // Usuario table create statement
@@ -68,12 +60,15 @@ public class AbstractDataBase extends SQLiteOpenHelper{
             + "(" + KEY_ID + " INTEGER PRIMARY KEY," 
             + "nome TEXT, endereco TEXT, numero TEXT, "				
 			+ "cep TEXT, fone TEXT, bairro_id INTEGER )";
- 	    		
+ 	
+    private static final String CREATE_TABLE_BAIRRO = "CREATE TABLE " + TABLE_BAIRRO
+            + "(" + KEY_ID + " INTEGER PRIMARY KEY," 
+            + "nome TEXT )";
 		
 	public AbstractDataBase (Context context){
 		
 		//Chamando o construtor que sabe acessar o BD
-		super(context,DATABASE,null,VERSAO);
+		super(context,DATABASE_NAME,null,DATABASE_VERSION);
 	}
 	
 	
@@ -82,7 +77,7 @@ public class AbstractDataBase extends SQLiteOpenHelper{
 		//Definicao do comando DDL a ser executado		
 		database.execSQL(CREATE_TABLE_USUARIO);
 		database.execSQL(CREATE_TABLE_UBS);
-		//database.execSQL(CREATE_TABLE_BAIRRO);
+		database.execSQL(CREATE_TABLE_BAIRRO);
 	}
 
 	/** 
@@ -96,7 +91,7 @@ public class AbstractDataBase extends SQLiteOpenHelper{
 		//Executando o comando de destruicao		
 		database.execSQL("DROP TABLE IF EXISTS " + TABLE_USUARIO);
 		database.execSQL("DROP TABLE IF EXISTS " + TABLE_UBS);
-		//database.execSQL("DROP TABLE IF EXISTS " + TABLE_BAIRRO);
+		database.execSQL("DROP TABLE IF EXISTS " + TABLE_BAIRRO);
 		
 		
 		//Chamando o metodo de construcao da base de dados

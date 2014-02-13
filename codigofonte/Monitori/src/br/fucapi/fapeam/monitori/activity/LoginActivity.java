@@ -77,7 +77,16 @@ public class LoginActivity extends Activity {
 				startActivity(intent);
 				
 				return false;
-			
+				
+			case R.id.menu_ubs:
+				//Especialista em mudanca de tela
+				intent = new Intent(LoginActivity.this,
+						UnidadeSaudeActivity.class);
+				//Carrega a nova tela
+				startActivity(intent);
+				
+				return false;
+
 			default:
 				return super.onOptionsItemSelected(item);
 		}

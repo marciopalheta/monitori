@@ -23,61 +23,23 @@ import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-public class UsuarioDAO extends SQLiteOpenHelper{
-	
-	//Constantes para auxiliar o controle de versoes
-	private static final int VERSAO = 9;
-	private static final String TABELA = "Usuario";
-	private static final String DATABASE = "Pacientes";
-	
+public class UsuarioDAO extends AbstractDataBase{
+		
 	//Constante para log no LogCat
 	private static final String TAG = "CADASTRO_USUARIO";
 	
 	private static final String DATE_FORMAT = "dd-MM-yyyy";
-    private static final String TIME_FORMAT = "kk:mm";
+    
     private SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
 	
 	public UsuarioDAO (Context context){
 		
 		//Chamando o construtor que sabe acessar o BD
-		super(context,DATABASE,null,VERSAO);
+		super(context);
 	}
 	
 	
-	@Override
-	public void onCreate(SQLiteDatabase database) {
-		//Definicao do comando DDL a ser executado
-		String ddl = "CREATE TABLE " + TABELA + "( "
-				+ "id INTEGER PRIMARY KEY, "
-				+ "nome TEXT, endereco TEXT, bairro TEXT, "
-				+ "cep TEXT, unidadeSaude TEXT, celular TEXT, "
-				+ "telefone TEXT, dataMascimento TEXT, login TEXT, "
-				+ "nomeMae TEXT, numSus TEXT, "
-				+ "senha TEXT, foto TEXT, hipertenso TEXT, sexo TEXT, "
-				+ "observacao TEXT, diabetico1 TEXT, diabetico2 TEXT, crm TEXT, matricula TEXT, tipoUsuario TEXT)";
-		
-		//Execucao do comando no SQLite
-		database.execSQL(ddl);		
-	}
-
-	/** 
-	 * metodo responsavel pela atualizacao das estruturas das tabelas
-	 * */
-	
-	@Override
-	public void onUpgrade(SQLiteDatabase database, int oldVersion, 
-			int newVersion) {
-		
-		//Definindo o comando para destruir a tabela Usuario
-		String sql = "DROP TABLE IF EXISTS " + TABELA;
-		
-		//Executando o comando de destruicao
-		database.execSQL(sql);
-		
-		//Chamando o metodo de construcao da base de dados
-		onCreate(database);
-	}
-	/** 
+	 /** 
 	 * metodo responsavel pelo cadastro do usuario
 	 * */
 	
@@ -123,7 +85,7 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 		}
 		
 		//Inserir dados do usuario
-		getWritableDatabase().insert(TABELA, null, values);
+		getWritableDatabase().insert(AbstractDataBase.TABLE_USUARIO, null, values);
 		Log.i(TAG, "Usuario Cadastrado: "+ usuario.getNome() );
 		Log.i(TAG, "dataMascimento: "+ dataForDB );		
 		
@@ -161,11 +123,11 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 		//Definicao da instrucao SQL
 		String sql = null;
 		if(tipoUsuario == TipoUsuario.PACIENTE){
-			sql = "Select * from Usuario where tipoUsuario = '"+TipoUsuario.PACIENTE+"' order by nome";
+			sql = "Select * from "+AbstractDataBase.TABLE_USUARIO +" where tipoUsuario = '"+TipoUsuario.PACIENTE+"' order by nome";
 		}else if(tipoUsuario == TipoUsuario.AGENTE){
-			sql = "Select * from Usuario where tipoUsuario = '"+TipoUsuario.AGENTE+"' order by nome";					
+			sql = "Select * from "+AbstractDataBase.TABLE_USUARIO +" where tipoUsuario = '"+TipoUsuario.AGENTE+"' order by nome";					
 		}else if(tipoUsuario == TipoUsuario.MEDICO){
-			sql = "Select * from Usuario where tipoUsuario = '"+TipoUsuario.MEDICO+"' order by nome";					
+			sql = "Select * from "+AbstractDataBase.TABLE_USUARIO +" where tipoUsuario = '"+TipoUsuario.MEDICO+"' order by nome";					
 		}
 		
 		//Objeto que reebe os registros do banco de dados
@@ -238,13 +200,14 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 		String[] args = {usuario.getId().toString()};
 		
 		//Exclusao do usuario
-		getWritableDatabase().delete(TABELA, "id=?", args);
+		getWritableDatabase().delete(AbstractDataBase.TABLE_USUARIO, "id=?", args);
 		Log.i(TAG, "Usuario Deletado: " +usuario.getNome());
 	}
 	
 	/** 
 	 * metodo responsavel pela atualizacao de usuarios
 	 * */
+	
 	public void alterar(Usuario usuario) {
 		ContentValues values = new ContentValues();
 		values.put("nome", usuario.getNome());
@@ -287,7 +250,7 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 		String[] args = { usuario.getId().toString() };
 
 		// Altera dados do Aluno no BD
-		getWritableDatabase().update(TABELA, values, "id=?", args);
+		getWritableDatabase().update(AbstractDataBase.TABLE_USUARIO, values, "id=?", args);
 		Log.i(TAG, "Usuario alterado: " + usuario.getNome());
 	}
 	
@@ -318,6 +281,7 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 		}
 		return usuario;
 	}
+
 	
 	
 }

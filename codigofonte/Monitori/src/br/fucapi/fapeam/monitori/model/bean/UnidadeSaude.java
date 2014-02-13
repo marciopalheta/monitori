@@ -9,7 +9,11 @@ public class UnidadeSaude extends AbstractEntityBean {
 	private Bairro bairro;
 	private String numeroUBS;
 	private String fone;
-
+	
+	@Override
+	public String toString() {		
+		return nome;
+	}
 	public String getNome() {
 		return nome;
 	}

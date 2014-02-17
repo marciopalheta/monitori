@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:id="@+id/textView1"
         android:layout_height="wrap_content"
-        
+        android:textSize="@dimen/fontes_para_textos"
         android:layout_toRightOf="@+id/imageView1"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="3dip">
+        <TextView
+        android:src="@drawable/ic_launcher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textID"
+        android:layout_alignParentLeft="true"
+        android:visibility="invisible">
+        </TextView>
+        <TextView
+        android:text="TextView"
+        
+        android:layout_width="wrap_content"
+        android:id="@+id/textView1"                        
+        android:layout_centerVertical="true"                
+		android:layout_height="wrap_content"
+		android:padding="10dp"		
+		android:textSize="@dimen/fontes_para_textos"				
+        >
+        </TextView>
+        
+        
+        
+    </RelativeLayout>

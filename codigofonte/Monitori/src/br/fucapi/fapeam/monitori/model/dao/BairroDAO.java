@@ -57,13 +57,34 @@ public class BairroDAO extends AbstractDataBase{
 			while(cursor.moveToNext()){
 				bairro = new Bairro();
 				
-				Log.e(TAG, "nome bairro = "+ cursor.getString(cursor.getColumnIndex("nome")) );
+				//Log.e(TAG, "nome bairro = "+ cursor.getString(cursor.getColumnIndex("nome")) );
 				//Carregar os atributos das UBS
 				bairro.setId(cursor.getLong(cursor.getColumnIndex("id") )); 
 				bairro.setNome(cursor.getString(cursor.getColumnIndex("nome")));																												
 				
 				//Adiciona um novo usuario a lista
 				list_bairros.add(bairro);
+			}
+		}catch(SQLException e){
+			Log.e(TAG, e.getMessage());
+		}finally{
+			cursor.close();
+		}
+		return list_bairros;
+	}
+	
+	public List<String> listaBairros(){
+		//Colecao de usuarios
+		List<String> list_bairros = new ArrayList<String>();		
+		//Definicao da instrucao SQL
+		String sql = "Select * from "+AbstractDataBase.TABLE_BAIRRO +" ";
+				
+		//Objeto que reebe os registros do banco de dados
+		Cursor cursor = getReadableDatabase().rawQuery(sql, null);
+		try{
+			while(cursor.moveToNext()){				
+				//Adiciona um novo usuario a lista
+				list_bairros.add( cursor.getString(cursor.getColumnIndex("nome")) );
 			}
 		}catch(SQLException e){
 			Log.e(TAG, e.getMessage());
@@ -101,6 +122,32 @@ public class BairroDAO extends AbstractDataBase{
 		// Altera dados do Aluno no BD
 		getWritableDatabase().update(AbstractDataBase.TABLE_BAIRRO, values, "id=?", args);
 		Log.i(TAG, "bairro alterado: " + bairro.getNome());
+	}
+
+	public Bairro getBairroPorId(long idBairro){
+
+		Bairro bairro = null;
+		
+		//Definicao da instrucao SQL
+		String sql = "Select * from "+AbstractDataBase.TABLE_BAIRRO+" where id='"+idBairro+"' ";
+		
+		//Objeto que reebe os registros do banco de dados
+		Cursor cursor = getReadableDatabase().rawQuery(sql, null);
+		try{
+			if(cursor.moveToNext()){				
+				
+				bairro = new Bairro();
+				
+				bairro.setId(cursor.getLong(cursor.getColumnIndex("id") ));							
+				bairro.setNome(cursor.getString(cursor.getColumnIndex("nome") ));																													
+				
+			}
+		}catch(SQLException e){
+			Log.e(TAG, e.getMessage());
+		}finally{
+			cursor.close();
+		}
+		return bairro;
 	}
 	
 	public Bairro getBairro(String nome){

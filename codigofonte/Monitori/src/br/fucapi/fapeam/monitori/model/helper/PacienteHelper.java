@@ -2,6 +2,7 @@ package br.fucapi.fapeam.monitori.model.helper;
 
 import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.activity.PacienteDadosActivity;
+import br.fucapi.fapeam.monitori.model.bean.Bairro;
 import br.fucapi.fapeam.monitori.model.bean.Paciente;
 import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
@@ -12,6 +13,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.TextView;
 
 public class PacienteHelper extends UsuarioHelper {
 		
@@ -48,6 +50,17 @@ public class PacienteHelper extends UsuarioHelper {
 		//paciente.setDataNascimento( getDataNascimento().toString());
 		
 		paciente.setSexo( String.valueOf(getSexo().getSelectedItem()) );
+		//getSpinBairro().getSelectedView().getId();
+		Bairro auxBairro = new Bairro();
+		
+		TextView textId = (TextView)getSpinBairro().getSelectedView().findViewById(R.id.textID); 
+		auxBairro.setId(Long.parseLong( textId.getText().toString() ) );
+		auxBairro.setNome(getSpinBairro().getSelectedItem().toString());
+		
+		Log.e("BAIRRO", "Spin Bairro nome: " + getSpinBairro().getSelectedItem() );
+		Log.e("BAIRRO", "Spin Bairro id: " + textId.getText() );
+						
+		paciente.setBairro(auxBairro);
 		
 		paciente.setLogin(paciente.getNome());
 		paciente.setSenha(paciente.getNome());
@@ -75,7 +88,11 @@ public class PacienteHelper extends UsuarioHelper {
 		
 		ArrayAdapter<String> array_spinner=(ArrayAdapter<String>)getSexo().getAdapter();
 		getSexo().setSelection(array_spinner.getPosition( paciente.getSexo() ));
-	    	
+	    				
+		
+		ArrayAdapter<String> array_bairro=(ArrayAdapter<String>)getSpinBairro().getAdapter();
+		getSpinBairro().setSelection(array_bairro.getPosition( paciente.getBairro().getNome() ) );	    				
+		
 		//Log.i("TESTE", "Sexo do Paciente: " +paciente.getSexo());
 		Log.e("TESTE", "is Hipertenso: " + paciente.isHipertenso() );
 		hipertenso.setChecked(paciente.isHipertenso() );

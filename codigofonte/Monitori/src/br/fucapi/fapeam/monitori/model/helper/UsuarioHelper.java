@@ -6,56 +6,35 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.xml.sax.DTDHandler;
-
 import br.fucapi.fapeam.monitori.R;
-import br.fucapi.fapeam.monitori.R.layout;
-import br.fucapi.fapeam.monitori.R.menu;
+import br.fucapi.fapeam.monitori.model.bean.Bairro;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
+import br.fucapi.fapeam.monitori.model.dao.BairroDAO;
 import br.fucapi.fapeam.monitori.utils.BairroDialog;
 import br.fucapi.fapeam.monitori.utils.Funcoes;
 import br.fucapi.fapeam.monitori.utils.Mask;
 import br.fucapi.fapeam.monitori.utils.SpinnerAdapter;
 
-import android.os.Bundle;
-import android.os.Handler;
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.text.Editable;
-import android.text.TextUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.Toast;
+import android.widget.TextView;
 
 public class UsuarioHelper {
 	private EditText nome;
 	private EditText endereco;
-	private EditText bairro;
 	private EditText cep;
 	private EditText unidadeSaude;
 	private EditText celular;
@@ -64,10 +43,8 @@ public class UsuarioHelper {
 	private EditText numSus;
 	
 	private EditText dataNascimento;		
-	private ImageButton ibDataNascimento;
-	private CheckBox isHipertenso;
-	private Button novoBairro;
-	private EditText nomeBairro; 		
+	private ImageButton ibDataNascimento;	
+	private Spinner spinBairro;		 	
 	
 	private static final String DATE_FORMAT = "dd/MM/yyyy";	    
     private SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);           
@@ -79,7 +56,7 @@ public class UsuarioHelper {
 	private Usuario usuario;
 	private Context context;		        		        
 	private FragmentActivity fragmentActivity;
-	
+	private int selectionCurrent;	
     //private Calendar myCalendar;
 
 	private DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
@@ -105,8 +82,7 @@ public class UsuarioHelper {
 		nome = (EditText) fragmentActivity.findViewById(R.id.edNome);
 		
 			
-		endereco = (EditText) fragmentActivity.findViewById(R.id.edEndereco);			
-		bairro = (EditText) fragmentActivity.findViewById(R.id.chbBairro);
+		endereco = (EditText) fragmentActivity.findViewById(R.id.edEndereco);					
 		cep = (EditText) fragmentActivity.findViewById(R.id.edCep);
 		unidadeSaude = (EditText) fragmentActivity.findViewById(R.id.chbUnidadeSaude);
 		celular = (EditText) fragmentActivity.findViewById(R.id.edCelular);
@@ -116,17 +92,7 @@ public class UsuarioHelper {
 		
 		dataNascimento = (EditText) fragmentActivity.findViewById(R.id.edDataNascimento); 				
 		dataNascimento.addTextChangedListener(Mask.insert("##/##/####", dataNascimento));
-		
-		novoBairro = (Button) fragmentActivity.findViewById(R.id.novoBairro);
-		novoBairro.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				getNovoBairro();
-				
-			}
-		});
-		
+						
 		ibDataNascimento= (ImageButton) fragmentActivity.findViewById(R.id.ibDataNascimento);
 		
 		ibDataNascimento.setOnClickListener(new OnClickListener() {
@@ -140,25 +106,94 @@ public class UsuarioHelper {
 	        }
 	    });
 		
+		spinBairro = (Spinner) fragmentActivity.findViewById(R.id.spinBairro);
+		
+		selectionCurrent = spinBairro.getSelectedItemPosition();
+		
+		spinBairro.setOnTouchListener(new View.OnTouchListener() {            
+			@Override
+			public boolean onTouch(View view, MotionEvent event) {
+				if(view !=null){					
+					TextView textId = (TextView)view.findViewById(R.id.textID);
+					 if(event.getAction()==MotionEvent.ACTION_UP){
+						 if (textId.getText().toString().equals("0") ){						
+								getNovoBairro();
+								return true;
+						   }
+		              }
+		            
+				}
+				return false;
+			}
+        });
+		
+		spinBairro.setOnItemSelectedListener(new OnItemSelectedListener() {
+			@Override
+			public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+								
+				if(selectedItemView !=null){
+					if(selectionCurrent!=position){
+						TextView textId = (TextView)selectedItemView.findViewById(R.id.textID);
+						
+						if (textId.getText().toString().equals("0") ){
+							spinBairro.setSelection(0);						
+							//Toast.makeText(fragmentActivity, "funcionou", Toast.LENGTH_LONG).show();
+							getNovoBairro();
+					    }
+					}
+				}
+			} 			
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parentView) {
+			    // your code here
+			}
+
+			});
 		
 		sexo = (Spinner) fragmentActivity.findViewById(R.id.spinSexo);		
 		
+		
 		String[] list = fragmentActivity.getResources().getStringArray(R.array.sexo_arrays);
 		Integer[] imageSexo={R.drawable.ic_man,R.drawable.ic_woman};
-				
-		//adapter = new SpinnerAdapter(activity, R.layout.spinner_item,data1);
-		adapter = new SpinnerAdapter(fragmentActivity, R.layout.spinner_item,list,imageSexo);
+							    
+		adapter = new SpinnerAdapter(fragmentActivity, R.layout.spinner_sexo,list,imageSexo);		
 	    sexo.setAdapter(adapter);
 	    //sexo.setAdapter(new MyAdapter(activity, R.layout.spinner_item, data1));
-	    
-		//Log.i("TESTE", "Sexo: " +sexo.getText() );
-		Log.e("TESTE", "Sexo: " + String.valueOf(sexo.getSelectedItem()) );
-		
-		
-		//foto = (ImageView) activity.findViewById(R.id.foto);				
-		
+	    atualizarListaBairros("");
+	    		
 	}
+	
+	private void atualizarListaBairros(String nomeBairro){
+		BairroDAO daoBairro = new BairroDAO(fragmentActivity); 
+		List<Bairro> listaBairros = daoBairro.listar();										
+		
+		String[] stringArray = new String[listaBairros.size()+1];
+		Integer[] intArray = new Integer[listaBairros.size()+1];
+		int index = 0;
+		int indexB = 0;
+		for (Bairro bairro : listaBairros) {
+			stringArray[index] = bairro.getNome();
+			if(bairro.getNome().equals(nomeBairro)){
+				indexB = index;	
+			}
+			intArray[index] = Integer.parseInt(bairro.getId().toString());
+		  index++;
+		}				
+		
+		stringArray[index] = context.getString(R.string.bairro_novo); 				
+		intArray[index] = 0;
+		adapter = new SpinnerAdapter(fragmentActivity, R.layout.spinner_bairro,stringArray,intArray);
+	    spinBairro.setAdapter(adapter);	    	    
+	    
+	    //ArrayAdapter<String> array_spinner=(ArrayAdapter<String>)getSpinBairro().getAdapter();
+		spinBairro.setSelection(indexB);
 
+		
+	    
+	    
+	}
+	
 	 private void updateLabel() {
 		 			 			 
 		 	String dateForButton = null;		 			 			 			 			 	
@@ -210,14 +245,6 @@ public class UsuarioHelper {
 
 	public void setEndereco(EditText endereco) {
 		this.endereco = endereco;
-	}
-
-	public EditText getBairro() {
-		return bairro;
-	}
-
-	public void setBairro(EditText bairro) {
-		this.bairro = bairro;
 	}
 
 	public EditText getCep() {
@@ -288,16 +315,12 @@ public class UsuarioHelper {
 	
 	private void getNovoBairro() {
 				
-		BairroDialog diag = BairroDialog.newInstance();
-		
-		diag.show(fragmentActivity.getSupportFragmentManager(), "dialg");
-		
-		
+		final BairroDialog diag = BairroDialog.newInstance();		
+		diag.show(fragmentActivity.getSupportFragmentManager(), "dialg");		
+				
 	}
 	
 	public boolean validar(){
-		List<View> listview;
-		
 		
 		// cria o mapa
 		Map<View, String> mapaDeCampos = new LinkedHashMap<View, String>();
@@ -326,6 +349,13 @@ public class UsuarioHelper {
 	public void setSexo(Spinner sexo) {
 		this.sexo = sexo;
 	}
-	
-	
+
+	public Spinner getSpinBairro() {
+		return spinBairro;
+	}
+
+	public void setSpinBairro(Spinner spinBairro) {
+		this.spinBairro = spinBairro;
+	}
+		
 }

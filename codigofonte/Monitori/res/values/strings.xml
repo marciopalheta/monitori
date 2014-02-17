@@ -83,4 +83,10 @@
     <string name="title_activity_ubs">UBS Activity</string>
     <string name="title_activity_ubs_dados">UBS DadosActivity</string>
 	<string name="numero">Numero</string>
+	
+	    <string name="bairro_prompt">Selecione um Bairro</string>
+		<string name="bairro_novo">Incluir Bairro</string>
+    <string-array name="bairro_arrays">
+        <item>@string/bairro_novo</item>        
+    </string-array>
 </resources>

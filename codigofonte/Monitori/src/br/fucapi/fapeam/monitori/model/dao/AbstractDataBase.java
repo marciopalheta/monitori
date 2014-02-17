@@ -48,8 +48,8 @@ public class AbstractDataBase extends SQLiteOpenHelper{
     // Usuario table create statement
     private static final String CREATE_TABLE_USUARIO = "CREATE TABLE "
             + TABLE_USUARIO + "(" + KEY_ID + " INTEGER PRIMARY KEY," 
-            + "nome TEXT, endereco TEXT, bairro TEXT, "
-			+ "cep TEXT, unidadeSaude TEXT, celular TEXT, "
+            + "nome TEXT, endereco TEXT, idBairro INTEGER, "
+			+ "cep TEXT, idUnidadeSaude INTEGER, celular TEXT, "
 			+ "telefone TEXT, dataMascimento TEXT, login TEXT, "
 			+ "nomeMae TEXT, numSus TEXT, "
 			+ "senha TEXT, foto TEXT, hipertenso TEXT, sexo TEXT, "

@@ -9,6 +9,7 @@ import java.util.List;
 import br.fucapi.fapeam.monitori.activity.PacienteDadosActivity;
 import br.fucapi.fapeam.monitori.model.bean.AbstractEntityBean;
 import br.fucapi.fapeam.monitori.model.bean.Agente;
+import br.fucapi.fapeam.monitori.model.bean.Bairro;
 import br.fucapi.fapeam.monitori.model.bean.Medico;
 import br.fucapi.fapeam.monitori.model.bean.Paciente;
 import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
@@ -29,13 +30,38 @@ public class UsuarioDAO extends AbstractDataBase{
 	private static final String TAG = "CADASTRO_USUARIO";
 	
 	private static final String DATE_FORMAT = "dd-MM-yyyy";
-    
-    private SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
 	
+	private static final String FIELDS_TABLE_USUARIO = ""+AbstractDataBase.TABLE_USUARIO+".id as idUsuario,"+
+					""+AbstractDataBase.TABLE_USUARIO+".nome as nomeUsuario,"+		
+					""+AbstractDataBase.TABLE_USUARIO+".dataMascimento,"+			
+					""+AbstractDataBase.TABLE_USUARIO+".endereco,"+
+					""+AbstractDataBase.TABLE_USUARIO+".cep,"+
+					""+AbstractDataBase.TABLE_USUARIO+".celular,"+
+					""+AbstractDataBase.TABLE_USUARIO+".telefone,"+
+					""+AbstractDataBase.TABLE_USUARIO+".login,"+
+					""+AbstractDataBase.TABLE_USUARIO+".senha,"+
+					""+AbstractDataBase.TABLE_USUARIO+".sexo,"+
+					""+AbstractDataBase.TABLE_USUARIO+".nomeMae,"+
+					""+AbstractDataBase.TABLE_USUARIO+".numSus,"+
+					""+AbstractDataBase.TABLE_USUARIO+".idBairro as bairroId,"+		
+					""+AbstractDataBase.TABLE_USUARIO+".tipoUsuario,"+
+					""+AbstractDataBase.TABLE_USUARIO+".hipertenso,"+
+					""+AbstractDataBase.TABLE_USUARIO+".diabetico1,"+
+					""+AbstractDataBase.TABLE_USUARIO+".diabetico2,"+			
+					""+AbstractDataBase.TABLE_USUARIO+".crm,"+		
+					""+AbstractDataBase.TABLE_USUARIO+".matricula ";
+	
+	private static final String FIELDS_TABLE_BAIRRO = ""+AbstractDataBase.TABLE_BAIRRO+".id as idBairro,"+
+			""+AbstractDataBase.TABLE_BAIRRO+".nome as nomeBairro ";
+
+	
+    private SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
+    private Context context;
 	public UsuarioDAO (Context context){
 		
 		//Chamando o construtor que sabe acessar o BD
 		super(context);
+		this.context = context;
 	}
 	
 	
@@ -66,6 +92,8 @@ public class UsuarioDAO extends AbstractDataBase{
 		values.put("nomeMae", usuario.getNomeMae());
 		values.put("numSus", usuario.getNumSus());
 		
+		values.put("idBairro", usuario.getBairro().getId());		
+		
 		values.put("tipoUsuario", usuario.getTipoUsuario().toString() );
 		
 		if(usuario instanceof Paciente){			
@@ -93,6 +121,8 @@ public class UsuarioDAO extends AbstractDataBase{
 		Log.i(TAG, "Senha: "+ usuario.getSenha() );
 		Log.i(TAG, "endereco: "+ usuario.getEndereco() );
 		Log.i(TAG, "cep: "+ usuario.getCep() );
+		Log.i(TAG, "idBairro: "+ usuario.getBairro().getId() );
+				
 		Log.i(TAG, "celular: "+ usuario.getCelular() );
 		Log.i(TAG, "telefone: "+ usuario.getTelefone() );
 		Log.i(TAG, "sexo: "+ usuario.getSexo() );		
@@ -122,13 +152,14 @@ public class UsuarioDAO extends AbstractDataBase{
 		TipoUsuario tipo;
 		//Definicao da instrucao SQL
 		String sql = null;
-		if(tipoUsuario == TipoUsuario.PACIENTE){
-			sql = "Select * from "+AbstractDataBase.TABLE_USUARIO +" where tipoUsuario = '"+TipoUsuario.PACIENTE+"' order by nome";
-		}else if(tipoUsuario == TipoUsuario.AGENTE){
-			sql = "Select * from "+AbstractDataBase.TABLE_USUARIO +" where tipoUsuario = '"+TipoUsuario.AGENTE+"' order by nome";					
-		}else if(tipoUsuario == TipoUsuario.MEDICO){
-			sql = "Select * from "+AbstractDataBase.TABLE_USUARIO +" where tipoUsuario = '"+TipoUsuario.MEDICO+"' order by nome";					
-		}
+						
+			sql = "Select " +
+					FIELDS_TABLE_USUARIO + ","+
+					FIELDS_TABLE_BAIRRO +
+					" from "+AbstractDataBase.TABLE_USUARIO +", " +
+					" "+AbstractDataBase.TABLE_BAIRRO +" " +
+					//"on  bairroId = idBairro " +
+					"where "+AbstractDataBase.TABLE_USUARIO+".idBairro = "+AbstractDataBase.TABLE_BAIRRO+".id and tipoUsuario = '"+tipoUsuario+"' order by "+AbstractDataBase.TABLE_USUARIO+".nome";		
 		
 		//Objeto que reebe os registros do banco de dados
 		Cursor cursor = getReadableDatabase().rawQuery(sql, null);
@@ -149,12 +180,23 @@ public class UsuarioDAO extends AbstractDataBase{
 																				 
 				
 				//Carregar os atributos dos usuarios
-				usuario.setId(cursor.getLong(cursor.getColumnIndex("id") )); 
-				usuario.setNome(cursor.getString(cursor.getColumnIndex("nome")));
+				usuario.setId( cursor.getLong(cursor.getColumnIndex("idUsuario") )); 
+				usuario.setNome(cursor.getString(cursor.getColumnIndex("nomeUsuario")));
+				
 				usuario.setEndereco(cursor.getString(cursor.getColumnIndex("endereco")));
 				usuario.setNomeMae(cursor.getString(cursor.getColumnIndex("nomeMae")));
 				usuario.setNumSus(cursor.getString(cursor.getColumnIndex("numSus")));
-				//usuario.setBairro(cursor.getString(3)); //BAIRRO	
+	
+				/*
+				BairroDAO bDao = new BairroDAO(context);				
+				Bairro bairro = bDao.getBairroPorId( cursor.getLong(cursor.getColumnIndex("idBairro") ) );
+				usuario.setBairro(bairro); //BAIRRO
+				*/
+				Bairro bairro = new Bairro();
+				bairro.setId(cursor.getLong(cursor.getColumnIndex("idBairro") ));
+				bairro.setNome(cursor.getString(cursor.getColumnIndex("nomeBairro")));				
+				usuario.setBairro(bairro); //BAIRRO
+				
 				usuario.setCep(cursor.getString(cursor.getColumnIndex("cep"))); 
 				//usuario.setUnidadeSaude(cursor.getString(5) );
 				
@@ -173,7 +215,7 @@ public class UsuarioDAO extends AbstractDataBase{
 								
 				usuario.setTelefone(cursor.getString(cursor.getColumnIndex("telefone")));
 				usuario.setSexo( cursor.getString(cursor.getColumnIndex("sexo")) );
-				usuario.setObservacao( cursor.getString(cursor.getColumnIndex("observacao")) );
+				//usuario.setObservacao( cursor.getString(cursor.getColumnIndex("observacao")) );
 								
 				
 				
@@ -229,6 +271,9 @@ public class UsuarioDAO extends AbstractDataBase{
 		//values.put("login", usuario.getLogin());
 		//values.put("senha", usuario.getNome());
 		values.put("sexo", usuario.getSexo() );
+		values.put("idBairro", usuario.getBairro().getId());
+		Log.i(TAG, "idBairro: "+ usuario.getBairro().getId() );
+		
 		values.put("tipoUsuario", usuario.getTipoUsuario().toString() );
 		
 		if(usuario instanceof Paciente){									

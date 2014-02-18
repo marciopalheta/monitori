@@ -326,7 +326,4 @@ public class UsuarioDAO extends AbstractDataBase{
 		}
 		return usuario;
 	}
-
-	
-	
 }

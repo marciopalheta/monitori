@@ -11,9 +11,9 @@
         android:showAsAction="never"               
         android:title="@string/title_activity_medico"/>
     <item
-        android:id="@+id/menu_ubs"
+        android:id="@+id/menu_agente"
         android:orderInCategory="100"
         android:showAsAction="always"               
-        android:title="@string/title_activity_ubs"/>
+        android:title="@string/title_activity_agente"/>
 
 </menu>

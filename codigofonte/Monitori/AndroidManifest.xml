@@ -62,6 +62,14 @@
             android:name="br.fucapi.fapeam.monitori.activity.UnidadeSaudeDadosActivity"
             android:label="@string/title_activity_ubs_dados" >
         </activity>
+        <activity
+            android:name="br.fucapi.fapeam.monitori.activity.AgenteActivity"
+            android:label="@string/title_activity_agente" >
+        </activity>
+        <activity
+            android:name="br.fucapi.fapeam.monitori.activity.AgenteDadosActivity"
+            android:label="@string/title_activity_agentes_dados" >
+        </activity>
     </application>
 
 </manifest>

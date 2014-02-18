@@ -8,6 +8,8 @@
     <string name="title_activity_paciente">Lista de Pacientes</string>
     <string name="title_activity_medico">Lista de Medicos</string>
     <string name="title_activity_medico_dados">Dados do Medico</string>
+    <string name="title_activity_agente">Agente</string>
+    <string name="title_activity_agentes_dados">AgentesDados</string>
 
     <!-- Strings para itens de menu -->
     <string name="novo">Novo Paciente</string>
@@ -36,7 +38,11 @@
     <string name="sus">Adicione o numero do SUS</string>
     <string name="nome_mae">Nome da Mae</string>
     <string name="cadastrar_paciente">Cadastrar paciente</string>
+    <string name="cadastrar_agente">Cadastrar agente</string>
 
+    <!-- Informacoes do Agente -->
+    <string name="matricula">Matricula</string>
+    
     <!-- Informacoes do Medico -->
     <string name="crm">CRM</string>
 
@@ -82,11 +88,14 @@
 
     <string name="title_activity_ubs">UBS Activity</string>
     <string name="title_activity_ubs_dados">UBS DadosActivity</string>
-	<string name="numero">Numero</string>
-	
-	    <string name="bairro_prompt">Selecione um Bairro</string>
-		<string name="bairro_novo">Incluir Bairro</string>
+    <string name="numero">Numero</string>
+    <string name="bairro_prompt">Selecione um Bairro</string>
+    <string name="bairro_novo">Incluir Bairro</string>
+
     <string-array name="bairro_arrays">
-        <item>@string/bairro_novo</item>        
+        <item>@string/bairro_novo</item>
     </string-array>
+
+   
+
 </resources>

@@ -78,10 +78,10 @@ public class LoginActivity extends Activity {
 				
 				return false;
 				
-			case R.id.menu_ubs:
+			case R.id.menu_agente:
 				//Especialista em mudanca de tela
 				intent = new Intent(LoginActivity.this,
-						UnidadeSaudeActivity.class);
+						AgenteActivity.class);
 				//Carrega a nova tela
 				startActivity(intent);
 				

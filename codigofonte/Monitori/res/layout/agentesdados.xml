@@ -1,0 +1,281 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+    android:background="#f7f6f6"
+    android:fillViewport="true">
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    
+    <TextView 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/cadastrar_agente"
+        android:id="@+id/text_cadastrar"
+        android:textColor="#000000"
+        android:textSize="@dimen/cadastrarpaciente"
+        android:layout_marginTop="45dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="30dp"
+        />   	
+    
+    <LinearLayout
+        android:id="@+id/fundo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="#ffffff"
+        android:paddingTop="40dp"
+        android:paddingRight="50dp"
+        android:paddingBottom="40dp"
+        android:layout_marginBottom="15dp"
+        android:orientation="vertical" >
+        
+        <ImageView 
+    		android:id="@+id/foto"
+   			android:layout_width="100dp"
+    		android:layout_height="100dp"
+    		android:layout_gravity="center_horizontal"
+   			android:src="@drawable/ic_no_image"
+    		android:contentDescription="@string/foto"/>
+		
+        <TextView
+		    android:id="@+id/tvNome"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+			android:text="@string/nome"
+            android:layout_marginLeft="@dimen/margem_editext"
+            android:textSize="@dimen/fontes_para_textos"
+            android:layout_marginBottom="10dp" />
+        
+        <EditText
+		    android:id="@+id/edNome"
+		    android:background="#ebedea"
+		    android:layout_width="370dp"
+		    android:layout_height="@dimen/heigth_editext"
+            android:textSize="@dimen/fontes_para_textos"
+            android:layout_marginLeft="@dimen/margem_editext"
+            android:padding="@dimen/padding"
+			android:hint="@string/nome"
+			android:layout_marginBottom="10dp" />
+        
+        <EditText
+		    android:id="@+id/edMatricula"
+		    android:background="#ebedea"
+		    android:layout_width="370dp"
+		    android:layout_height="@dimen/heigth_editext"
+            android:textSize="@dimen/fontes_para_textos"
+            android:layout_marginLeft="@dimen/margem_editext"
+            android:padding="@dimen/padding"
+			android:hint="@string/matricula"
+			android:layout_marginBottom="10dp" />
+        
+		<TextView
+		    android:id="@+id/tvDataNascimento"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+			android:text="@string/dtNascimento"
+            android:layout_marginLeft="@dimen/margem_editext"
+            android:textSize="@dimen/fontes_para_textos"
+            android:layout_marginBottom="10dp" />
+        
+        <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal">
+	        
+	        <EditText
+			    android:id="@+id/edDataNascimento"
+			    android:background="#ebeaea"
+			    android:layout_width="180dp"
+			    android:layout_height="@dimen/heigth_editext"
+				android:layout_marginLeft="@dimen/margem_editext"
+				android:padding="@dimen/padding"
+				android:textSize="@dimen/fontes_para_textos"
+				android:layout_marginBottom="10dp"
+				android:inputType="date"
+				android:hint="@string/dtNascimento"/>
+	         
+	        <ImageButton
+	        	android:id="@+id/ibDataNascimento"
+	        	android:layout_width="wrap_content"
+	        	android:layout_height="wrap_content"	        	
+	        	android:src="@android:drawable/ic_menu_today" 
+	        	android:contentDescription="@string/dtNascimento"
+	        	/>	        
+        </LinearLayout>                
+        
+        <TextView
+		    android:id="@+id/tvTelefone"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+			android:text="@string/telefone"
+            android:layout_marginLeft="@dimen/margem_editext"
+            android:textSize="@dimen/fontes_para_textos"
+            android:layout_marginBottom="10dp" />
+        
+        <EditText
+		    android:id="@+id/edTefone"
+		    android:background="#ebeaea"
+		    android:layout_width="180dp"
+		    android:layout_height="@dimen/heigth_editext"
+			android:layout_marginLeft="@dimen/margem_editext"
+			android:padding="@dimen/padding"
+			android:textSize="@dimen/fontes_para_textos"
+			android:layout_marginBottom="10dp"
+			android:inputType="phone"
+			android:hint="@string/telefone"/>
+		 
+        <TextView
+		    android:id="@+id/tvCelular"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+			android:text="@string/celular"
+            android:layout_marginLeft="@dimen/margem_editext"
+            android:textSize="@dimen/fontes_para_textos"
+            android:layout_marginBottom="10dp" />
+        
+       <EditText
+		    android:id="@+id/edCelular"
+		    android:background="#ebeaea"
+		    android:layout_width="180dp"
+		    android:layout_height="@dimen/heigth_editext"
+			android:layout_marginLeft="@dimen/margem_editext"
+			android:padding="@dimen/padding"
+			android:textSize="@dimen/fontes_para_textos"
+			android:layout_marginBottom="10dp"
+			android:inputType="phone"
+			android:hint="@string/celular"/>   
+		
+		<TextView
+		    android:id="@+id/tvEndereco"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+			android:text="@string/endereco"
+            android:layout_marginLeft="@dimen/margem_editext"
+            android:textSize="@dimen/fontes_para_textos"
+            android:layout_marginBottom="10dp" />
+			
+       <EditText
+		    android:id="@+id/edEndereco"
+		    android:background="#ebeaea"
+		    android:layout_width="370dp"
+		    android:layout_height="@dimen/heigth_editext"
+			android:layout_marginLeft="@dimen/margem_editext"
+			android:padding="@dimen/padding"
+			android:textSize="@dimen/fontes_para_textos"
+			android:layout_marginBottom="10dp"
+			android:inputType="textPostalAddress"
+			android:hint="@string/endereco"/>
+		
+		<TextView
+		    android:id="@+id/tvCep"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+			android:text="@string/cep"
+            android:layout_marginLeft="@dimen/margem_editext"
+            android:textSize="@dimen/fontes_para_textos"
+            android:layout_marginBottom="10dp" />
+       <EditText
+		    android:id="@+id/edCep"
+		    android:background="#ebeaea"
+		    android:layout_width="180dp"
+		    android:layout_height="@dimen/heigth_editext"
+			android:layout_marginLeft="@dimen/margem_editext"
+			android:padding="@dimen/padding"
+			android:textSize="@dimen/fontes_para_textos"
+			android:layout_marginBottom="10dp"
+			android:inputType="textPostalAddress"
+			android:hint="@string/cep"/>
+
+       <TextView
+		    android:id="@+id/tvBairro"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+			android:text="@string/bairro"
+            android:layout_marginLeft="@dimen/margem_editext"
+            android:textSize="@dimen/fontes_para_textos"
+            android:layout_marginBottom="10dp" />       
+       <Spinner
+        android:id="@+id/spinBairro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margem_editext"
+        android:textSize="@dimen/fontes_para_textos"            
+        android:entries="@array/bairro_arrays"
+        android:prompt="@string/bairro_prompt" 
+        android:background="#ebedea"
+        
+        android:layout_marginBottom="10dp"
+        />
+       
+       		
+       <TextView
+		    android:id="@+id/tvSexo"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+			android:text="@string/sexo"
+            android:layout_marginLeft="@dimen/margem_editext"
+            android:textSize="@dimen/fontes_para_textos"
+            android:layout_marginBottom="10dp" />	         
+        
+       <Spinner
+        android:id="@+id/spinSexo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margem_editext"
+        android:textSize="@dimen/fontes_para_textos"            
+        android:entries="@array/sexo_arrays"
+        android:prompt="@string/sexo_prompt" 
+        android:background="#ebedea"
+        
+        android:layout_marginBottom="10dp"
+        />
+                   
+     	
+       
+        <EditText
+		    android:id="@+id/chbUnidadeSaude"
+		    android:background="#ebeaea"
+		    android:layout_width="370dp"
+		    android:layout_height="@dimen/heigth_editext"
+			android:layout_marginLeft="@dimen/margem_editext"
+			android:padding="@dimen/padding"
+			android:textSize="@dimen/fontes_para_textos"
+			android:layout_marginBottom="10dp"
+			android:hint="@string/unidadeSaude"/>
+        
+        
+	</LinearLayout> 
+    
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" >
+         	
+        <Button
+		    android:id="@+id/sbSalvar"
+		    android:layout_width="@dimen/bt_width"
+		    android:layout_height="@dimen/bt_heigth"
+		    android:background="#000000"
+		    android:text="@string/salvar"
+		    android:textColor="#ffffff"
+		    android:layout_marginBottom="10dp"
+		    android:layout_gravity="center_horizontal"/>
+        
+        <Button
+                android:id="@+id/sbenviar"
+                android:layout_width="@dimen/bt_width"
+                android:layout_height="@dimen/bt_heigth"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="#000000"
+                android:text="@string/enviar"
+                android:textColor="#ffffff" />
+		 
+    </LinearLayout>           
+	</LinearLayout>
+</ScrollView>

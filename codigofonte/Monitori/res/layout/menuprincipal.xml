@@ -11,10 +11,11 @@
 		android:layout_weight="1"
 	>
 		<Button
-			android:id="@+id/btClassicos"
+			android:id="@+id/btAgente"
 			android:text="@string/menu_agente"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:drawableTop="@drawable/btn_carro_classico"
 			android:drawablePadding="10dp"
 			android:background="@null"
 			android:textStyle="bold"

@@ -1,7 +1,6 @@
 package br.fucapi.fapeam.monitori.activity;
 
 import br.fucapi.fapeam.monitori.R;
-import br.fucapi.fapeam.monitori.utils.AndroidUtils;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +10,7 @@ import android.widget.Button;
 
 public class MenuPrincipalActivity extends Activity implements OnClickListener {
 	private Button btEsportivos;
-	private Button btClassicos;
+	private Button btAgente;
 	private Button btLuxo;
 	private Button btSobre;
 	@Override
@@ -21,8 +20,8 @@ public class MenuPrincipalActivity extends Activity implements OnClickListener {
 		setContentView(R.layout.menuprincipal);
 		btEsportivos = (Button) findViewById(R.id.btEsportivos);
 		btEsportivos.setOnClickListener(this);
-		btClassicos = (Button) findViewById(R.id.btClassicos);
-		btClassicos.setOnClickListener(this);
+		btAgente = (Button) findViewById(R.id.btAgente);
+		btAgente.setOnClickListener(this);
 		btLuxo = (Button) findViewById(R.id.btLuxo);
 		btLuxo.setOnClickListener(this);
 		btSobre = (Button) findViewById(R.id.btSobre);
@@ -30,23 +29,12 @@ public class MenuPrincipalActivity extends Activity implements OnClickListener {
 	}
 	@Override
 	public void onClick(View v) {
-		boolean redeOk = AndroidUtils.isNetworkAvailable(this);
-        if(redeOk) {
+		
+      
         	Intent intent = new Intent(this, PacienteDadosActivity.class);
-    		if(v == btEsportivos) {
-    			//intent.putExtra(Carro.TIPO, Carro.TIPO_ESPORTIVOS);
+    		if(v == btAgente) {
     			startActivity(intent);
-    		} else if(v == btClassicos) {
-    			//intent.putExtra(Carro.TIPO, Carro.TIPO_CLASSICO);
-    			startActivity(intent);
-    		} else if(v == btLuxo) {
-    			//intent.putExtra(Carro.TIPO, Carro.TIPO_LUXO);
-    			startActivity(intent);
-    		} else if(v == btSobre) {
-    			startActivity(new Intent(this, AgenteActivity.class));
     		}
-        } else {
-        	AndroidUtils.alertDialog(this, R.string.erro_conexao_indisponivel);
-        }
+      
 	}
 }

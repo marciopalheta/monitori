@@ -42,7 +42,7 @@
 
     <!-- Informacoes do Agente -->
     <string name="matricula">Matricula</string>
-    
+
     <!-- Informacoes do Medico -->
     <string name="crm">CRM</string>
 
@@ -96,6 +96,11 @@
         <item>@string/bairro_novo</item>
     </string-array>
 
-   
-
+    <string name="title_activity_menu_principal">MenuPrincipal</string>
+    <!-- Menu principal -->
+    <string name="menu_agente">Agente</string>
+    <string name="menu_paciente">Paciente</string>
+    <string name="menu_medico">Medico</string>
+    <string name="menu_coletadados">ColetarDados</string>
+	 <string name="erro_conexao_indisponivel">Conexão indisponível, por favor ative sua rede móvel ou Wi-Fi.</string>
 </resources>

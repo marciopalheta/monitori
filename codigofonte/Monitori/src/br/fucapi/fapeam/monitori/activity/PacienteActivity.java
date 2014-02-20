@@ -77,22 +77,22 @@ public class PacienteActivity extends Activity {
 		});
 
 		// Metodo que "escuta" o evento de Click SIMPLES
-				lvListagem.setOnItemClickListener(new OnItemClickListener() {
-					@Override
-					public void onItemClick(AdapterView<?> adapter, View view,
-							int posicao, long id) {
+		lvListagem.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> adapter, View view,
+					int posicao, long id) {
 
-						Intent form = new Intent(PacienteActivity.this,
-								PacienteDadosActivity.class);
+				Intent form = new Intent(PacienteActivity.this,
+						PacienteDadosActivity.class);
 
-						pacienteSelecionado = (Paciente) lvListagem
-								.getItemAtPosition(posicao);
+				pacienteSelecionado = (Paciente) lvListagem
+						.getItemAtPosition(posicao);
 
-						form.putExtra("PACIENTE_SELECIONADO", pacienteSelecionado);
+				form.putExtra("PACIENTE_SELECIONADO", pacienteSelecionado);
 
-						startActivity(form);
-					}
-				});
+				startActivity(form);
+			}
+		});
 				
 	}
 

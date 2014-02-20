@@ -70,6 +70,10 @@
             android:name="br.fucapi.fapeam.monitori.activity.AgenteDadosActivity"
             android:label="@string/title_activity_agentes_dados" >
         </activity>
+        <activity
+            android:name="br.fucapi.fapeam.monitori.activity.MenuPrincipalActivity"
+            android:label="@string/title_activity_menu_principal" >
+        </activity>
     </application>
 
 </manifest>

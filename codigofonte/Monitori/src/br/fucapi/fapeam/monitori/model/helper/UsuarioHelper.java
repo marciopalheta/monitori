@@ -45,6 +45,7 @@ public class UsuarioHelper {
 	private EditText dataNascimento;		
 	private ImageButton ibDataNascimento;	
 	private Spinner spinBairro;		 	
+	private Spinner spinUbs;	
 	
 	private static final String DATE_FORMAT = "dd/MM/yyyy";	    
     private SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);           
@@ -105,6 +106,8 @@ public class UsuarioHelper {
 	                    dtCalendar.get(Calendar.DAY_OF_MONTH)).show();
 	        }
 	    });
+		
+		spinUbs = (Spinner) fragmentActivity.findViewById(R.id.spinUbs);
 		
 		spinBairro = (Spinner) fragmentActivity.findViewById(R.id.spinBairro);
 		
@@ -183,7 +186,7 @@ public class UsuarioHelper {
 		
 		stringArray[index] = context.getString(R.string.bairro_novo); 				
 		intArray[index] = 0;
-		adapter = new SpinnerAdapter(fragmentActivity, R.layout.spinner_bairro,stringArray,intArray);
+		adapter = new SpinnerAdapter(fragmentActivity, R.layout.spinner_generic,stringArray,intArray);
 	    spinBairro.setAdapter(adapter);	    	    
 	    
 	    //ArrayAdapter<String> array_spinner=(ArrayAdapter<String>)getSpinBairro().getAdapter();
@@ -356,6 +359,14 @@ public class UsuarioHelper {
 
 	public void setSpinBairro(Spinner spinBairro) {
 		this.spinBairro = spinBairro;
+	}
+	
+	public Spinner getSpinUbs() {
+		return spinUbs;
+	}
+
+	public void setSpinUbs(Spinner spinUbs) {
+		this.spinUbs= spinUbs;
 	}
 		
 }

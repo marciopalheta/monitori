@@ -30,7 +30,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class PacienteDadosActivity extends FragmentActivity {
+public class PacienteDadosActivity extends UsuarioDadosActivity {
 
 	//Atributos para manipulacao de tela
 	private Button botao;
@@ -44,8 +44,10 @@ public class PacienteDadosActivity extends FragmentActivity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		super.setContentView(R.layout.pacientedados);
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.pacientedados);
+		//setContentView(R.layout.pacientedados);
+		
 				
 		//Criacao do objeto helper
 		helper = new PacienteHelper(this);

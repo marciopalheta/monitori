@@ -169,5 +169,38 @@ public class UnidadeSaudeDAO extends AbstractDataBase{
 		return ubs;
 	}
 	
+	public UnidadeSaude getUnidadeSaude(long id){
+		//Colecao de usuarios
+		UnidadeSaude ubs = null;
+		
+		//Definicao da instrucao SQL
+		String sql = "Select * from "+AbstractDataBase.TABLE_UBS+" where id='"+id+"' ";
+		
+		//Objeto que reebe os registros do banco de dados
+		Cursor cursor = getReadableDatabase().rawQuery(sql, null);
+		try{
+			if(cursor.moveToNext()){				
+				
+				ubs = new UnidadeSaude();
+				
+				ubs.setId(cursor.getLong(cursor.getColumnIndex("id") ));							
+				ubs.setNome(cursor.getString(cursor.getColumnIndex("nome") ));				
+				ubs.setEndereco(cursor.getString(cursor.getColumnIndex("endereco") ));								
+				ubs.setNumeroUBS(cursor.getString(cursor.getColumnIndex("numero") ));								
+				ubs.setCep(cursor.getString(cursor.getColumnIndex("cep") ));				
+				
+				ubs.setFone(cursor.getString(cursor.getColumnIndex("fone") ));
+				
+				//ubs.setBairro(bairro);																		
+				
+			}
+		}catch(SQLException e){
+			Log.e(TAG, e.getMessage());
+		}finally{
+			cursor.close();
+		}
+		return ubs;
+	}
+	
 	
 }

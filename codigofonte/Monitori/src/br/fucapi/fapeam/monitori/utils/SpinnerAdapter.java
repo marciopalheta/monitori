@@ -66,7 +66,7 @@ public class SpinnerAdapter extends ArrayAdapter<String> {
 	            	label.setText(textArray[position]);            
 	            	ImageView icon=(ImageView)row.findViewById(R.id.imageView1);
 	            	icon.setImageResource(intArray[position]);
-	            }else if(textViewResourceId == R.layout.spinner_bairro ){
+	            }else if(textViewResourceId == R.layout.spinner_generic){
 	            	TextView id=(TextView)row.findViewById(R.id.textID);
 	            	id.setText( String.valueOf( intArray[position] ) );            
 	            	

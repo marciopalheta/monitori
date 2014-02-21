@@ -7,7 +7,8 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="18" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -70,6 +71,10 @@
         <activity
             android:name="br.fucapi.fapeam.monitori.activity.AgenteDadosActivity"
             android:label="@string/title_activity_agentes_dados" >
+        </activity>
+        <activity
+            android:name="br.fucapi.fapeam.monitori.activity.MenuPrincipalActivity"
+            android:label="@string/title_activity_menu_principal" >
         </activity>
         <activity
             android:name="br.fucapi.fapeam.monitori.activity.MenuPrincipalActivity"

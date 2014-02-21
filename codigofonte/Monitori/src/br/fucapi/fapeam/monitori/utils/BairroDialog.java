@@ -195,7 +195,7 @@ public class BairroDialog extends DialogFragment {
 		
 		stringArray[index] = getActivity().getString(R.string.bairro_novo); 				
 		intArray[index] = 0;
-		adapter = new SpinnerAdapter(getActivity(), R.layout.spinner_bairro,stringArray,intArray);
+		adapter = new SpinnerAdapter(getActivity(), R.layout.spinner_generic,stringArray,intArray);
 	    spinBairro.setAdapter(adapter);	    	    
 	    
 		spinBairro.setSelection(indexB);

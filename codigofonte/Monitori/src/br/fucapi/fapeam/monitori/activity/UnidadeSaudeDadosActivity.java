@@ -1,36 +1,15 @@
 package br.fucapi.fapeam.monitori.activity;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
-import org.xml.sax.DTDHandler;
-
 import br.fucapi.fapeam.monitori.R;
-import br.fucapi.fapeam.monitori.R.layout;
-import br.fucapi.fapeam.monitori.R.menu;
-import br.fucapi.fapeam.monitori.model.bean.Paciente;
 import br.fucapi.fapeam.monitori.model.bean.UnidadeSaude;
-import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import br.fucapi.fapeam.monitori.model.dao.UnidadeSaudeDAO;
-import br.fucapi.fapeam.monitori.model.dao.UsuarioDAO;
-import br.fucapi.fapeam.monitori.model.helper.PacienteHelper;
 import br.fucapi.fapeam.monitori.model.helper.UnidadeSaudeHelper;
-import br.fucapi.fapeam.monitori.model.helper.UsuarioHelper;
 import android.os.Bundle;
 import android.app.Activity;
-import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.content.Intent;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.Toast;
 
 public class UnidadeSaudeDadosActivity extends Activity {
 
@@ -97,6 +76,12 @@ public class UnidadeSaudeDadosActivity extends Activity {
 						dao.alterar(ubs);
 					}//Fechando a conexao com o BD
 					dao.close();
+					
+					Intent result = new Intent();
+	                //System.out.println("from second activity: \"" + txtStr + "\"");
+	                result.putExtra("NOVA_UBS", ubs.getNome());
+	                setResult(Activity.RESULT_OK, result);
+					
 					//Encerrando a activity
 					finish();
 				}

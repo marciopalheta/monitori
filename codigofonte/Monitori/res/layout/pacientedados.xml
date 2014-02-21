@@ -279,6 +279,20 @@
                 android:padding="@dimen/padding"
                 android:textSize="@dimen/fontes_para_textos" />
 		 
+		<Spinner
+        android:id="@+id/spinUbs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margem_editext"
+        android:textSize="@dimen/fontes_para_textos"            
+        android:entries="@array/ubs_arrays"
+        android:prompt="@string/ubs_prompt" 
+        android:background="#ebedea"
+        
+        android:layout_marginBottom="10dp"
+        />
+		 
+		 
         <EditText
 		    android:id="@+id/chbUnidadeSaude"
 		    android:background="#ebeaea"

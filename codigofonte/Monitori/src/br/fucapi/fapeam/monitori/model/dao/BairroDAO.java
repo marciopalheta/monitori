@@ -124,7 +124,7 @@ public class BairroDAO extends AbstractDataBase{
 		Log.i(TAG, "bairro alterado: " + bairro.getNome());
 	}
 
-	public Bairro getBairroPorId(long idBairro){
+	public Bairro getBairro(long idBairro){
 
 		Bairro bairro = null;
 		

@@ -103,4 +103,14 @@
     <string name="menu_medico">Medico</string>
     <string name="menu_coletadados">ColetarDados</string>
 	 <string name="erro_conexao_indisponivel">Conexão indisponível, por favor ative sua rede móvel ou Wi-Fi.</string>
+	 
+	 
+	<string name="ubs_prompt">Selecione uma UBS</string>
+    <string name="ubs_novo">Incluir UBS</string>
+
+    <string-array name="ubs_arrays">
+        <item>@string/ubs_novo</item>
+    </string-array>
+	 
+	 
 </resources>

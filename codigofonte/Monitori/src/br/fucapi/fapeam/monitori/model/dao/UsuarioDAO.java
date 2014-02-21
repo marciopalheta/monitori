@@ -13,6 +13,7 @@ import br.fucapi.fapeam.monitori.model.bean.Bairro;
 import br.fucapi.fapeam.monitori.model.bean.Medico;
 import br.fucapi.fapeam.monitori.model.bean.Paciente;
 import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
+import br.fucapi.fapeam.monitori.model.bean.UnidadeSaude;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import android.content.ContentValues;
 import android.content.Context;
@@ -31,8 +32,8 @@ public class UsuarioDAO extends AbstractDataBase{
 	
 	private static final String DATE_FORMAT = "dd-MM-yyyy";
 	
-	private static final String FIELDS_TABLE_USUARIO = ""+AbstractDataBase.TABLE_USUARIO+".id as idUsuario,"+
-					""+AbstractDataBase.TABLE_USUARIO+".nome as nomeUsuario,"+		
+	private static final String FIELDS_TABLE_USUARIO = ""+AbstractDataBase.TABLE_USUARIO+".id,"+
+					""+AbstractDataBase.TABLE_USUARIO+".nome,"+		
 					""+AbstractDataBase.TABLE_USUARIO+".dataMascimento,"+			
 					""+AbstractDataBase.TABLE_USUARIO+".endereco,"+
 					""+AbstractDataBase.TABLE_USUARIO+".cep,"+
@@ -43,7 +44,8 @@ public class UsuarioDAO extends AbstractDataBase{
 					""+AbstractDataBase.TABLE_USUARIO+".sexo,"+
 					""+AbstractDataBase.TABLE_USUARIO+".nomeMae,"+
 					""+AbstractDataBase.TABLE_USUARIO+".numSus,"+
-					""+AbstractDataBase.TABLE_USUARIO+".idBairro as bairroId,"+		
+					""+AbstractDataBase.TABLE_USUARIO+".idBairro,"+
+					""+AbstractDataBase.TABLE_USUARIO+".idUnidadeSaude,"+					
 					""+AbstractDataBase.TABLE_USUARIO+".tipoUsuario,"+
 					""+AbstractDataBase.TABLE_USUARIO+".hipertenso,"+
 					""+AbstractDataBase.TABLE_USUARIO+".diabetico1,"+
@@ -51,9 +53,6 @@ public class UsuarioDAO extends AbstractDataBase{
 					""+AbstractDataBase.TABLE_USUARIO+".crm,"+		
 					""+AbstractDataBase.TABLE_USUARIO+".matricula ";
 	
-	private static final String FIELDS_TABLE_BAIRRO = ""+AbstractDataBase.TABLE_BAIRRO+".id as idBairro,"+
-			""+AbstractDataBase.TABLE_BAIRRO+".nome as nomeBairro ";
-
 	
     private SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
     private Context context;
@@ -92,7 +91,12 @@ public class UsuarioDAO extends AbstractDataBase{
 		values.put("nomeMae", usuario.getNomeMae());
 		values.put("numSus", usuario.getNumSus());
 		
-		values.put("idBairro", usuario.getBairro().getId());		
+		if(usuario.getBairro() != null){
+			values.put("idBairro", usuario.getBairro().getId());
+		}
+		if(usuario.getUnidadeSaude() != null){
+			values.put("idUnidadeSaude", usuario.getUnidadeSaude().getId());
+		}
 		
 		values.put("tipoUsuario", usuario.getTipoUsuario().toString() );
 		
@@ -154,12 +158,9 @@ public class UsuarioDAO extends AbstractDataBase{
 		String sql = null;
 						
 			sql = "Select " +
-					FIELDS_TABLE_USUARIO + ","+
-					FIELDS_TABLE_BAIRRO +
-					" from "+AbstractDataBase.TABLE_USUARIO +", " +
-					" "+AbstractDataBase.TABLE_BAIRRO +" " +
-					//"on  bairroId = idBairro " +
-					"where "+AbstractDataBase.TABLE_USUARIO+".idBairro = "+AbstractDataBase.TABLE_BAIRRO+".id and tipoUsuario = '"+tipoUsuario+"' order by "+AbstractDataBase.TABLE_USUARIO+".nome";		
+					FIELDS_TABLE_USUARIO + " "+					
+					" from "+AbstractDataBase.TABLE_USUARIO +" " +					
+					"where tipoUsuario = '"+tipoUsuario+"' order by "+AbstractDataBase.TABLE_USUARIO+".nome";		
 		
 		//Objeto que reebe os registros do banco de dados
 		Cursor cursor = getReadableDatabase().rawQuery(sql, null);
@@ -180,22 +181,22 @@ public class UsuarioDAO extends AbstractDataBase{
 																				 
 				
 				//Carregar os atributos dos usuarios
-				usuario.setId( cursor.getLong(cursor.getColumnIndex("idUsuario") )); 
-				usuario.setNome(cursor.getString(cursor.getColumnIndex("nomeUsuario")));
+				usuario.setId( cursor.getLong(cursor.getColumnIndex("id") )); 
+				usuario.setNome(cursor.getString(cursor.getColumnIndex("nome")));
 				
 				usuario.setEndereco(cursor.getString(cursor.getColumnIndex("endereco")));
 				usuario.setNomeMae(cursor.getString(cursor.getColumnIndex("nomeMae")));
 				usuario.setNumSus(cursor.getString(cursor.getColumnIndex("numSus")));
 	
-				/*
-				BairroDAO bDao = new BairroDAO(context);				
-				Bairro bairro = bDao.getBairroPorId( cursor.getLong(cursor.getColumnIndex("idBairro") ) );
-				usuario.setBairro(bairro); //BAIRRO
-				*/
-				Bairro bairro = new Bairro();
-				bairro.setId(cursor.getLong(cursor.getColumnIndex("idBairro") ));
-				bairro.setNome(cursor.getString(cursor.getColumnIndex("nomeBairro")));				
-				usuario.setBairro(bairro); //BAIRRO
+				
+				BairroDAO bairroDao = new BairroDAO(context);				
+				Bairro bairro = bairroDao.getBairro( cursor.getLong(cursor.getColumnIndex("idBairro") ) );
+				usuario.setBairro(bairro); 
+				
+				UnidadeSaudeDAO ubsDao = new UnidadeSaudeDAO(context);				
+				UnidadeSaude ubs = ubsDao.getUnidadeSaude( cursor.getLong(cursor.getColumnIndex("idUnidadeSaude") ) );
+				usuario.setUnidadeSaude(ubs);
+				
 				
 				usuario.setCep(cursor.getString(cursor.getColumnIndex("cep"))); 
 				//usuario.setUnidadeSaude(cursor.getString(5) );
@@ -271,8 +272,13 @@ public class UsuarioDAO extends AbstractDataBase{
 		//values.put("login", usuario.getLogin());
 		//values.put("senha", usuario.getNome());
 		values.put("sexo", usuario.getSexo() );
-		values.put("idBairro", usuario.getBairro().getId());
-		Log.i(TAG, "idBairro: "+ usuario.getBairro().getId() );
+		
+		if(usuario.getBairro() != null){
+			values.put("idBairro", usuario.getBairro().getId());
+		}
+		if(usuario.getUnidadeSaude() != null){
+			values.put("idUnidadeSaude", usuario.getUnidadeSaude().getId());
+		}
 		
 		values.put("tipoUsuario", usuario.getTipoUsuario().toString() );
 		

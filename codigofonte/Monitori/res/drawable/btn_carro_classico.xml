@@ -3,7 +3,7 @@
 <!--  
 Efeito especial de on/off para o botao
 -->
-	<item android:drawable="@drawable/btn_carro_classico_off" android:state_pressed="false" android:state_focused="false" />
-	<item android:drawable="@drawable/btn_carro_classico_off" android:state_pressed="false" android:state_focused="true" />
-	<item android:drawable="@drawable/btn_carro_classico_on" android:state_pressed="true" android:state_focused="false" />
+	<item android:drawable="@drawable/ic_man" android:state_pressed="false" android:state_focused="false" />
+	<item android:drawable="@drawable/ic_man" android:state_pressed="false" android:state_focused="true" />
+	<item android:drawable="@drawable/ic_man" android:state_pressed="true" android:state_focused="false" />
 </selector>

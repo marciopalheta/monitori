@@ -35,8 +35,7 @@ import android.widget.TextView;
 public class UsuarioHelper {
 	private EditText nome;
 	private EditText endereco;
-	private EditText cep;
-	private EditText unidadeSaude;
+	private EditText cep;	
 	private EditText celular;
 	private EditText telefone;
 	private EditText nomeMae;
@@ -85,7 +84,7 @@ public class UsuarioHelper {
 			
 		endereco = (EditText) fragmentActivity.findViewById(R.id.edEndereco);					
 		cep = (EditText) fragmentActivity.findViewById(R.id.edCep);
-		unidadeSaude = (EditText) fragmentActivity.findViewById(R.id.chbUnidadeSaude);
+		
 		celular = (EditText) fragmentActivity.findViewById(R.id.edCelular);
 		telefone = (EditText) fragmentActivity.findViewById(R.id.edTefone);
 		nomeMae = (EditText) fragmentActivity.findViewById(R.id.edNomedamae);
@@ -258,13 +257,6 @@ public class UsuarioHelper {
 		this.cep = cep;
 	}
 
-	public EditText getUnidadeSaude() {
-		return unidadeSaude;
-	}
-
-	public void setUnidadeSaude(EditText unidadeSaude) {
-		this.unidadeSaude = unidadeSaude;
-	}
 
 	public EditText getCelular() {
 		return celular;

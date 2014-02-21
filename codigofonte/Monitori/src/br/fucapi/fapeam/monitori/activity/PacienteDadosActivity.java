@@ -33,14 +33,10 @@ import android.widget.Toast;
 public class PacienteDadosActivity extends UsuarioDadosActivity {
 
 	//Atributos para manipulacao de tela
-	private Button botao;
+	
 	private PacienteHelper helper;
 	private Paciente pacienteParaSerAlterado = null;
 	
-	private Button btDataNascimento;
-	
-	
-
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +47,7 @@ public class PacienteDadosActivity extends UsuarioDadosActivity {
 				
 		//Criacao do objeto helper
 		helper = new PacienteHelper(this);
-		botao = (Button) findViewById(R.id.sbSalvar);
+	
 						
 		// Busca o paciente a ser alterado
 		pacienteParaSerAlterado = (Paciente) getIntent().getSerializableExtra(
@@ -61,29 +57,8 @@ public class PacienteDadosActivity extends UsuarioDadosActivity {
 					// Atualiza a tela com dados do Aluno
 					helper.setPaciente(pacienteParaSerAlterado);
 				}
-
-		
-		botao.setOnClickListener(new OnClickListener(){
-			@Override
-			public void onClick(View arg0) {
-				//Utilizando o helper
-				Paciente paciente = (Paciente) helper.getPaciente();
-				//Criacao do objeto DAO
-				UsuarioDAO dao = new UsuarioDAO(PacienteDadosActivity.this);
-				
-				//Validando os campos
-				if(helper.validar()==true){		
-					// Verificacao para salvar ou cadastrar o aluno
-					if (paciente.getId() == null) {
-						dao.cadastrar(paciente);
-					} else {
-						dao.alterar(paciente);
-					}//Fechando a conexao com o BD
-					dao.close();
-					//Encerrando a activity
-					finish();
-				}}
-		});
+	
+	
 	}
 			
 	

@@ -5,6 +5,8 @@ import java.util.List;
 import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.R.layout;
 import br.fucapi.fapeam.monitori.R.menu;
+import br.fucapi.fapeam.monitori.model.bean.Medico;
+import br.fucapi.fapeam.monitori.model.bean.Paciente;
 import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import br.fucapi.fapeam.monitori.model.dao.UsuarioDAO;
@@ -53,6 +55,9 @@ public class MedicoActivity extends Activity {
 			super.onCreate(savedInstanceState);
 			setContentView(R.layout.medico);
 			
+			//getActionBar().setHomeButtonEnabled(true);
+			//getActionBar().setDisplayHomeAsUpEnabled(true);
+			
 			//Ligacao dos componentes de TELA aos atributos da Activity
 			lvListagem = (ListView) findViewById(R.id.lvListagem);
 			//Informa que a ListView tem um menu de contexto
@@ -64,23 +69,32 @@ public class MedicoActivity extends Activity {
 				public boolean onItemLongClick(AdapterView<?> adapter, View view,
 						int posicao, long id) {
 					//Marca o usuario selecionado
-					usuarioSelecionado = (Usuario) adapter.getItemAtPosition(posicao);
+					usuarioSelecionado = (Medico) adapter.getItemAtPosition(posicao);
 					Log.i(TAG, "Usuario Selecionado ListView.LongClick()"
 							+ usuarioSelecionado.getNome());
 					return false;
 				}
 				
 			});
-			//Metodo do click simples
-			lvListagem.setOnItemClickListener(new OnItemClickListener(){
+
+			// Metodo que "escuta" o evento de Click SIMPLES
+			lvListagem.setOnItemClickListener(new OnItemClickListener() {
 				@Override
-				public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-						long arg3) {
-					// TODO Auto-generated method stub
-					
+				public void onItemClick(AdapterView<?> adapter, View view,
+						int posicao, long id) {
+
+					Intent form = new Intent(MedicoActivity.this,
+							MedicoDadosActivity.class);
+
+					usuarioSelecionado = (Medico) lvListagem
+							.getItemAtPosition(posicao);
+
+					form.putExtra("MEDICO_SELECIONADO", usuarioSelecionado);
+
+					startActivity(form);
 				}
-				
 			});
+					
 		}
 
 		protected void onSaveInstanceState(Bundle outState){
@@ -114,7 +128,7 @@ public class MedicoActivity extends Activity {
 			MenuInflater inflater = this.getMenuInflater();
 			
 			//Inflar um XML
-			inflater.inflate(R.menu.medico, menu);
+			inflater.inflate(R.menu.paciente, menu);
 			
 			return true;
 		}
@@ -133,7 +147,7 @@ public class MedicoActivity extends Activity {
 			this.lvListagem.setAdapter(adapter);
 		}
 		
-		private void excluirMedico() {
+		private void excluirUsuario() {
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			builder.setMessage("Confirma a exclusao de: "
 					+ usuarioSelecionado.getNome());
@@ -166,11 +180,21 @@ public class MedicoActivity extends Activity {
 		public boolean onContextItemSelected(MenuItem item) {
 			Intent intent;
 			switch (item.getItemId()) {
-			case R.id.menu_deletar:
-				excluirMedico();
-				break;
-			default:
-				break;
+				case R.id.menu_editar:
+					
+					Intent form = new Intent(MedicoActivity.this,
+							MedicoDadosActivity.class);				
+					form.putExtra("MEDICO_SELECIONADO", usuarioSelecionado);
+
+					startActivity(form);
+
+					
+					break;
+				case R.id.menu_deletar:
+					excluirUsuario();
+					break;
+				default:
+					break;
 			}
 			return super.onContextItemSelected(item);
 		}

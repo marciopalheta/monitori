@@ -1,57 +1,29 @@
 package br.fucapi.fapeam.monitori.activity;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
-import org.xml.sax.DTDHandler;
-
 import br.fucapi.fapeam.monitori.R;
-import br.fucapi.fapeam.monitori.R.layout;
-import br.fucapi.fapeam.monitori.R.menu;
 import br.fucapi.fapeam.monitori.model.bean.Agente;
-import br.fucapi.fapeam.monitori.model.bean.Paciente;
-import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import br.fucapi.fapeam.monitori.model.dao.UsuarioDAO;
 import br.fucapi.fapeam.monitori.model.helper.AgenteHelper;
-import br.fucapi.fapeam.monitori.model.helper.PacienteHelper;
-import br.fucapi.fapeam.monitori.model.helper.UsuarioHelper;
 import android.os.Bundle;
-import android.app.Activity;
-import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.content.Intent;
-import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.Toast;
 
-public class AgenteDadosActivity extends FragmentActivity {
+public class AgenteDadosActivity extends UsuarioDadosActivity {
 
-	//Atributos para manipulacao de tela
-	private Button botao;
+	//Atributos para manipulacao de tela	
 	private AgenteHelper helper;
-	private Agente agenteParaSerAlterado = null;
-	
-	private Button btDataNascimento;
-	
-	
+	private Agente agenteParaSerAlterado = null;	
 
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		super.setContentView(R.layout.agentesdados);
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.agentesdados);
+		
 				
 		//Criacao do objeto helper
-		helper = new AgenteHelper(this);
-		botao = (Button) findViewById(R.id.sbSalvar);
+		helper = new AgenteHelper(this);		
 						
 		// Busca o paciente a ser alterado
 		agenteParaSerAlterado = (Agente) getIntent().getSerializableExtra(
@@ -62,28 +34,7 @@ public class AgenteDadosActivity extends FragmentActivity {
 					helper.setAgente(agenteParaSerAlterado);
 				}
 
-		
-		botao.setOnClickListener(new OnClickListener(){
-			@Override
-			public void onClick(View arg0) {
-				//Utilizando o helper
-				Agente agente = (Agente) helper.getAgente();
-				//Criacao do objeto DAO
-				UsuarioDAO dao = new UsuarioDAO(AgenteDadosActivity.this);
-				
-				//Validando os campos
-				if(helper.validar()==true){		
-					// Verificacao para salvar ou cadastrar o aluno
-					if (agente.getId() == null) {
-						dao.cadastrar(agente);
-					} else {
-						dao.alterar(agente);
-					}//Fechando a conexao com o BD
-					dao.close();
-					//Encerrando a activity
-					finish();
-				}}
-		});
+
 	}
 			
 	

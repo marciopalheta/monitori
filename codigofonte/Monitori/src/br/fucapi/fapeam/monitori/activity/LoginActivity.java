@@ -20,7 +20,6 @@ import android.widget.Toast;
 
 public class LoginActivity extends Activity {
 	
-	
 	//Atributos de Tela
 	private EditText login;
 	private EditText senha;
@@ -44,9 +43,6 @@ public class LoginActivity extends Activity {
 				validarUsuario();
 			}
 		});
-		
-		
-		
 	}
 
 	@Override
@@ -61,7 +57,24 @@ public class LoginActivity extends Activity {
 		//Verifica o item do menu selecionado
 		switch(item.getItemId()){
 			//Verifica se foi selecionado um item novo
-							
+								
+			case R.id.menu_agente:
+				//Especialista em mudanca de tela
+				intent = new Intent(LoginActivity.this,
+						AgenteActivity.class);
+				//Carrega a nova tela
+				startActivity(intent);
+			
+				return false;
+				
+			case R.id.menu_paciente:
+				//Especialista em mudanca de tela
+				intent = new Intent(LoginActivity.this,
+						PacienteActivity.class);
+				//Carrega a nova tela
+				startActivity(intent);
+				
+				return false;
 				
 			case R.id.menu_medico:
 				//Especialista em mudanca de tela

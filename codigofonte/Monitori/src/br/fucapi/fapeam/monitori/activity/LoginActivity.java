@@ -61,14 +61,8 @@ public class LoginActivity extends Activity {
 		//Verifica o item do menu selecionado
 		switch(item.getItemId()){
 			//Verifica se foi selecionado um item novo
-			case R.id.menu_paciente:
-				//Especialista em mudanca de tela
-				intent = new Intent(LoginActivity.this,
-						PacienteActivity.class);
-				//Carrega a nova tela
-				startActivity(intent);
+							
 				
-				return false;
 			case R.id.menu_medico:
 				//Especialista em mudanca de tela
 				intent = new Intent(LoginActivity.this,
@@ -96,7 +90,7 @@ public class LoginActivity extends Activity {
 		//mudando de activity caso usuario logado
 				//Especialista em mudanca de tela
 					Intent intent = new Intent(LoginActivity.this,
-					PacienteActivity.class);
+					MenuPrincipalActivity.class);
 					//Carrega a nova tela
 					startActivity(intent);
 	}

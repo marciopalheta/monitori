@@ -84,9 +84,12 @@ public class UsuarioHelper {
 			
 		endereco = (EditText) fragmentActivity.findViewById(R.id.edEndereco);					
 		cep = (EditText) fragmentActivity.findViewById(R.id.edCep);
+		cep.addTextChangedListener(Mask.insert("#####-###", cep));
 		
 		celular = (EditText) fragmentActivity.findViewById(R.id.edCelular);
+		celular.addTextChangedListener(Mask.insert("(##)####-####", celular));
 		telefone = (EditText) fragmentActivity.findViewById(R.id.edTefone);
+		telefone.addTextChangedListener(Mask.insert("(##)####-####", telefone));
 		nomeMae = (EditText) fragmentActivity.findViewById(R.id.edNomedamae);
 		numSus = (EditText) fragmentActivity.findViewById(R.id.edit_sus);
 		

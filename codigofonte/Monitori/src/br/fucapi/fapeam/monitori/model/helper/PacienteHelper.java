@@ -6,14 +6,9 @@ import br.fucapi.fapeam.monitori.model.bean.Bairro;
 import br.fucapi.fapeam.monitori.model.bean.Paciente;
 import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
 import br.fucapi.fapeam.monitori.model.bean.UnidadeSaude;
-import br.fucapi.fapeam.monitori.model.bean.Usuario;
-import android.content.Context;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
 public class PacienteHelper extends UsuarioHelper {
@@ -94,8 +89,7 @@ public class PacienteHelper extends UsuarioHelper {
 		if(paciente.getBairro() !=null){
 			getSpinBairro().setSelection(array_bairro.getPosition( paciente.getBairro().getNome() ) );
 		}
-		
-			    						
+		    						
 		ArrayAdapter<String> array_ubs=(ArrayAdapter<String>)getSpinUbs().getAdapter();
 		if(paciente.getUnidadeSaude() !=null){
 			getSpinUbs().setSelection(array_ubs.getPosition( paciente.getUnidadeSaude().getNome() ) );
@@ -107,12 +101,7 @@ public class PacienteHelper extends UsuarioHelper {
 		diabetico1.setChecked(paciente.isDiabetico1() );
 		diabetico2.setChecked(paciente.isDiabetico2() );
 		
-		
-		this.paciente = paciente;
-		
-	
+		this.paciente = paciente;	
 	//Validando dados
-	
-			
-			}
+	}
 }

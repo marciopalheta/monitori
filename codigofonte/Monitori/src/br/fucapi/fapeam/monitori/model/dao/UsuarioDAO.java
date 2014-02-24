@@ -63,11 +63,9 @@ public class UsuarioDAO extends AbstractDataBase{
 		this.context = context;
 	}
 	
-	
 	 /** 
 	 * metodo responsavel pelo cadastro do usuario
 	 * */
-	
 	public void cadastrar (Usuario usuario){
 		//objeto para armazenar os valores dos camopos
 		ContentValues values = new ContentValues();
@@ -103,9 +101,7 @@ public class UsuarioDAO extends AbstractDataBase{
 		if(usuario instanceof Paciente){			
 			values.put("hipertenso", String.valueOf( ((Paciente)usuario).isHipertenso() ) );
 			values.put("diabetico1", String.valueOf( ((Paciente)usuario).isDiabetico1() ) );
-			values.put("diabetico2", String.valueOf( ((Paciente)usuario).isDiabetico2() ) );
-			
-			
+			values.put("diabetico2", String.valueOf( ((Paciente)usuario).isDiabetico2() ) );		
 		}
 		
 		if(usuario instanceof Medico){			
@@ -132,7 +128,6 @@ public class UsuarioDAO extends AbstractDataBase{
 		Log.i(TAG, "sexo: "+ usuario.getSexo() );		
 		Log.i(TAG, "tipoUsuario: "+ usuario.getTipoUsuario().toString() );
 		
-		
 		if(usuario instanceof Paciente){						
 			Log.i(TAG, "hipertenso: "+ ((Paciente)usuario).isHipertenso() );
 			Log.i(TAG, "diabetico1: "+ ((Paciente)usuario).isDiabetico1() );
@@ -144,7 +139,6 @@ public class UsuarioDAO extends AbstractDataBase{
 		if(usuario instanceof Agente){						
 			Log.i(TAG, "matricula: "+ ((Agente)usuario).getMatricula() );
 		}
-		
 	}
 	
 	/** 
@@ -219,10 +213,7 @@ public class UsuarioDAO extends AbstractDataBase{
 				usuario.setTelefone(cursor.getString(cursor.getColumnIndex("telefone")));
 				usuario.setSexo( cursor.getString(cursor.getColumnIndex("sexo")) );
 				//usuario.setObservacao( cursor.getString(cursor.getColumnIndex("observacao")) );
-								
-				
-				
-				
+										
 				//Adiciona um novo usuario a lista
 				lista.add(usuario);
 			}
@@ -252,11 +243,9 @@ public class UsuarioDAO extends AbstractDataBase{
 	/** 
 	 * metodo responsavel pela atualizacao de usuarios
 	 * */
-	
 	public void alterar(Usuario usuario) {
 		ContentValues values = new ContentValues();
 		values.put("nome", usuario.getNome());
-		
 		
 		String dataForDB=null;	
 		Calendar cal =  usuario.getDataNascimento();
@@ -288,7 +277,6 @@ public class UsuarioDAO extends AbstractDataBase{
 			values.put("hipertenso", String.valueOf( ((Paciente)usuario).isHipertenso() ) );
 			values.put("diabetico1", String.valueOf( ((Paciente)usuario).isDiabetico1() ) );
 			values.put("diabetico2", String.valueOf( ((Paciente)usuario).isDiabetico2() ) );
-
 		}
 		
 		if(usuario instanceof Medico){			
@@ -319,8 +307,6 @@ public class UsuarioDAO extends AbstractDataBase{
 		try{
 			if(cursor.moveToNext()){				
 				
-				
-				
 				if(cursor.getString(cursor.getColumnIndex("tipoUsuario")).equals(TipoUsuario.PACIENTE.toString()) ){
 					usuario = new Paciente();					
 					((Paciente)usuario).setHipertenso( Boolean.parseBoolean( cursor.getString(cursor.getColumnIndex("hipertenso"))  ) );
@@ -333,8 +319,7 @@ public class UsuarioDAO extends AbstractDataBase{
 				}else if(cursor.getString(cursor.getColumnIndex("tipoUsuario")).equals(TipoUsuario.MEDICO.toString()) ){
 					usuario = new Medico();					
 					((Medico)usuario).setCrm( cursor.getString(cursor.getColumnIndex("crm"))   );
-				}
-																				 
+				}																 
 				
 				//Carregar os atributos dos usuarios
 				usuario.setId( cursor.getLong(cursor.getColumnIndex("id") )); 
@@ -352,7 +337,6 @@ public class UsuarioDAO extends AbstractDataBase{
 				UnidadeSaudeDAO ubsDao = new UnidadeSaudeDAO(context);				
 				UnidadeSaude ubs = ubsDao.getUnidadeSaude( cursor.getLong(cursor.getColumnIndex("idUnidadeSaude") ) );
 				usuario.setUnidadeSaude(ubs);
-				
 				
 				usuario.setCep(cursor.getString(cursor.getColumnIndex("cep"))); 
 				//usuario.setUnidadeSaude(cursor.getString(5) );
@@ -379,10 +363,7 @@ public class UsuarioDAO extends AbstractDataBase{
 				usuario.setSexo( cursor.getString(cursor.getColumnIndex("sexo")) );
 				//usuario.setObservacao( cursor.getString(cursor.getColumnIndex("observacao")) );
 	
-				
-				
 				//Adiciona um novo usuario a lista
-				
 			}
 		}catch(SQLException e){
 			Log.e(TAG, e.getMessage());

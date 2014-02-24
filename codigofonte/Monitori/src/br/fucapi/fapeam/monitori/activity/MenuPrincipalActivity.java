@@ -1,8 +1,6 @@
 package br.fucapi.fapeam.monitori.activity;
 
 import br.fucapi.fapeam.monitori.R;
-import br.fucapi.fapeam.monitori.R.id;
-import br.fucapi.fapeam.monitori.R.layout;
 import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
 import android.app.Activity;
 import android.content.Intent;
@@ -34,6 +32,7 @@ public class MenuPrincipalActivity extends Activity implements OnClickListener {
 		btcoletadados = (Button) findViewById(R.id.btcoletadados);
 		btcoletadados.setOnClickListener(this);
 	}
+
 	@Override
 	public void onClick(View v) {
         	Intent intent = new Intent(this, AgenteActivity.class);
@@ -49,7 +48,6 @@ public class MenuPrincipalActivity extends Activity implements OnClickListener {
     		Intent intent3 = new Intent(this, MedicoActivity.class);
     		if(v == btMedico) {
     			startActivity(intent3);
-    		}
-      
+    		}  
 	}
 }

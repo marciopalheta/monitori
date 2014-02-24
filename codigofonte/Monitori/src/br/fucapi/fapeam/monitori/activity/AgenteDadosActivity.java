@@ -14,14 +14,12 @@ public class AgenteDadosActivity extends UsuarioDadosActivity {
 	//Atributos para manipulacao de tela	
 	private AgenteHelper helper;
 	private Agente agenteParaSerAlterado = null;	
-
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.setContentView(R.layout.agentesdados);
 		super.onCreate(savedInstanceState);
-		
-				
+						
 		//Criacao do objeto helper
 		helper = new AgenteHelper(this);		
 						
@@ -33,11 +31,8 @@ public class AgenteDadosActivity extends UsuarioDadosActivity {
 					// Atualiza a tela com dados do Aluno
 					helper.setAgente(agenteParaSerAlterado);
 				}
-
-
 	}
 			
-	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		//Definicao do menu inflater
@@ -48,7 +43,6 @@ public class AgenteDadosActivity extends UsuarioDadosActivity {
 		
 		return true;
 	}
-	
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -84,8 +78,6 @@ public class AgenteDadosActivity extends UsuarioDadosActivity {
 				finish();
 				return true;
 	    }
-
 	    return super.onOptionsItemSelected(item);
 	}
-		
 }

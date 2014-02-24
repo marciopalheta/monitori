@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
 
-
 public class MedicoHelper extends UsuarioHelper {
 		
 	private Medico medico;
@@ -40,14 +39,12 @@ public Medico getMedico(){
 		auxBairro.setId(Long.parseLong( idBairro.getText().toString() ) );
 		auxBairro.setNome(getSpinBairro().getSelectedItem().toString());					
 		medico.setBairro(auxBairro);
-		
-		
+				
 		UnidadeSaude auxUbs = new UnidadeSaude();
 		TextView idUbs = (TextView)getSpinUbs().getSelectedView().findViewById(R.id.textID); 
 		auxUbs.setId(Long.parseLong( idUbs.getText().toString() ) );
 		auxUbs.setNome(getSpinUbs().getSelectedItem().toString());					
 		medico.setUnidadeSaude(auxUbs);
-		
 		
 		medico.setTipoUsuario(TipoUsuario.MEDICO);
 		
@@ -55,9 +52,6 @@ public Medico getMedico(){
 		medico.setSenha(medico.getNome());
 		
 		medico.setCrm(crm.getText().toString());
-		
-
-
 		return medico;		
 	}
 	
@@ -74,23 +68,17 @@ public Medico getMedico(){
 		ArrayAdapter<String> array_spinner=(ArrayAdapter<String>)getSexo().getAdapter();
 		getSexo().setSelection(array_spinner.getPosition( medico.getSexo() ));
 	    				
-		
 		ArrayAdapter<String> array_bairro=(ArrayAdapter<String>)getSpinBairro().getAdapter();
 		if(medico.getBairro() !=null){
 			getSpinBairro().setSelection(array_bairro.getPosition( medico.getBairro().getNome() ) );
 		}
-		
-			    						
+			
 		ArrayAdapter<String> array_ubs=(ArrayAdapter<String>)getSpinUbs().getAdapter();
 		if(medico.getUnidadeSaude() !=null){
 			getSpinUbs().setSelection(array_ubs.getPosition( medico.getUnidadeSaude().getNome() ) );
 		}
 		
 		crm.setText(medico.getCrm());
-		
-		
 		this.medico= medico;
-		
-			
 		}
 }

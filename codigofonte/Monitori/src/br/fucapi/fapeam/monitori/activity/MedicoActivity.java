@@ -3,10 +3,7 @@ package br.fucapi.fapeam.monitori.activity;
 import java.util.List;
 
 import br.fucapi.fapeam.monitori.R;
-import br.fucapi.fapeam.monitori.R.layout;
-import br.fucapi.fapeam.monitori.R.menu;
 import br.fucapi.fapeam.monitori.model.bean.Medico;
-import br.fucapi.fapeam.monitori.model.bean.Paciente;
 import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import br.fucapi.fapeam.monitori.model.dao.UsuarioDAO;
@@ -30,7 +27,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 
 public class MedicoActivity extends Activity {
-	
 	
 	//Definicao das constantes
 		private final String TAG = "CADASTRO_MEDICO";
@@ -73,8 +69,7 @@ public class MedicoActivity extends Activity {
 					Log.i(TAG, "Usuario Selecionado ListView.LongClick()"
 							+ usuarioSelecionado.getNome());
 					return false;
-				}
-				
+				}			
 			});
 
 			// Metodo que "escuta" o evento de Click SIMPLES
@@ -93,8 +88,7 @@ public class MedicoActivity extends Activity {
 
 					startActivity(form);
 				}
-			});
-					
+			});	
 		}
 
 		protected void onSaveInstanceState(Bundle outState){
@@ -162,7 +156,6 @@ public class MedicoActivity extends Activity {
 					usuarioSelecionado = null;
 				}
 			});
-
 			builder.setNegativeButton("Nao", null);
 			AlertDialog dialog = builder.create();
 			dialog.setTitle("Confirmacao de exclusao");
@@ -178,7 +171,6 @@ public class MedicoActivity extends Activity {
 
 		@Override
 		public boolean onContextItemSelected(MenuItem item) {
-			Intent intent;
 			switch (item.getItemId()) {
 				case R.id.menu_editar:
 					
@@ -202,5 +194,4 @@ public class MedicoActivity extends Activity {
 			super.onResume();
 			this.carregarLista();
 		}
-
 	}

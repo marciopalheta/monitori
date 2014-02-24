@@ -1,34 +1,12 @@
 package br.fucapi.fapeam.monitori.model.dao;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-
-import br.fucapi.fapeam.monitori.activity.PacienteDadosActivity;
-import br.fucapi.fapeam.monitori.model.bean.AbstractEntityBean;
-import br.fucapi.fapeam.monitori.model.bean.Agente;
-import br.fucapi.fapeam.monitori.model.bean.Medico;
-import br.fucapi.fapeam.monitori.model.bean.Paciente;
-import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
-import br.fucapi.fapeam.monitori.model.bean.Usuario;
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
-import android.database.DatabaseUtils;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 public class AbstractDataBase extends SQLiteOpenHelper{
 		
-	//Constante para log no LogCat
-    private static final String LOG = AbstractDataBase.class.getName();
- 
-    // Database Version
+	// Database Version
     private static final int DATABASE_VERSION = 1;
  
     // Database Name
@@ -71,7 +49,6 @@ public class AbstractDataBase extends SQLiteOpenHelper{
 		super(context,DATABASE_NAME,null,DATABASE_VERSION);
 	}
 	
-	
 	@Override
 	public void onCreate(SQLiteDatabase database) {
 		//Definicao do comando DDL a ser executado		
@@ -96,7 +73,5 @@ public class AbstractDataBase extends SQLiteOpenHelper{
 		
 		//Chamando o metodo de construcao da base de dados
 		onCreate(database);
-	}
-			
-		
+	}	
 }

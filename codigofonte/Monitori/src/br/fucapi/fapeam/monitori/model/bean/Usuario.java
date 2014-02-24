@@ -21,8 +21,7 @@ public class Usuario extends AbstractEntityBean {
 	private String foto;
 	private String sexo;
 	private TipoUsuario tipoUsuario;
-	
-	
+		
 	public String getNomeMae() {
 		return nomeMae;
 	}
@@ -155,5 +154,4 @@ public class Usuario extends AbstractEntityBean {
 	public void setTipoUsuario(TipoUsuario tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
 	}
-
 }

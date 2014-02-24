@@ -1,33 +1,16 @@
 package br.fucapi.fapeam.monitori.activity;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
-
-import org.xml.sax.DTDHandler;
-
 import br.fucapi.fapeam.monitori.R;
-import br.fucapi.fapeam.monitori.R.layout;
-import br.fucapi.fapeam.monitori.R.menu;
-import br.fucapi.fapeam.monitori.model.bean.Bairro;
-import br.fucapi.fapeam.monitori.model.bean.Paciente;
 import br.fucapi.fapeam.monitori.model.bean.UnidadeSaude;
-import br.fucapi.fapeam.monitori.model.bean.Usuario;
-import br.fucapi.fapeam.monitori.model.dao.BairroDAO;
 import br.fucapi.fapeam.monitori.model.dao.UnidadeSaudeDAO;
-import br.fucapi.fapeam.monitori.model.dao.UsuarioDAO;
-import br.fucapi.fapeam.monitori.model.helper.PacienteHelper;
-import br.fucapi.fapeam.monitori.model.helper.UsuarioHelper;
-import br.fucapi.fapeam.monitori.utils.BairroDialog;
 import br.fucapi.fapeam.monitori.utils.SpinnerAdapter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.app.Activity;
-import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -35,18 +18,13 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
 
 public class UsuarioDadosActivity extends FragmentActivity {
@@ -58,20 +36,16 @@ public class UsuarioDadosActivity extends FragmentActivity {
 
 		private SpinnerAdapter adapter = null;
 		
-		
-		
 		private int selectionCurrent;
 
 		private final int REQUEST_CODE_UBS = 12;
 		private static final int REQUEST_CODE_FOTO = 123;
-		
 		
 		@Override
 		protected void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
 			
 			foto = (ImageView) findViewById(R.id.foto);
-			
 			
 			foto.setOnClickListener(new OnClickListener() {
 				@Override
@@ -94,7 +68,6 @@ public class UsuarioDadosActivity extends FragmentActivity {
 				}
 			});
 			
-			
 			spinUbs = (Spinner) findViewById(R.id.spinUbs);		
 			atualizarListaUbs("");
 			
@@ -110,8 +83,7 @@ public class UsuarioDadosActivity extends FragmentActivity {
 									getNovaUbs();
 									return true;
 							   }
-			              }
-			            
+			              }            
 					}
 					return false;
 				}
@@ -138,13 +110,8 @@ public class UsuarioDadosActivity extends FragmentActivity {
 				public void onNothingSelected(AdapterView<?> parentView) {
 				    // your code here
 				}
-
 				});
-
-				
-			
 		}
-
 		
 		private void atualizarListaUbs(String nomeUBS){
 			UnidadeSaudeDAO daoUbs = new UnidadeSaudeDAO(this); 
@@ -172,23 +139,17 @@ public class UsuarioDadosActivity extends FragmentActivity {
 			spinUbs.setAdapter(adapter);	    	    
 		    
 		    //ArrayAdapter<String> array_spinner=(ArrayAdapter<String>)getSpinBairro().getAdapter();
-			spinUbs.setSelection(indexB);
-				   	    
+			spinUbs.setSelection(indexB);		   	    
 		}
 
-		
-		
 		private void getNovaUbs() {
 			
 			Intent intent = new Intent(this,
 					UnidadeSaudeDadosActivity.class);
 			
 			//form.putExtra("PACIENTE_SELECIONADO", pacienteSelecionado);
-			startActivityForResult(intent, REQUEST_CODE_UBS );
-			
-					
+			startActivityForResult(intent, REQUEST_CODE_UBS );					
 		}
-		
 		
 		@Override
 	    public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -208,10 +169,8 @@ public class UsuarioDadosActivity extends FragmentActivity {
 				} else {
 					localArquivo = null;
 				}
-			}
-	        
+			}   
 	    }
-
 		
 		@Override
 		public boolean onCreateOptionsMenu(Menu menu) {
@@ -223,18 +182,14 @@ public class UsuarioDadosActivity extends FragmentActivity {
 			
 			return true;
 		}
-					
-		
 		
 		public Spinner getSpinUbs() {
 			return spinUbs;
 		}
 
-
 		public void setSpinUbs(Spinner spinUbs) {
 			this.spinUbs = spinUbs;
 		}
-		
 		
 		public void carregarFoto(String localFoto) {
 			
@@ -253,7 +208,6 @@ public class UsuarioDadosActivity extends FragmentActivity {
 			foto.setImageBitmap(imagemFotoReduzida);
 		}
 		
-		
 		public String getLocalArquivo() {
 			return localArquivo;
 		}
@@ -261,5 +215,4 @@ public class UsuarioDadosActivity extends FragmentActivity {
 		public void setLocalArquivo(String localArquivo) {
 			this.localArquivo = localArquivo;
 		}
-		
 }

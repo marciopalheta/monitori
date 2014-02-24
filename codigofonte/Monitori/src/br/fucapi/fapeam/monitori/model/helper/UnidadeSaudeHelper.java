@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import br.fucapi.fapeam.monitori.R;
-import br.fucapi.fapeam.monitori.activity.UnidadeSaudeDadosActivity;
 import br.fucapi.fapeam.monitori.model.bean.Bairro;
 import br.fucapi.fapeam.monitori.model.bean.UnidadeSaude;
 import br.fucapi.fapeam.monitori.model.dao.BairroDAO;
@@ -37,7 +36,6 @@ public class UnidadeSaudeHelper {
 	private FragmentActivity fragmentActivity;	
 	private ArrayAdapter<String> adapter;
 	
-	
 	public UnidadeSaudeHelper(final FragmentActivity fragmentActivity){		
 		
 		this.fragmentActivity = fragmentActivity;
@@ -53,9 +51,7 @@ public class UnidadeSaudeHelper {
 		numero =(EditText) fragmentActivity.findViewById(R.id.edNumero);		
 		cep = (EditText) fragmentActivity.findViewById(R.id.edCep);
 		cep.addTextChangedListener(Mask.insert("#####-###", cep));
-				
-		
-		
+					
 		spinBairro = (Spinner) fragmentActivity.findViewById(R.id.spinBairro);
 		atualizarListaBairros();
 		
@@ -71,8 +67,7 @@ public class UnidadeSaudeHelper {
 								getNovoBairro();
 								return true;
 						   }
-		              }
-		            
+		              }    
 				}
 				return false;
 			}
@@ -99,10 +94,7 @@ public class UnidadeSaudeHelper {
 			public void onNothingSelected(AdapterView<?> parentView) {
 			    // your code here
 			}
-
 			});
-
-		
 	}
 
 	private void atualizarListaBairros(){
@@ -122,8 +114,7 @@ public class UnidadeSaudeHelper {
 		stringArray[index] = fragmentActivity.getString(R.string.bairro_novo); 				
 		intArray[index] = 0;
 		adapter = new SpinnerAdapter(fragmentActivity, R.layout.spinner_generic,stringArray,intArray);
-	    spinBairro.setAdapter(adapter);	    	    	    			    
-	    
+	    spinBairro.setAdapter(adapter);	    	    	    			       
 	}
 	
 	public UnidadeSaude getUnidadeSaude(){
@@ -150,32 +141,30 @@ public class UnidadeSaudeHelper {
 		//ArrayAdapter<String> array_spinner=(ArrayAdapter<String>)getSexo().getAdapter();
 		//bairro.setSelection(array_spinner.getPosition( paciente.getSexo() ));
 	    	
-		
 		this.ubs = ubs;			
 	}
 	
 	public boolean validarDados(View view, String mensagem) {
 		  if (view instanceof EditText) {
-		   EditText edTexto = (EditText) view;
-		   Editable texto = edTexto.getText();
-		   if (texto != null) {
-		    String strTexto = texto.toString();
-		    if (!TextUtils.isEmpty(strTexto)) {
-		     return true;
-		    }
-		   }
-		   // em qualquer outra condição é gerado um erro
-		   edTexto.setError(mensagem);
-		   edTexto.setFocusable(true);
-		   edTexto.requestFocus();
-		   return false;
+			  EditText edTexto = (EditText) view;
+			  Editable texto = edTexto.getText();
+			  if (texto != null) {
+				  String strTexto = texto.toString();
+				  if (!TextUtils.isEmpty(strTexto)) {
+					  return true;
+				  }
+			  }
+			  // em qualquer outra condição é gerado um erro
+			  edTexto.setError(mensagem);
+			  edTexto.setFocusable(true);
+			  edTexto.requestFocus();
+			  return false;
 		  }
 		  return false;
-		 }
+	}
 	
 	public boolean validar(){
 		List<View> listview;
-		
 		
 		// cria o mapa
 		Map<View, String> mapaDeCampos = new LinkedHashMap<View, String>();
@@ -191,9 +180,7 @@ public class UnidadeSaudeHelper {
 				return false;
 			}
 		}
-				
 			return true;
-		
 	}
 	
 	private void getNovoBairro() {

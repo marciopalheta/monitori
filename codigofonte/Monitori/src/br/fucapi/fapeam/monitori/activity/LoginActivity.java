@@ -1,8 +1,6 @@
 package br.fucapi.fapeam.monitori.activity;
 
 import br.fucapi.fapeam.monitori.R;
-import br.fucapi.fapeam.monitori.R.layout;
-import br.fucapi.fapeam.monitori.R.menu;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import br.fucapi.fapeam.monitori.model.dao.UsuarioDAO;
 import android.os.Bundle;
@@ -12,10 +10,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Toast;
 
 public class LoginActivity extends Activity {
@@ -108,7 +104,6 @@ public class LoginActivity extends Activity {
 					startActivity(intent);
 	}
 	
-	
 	public void validarUsuario(){
 		//Criacao do objeto DAO
 		UsuarioDAO dao = new UsuarioDAO(this);
@@ -124,6 +119,5 @@ public class LoginActivity extends Activity {
 		}else{
 			Toast.makeText(LoginActivity.this, "Login Falhou", Toast.LENGTH_LONG).show();
 		}
-	}
-	
+	}	
 }

@@ -33,11 +33,9 @@ public class BairroDialog extends DialogFragment {
 
 	private SpinnerAdapter adapter;
 	
-
 	public static BairroDialog newInstance() {
         return new BairroDialog();
     }
-
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -56,8 +54,7 @@ public class BairroDialog extends DialogFragment {
         //View layout = inflater.inflate(R.layout.bairrodados, (ViewGroup) activity.findViewById(R.id.edNome));
         nomeBairro = (EditText) layout.findViewById(R.id.edNome);
         spinBairro = (Spinner) getActivity().findViewById(R.id.spinBairro);
-        
-        
+           
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());		
 		builder.setView(layout);				 		
 
@@ -121,18 +118,13 @@ public class BairroDialog extends DialogFragment {
 		return dialog;
 	}		
 	
-	
-	
 	@Override
 	public void onSaveInstanceState(Bundle savedInstanceState) {		
 		  
 		super.onSaveInstanceState(savedInstanceState);
 		
 		savedInstanceState.putBoolean("MyBoolean", true);
-		
 	}
-	
-	
 	
 	@Override
 	public void onResume() {
@@ -156,11 +148,9 @@ public class BairroDialog extends DialogFragment {
 		super.onDestroyView();
 	}
 	
-	
 	public View.OnClickListener getClickListener() {
 		return clickListener;
 	}
-
 
 	public void setClickListener(View.OnClickListener clickListener) {
 		this.clickListener = clickListener;
@@ -169,7 +159,6 @@ public class BairroDialog extends DialogFragment {
 	public EditText getNomeBairro() {
 		return nomeBairro;
 	}
-
 
 	public void setNomeBairro(EditText nomeBairro) {
 		this.nomeBairro = nomeBairro;
@@ -198,9 +187,6 @@ public class BairroDialog extends DialogFragment {
 		adapter = new SpinnerAdapter(getActivity(), R.layout.spinner_generic,stringArray,intArray);
 	    spinBairro.setAdapter(adapter);	    	    
 	    
-		spinBairro.setSelection(indexB);
-
-		
-	}
-	
+		spinBairro.setSelection(indexB);		
+	}	
 }

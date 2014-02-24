@@ -1,10 +1,8 @@
 package br.fucapi.fapeam.monitori.activity;
 
 import br.fucapi.fapeam.monitori.R;
-import br.fucapi.fapeam.monitori.model.bean.Agente;
 import br.fucapi.fapeam.monitori.model.bean.Medico;
 import br.fucapi.fapeam.monitori.model.dao.UsuarioDAO;
-import br.fucapi.fapeam.monitori.model.helper.AgenteHelper;
 import br.fucapi.fapeam.monitori.model.helper.MedicoHelper;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,12 +15,10 @@ public class MedicoDadosActivity extends UsuarioDadosActivity {
 		private MedicoHelper helper;
 		private Medico medicoParaSerAlterado = null;	
 
-		
 		@Override
 		protected void onCreate(Bundle savedInstanceState) {
 			super.setContentView(R.layout.medicodados);
-			super.onCreate(savedInstanceState);
-			
+			super.onCreate(savedInstanceState);			
 					
 			//Criacao do objeto helper
 			helper = new MedicoHelper(this);		
@@ -35,11 +31,8 @@ public class MedicoDadosActivity extends UsuarioDadosActivity {
 						// Atualiza a tela com dados do Aluno
 						helper.setMedico(medicoParaSerAlterado);
 					}
-
-
 		}
 				
-		
 		@Override
 		public boolean onCreateOptionsMenu(Menu menu) {
 			//Definicao do menu inflater
@@ -50,7 +43,6 @@ public class MedicoDadosActivity extends UsuarioDadosActivity {
 			
 			return true;
 		}
-		
 		
 		@Override
 		public boolean onOptionsItemSelected(MenuItem item) {
@@ -63,6 +55,7 @@ public class MedicoDadosActivity extends UsuarioDadosActivity {
 		            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		            startActivity(intent);*/
 		            return true;
+		
 		        case R.id.menu_salvar:			
 					//Utilizando o helper
 					Medico medico = (Medico) helper.getMedico();
@@ -82,12 +75,11 @@ public class MedicoDadosActivity extends UsuarioDadosActivity {
 						finish();
 					}
 					return true;
-				case R.id.menu_cancelar:			
+				
+		        case R.id.menu_cancelar:			
 					finish();
 					return true;
 		    }
-
 		    return super.onOptionsItemSelected(item);
 		}
-			
 }

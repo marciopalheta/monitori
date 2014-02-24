@@ -10,19 +10,16 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
 
-
 public class AgenteHelper extends UsuarioHelper {
 		
 	private Agente agente;
 	private EditText matricula;
 	
-	
 	public AgenteHelper(AgenteDadosActivity activity){
 		super(activity);
 						
 		//criacao do objeto paciente
-		agente= new Agente();
-		
+		agente= new Agente();	
 		matricula =(EditText) activity.findViewById(R.id.edMatricula);
 	}
 	
@@ -43,13 +40,11 @@ public class AgenteHelper extends UsuarioHelper {
 		auxBairro.setNome(getSpinBairro().getSelectedItem().toString());					
 		agente.setBairro(auxBairro);
 		
-		
 		UnidadeSaude auxUbs = new UnidadeSaude();
 		TextView idUbs = (TextView)getSpinUbs().getSelectedView().findViewById(R.id.textID); 
 		auxUbs.setId(Long.parseLong( idUbs.getText().toString() ) );
 		auxUbs.setNome(getSpinUbs().getSelectedItem().toString());					
 		agente.setUnidadeSaude(auxUbs);
-		
 		
 		agente.setTipoUsuario(TipoUsuario.AGENTE);
 		
@@ -58,8 +53,6 @@ public class AgenteHelper extends UsuarioHelper {
 		
 		agente.setMatricula(matricula.getText().toString());
 		
-		
-
 		return agente;		
 	}
 	
@@ -76,12 +69,10 @@ public class AgenteHelper extends UsuarioHelper {
 		ArrayAdapter<String> array_spinner=(ArrayAdapter<String>)getSexo().getAdapter();
 		getSexo().setSelection(array_spinner.getPosition( agente.getSexo() ));
 	    				
-		
 		ArrayAdapter<String> array_bairro=(ArrayAdapter<String>)getSpinBairro().getAdapter();
 		if(agente.getBairro() !=null){
 			getSpinBairro().setSelection(array_bairro.getPosition( agente.getBairro().getNome() ) );
 		}
-		
 			    						
 		ArrayAdapter<String> array_ubs=(ArrayAdapter<String>)getSpinUbs().getAdapter();
 		if(agente.getUnidadeSaude() !=null){
@@ -89,11 +80,6 @@ public class AgenteHelper extends UsuarioHelper {
 		}
 		
 		matricula.setText(agente.getMatricula());
-		
-		
 		this.agente= agente;
-		
-			
 	}
-	
 }

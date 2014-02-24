@@ -1,12 +1,7 @@
 package br.fucapi.fapeam.monitori.activity;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.zip.Inflater;
 import br.fucapi.fapeam.monitori.R;
-import br.fucapi.fapeam.monitori.R.layout;
-import br.fucapi.fapeam.monitori.R.menu;
-import br.fucapi.fapeam.monitori.model.bean.Paciente;
 import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import br.fucapi.fapeam.monitori.model.dao.UsuarioDAO;
@@ -73,7 +68,6 @@ public class AgenteActivity extends Activity {
 						+ usuarioSelecionado.getNome());
 				return false;
 			}
-			
 		});
 
 		// Metodo que "escuta" o evento de Click SIMPLES
@@ -89,11 +83,9 @@ public class AgenteActivity extends Activity {
 								.getItemAtPosition(posicao);
 
 						form.putExtra("AGENTE_SELECIONADO", usuarioSelecionado);
-
 						startActivity(form);
 					}
-				});
-				
+				});			
 	}
 
 	protected void onSaveInstanceState(Bundle outState){
@@ -161,7 +153,6 @@ public class AgenteActivity extends Activity {
 				usuarioSelecionado = null;
 			}
 		});
-
 		builder.setNegativeButton("Nao", null);
 		AlertDialog dialog = builder.create();
 		dialog.setTitle("Confirmacao de exclusao");
@@ -177,7 +168,6 @@ public class AgenteActivity extends Activity {
 
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
-		Intent intent;
 		switch (item.getItemId()) {
 			case R.id.menu_editar:
 				
@@ -186,8 +176,7 @@ public class AgenteActivity extends Activity {
 				form.putExtra("AGENTE_SELECIONADO", usuarioSelecionado);
 
 				startActivity(form);
-
-				
+	
 				break;
 			case R.id.menu_deletar:
 				excluirUsuario();
@@ -197,9 +186,9 @@ public class AgenteActivity extends Activity {
 		}
 		return super.onContextItemSelected(item);
 	}
+
 	protected void onResume(){
 		super.onResume();
 		this.carregarLista();
 	}
-
 }

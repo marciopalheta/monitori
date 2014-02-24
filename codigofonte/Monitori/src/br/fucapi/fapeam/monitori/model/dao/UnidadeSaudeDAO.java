@@ -19,14 +19,11 @@ public class UnidadeSaudeDAO extends AbstractDataBase{
 		
 		//Chamando o construtor que sabe acessar o BD
 		super(context);
-	}
-	
-		
+	}	
 
 	/** 
 	 * metodo responsavel pelo cadastro do usuario
 	 * */
-	
 	public void cadastrar (UnidadeSaude ubs){
 		//objeto para armazenar os valores dos camopos
 		ContentValues values = new ContentValues();
@@ -47,7 +44,6 @@ public class UnidadeSaudeDAO extends AbstractDataBase{
 		Log.i(TAG, "cep: "+ ubs.getCep() );
 		//Log.i(TAG, "bairro: "+ ubs.getBairro().getNome() );
 		Log.i(TAG, "fone: "+ ubs.getFone() );
-		
 							
 	}
 	
@@ -80,8 +76,7 @@ public class UnidadeSaudeDAO extends AbstractDataBase{
 				BairroDAO bairroDao = new BairroDAO();
 				bairroDao.
 				ubs.setBairro( cursor.getString(cursor.getColumnIndex("fone")));
-				*/												
-								
+				*/																		
 				
 				//Adiciona um novo usuario a lista
 				lista.add(ubs);
@@ -127,7 +122,6 @@ public class UnidadeSaudeDAO extends AbstractDataBase{
 		//Log.i(TAG, "bairro: "+ ubs.getBairro().getNome() );
 		Log.i(TAG, "fone: "+ ubs.getFone() );
 		
-		
 		// Colecao de valores de parametros do SQL
 		String[] args = { ubs.getId().toString() };
 
@@ -158,8 +152,7 @@ public class UnidadeSaudeDAO extends AbstractDataBase{
 				
 				ubs.setFone(cursor.getString(cursor.getColumnIndex("fone") ));
 				
-				//ubs.setBairro(bairro);																		
-				
+				//ubs.setBairro(bairro);		
 			}
 		}catch(SQLException e){
 			Log.e(TAG, e.getMessage());
@@ -191,8 +184,7 @@ public class UnidadeSaudeDAO extends AbstractDataBase{
 				
 				ubs.setFone(cursor.getString(cursor.getColumnIndex("fone") ));
 				
-				//ubs.setBairro(bairro);																		
-				
+				//ubs.setBairro(bairro);			
 			}
 		}catch(SQLException e){
 			Log.e(TAG, e.getMessage());
@@ -201,6 +193,4 @@ public class UnidadeSaudeDAO extends AbstractDataBase{
 		}
 		return ubs;
 	}
-	
-	
 }

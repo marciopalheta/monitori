@@ -1,6 +1,5 @@
 package br.fucapi.fapeam.monitori.activity;
 
-import java.util.ArrayList;
 import java.util.List;
 import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.model.bean.UnidadeSaude;
@@ -65,7 +64,6 @@ public class UnidadeSaudeActivity extends Activity {
 						+ ubsSelecionado.getNome());
 				return false;
 			}
-			
 		});
 
 		// Metodo que "escuta" o evento de Click SIMPLES
@@ -84,8 +82,7 @@ public class UnidadeSaudeActivity extends Activity {
 
 						startActivity(form);
 					}
-				});
-				
+				});	
 	}
 
 	protected void onSaveInstanceState(Bundle outState){
@@ -156,7 +153,6 @@ public class UnidadeSaudeActivity extends Activity {
 				ubsSelecionado = null;
 			}
 		});
-
 		builder.setNegativeButton("Nao", null);
 		AlertDialog dialog = builder.create();
 		dialog.setTitle("Confirmacao de exclusao");
@@ -172,7 +168,6 @@ public class UnidadeSaudeActivity extends Activity {
 
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
-		Intent intent;
 		switch (item.getItemId()) {
 			case R.id.menu_editar:
 				
@@ -181,8 +176,6 @@ public class UnidadeSaudeActivity extends Activity {
 				form.putExtra("UBS_SELECIONADO", ubsSelecionado);
 
 				startActivity(form);
-
-				
 				break;
 			case R.id.menu_deletar:
 				excluirUsuario();
@@ -196,5 +189,4 @@ public class UnidadeSaudeActivity extends Activity {
 		super.onResume();		
 		this.carregarLista();
 	}
-
 }

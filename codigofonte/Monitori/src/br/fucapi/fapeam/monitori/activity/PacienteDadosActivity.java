@@ -1,53 +1,28 @@
 package br.fucapi.fapeam.monitori.activity;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
-import org.xml.sax.DTDHandler;
-
 import br.fucapi.fapeam.monitori.R;
-import br.fucapi.fapeam.monitori.R.layout;
-import br.fucapi.fapeam.monitori.R.menu;
 import br.fucapi.fapeam.monitori.model.bean.Paciente;
-import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import br.fucapi.fapeam.monitori.model.dao.UsuarioDAO;
 import br.fucapi.fapeam.monitori.model.helper.PacienteHelper;
-import br.fucapi.fapeam.monitori.model.helper.UsuarioHelper;
 import android.os.Bundle;
-import android.app.Activity;
-import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.content.Intent;
-import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.Toast;
 
 public class PacienteDadosActivity extends UsuarioDadosActivity {
 
 	//Atributos para manipulacao de tela
-	
 	private PacienteHelper helper;
 	private Paciente pacienteParaSerAlterado = null;
-	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.setContentView(R.layout.pacientedados);
 		super.onCreate(savedInstanceState);
 		//setContentView(R.layout.pacientedados);
-		
 				
 		//Criacao do objeto helper
 		helper = new PacienteHelper(this);
-	
 						
 		// Busca o paciente a ser alterado
 		pacienteParaSerAlterado = (Paciente) getIntent().getSerializableExtra(
@@ -57,10 +32,7 @@ public class PacienteDadosActivity extends UsuarioDadosActivity {
 					// Atualiza a tela com dados do Aluno
 					helper.setPaciente(pacienteParaSerAlterado);
 				}
-	
-	
 	}
-			
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -72,7 +44,6 @@ public class PacienteDadosActivity extends UsuarioDadosActivity {
 		
 		return true;
 	}
-	
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -108,8 +79,6 @@ public class PacienteDadosActivity extends UsuarioDadosActivity {
 				finish();
 				return true;
 	    }
-
 	    return super.onOptionsItemSelected(item);
 	}
-		
 }

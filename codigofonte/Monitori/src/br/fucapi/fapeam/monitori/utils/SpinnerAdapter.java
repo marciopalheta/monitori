@@ -1,7 +1,5 @@
 package br.fucapi.fapeam.monitori.utils;
 
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
@@ -13,7 +11,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import br.fucapi.fapeam.monitori.R;
-import br.fucapi.fapeam.monitori.model.bean.Bairro;
 
 public class SpinnerAdapter extends ArrayAdapter<String> {
 

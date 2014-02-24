@@ -35,10 +35,8 @@ public class UnidadeSaudeDadosActivity extends FragmentActivity {
 					// Atualiza a tela com dados do Aluno
 					helper.setUnidadeSaude(ubsParaSerAlterado);
 				}
-
 	}
 			
-	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		//Definicao do menu inflater
@@ -49,7 +47,6 @@ public class UnidadeSaudeDadosActivity extends FragmentActivity {
 		
 		return true;
 	}
-	
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -91,8 +88,6 @@ public class UnidadeSaudeDadosActivity extends FragmentActivity {
 				finish();
 				return true;
 	    }
-
 	    return super.onOptionsItemSelected(item);
 	}
-		
 }

@@ -19,14 +19,11 @@ public class BairroDAO extends AbstractDataBase{
 		
 		//Chamando o construtor que sabe acessar o BD
 		super(context);
-	}
-	
-		
+	}	
 
 	/** 
 	 * metodo responsavel pelo cadastro do usuario
 	 * */
-	
 	public void cadastrar (Bairro bairro){
 		//objeto para armazenar os valores dos camopos
 		ContentValues values = new ContentValues();
@@ -36,9 +33,7 @@ public class BairroDAO extends AbstractDataBase{
 		//Inserir dados do Bairro
 		getWritableDatabase().insert(AbstractDataBase.TABLE_BAIRRO, null, values);
 						
-		Log.i(TAG, "nome: "+ bairro.getNome() );
-		
-							
+		Log.i(TAG, "nome: "+ bairro.getNome() );						
 	}
 	
 	/** 
@@ -139,8 +134,7 @@ public class BairroDAO extends AbstractDataBase{
 				bairro = new Bairro();
 				
 				bairro.setId(cursor.getLong(cursor.getColumnIndex("id") ));							
-				bairro.setNome(cursor.getString(cursor.getColumnIndex("nome") ));																													
-				
+				bairro.setNome(cursor.getString(cursor.getColumnIndex("nome") ));		
 			}
 		}catch(SQLException e){
 			Log.e(TAG, e.getMessage());
@@ -165,8 +159,7 @@ public class BairroDAO extends AbstractDataBase{
 				bairro = new Bairro();
 				
 				bairro.setId(cursor.getLong(cursor.getColumnIndex("id") ));							
-				bairro.setNome(cursor.getString(cursor.getColumnIndex("nome") ));																													
-				
+				bairro.setNome(cursor.getString(cursor.getColumnIndex("nome") ));
 			}
 		}catch(SQLException e){
 			Log.e(TAG, e.getMessage());
@@ -175,6 +168,4 @@ public class BairroDAO extends AbstractDataBase{
 		}
 		return bairro;
 	}
-	
-	
 }

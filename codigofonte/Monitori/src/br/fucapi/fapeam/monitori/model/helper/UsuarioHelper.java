@@ -167,23 +167,20 @@ public class UsuarioHelper {
 		adapter = new SpinnerAdapter(fragmentActivity, R.layout.spinner_sexo,list,imageSexo);		
 	    sexo.setAdapter(adapter);
 	    //sexo.setAdapter(new MyAdapter(activity, R.layout.spinner_item, data1));
-	    atualizarListaBairros("");
+	    atualizarListaBairros();
 	    		
 	}
 	
-	private void atualizarListaBairros(String nomeBairro){
+	private void atualizarListaBairros(){
 		BairroDAO daoBairro = new BairroDAO(fragmentActivity); 
 		List<Bairro> listaBairros = daoBairro.listar();										
 		
 		String[] stringArray = new String[listaBairros.size()+1];
 		Integer[] intArray = new Integer[listaBairros.size()+1];
-		int index = 0;
-		int indexB = 0;
+		int index = 0;		
 		for (Bairro bairro : listaBairros) {
 			stringArray[index] = bairro.getNome();
-			if(bairro.getNome().equals(nomeBairro)){
-				indexB = index;	
-			}
+			
 			intArray[index] = Integer.parseInt(bairro.getId().toString());
 		  index++;
 		}				
@@ -191,13 +188,7 @@ public class UsuarioHelper {
 		stringArray[index] = context.getString(R.string.bairro_novo); 				
 		intArray[index] = 0;
 		adapter = new SpinnerAdapter(fragmentActivity, R.layout.spinner_generic,stringArray,intArray);
-	    spinBairro.setAdapter(adapter);	    	    
-	    
-	    //ArrayAdapter<String> array_spinner=(ArrayAdapter<String>)getSpinBairro().getAdapter();
-		spinBairro.setSelection(indexB);
-
-		
-	    
+	    spinBairro.setAdapter(adapter);	    	    	    
 	    
 	}
 	

@@ -111,6 +111,10 @@
     <string-array name="ubs_arrays">
         <item>@string/ubs_novo</item>
     </string-array>
-	 
+	
+    <string name="mask_date">dd/mm/yyyy</string>
+    <string name="mask_cep">#####-###</string>
+    <string name="mask_telefone">(##)####-####</string>
+    
 	 
 </resources>

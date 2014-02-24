@@ -174,9 +174,11 @@ public class UsuarioDAO extends AbstractDataBase{
 					((Paciente)usuario).setDiabetico1( Boolean.parseBoolean( cursor.getString(cursor.getColumnIndex("diabetico1"))  ) );
 					((Paciente)usuario).setDiabetico2( Boolean.parseBoolean( cursor.getString(cursor.getColumnIndex("diabetico2"))  ) );
 				}else if(tipoUsuario == TipoUsuario.AGENTE){
-					usuario = new Agente();					
+					usuario = new Agente();				
+					((Agente)usuario).setMatricula( cursor.getString(cursor.getColumnIndex("matricula"))   );
 				}else if(tipoUsuario == TipoUsuario.MEDICO){
 					usuario = new Medico();					
+					((Medico)usuario).setCrm( cursor.getString(cursor.getColumnIndex("crm"))   );
 				}
 																				 
 				
@@ -317,10 +319,67 @@ public class UsuarioDAO extends AbstractDataBase{
 		try{
 			if(cursor.moveToNext()){				
 				
-				usuario = new Usuario();
 				
-				usuario.setId(cursor.getLong(cursor.getColumnIndex("id") ));							
-				usuario.setNome(cursor.getString(cursor.getColumnIndex("nome") ));				
+				
+				if(cursor.getString(cursor.getColumnIndex("tipoUsuario")).equals(TipoUsuario.PACIENTE.toString()) ){
+					usuario = new Paciente();					
+					((Paciente)usuario).setHipertenso( Boolean.parseBoolean( cursor.getString(cursor.getColumnIndex("hipertenso"))  ) );
+					((Paciente)usuario).setDiabetico1( Boolean.parseBoolean( cursor.getString(cursor.getColumnIndex("diabetico1"))  ) );
+					((Paciente)usuario).setDiabetico2( Boolean.parseBoolean( cursor.getString(cursor.getColumnIndex("diabetico2"))  ) );
+				}else if(cursor.getString(cursor.getColumnIndex("tipoUsuario")).equals(TipoUsuario.AGENTE.toString()) ){
+					usuario = new Agente();					
+					((Agente)usuario).setMatricula( cursor.getString(cursor.getColumnIndex("matricula"))   );
+					
+				}else if(cursor.getString(cursor.getColumnIndex("tipoUsuario")).equals(TipoUsuario.MEDICO.toString()) ){
+					usuario = new Medico();					
+					((Medico)usuario).setCrm( cursor.getString(cursor.getColumnIndex("crm"))   );
+				}
+																				 
+				
+				//Carregar os atributos dos usuarios
+				usuario.setId( cursor.getLong(cursor.getColumnIndex("id") )); 
+				usuario.setNome(cursor.getString(cursor.getColumnIndex("nome")));
+				
+				usuario.setEndereco(cursor.getString(cursor.getColumnIndex("endereco")));
+				usuario.setNomeMae(cursor.getString(cursor.getColumnIndex("nomeMae")));
+				usuario.setNumSus(cursor.getString(cursor.getColumnIndex("numSus")));
+	
+				
+				BairroDAO bairroDao = new BairroDAO(context);				
+				Bairro bairro = bairroDao.getBairro( cursor.getLong(cursor.getColumnIndex("idBairro") ) );
+				usuario.setBairro(bairro); 
+				
+				UnidadeSaudeDAO ubsDao = new UnidadeSaudeDAO(context);				
+				UnidadeSaude ubs = ubsDao.getUnidadeSaude( cursor.getLong(cursor.getColumnIndex("idUnidadeSaude") ) );
+				usuario.setUnidadeSaude(ubs);
+				
+				
+				usuario.setCep(cursor.getString(cursor.getColumnIndex("cep"))); 
+				//usuario.setUnidadeSaude(cursor.getString(5) );
+				
+				usuario.setCelular(cursor.getString(cursor.getColumnIndex("celular")));
+				String dtNascto=null;
+				
+				dtNascto = cursor.getString(cursor.getColumnIndex("dataMascimento"));								
+					
+					if(dtNascto !=null){
+						Calendar cal = Calendar.getInstance();
+						try {
+							cal.setTime(dateFormat.parse(dtNascto));
+							usuario.setDataNascimento(cal);
+						} catch (ParseException e) {
+							usuario.setDataNascimento(null);	
+							Log.e(TAG, e.getMessage());							
+						}						
+					}else{
+						usuario.setDataNascimento(null);
+					}
+								
+				usuario.setTelefone(cursor.getString(cursor.getColumnIndex("telefone")));
+				usuario.setSexo( cursor.getString(cursor.getColumnIndex("sexo")) );
+				//usuario.setObservacao( cursor.getString(cursor.getColumnIndex("observacao")) );
+	
+				
 				
 				//Adiciona um novo usuario a lista
 				

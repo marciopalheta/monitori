@@ -67,7 +67,8 @@
 				android:text="@string/crm"
 	            android:layout_marginLeft="@dimen/margem_editext"
 	            android:textSize="@dimen/fontes_para_textos"
-	            android:layout_marginBottom="10dp" />
+	            android:layout_marginBottom="10dp" 	            
+	            />
 	        
 	        <EditText
 			    android:id="@+id/edCrm"
@@ -78,7 +79,9 @@
 	            android:layout_marginLeft="@dimen/margem_editext"
 	            android:padding="@dimen/padding"
 				android:hint="@string/crm"
-				android:layout_marginBottom="10dp" />
+				android:layout_marginBottom="10dp" 
+				android:inputType="number"
+				/>
 	        
 	        	        	        
 			<TextView
@@ -105,7 +108,7 @@
 						android:textSize="@dimen/fontes_para_textos"
 						android:layout_marginBottom="10dp"
 						android:inputType="date"
-						android:hint="@string/dtNascimento"/>
+						android:hint="@string/mask_date"/>
 			         
 			        <ImageButton
 			        	android:id="@+id/ibDataNascimento"
@@ -135,7 +138,7 @@
 				android:textSize="@dimen/fontes_para_textos"
 				android:layout_marginBottom="10dp"
 				android:inputType="phone"
-				android:hint="@string/telefone"/>
+				android:hint="@string/mask_telefone"/>
 			 
 	        <TextView
 			    android:id="@+id/tvCelular"
@@ -155,8 +158,8 @@
 				android:padding="@dimen/padding"
 				android:textSize="@dimen/fontes_para_textos"
 				android:layout_marginBottom="10dp"
-				android:inputType="phone"
-				android:hint="@string/celular"/>   
+				android:inputType="number"
+				android:hint="@string/mask_telefone"/>   
 			
 			<TextView
 			    android:id="@+id/tvEndereco"
@@ -196,7 +199,7 @@
 				android:padding="@dimen/padding"
 				android:textSize="@dimen/fontes_para_textos"
 				android:layout_marginBottom="10dp"
-				android:inputType="textPostalAddress"
+				android:inputType="number"
 				android:hint="@string/cep"/>
 	
 	       <TextView

@@ -16,6 +16,15 @@
         android:layout_marginBottom="15dp"
         android:orientation="vertical" >
         
+        <TextView
+			    android:id="@+id/tvNome"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+				android:text="@string/nome"
+	            android:layout_marginLeft="@dimen/margem_editext"
+	            android:textSize="@dimen/fontes_para_textos"
+	            android:layout_marginBottom="10dp" />
+        
         <EditText
 		    android:id="@+id/edNome"
 		    android:background="#ebedea"
@@ -27,6 +36,14 @@
 			android:hint="@string/nome"
 			android:layout_marginBottom="10dp" />                
         
+        <TextView
+			    android:id="@+id/tvFone"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+				android:text="@string/telefone"
+	            android:layout_marginLeft="@dimen/margem_editext"
+	            android:textSize="@dimen/fontes_para_textos"
+	            android:layout_marginBottom="10dp" />
         <EditText
 		    android:id="@+id/edFone"
 		    android:background="#ebeaea"
@@ -37,8 +54,17 @@
 			android:textSize="@dimen/fontes_para_textos"
 			android:layout_marginBottom="10dp"
 			android:inputType="phone"
-			android:hint="@string/telefone"/>   
-			
+			android:hint="@string/mask_telefone"/>   
+		
+        <TextView
+			    android:id="@+id/tvEndereco"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+				android:text="@string/endereco"
+	            android:layout_marginLeft="@dimen/margem_editext"
+	            android:textSize="@dimen/fontes_para_textos"
+	            android:layout_marginBottom="10dp" />
+        	
        <EditText
 		    android:id="@+id/edEndereco"
 		    android:background="#ebeaea"
@@ -51,6 +77,15 @@
 			android:inputType="textPostalAddress"
 			android:hint="@string/endereco"/>
 		
+       <TextView
+			    android:id="@+id/tvNumero"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+				android:text="@string/numero"
+	            android:layout_marginLeft="@dimen/margem_editext"
+	            android:textSize="@dimen/fontes_para_textos"
+	            android:layout_marginBottom="10dp" />
+       
        <EditText
 		    android:id="@+id/edNumero"
 		    android:background="#ebeaea"
@@ -60,8 +95,17 @@
 			android:padding="@dimen/padding"
 			android:textSize="@dimen/fontes_para_textos"
 			android:layout_marginBottom="10dp"
-			android:inputType="textPhonetic"
+			android:inputType="number"
 			android:hint="@string/numero"/>
+       
+       <TextView
+			    android:id="@+id/tvCep"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+				android:text="@string/cep"
+	            android:layout_marginLeft="@dimen/margem_editext"
+	            android:textSize="@dimen/fontes_para_textos"	            
+	            android:layout_marginBottom="10dp" />
        
        <EditText
 		    android:id="@+id/edCep"
@@ -72,19 +116,30 @@
 			android:padding="@dimen/padding"
 			android:textSize="@dimen/fontes_para_textos"
 			android:layout_marginBottom="10dp"
-			android:inputType="textPostalAddress"
-			android:hint="@string/cep"/>
+			android:inputType="number"
+			android:hint="@string/mask_cep"/>
+                    
+              <TextView
+			    android:id="@+id/tvBairro"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+				android:text="@string/bairro"
+	            android:layout_marginLeft="@dimen/margem_editext"
+	            android:textSize="@dimen/fontes_para_textos"
+	            android:layout_marginBottom="10dp" />       
+	       <Spinner
+	        android:id="@+id/spinBairro"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="@dimen/margem_editext"
+	        android:textSize="@dimen/fontes_para_textos"            
+	        android:entries="@array/bairro_arrays"
+	        android:prompt="@string/bairro_prompt" 
+	        android:background="#ebedea"
+	        
+	        android:layout_marginBottom="10dp"
+	        />
        
-       <EditText
-		    android:id="@+id/chbBairro"
-		    android:background="#ebeaea"
-		    android:layout_width="match_parent"
-		    android:layout_height="@dimen/heigth_editext"
-			android:layout_marginLeft="@dimen/margem_editext"
-			android:padding="@dimen/padding"
-			android:textSize="@dimen/fontes_para_textos"
-			android:layout_marginBottom="10dp"
-			android:hint="@string/bairro"/>
 	</LinearLayout>           
 	
 </ScrollView>

@@ -7,11 +7,12 @@ import br.fucapi.fapeam.monitori.model.helper.UnidadeSaudeHelper;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-public class UnidadeSaudeDadosActivity extends Activity {
+public class UnidadeSaudeDadosActivity extends FragmentActivity {
 
 	//Atributos para manipulacao de tela
 	

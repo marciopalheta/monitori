@@ -12,7 +12,7 @@
 	    <TextView 
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
-	        android:text="@string/cadastrar_medico"
+	        android:text="@string/cadastrar_paciente"
 	        android:id="@+id/text_cadastrar"
 	        android:textColor="#000000"        
 	        android:layout_marginTop="15dp"
@@ -84,7 +84,7 @@
 						android:textSize="@dimen/fontes_para_textos"
 						android:layout_marginBottom="10dp"
 						android:inputType="date"
-						android:hint="@string/dtNascimento"/>
+						android:hint="@string/mask_date"/>
 			         
 			        <ImageButton
 			        	android:id="@+id/ibDataNascimento"
@@ -114,7 +114,7 @@
 				android:textSize="@dimen/fontes_para_textos"
 				android:layout_marginBottom="10dp"
 				android:inputType="phone"
-				android:hint="@string/telefone"/>
+				android:hint="@string/mask_telefone"/>
 			 
 	        <TextView
 			    android:id="@+id/tvCelular"
@@ -135,7 +135,7 @@
 				android:textSize="@dimen/fontes_para_textos"
 				android:layout_marginBottom="10dp"
 				android:inputType="phone"
-				android:hint="@string/celular"/>   
+				android:hint="@string/mask_telefone"/>   
 			
 			<TextView
 			    android:id="@+id/tvEndereco"
@@ -175,8 +175,8 @@
 				android:padding="@dimen/padding"
 				android:textSize="@dimen/fontes_para_textos"
 				android:layout_marginBottom="10dp"
-				android:inputType="textPostalAddress"
-				android:hint="@string/cep"/>
+				android:inputType="number"
+				android:hint="@string/mask_cep"/>
 	
 	       <TextView
 			    android:id="@+id/tvBairro"
@@ -329,7 +329,9 @@
 	                android:background="#ebeaea"
 	                android:hint="@string/sus"
 	                android:padding="@dimen/padding"
-	                android:textSize="@dimen/fontes_para_textos" />
+	                android:textSize="@dimen/fontes_para_textos" 
+	                android:inputType="number"
+	                />
 		</LinearLayout> 
                   
 	</LinearLayout>

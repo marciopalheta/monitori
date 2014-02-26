@@ -14,8 +14,7 @@
         android:layout_centerVertical="true"
         android:text="@string/app_name"
         android:textSize="44sp" />
-  
-     
+    
     <EditText 
         android:id="@+id/edt_login"
         android:layout_width="@dimen/login_Editext_width"
@@ -24,8 +23,7 @@
         android:background="#e1e0e0"
         android:layout_below="@id/txv_monitori"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
-        />
+        android:layout_marginTop="5dp"/>
     
     <EditText 
         android:id="@+id/edt_senha"
@@ -36,8 +34,7 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/edt_login"
         android:layout_marginTop="5dp"
-        android:password="true"
-        />
+        android:password="true"/>
 
     <Button
         android:id="@+id/btValidar"
@@ -49,9 +46,6 @@
         android:layout_below="@id/edt_senha"
         android:layout_marginTop="5dp"
         android:textColor="#ffffff"
-        android:textSize="@dimen/fonte_bts_texts"
-        />
-    
-
+        android:textSize="@dimen/fonte_bts_texts"/>
     
 </RelativeLayout>

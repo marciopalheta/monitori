@@ -2,7 +2,7 @@
 
     <item
         android:id="@+id/menu_novo"        
-        android:title="@string/novo"
+        android:title="@string/cadastrar_paciente"
     	android:icon="@android:drawable/ic_input_add"               
     	android:showAsAction="always|withText" />
 

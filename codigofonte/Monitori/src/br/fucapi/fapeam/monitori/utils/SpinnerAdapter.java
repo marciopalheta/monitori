@@ -72,14 +72,8 @@ public class SpinnerAdapter extends ArrayAdapter<String> {
 	            	
 	            	if(intArray[position] == 0){
 	            		label.setOnClickListener(clickListener);
-	            	}	            		            	    	            	
-	            	
-	            		            	
-	            }
-	            
-	            
-	            
-            return row;
+	            	}   		            	
+	            }	            
+	            return row;
             }
-       
    }

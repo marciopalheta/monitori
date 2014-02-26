@@ -15,6 +15,16 @@ public class AgenteHelper extends UsuarioHelper {
 	private Agente agente;
 	private EditText matricula;
 	
+	
+	
+	public EditText getMatricula() {
+		return matricula;
+	}
+
+	public void setMatricula(EditText matricula) {
+		this.matricula = matricula;
+	}
+
 	public AgenteHelper(AgenteDadosActivity activity){
 		super(activity);
 						

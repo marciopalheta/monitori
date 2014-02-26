@@ -8,11 +8,11 @@
     <string name="title_activity_paciente">Lista de Pacientes</string>
     <string name="title_activity_medico">Lista de Medicos</string>
     <string name="title_activity_medico_dados">Dados do Medico</string>
-    <string name="title_activity_agente">Agente</string>
-    <string name="title_activity_agentes_dados">AgentesDados</string>
+    <string name="title_activity_agente">Lista de Agentes</string>
+    <string name="title_activity_agentes_dados">Dados do Agente</string>
 
     <!-- Strings para itens de menu -->
-    <string name="novo">Novo Paciente</string>
+    <string name="novo">Novo Cadastro</string>
     <string name="sincronizar">Sincronizar</string>
 
     <!-- Informacoes pessoais que todos usuarios irao ter -->
@@ -37,8 +37,8 @@
     <string name="enviar">Enviar</string>
     <string name="sus">Adicione o numero do SUS</string>
     <string name="nome_mae">Nome da Mae</string>
-    <string name="cadastrar_paciente">Cadastrar paciente</string>
-    <string name="cadastrar_agente">Cadastrar agente</string>
+    <string name="cadastrar_paciente">Novo paciente</string>
+    <string name="cadastrar_agente">Novo agente</string>
 
     <!-- Informacoes do Agente -->
     <string name="matricula">Matricula</string>
@@ -47,7 +47,7 @@
     <string name="crm">CRM</string>
 
     <!-- string login -->
-    <string name="login">login</string>
+    <string name="login">usuario</string>
     <string name="senha">senha</string>
     <string name="entrar">entrar</string>
     <string name="title_activity_login">Login</string>
@@ -55,9 +55,9 @@
 
     <!-- Menu de contexto -->
     <string name="deletar">Deletar</string>
-    <string name="cadastrar_medico">Cadastrar Medico</string>
+    <string name="cadastrar_medico">Novo Medico</string>
     <string name="cancelar">Cancelar</string>
-    <string name="title_activity_coletar_dados">ColetarDados</string>
+    <string name="title_activity_coletar_dados">Coletar Dados</string>
 
     <!-- coletar dados -->
     <string name="coletar_dados">Coletada dados</string>
@@ -86,8 +86,8 @@
         <item>@string/feminino</item>
     </string-array>
 
-    <string name="title_activity_ubs">UBS Activity</string>
-    <string name="title_activity_ubs_dados">UBS DadosActivity</string>
+    <string name="title_activity_ubs">Lista de UBS</string>
+    <string name="title_activity_ubs_dados">Dados de UBS</string>
     <string name="numero">Numero</string>
     <string name="bairro_prompt">Selecione um Bairro</string>
     <string name="bairro_novo">Incluir Bairro</string>
@@ -96,12 +96,12 @@
         <item>@string/bairro_novo</item>
     </string-array>
 
-    <string name="title_activity_menu_principal">MenuPrincipal</string>
+    <string name="title_activity_menu_principal">Menu Principal</string>
     <!-- Menu principal -->
     <string name="menu_agente">Agente</string>
     <string name="menu_paciente">Paciente</string>
     <string name="menu_medico">Medico</string>
-    <string name="menu_coletadados">ColetarDados</string>
+    <string name="menu_coletadados">Coletar Dados</string>
 	 <string name="erro_conexao_indisponivel">Conexão indisponível, por favor ative sua rede móvel ou Wi-Fi.</string>
 	 
 	 

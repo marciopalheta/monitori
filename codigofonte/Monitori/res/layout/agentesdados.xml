@@ -209,20 +209,18 @@
 	            android:layout_marginLeft="@dimen/margem_editext"
 	            android:textSize="@dimen/fontes_para_textos"
 	            android:layout_marginBottom="10dp" />       
+	   
 	       <Spinner
-	        android:id="@+id/spinBairro"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_marginLeft="@dimen/margem_editext"
-	        android:textSize="@dimen/fontes_para_textos"            
-	        android:entries="@array/bairro_arrays"
-	        android:prompt="@string/bairro_prompt" 
-	        android:background="#ebedea"
-	        
-	        android:layout_marginBottom="10dp"
-	        />
+	           	android:id="@+id/spinBairro"
+	        	android:layout_width="match_parent"
+	        	android:layout_height="wrap_content"
+	        	android:layout_marginLeft="@dimen/margem_editext"
+	        	android:textSize="@dimen/fontes_para_textos"            
+	        	android:entries="@array/bairro_arrays"
+	        	android:prompt="@string/bairro_prompt" 
+	        	android:background="#ebedea"
+	        	android:layout_marginBottom="10dp"/>
 	       
-	       		
 	       <TextView
 			    android:id="@+id/tvSexo"
 			    android:layout_width="wrap_content"
@@ -241,11 +239,8 @@
 	        android:entries="@array/sexo_arrays"
 	        android:prompt="@string/sexo_prompt" 
 	        android:background="#ebedea"
-	        
-	        android:layout_marginBottom="10dp"
-	        />
+	        android:layout_marginBottom="10dp"/>
 	                   	     		    				
-			
 			 <TextView
 			    android:id="@+id/tvUbs"
 			    android:layout_width="wrap_content"
@@ -256,20 +251,16 @@
 				android:text="@string/unidadeSaude"/>
 			 
 			<Spinner
-	        android:id="@+id/spinUbs"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_marginLeft="@dimen/margem_editext"
-	        android:textSize="@dimen/fontes_para_textos"            
-	        android:entries="@array/ubs_arrays"
-	        android:prompt="@string/ubs_prompt" 
-	        android:background="#ebedea"
-	        
-	        android:layout_marginBottom="10dp"
-	        />
+	        	android:id="@+id/spinUbs"
+	        	android:layout_width="match_parent"
+	        	android:layout_height="wrap_content"
+	        	android:layout_marginLeft="@dimen/margem_editext"
+	        	android:textSize="@dimen/fontes_para_textos"            
+	        	android:entries="@array/ubs_arrays"
+	        	android:prompt="@string/ubs_prompt" 
+	        	android:background="#ebedea"
+	        	android:layout_marginBottom="10dp"/>
 			 
-			
-		</LinearLayout> 
-                  
+		</LinearLayout>      
 	</LinearLayout>
 </ScrollView>    

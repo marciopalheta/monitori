@@ -81,4 +81,14 @@ public Medico getMedico(){
 		crm.setText(medico.getCrm());
 		this.medico= medico;
 		}
+
+	public EditText getCrm() {
+		return crm;
+	}
+
+	public void setCrm(EditText crm) {
+		this.crm = crm;
+	}
+	
+	
 }

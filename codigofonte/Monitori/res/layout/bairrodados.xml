@@ -32,9 +32,6 @@
 			>
             <requestFocus />
         </EditText> 
-			
-			
-        
+	
     </LinearLayout>
-
 </ScrollView>

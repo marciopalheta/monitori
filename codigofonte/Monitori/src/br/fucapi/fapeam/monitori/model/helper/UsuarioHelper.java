@@ -7,7 +7,10 @@ import java.util.List;
 import java.util.Map;
 
 import br.fucapi.fapeam.monitori.R;
+import br.fucapi.fapeam.monitori.model.bean.Agente;
 import br.fucapi.fapeam.monitori.model.bean.Bairro;
+import br.fucapi.fapeam.monitori.model.bean.Medico;
+import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import br.fucapi.fapeam.monitori.model.dao.BairroDAO;
 import br.fucapi.fapeam.monitori.utils.BairroDialog;
@@ -318,7 +321,7 @@ public class UsuarioHelper {
 		mapaDeCampos.put(nome, "Nome obrigatorio");
 		mapaDeCampos.put(dataNascimento, "Campo obrigatorio");
 		mapaDeCampos.put(telefone, "Telefone obrigatorio");		
-		mapaDeCampos.put(cep, "Cep obrigatorio");
+		mapaDeCampos.put(cep, "Cep obrigatorio");;
 		
 		
 		

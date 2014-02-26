@@ -122,7 +122,7 @@ public class MedicoActivity extends Activity {
 			MenuInflater inflater = this.getMenuInflater();
 			
 			//Inflar um XML
-			inflater.inflate(R.menu.paciente, menu);
+			inflater.inflate(R.menu.medico, menu);
 			
 			return true;
 		}

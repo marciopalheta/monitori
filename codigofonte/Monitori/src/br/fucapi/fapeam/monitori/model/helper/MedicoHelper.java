@@ -28,6 +28,7 @@ public Medico getMedico(){
 		
 		medico.setNome(getNome().getText().toString());
 		medico.setEndereco(getEndereco().getText().toString());
+		medico.setNumero(getNumero().getText().toString());
 		medico.setCep(getCep().getText().toString());
 		medico.setCelular(getCelular().getText().toString());
 		medico.setTelefone(getTelefone().getText().toString());
@@ -59,7 +60,8 @@ public Medico getMedico(){
 						
 		getNome().setText(medico.getNome());		
 		getTelefone().setText(medico.getTelefone());
-		getEndereco().setText(medico.getEndereco());		
+		getEndereco().setText(medico.getEndereco());
+		getNumero().setText(medico.getNumero());
 		getCep().setText(medico.getCep() );
 		getCelular().setText(medico.getCelular());
 		getTelefone().setText(medico.getTelefone());												

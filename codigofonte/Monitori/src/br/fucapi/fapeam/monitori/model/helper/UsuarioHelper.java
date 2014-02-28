@@ -38,6 +38,7 @@ import android.widget.TextView;
 public class UsuarioHelper {
 	private EditText nome;
 	private EditText endereco;
+	private EditText numero;
 	private EditText cep;	
 	private EditText celular;
 	private EditText telefone;
@@ -85,6 +86,7 @@ public class UsuarioHelper {
 		nome = (EditText) fragmentActivity.findViewById(R.id.edNome);
 			
 		endereco = (EditText) fragmentActivity.findViewById(R.id.edEndereco);					
+		numero = (EditText) fragmentActivity.findViewById(R.id.edNumero);
 		
 		cep = (EditText) fragmentActivity.findViewById(R.id.edCep);
 		cep.addTextChangedListener(Mask.insert("#####-###", cep));
@@ -246,6 +248,15 @@ public class UsuarioHelper {
 
 	public void setEndereco(EditText endereco) {
 		this.endereco = endereco;
+	}
+
+	
+	public EditText getNumero() {
+		return numero;
+	}
+
+	public void setNumero(EditText numero) {
+		this.numero = numero;
 	}
 
 	public EditText getCep() {

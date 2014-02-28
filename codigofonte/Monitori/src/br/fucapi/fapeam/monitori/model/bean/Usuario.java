@@ -7,6 +7,7 @@ public class Usuario extends AbstractEntityBean {
 
 	private String nome;
 	private String endereco;
+	private String numero;
 	private Bairro bairro;
 	private UnidadeSaude unidadeSaude;
 	private String cep;
@@ -105,6 +106,14 @@ public class Usuario extends AbstractEntityBean {
 
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
+	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
 	}
 
 	public Bairro getBairro() {

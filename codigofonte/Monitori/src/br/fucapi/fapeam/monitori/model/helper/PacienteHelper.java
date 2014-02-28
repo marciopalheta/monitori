@@ -33,6 +33,7 @@ public class PacienteHelper extends UsuarioHelper {
 		
 		paciente.setNome(getNome().getText().toString());
 		paciente.setEndereco(getEndereco().getText().toString());
+		paciente.setNumero(getNumero().getText().toString());
 		paciente.setCep(getCep().getText().toString());
 		paciente.setCelular(getCelular().getText().toString());
 		paciente.setTelefone(getTelefone().getText().toString());
@@ -73,7 +74,8 @@ public class PacienteHelper extends UsuarioHelper {
 						
 		getNome().setText(paciente.getNome());		
 		getTelefone().setText(paciente.getTelefone());
-		getEndereco().setText(paciente.getEndereco());		
+		getEndereco().setText(paciente.getEndereco());	
+		getNumero().setText(paciente.getNumero());
 		getCep().setText(paciente.getCep() );
 		getCelular().setText(paciente.getCelular());
 		getTelefone().setText(paciente.getTelefone());										

@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class AbstractDataBase extends SQLiteOpenHelper{
 		
 	// Database Version
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
  
     // Database Name
     private static final String DATABASE_NAME = "Monitori";
@@ -26,7 +26,7 @@ public class AbstractDataBase extends SQLiteOpenHelper{
     // Usuario table create statement
     private static final String CREATE_TABLE_USUARIO = "CREATE TABLE "
             + TABLE_USUARIO + "(" + KEY_ID + " INTEGER PRIMARY KEY," 
-            + "nome TEXT, endereco TEXT, idBairro INTEGER, "
+            + "nome TEXT, endereco TEXT, numero TEXT, idBairro INTEGER, "
 			+ "cep TEXT, idUnidadeSaude INTEGER, celular TEXT, "
 			+ "telefone TEXT, dataMascimento TEXT, login TEXT, "
 			+ "nomeMae TEXT, numSus TEXT, "

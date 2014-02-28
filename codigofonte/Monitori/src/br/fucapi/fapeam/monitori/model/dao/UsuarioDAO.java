@@ -36,6 +36,7 @@ public class UsuarioDAO extends AbstractDataBase{
 					""+AbstractDataBase.TABLE_USUARIO+".nome,"+		
 					""+AbstractDataBase.TABLE_USUARIO+".dataMascimento,"+			
 					""+AbstractDataBase.TABLE_USUARIO+".endereco,"+
+					""+AbstractDataBase.TABLE_USUARIO+".numero,"+
 					""+AbstractDataBase.TABLE_USUARIO+".cep,"+
 					""+AbstractDataBase.TABLE_USUARIO+".celular,"+
 					""+AbstractDataBase.TABLE_USUARIO+".telefone,"+
@@ -80,6 +81,7 @@ public class UsuarioDAO extends AbstractDataBase{
 		values.put("dataMascimento", dataForDB);
 				
 		values.put("endereco", usuario.getEndereco());
+		values.put("numero", usuario.getNumero());
 		values.put("cep", usuario.getCep());
 		values.put("celular", usuario.getCelular());
 		values.put("telefone", usuario.getTelefone());
@@ -120,6 +122,7 @@ public class UsuarioDAO extends AbstractDataBase{
 		Log.i(TAG, "Login: "+ usuario.getLogin() );
 		Log.i(TAG, "Senha: "+ usuario.getSenha() );
 		Log.i(TAG, "endereco: "+ usuario.getEndereco() );
+		Log.i(TAG, "numero: "+ usuario.getNumero());
 		Log.i(TAG, "cep: "+ usuario.getCep() );
 		Log.i(TAG, "idBairro: "+ usuario.getBairro().getId() );
 				
@@ -181,6 +184,7 @@ public class UsuarioDAO extends AbstractDataBase{
 				usuario.setNome(cursor.getString(cursor.getColumnIndex("nome")));
 				
 				usuario.setEndereco(cursor.getString(cursor.getColumnIndex("endereco")));
+				usuario.setNumero(cursor.getString(cursor.getColumnIndex("numero")));
 				usuario.setNomeMae(cursor.getString(cursor.getColumnIndex("nomeMae")));
 				usuario.setNumSus(cursor.getString(cursor.getColumnIndex("numSus")));
 	
@@ -255,6 +259,7 @@ public class UsuarioDAO extends AbstractDataBase{
 		values.put("dataMascimento", dataForDB);		
 		
 		values.put("endereco", usuario.getEndereco());
+		values.put("numero", usuario.getNumero());
 		values.put("cep", usuario.getCep());
 		values.put("celular", usuario.getCelular());
 		values.put("telefone", usuario.getTelefone());
@@ -326,6 +331,7 @@ public class UsuarioDAO extends AbstractDataBase{
 				usuario.setNome(cursor.getString(cursor.getColumnIndex("nome")));
 				
 				usuario.setEndereco(cursor.getString(cursor.getColumnIndex("endereco")));
+				usuario.setNumero(cursor.getString(cursor.getColumnIndex("numero")));
 				usuario.setNomeMae(cursor.getString(cursor.getColumnIndex("nomeMae")));
 				usuario.setNumSus(cursor.getString(cursor.getColumnIndex("numSus")));
 	

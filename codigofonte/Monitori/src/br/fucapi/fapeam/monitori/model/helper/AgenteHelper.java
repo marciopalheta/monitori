@@ -37,6 +37,7 @@ public class AgenteHelper extends UsuarioHelper {
 		
 		agente.setNome(getNome().getText().toString());
 		agente.setEndereco(getEndereco().getText().toString());
+		agente.setNumero(getNumero().getText().toString());
 		agente.setCep(getCep().getText().toString());
 		agente.setCelular(getCelular().getText().toString());
 		agente.setTelefone(getTelefone().getText().toString());
@@ -70,7 +71,8 @@ public class AgenteHelper extends UsuarioHelper {
 						
 		getNome().setText(agente.getNome());		
 		getTelefone().setText(agente.getTelefone());
-		getEndereco().setText(agente.getEndereco());		
+		getEndereco().setText(agente.getEndereco());
+		getNumero().setText(agente.getNumero());
 		getCep().setText(agente.getCep() );
 		getCelular().setText(agente.getCelular());
 		getTelefone().setText(agente.getTelefone());												

@@ -1,5 +1,8 @@
 package br.fucapi.fapeam.monitori.model.helper;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.activity.PacienteDadosActivity;
 import br.fucapi.fapeam.monitori.model.bean.Bairro;
@@ -7,26 +10,50 @@ import br.fucapi.fapeam.monitori.model.bean.Paciente;
 import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
 import br.fucapi.fapeam.monitori.model.bean.UnidadeSaude;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class PacienteHelper extends UsuarioHelper {
 	
 	private Paciente paciente;
+	private EditText numSus;
 	private CheckBox hipertenso;
 	private CheckBox diabetico1;
 	private CheckBox diabetico2;
 	
+	
+	public EditText getNumSus() {
+		return numSus;
+	}
+
+	public void setNumSus(EditText numSus) {
+		this.numSus = numSus;
+	}
+
 	public PacienteHelper(PacienteDadosActivity fragmentActivity){
 		super(fragmentActivity);
 						
 		//criacao do objeto paciente
 		paciente = new Paciente();
 		
+		numSus =(EditText) fragmentActivity.findViewById(R.id.edit_sus);
+		
 		hipertenso =(CheckBox) fragmentActivity.findViewById(R.id.chbHipertenso);
 		diabetico1 =(CheckBox) fragmentActivity.findViewById(R.id.chbTipo1);
 		diabetico2 =(CheckBox) fragmentActivity.findViewById(R.id.chbTipo2);
+		
+		Map<View, String> mapaDeCampos = new LinkedHashMap<View, String>();
+		
+		mapaDeCampos.put(getNome(), "Nome obrigatorio");
+		mapaDeCampos.put(getEditTextDataNascimento(), "Campo obrigatorio");
+		mapaDeCampos.put(getTelefone(), "Telefone obrigatorio");		
+		mapaDeCampos.put(getCep(), "Cep obrigatorio");
+		mapaDeCampos.put(numSus, "Campo obrigatorio");
+		
+		setMapaDeCampos(mapaDeCampos);
 	}
 
 	public Paciente getPaciente(){

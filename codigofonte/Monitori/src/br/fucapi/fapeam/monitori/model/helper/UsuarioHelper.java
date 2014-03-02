@@ -43,7 +43,6 @@ public class UsuarioHelper {
 	private EditText celular;
 	private EditText telefone;
 	private EditText nomeMae;
-	private EditText numSus;
 	
 	private EditText dataNascimento;		
 	private ImageButton ibDataNascimento;	
@@ -55,6 +54,8 @@ public class UsuarioHelper {
     
 	private Calendar dtCalendar = Calendar.getInstance();			
 	
+	private Agente agente;
+	
 	private ImageView foto;
 	private Spinner sexo;	
 	private Usuario usuario;
@@ -62,6 +63,17 @@ public class UsuarioHelper {
 	private FragmentActivity fragmentActivity;
 	private int selectionCurrent;	
     //private Calendar myCalendar;
+
+
+	private Map<View, String> mapaDeCampos = new LinkedHashMap<View, String>();
+	
+	public Map<View, String> getMapaDeCampos() {
+		return mapaDeCampos;
+	}
+
+	public void setMapaDeCampos(Map<View, String> mapaDeCampos) {
+		this.mapaDeCampos = mapaDeCampos;
+	}
 
 	private DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
@@ -98,7 +110,7 @@ public class UsuarioHelper {
 		telefone.addTextChangedListener(Mask.insert("(##)####-####", telefone));
 		
 		nomeMae = (EditText) fragmentActivity.findViewById(R.id.edNomedamae);
-		numSus = (EditText) fragmentActivity.findViewById(R.id.edit_sus);
+		//numSus = (EditText) fragmentActivity.findViewById(R.id.edit_sus);
 		
 		dataNascimento = (EditText) fragmentActivity.findViewById(R.id.edDataNascimento); 				
 		dataNascimento.addTextChangedListener(Mask.insert("##/##/####", dataNascimento));
@@ -218,14 +230,15 @@ public class UsuarioHelper {
 		this.nomeMae = nomeMae;
 	}
 
-	public EditText getNumSus() {
-		return numSus;
+	
+	public EditText getEditTextDataNascimento() {
+		return dataNascimento;
 	}
 
-	public void setNumSus(EditText numSus) {
-		this.numSus = numSus;
+	public void setEditTextDataNascimento(EditText dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
-
+	
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -326,16 +339,15 @@ public class UsuarioHelper {
 	}
 	
 	public boolean validar(){
-		
 		// cria o mapa
-		Map<View, String> mapaDeCampos = new LinkedHashMap<View, String>();
+
+		//Map<View, String> mapaDeCampos = new LinkedHashMap<View, String>();
+		
 		mapaDeCampos.put(nome, "Nome obrigatorio");
 		mapaDeCampos.put(dataNascimento, "Campo obrigatorio");
 		mapaDeCampos.put(telefone, "Telefone obrigatorio");		
-		mapaDeCampos.put(cep, "Cep obrigatorio");;
-		
-		
-		
+		mapaDeCampos.put(cep, "Cep obrigatorio");
+			
 		for(View chave: mapaDeCampos.keySet()){
 		    //System.out.println("chave: "+chave+", valor: "+mapaDeCampos.get(chave)+".");
 		    if(Funcoes.validarDados(chave,  mapaDeCampos.get(chave) ) == false){

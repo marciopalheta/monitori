@@ -1,11 +1,16 @@
 package br.fucapi.fapeam.monitori.model.helper;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.activity.MedicoDadosActivity;
 import br.fucapi.fapeam.monitori.model.bean.Bairro;
 import br.fucapi.fapeam.monitori.model.bean.Medico;
 import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
 import br.fucapi.fapeam.monitori.model.bean.UnidadeSaude;
+import br.fucapi.fapeam.monitori.utils.Funcoes;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -22,6 +27,17 @@ public class MedicoHelper extends UsuarioHelper {
 		medico= new Medico();
 		
 		crm =(EditText) activity.findViewById(R.id.edCrm);
+		
+		Map<View, String> mapaDeCampos = new LinkedHashMap<View, String>();
+		
+		mapaDeCampos.put(getNome(), "Nome obrigatorio");
+		mapaDeCampos.put(crm, "Campo obrigatorio");
+		mapaDeCampos.put(getEditTextDataNascimento(), "Campo obrigatorio");
+		mapaDeCampos.put(getTelefone(), "Telefone obrigatorio");		
+		mapaDeCampos.put(getCep(), "Cep obrigatorio");
+		
+		setMapaDeCampos(mapaDeCampos);
+		
 	}
 
 public Medico getMedico(){
@@ -91,6 +107,5 @@ public Medico getMedico(){
 	public void setCrm(EditText crm) {
 		this.crm = crm;
 	}
-	
 	
 }

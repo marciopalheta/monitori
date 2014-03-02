@@ -1,11 +1,16 @@
 package br.fucapi.fapeam.monitori.model.helper;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.activity.AgenteDadosActivity;
 import br.fucapi.fapeam.monitori.model.bean.Agente;
 import br.fucapi.fapeam.monitori.model.bean.Bairro;
 import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
 import br.fucapi.fapeam.monitori.model.bean.UnidadeSaude;
+import br.fucapi.fapeam.monitori.utils.Funcoes;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -31,6 +36,20 @@ public class AgenteHelper extends UsuarioHelper {
 		//criacao do objeto paciente
 		agente= new Agente();	
 		matricula =(EditText) activity.findViewById(R.id.edMatricula);
+		
+		
+		Map<View, String> mapaDeCampos = new LinkedHashMap<View, String>();
+		
+		mapaDeCampos.put(getNome(), "Nome obrigatorio");
+		mapaDeCampos.put(matricula, "Campo obrigatorio");
+		mapaDeCampos.put(getEditTextDataNascimento(), "Campo obrigatorio");
+		mapaDeCampos.put(getTelefone(), "Telefone obrigatorio");		
+		mapaDeCampos.put(getCep(), "Cep obrigatorio");
+		
+		
+		
+		setMapaDeCampos(mapaDeCampos);
+		
 	}
 	
 	public Agente getAgente(){
@@ -94,4 +113,6 @@ public class AgenteHelper extends UsuarioHelper {
 		matricula.setText(agente.getMatricula());
 		this.agente= agente;
 	}
+	
+	
 }

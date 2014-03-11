@@ -4,7 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import br.fucapi.fapeam.monitori.R;
-import br.fucapi.fapeam.monitori.activity.AgenteDadosActivity;
+import br.fucapi.fapeam.monitori.activity.agente.AgenteDadosActivity;
 import br.fucapi.fapeam.monitori.model.bean.Agente;
 import br.fucapi.fapeam.monitori.model.bean.Bairro;
 import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;

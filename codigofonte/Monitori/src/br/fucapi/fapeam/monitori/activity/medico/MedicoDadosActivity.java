@@ -1,6 +1,7 @@
-package br.fucapi.fapeam.monitori.activity;
+package br.fucapi.fapeam.monitori.activity.medico;
 
 import br.fucapi.fapeam.monitori.R;
+import br.fucapi.fapeam.monitori.activity.UsuarioDadosActivity;
 import br.fucapi.fapeam.monitori.model.bean.Medico;
 import br.fucapi.fapeam.monitori.model.dao.UsuarioDAO;
 import br.fucapi.fapeam.monitori.model.helper.MedicoHelper;

@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.util.Log;
 import br.fucapi.fapeam.monitori.model.bean.UnidadeSaude;
+import br.fucapi.fapeam.monitori.sqlite.SQLiteDatabaseHelper;
 
 public class UnidadeSaudeDAO extends AbstractDataBase{
 		
@@ -28,15 +29,15 @@ public class UnidadeSaudeDAO extends AbstractDataBase{
 		//objeto para armazenar os valores dos camopos
 		ContentValues values = new ContentValues();
 		//Definicao dos valores dos campos
-		values.put("nome", ubs.getNome());			
-		values.put("endereco", ubs.getEndereco());
-		values.put("numero", ubs.getNumeroUBS() );
-		values.put("cep", ubs.getCep() );		
+		values.put( SQLiteDatabaseHelper.FIELDS_TABLE_UBS.nome , ubs.getNome());			
+		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_UBS.endereco, ubs.getEndereco());
+		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_UBS.numero, ubs.getNumeroUBS() );
+		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_UBS.cep, ubs.getCep() );		
 		//values.put("bairro", ubs.getBairro().getId());	
-		values.put("fone", ubs.getFone());
+		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_UBS.telefone, ubs.getFone());
 
 		//Inserir dados da UBS
-		getWritableDatabase().insert(AbstractDataBase.TABLE_UBS, null, values);
+		getWritableDatabase().insert(SQLiteDatabaseHelper.TABLE_UBS_NAME, null, values);
 						
 		Log.i(TAG, "nome: "+ ubs.getNome() );
 		Log.i(TAG, "endereco: "+ ubs.getEndereco() );
@@ -55,23 +56,21 @@ public class UnidadeSaudeDAO extends AbstractDataBase{
 		List<UnidadeSaude> lista = new ArrayList<UnidadeSaude>();
 		UnidadeSaude ubs;
 		//Definicao da instrucao SQL
-		String sql = "Select * from "+AbstractDataBase.TABLE_UBS +" ";
-		
-		Log.i(TAG, "chamou listar2 = "+sql );
+		String sql = "Select * from "+SQLiteDatabaseHelper.TABLE_UBS_NAME +" ";
+				
 		//Objeto que reebe os registros do banco de dados
 		Cursor cursor = getReadableDatabase().rawQuery(sql, null);
 		try{
 			while(cursor.moveToNext()){
-				ubs = new UnidadeSaude();
-				Log.i(TAG, "chamou listar2" );		
+				ubs = new UnidadeSaude();						
 				Log.e(TAG, "nome ubs = "+ cursor.getString(cursor.getColumnIndex("nome")) );
 				//Carregar os atributos das UBS
-				ubs.setId(cursor.getLong(cursor.getColumnIndex("id") )); 
-				ubs.setNome(cursor.getString(cursor.getColumnIndex("nome")));
-				ubs.setEndereco(cursor.getString(cursor.getColumnIndex("endereco")));				
-				ubs.setCep(cursor.getString(cursor.getColumnIndex("cep")));
-				ubs.setFone(cursor.getString(cursor.getColumnIndex("fone")));
-				ubs.setNumeroUBS(cursor.getString(cursor.getColumnIndex("numero")));
+				ubs.setId(cursor.getLong(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_UBS.id) )); 
+				ubs.setNome(cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_UBS.nome)));
+				ubs.setEndereco(cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_UBS.endereco)));				
+				ubs.setCep(cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_UBS.cep)));
+				ubs.setFone(cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_UBS.telefone)));
+				ubs.setNumeroUBS(cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_UBS.numero)));
 				/*
 				BairroDAO bairroDao = new BairroDAO();
 				bairroDao.
@@ -97,7 +96,7 @@ public class UnidadeSaudeDAO extends AbstractDataBase{
 		String[] args = {ubs.getId().toString()};
 		
 		//Exclusao do usuario
-		getWritableDatabase().delete(AbstractDataBase.TABLE_UBS, "id=?", args);
+		getWritableDatabase().delete(SQLiteDatabaseHelper.TABLE_UBS_NAME, "id=?", args);
 		Log.i(TAG, "UBS Deletado: " +ubs.getNome());
 	}
 	
@@ -106,14 +105,13 @@ public class UnidadeSaudeDAO extends AbstractDataBase{
 	 * */
 	public void alterar(UnidadeSaude ubs) {
 		ContentValues values = new ContentValues();
-		values.put("nome", ubs.getNome());
-		
-		values.put("nome", ubs.getNome());			
-		values.put("endereco", ubs.getEndereco());
-		values.put("numero", ubs.getNumeroUBS() );
-		values.put("cep", ubs.getCep() );		
+		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_UBS.nome, ubs.getNome());
+				
+		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_UBS.endereco, ubs.getEndereco());
+		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_UBS.numero, ubs.getNumeroUBS() );
+		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_UBS.cep, ubs.getCep() );		
 		//values.put("bairro", ubs.getBairro().getId());	
-		values.put("fone", ubs.getFone());
+		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_UBS.telefone, ubs.getFone());
 								
 		Log.i(TAG, "nome: "+ ubs.getNome() );
 		Log.i(TAG, "endereco: "+ ubs.getEndereco() );
@@ -126,48 +124,16 @@ public class UnidadeSaudeDAO extends AbstractDataBase{
 		String[] args = { ubs.getId().toString() };
 
 		// Altera dados do Aluno no BD
-		getWritableDatabase().update(AbstractDataBase.TABLE_UBS, values, "id=?", args);
+		getWritableDatabase().update(SQLiteDatabaseHelper.TABLE_UBS_NAME, values, "id=?", args);
 		Log.i(TAG, "UBS alterado: " + ubs.getNome());
 	}
-	
-	public UnidadeSaude getUnidadeSaude(String nome){
-		//Colecao de usuarios
-		UnidadeSaude ubs = null;
-		
-		//Definicao da instrucao SQL
-		String sql = "Select * from "+AbstractDataBase.TABLE_UBS+" where nome='"+nome+"' ";
-		
-		//Objeto que reebe os registros do banco de dados
-		Cursor cursor = getReadableDatabase().rawQuery(sql, null);
-		try{
-			if(cursor.moveToNext()){				
-				
-				ubs = new UnidadeSaude();
-				
-				ubs.setId(cursor.getLong(cursor.getColumnIndex("id") ));							
-				ubs.setNome(cursor.getString(cursor.getColumnIndex("nome") ));				
-				ubs.setEndereco(cursor.getString(cursor.getColumnIndex("endereco") ));								
-				ubs.setNumeroUBS(cursor.getString(cursor.getColumnIndex("numero") ));								
-				ubs.setCep(cursor.getString(cursor.getColumnIndex("cep") ));				
-				
-				ubs.setFone(cursor.getString(cursor.getColumnIndex("fone") ));
-				
-				//ubs.setBairro(bairro);		
-			}
-		}catch(SQLException e){
-			Log.e(TAG, e.getMessage());
-		}finally{
-			cursor.close();
-		}
-		return ubs;
-	}
-	
+			
 	public UnidadeSaude getUnidadeSaude(long id){
 		//Colecao de usuarios
 		UnidadeSaude ubs = null;
 		
 		//Definicao da instrucao SQL
-		String sql = "Select * from "+AbstractDataBase.TABLE_UBS+" where id='"+id+"' ";
+		String sql = "Select * from "+SQLiteDatabaseHelper.TABLE_UBS_NAME+" where "+SQLiteDatabaseHelper.FIELDS_TABLE_UBS.id+"='"+id+"' ";
 		
 		//Objeto que reebe os registros do banco de dados
 		Cursor cursor = getReadableDatabase().rawQuery(sql, null);
@@ -176,13 +142,13 @@ public class UnidadeSaudeDAO extends AbstractDataBase{
 				
 				ubs = new UnidadeSaude();
 				
-				ubs.setId(cursor.getLong(cursor.getColumnIndex("id") ));							
-				ubs.setNome(cursor.getString(cursor.getColumnIndex("nome") ));				
-				ubs.setEndereco(cursor.getString(cursor.getColumnIndex("endereco") ));								
-				ubs.setNumeroUBS(cursor.getString(cursor.getColumnIndex("numero") ));								
-				ubs.setCep(cursor.getString(cursor.getColumnIndex("cep") ));				
+				ubs.setId(cursor.getLong(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_UBS.id) ));							
+				ubs.setNome(cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_UBS.nome) ));				
+				ubs.setEndereco(cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_UBS.endereco) ));								
+				ubs.setNumeroUBS(cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_UBS.numero) ));								
+				ubs.setCep(cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_UBS.cep) ));				
 				
-				ubs.setFone(cursor.getString(cursor.getColumnIndex("fone") ));
+				ubs.setFone(cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_UBS.telefone) ));
 				
 				//ubs.setBairro(bairro);			
 			}

@@ -23,5 +23,7 @@
     <dimen name="bthistorico_altura">50dp</dimen>
     <dimen name="btdata_largura">120dp</dimen>
  	<dimen name="magem_bthistorico">10dp</dimen>
- 	
+	
+ 	<dimen name="action_button_min_width">56dp</dimen>
+ 		
 </resources>

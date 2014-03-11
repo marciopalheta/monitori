@@ -116,5 +116,29 @@
     <string name="mask_cep">#####-###</string>
     <string name="mask_telefone">(##)####-####</string>
     
-	 
+	<!-- novas strings -->
+        
+    <string name="splashscreen_text">Carregando aplicação</string>
+    <string name="splashscreen_label">Carregando...</string>
+    <string name="preferences_label">Preferencias</string>
+    <string name="menuitem_refresh">Refresh</string>
+    <string name="menuitem_preferences">Settings</string>
+    <string name="menuitem_quit">Sair</string>
+    <string name="confirm_quit">Você tem certeza que deseja sair da aplicação?</string>
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
+    <string name="error_retrievingdata">Error retrieving data</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
+    <!-- For sample -->
+
+    <string name="mainmenu_button1">@string/title_activity_paciente </string>
+    <string name="mainmenu_button2">Airport (AsyncTask)</string>    
+    <string name="eula_title">Contrato de Licença de Usuário Final</string>
+    <string name="eula_accept">Aceitar</string>
+    <string name="eula_refuse">Recusar</string>
+    <string name="eula_close">Fechar</string>    
+    <string name="title_activity_your_app_main">YourAppMainActivity</string>    
+    	 
 </resources>

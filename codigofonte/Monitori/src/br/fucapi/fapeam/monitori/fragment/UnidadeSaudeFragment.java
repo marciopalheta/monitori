@@ -1,7 +1,8 @@
-package br.fucapi.fapeam.monitori.activity;
+package br.fucapi.fapeam.monitori.fragment;
 
 import java.util.List;
 import br.fucapi.fapeam.monitori.R;
+import br.fucapi.fapeam.monitori.activity.unidadeSaude.UnidadeSaudeDadosActivity;
 import br.fucapi.fapeam.monitori.model.bean.UnidadeSaude;
 import br.fucapi.fapeam.monitori.model.dao.UnidadeSaudeDAO;
 import android.os.Bundle;
@@ -10,12 +11,16 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
+import android.support.v4.app.Fragment;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -23,7 +28,7 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class UnidadeSaudeActivity extends Activity {
+public class UnidadeSaudeFragment extends Fragment {
 
 	//Definicao das constantes
 	private final String TAG = "CADASTRO_UBS";
@@ -43,13 +48,21 @@ public class UnidadeSaudeActivity extends Activity {
 	//UnidadeSaude selecionando com o click longo
 	private UnidadeSaude ubsSelecionado = null;	
 	
+	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.unidadesaude);
-		
+		setHasOptionsMenu(true); //adicionar itens ao OptionsMenu 								
+	}
+	    
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {		
+		//Log.d("FragmentLifecycle", "onCreateView savedInstanceState is " + (savedInstanceState == null?"":"not ") + "null");
+
+		View layout = inflater.inflate(R.layout.unidadesaude, container, false);
+						
 		//Ligacao dos componentes de TELA aos atributos da Activity
-		lvListagem = (ListView) findViewById(R.id.lvListagem);
+		lvListagem = (ListView) layout.findViewById(R.id.lvListagem);
 		//Informa que a ListView tem um menu de contexto
 		registerForContextMenu(lvListagem);
 		
@@ -72,7 +85,7 @@ public class UnidadeSaudeActivity extends Activity {
 					public void onItemClick(AdapterView<?> adapter, View view,
 							int posicao, long id) {
 
-						Intent form = new Intent(UnidadeSaudeActivity.this,
+						Intent form = new Intent(getActivity(),
 								UnidadeSaudeDadosActivity.class);
 
 						ubsSelecionado = (UnidadeSaude) lvListagem
@@ -82,12 +95,19 @@ public class UnidadeSaudeActivity extends Activity {
 
 						startActivity(form);
 					}
-				});	
+				});
+		
+		return layout;		
 	}
+		
+    @Override
+	public void onInflate(Activity activity, AttributeSet attrs, Bundle savedInstanceState) {
+		super.onInflate(activity, attrs, savedInstanceState);
+		Log.d("FragmentLifecycle", "onInflate");
+	}
+			
 
-	protected void onSaveInstanceState(Bundle outState){
-		//Inclusao da lista paciente no objeto Bundle
-	//	outState.putStringArrayList(PACIENTES_KEY, (ArrayList<Usuario>) listaPaciente);
+	public void onSaveInstanceState(Bundle outState){
 		//Persistencia do objeto bundle
 		super.onSaveInstanceState(outState);
 		Log.i(TAG, "onsaveRestoreState(): "	+ listaUbs);
@@ -99,7 +119,7 @@ public class UnidadeSaudeActivity extends Activity {
 			//Verifica se foi selecionado um item novo
 			case R.id.menu_novo:
 				//Especialista em mudanca de tela
-				Intent intent = new Intent(UnidadeSaudeActivity.this,
+				Intent intent = new Intent(getActivity() ,
 						UnidadeSaudeDadosActivity.class);
 				//Carrega a nova tela
 				startActivity(intent);
@@ -111,67 +131,25 @@ public class UnidadeSaudeActivity extends Activity {
 	}
 	
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		//Definicao do menu inflater
-		MenuInflater inflater = this.getMenuInflater();
-		
-		//Inflar um XML
-		inflater.inflate(R.menu.unidadesaude, menu);
-		
-		return true;
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		  inflater.inflate(R.menu.unidadesaude, menu);
 	}
-	
-	public void carregarLista(){
-		//Criacao do objeto DAO
-		UnidadeSaudeDAO dao = new UnidadeSaudeDAO(this);
 		
-		Log.i(TAG, "chamou listar "	);
-		//Chamado do metodo listar
-		this.listaUbs = dao.listar();
-		
-		//fim da conexao do DB
-		dao.close();
-		
-		//O objeto arrayadapter converte lista em view
-		this.adapter = new ArrayAdapter<UnidadeSaude>(this, adapterLayout, listaUbs);
-		//associacao do adapter ao listView
-		this.lvListagem.setAdapter(adapter);
-	}
-	
-	private void excluirUsuario() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage("Confirma a exclusao de: "
-				+ ubsSelecionado.getNome());
-
-		builder.setPositiveButton("Sim", new OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int witch) {
-				UnidadeSaudeDAO dao = new UnidadeSaudeDAO(UnidadeSaudeActivity.this);
-				dao.deletar(ubsSelecionado);
-				dao.close();
-				carregarLista();
-				ubsSelecionado = null;
-			}
-		});
-		builder.setNegativeButton("Nao", null);
-		AlertDialog dialog = builder.create();
-		dialog.setTitle("Confirmacao de exclusao");
-		dialog.show();
-	}
-	
+				
 	public void onCreateContextMenu(ContextMenu menu, View view,
 			ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, view, menuInfo);
-
-		getMenuInflater().inflate(R.menu.menu_contexto, menu);
+		
+		getActivity().getMenuInflater().inflate(R.menu.menu_contexto, menu);
+		//getMenuInflater().inflate(R.menu.menu_contexto, menu);
 	}
-
+	
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.menu_editar:
 				
-				Intent form = new Intent(UnidadeSaudeActivity.this,
+				Intent form = new Intent(getActivity(),
 						UnidadeSaudeDadosActivity.class);				
 				form.putExtra("UBS_SELECIONADO", ubsSelecionado);
 
@@ -185,8 +163,52 @@ public class UnidadeSaudeActivity extends Activity {
 		}
 		return super.onContextItemSelected(item);
 	}
-	protected void onResume(){
-		super.onResume();		
+	
+	
+	public void onResume(){
+		super.onResume();
 		this.carregarLista();
 	}
+
+		
+	public void carregarLista(){
+		//Criacao do objeto DAO
+		UnidadeSaudeDAO dao = new UnidadeSaudeDAO(getActivity());
+		
+		Log.i(TAG, "chamou listar "	);
+		//Chamado do metodo listar
+		this.listaUbs = dao.listar();
+		
+		//fim da conexao do DB
+		dao.close();
+		
+		//O objeto arrayadapter converte lista em view
+		this.adapter = new ArrayAdapter<UnidadeSaude>(getActivity(), adapterLayout, listaUbs);
+		//associacao do adapter ao listView
+		this.lvListagem.setAdapter(adapter);
+	}
+	
+	private void excluirUsuario() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+		builder.setMessage("Confirma a exclusao de: "
+				+ ubsSelecionado.getNome());
+
+		builder.setPositiveButton("Sim", new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int witch) {
+				UnidadeSaudeDAO dao = new UnidadeSaudeDAO(getActivity());
+				dao.deletar(ubsSelecionado);
+				dao.close();
+				carregarLista();
+				ubsSelecionado = null;
+			}
+		});
+		builder.setNegativeButton("Nao", null);
+		AlertDialog dialog = builder.create();
+		dialog.setTitle("Confirmacao de exclusao");
+		dialog.show();
+	}
+	
+
+	
 }

@@ -1,38 +1,40 @@
-package br.fucapi.fapeam.monitori.activity;
+package br.fucapi.fapeam.monitori.activity.paciente;
 
 import br.fucapi.fapeam.monitori.R;
-import br.fucapi.fapeam.monitori.model.bean.Agente;
+import br.fucapi.fapeam.monitori.activity.UsuarioDadosActivity;
+import br.fucapi.fapeam.monitori.model.bean.Paciente;
 import br.fucapi.fapeam.monitori.model.dao.UsuarioDAO;
-import br.fucapi.fapeam.monitori.model.helper.AgenteHelper;
+import br.fucapi.fapeam.monitori.model.helper.PacienteHelper;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-public class AgenteDadosActivity extends UsuarioDadosActivity {
+public class PacienteDadosActivity extends UsuarioDadosActivity {
 
-	//Atributos para manipulacao de tela	
-	private AgenteHelper helper;
-	private Agente agenteParaSerAlterado = null;	
+	//Atributos para manipulacao de tela
+	private PacienteHelper helper;
+	private Paciente pacienteParaSerAlterado = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.setContentView(R.layout.agentesdados);
+		super.setContentView(R.layout.pacientedados);
 		super.onCreate(savedInstanceState);
-						
+		//setContentView(R.layout.pacientedados);
+				
 		//Criacao do objeto helper
-		helper = new AgenteHelper(this);		
+		helper = new PacienteHelper(this);
 						
 		// Busca o paciente a ser alterado
-		agenteParaSerAlterado = (Agente) getIntent().getSerializableExtra(
-						"AGENTE_SELECIONADO");
+		pacienteParaSerAlterado = (Paciente) getIntent().getSerializableExtra(
+						"PACIENTE_SELECIONADO");
 
-				if (agenteParaSerAlterado != null) {
+				if (pacienteParaSerAlterado != null) {
 					// Atualiza a tela com dados do Aluno
-					helper.setAgente(agenteParaSerAlterado);
+					helper.setPaciente(pacienteParaSerAlterado);
 				}
 	}
-			
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		//Definicao do menu inflater
@@ -57,17 +59,17 @@ public class AgenteDadosActivity extends UsuarioDadosActivity {
 	            return true;
 	        case R.id.menu_salvar:			
 				//Utilizando o helper
-				Agente agente = (Agente) helper.getAgente();
+				Paciente paciente = (Paciente) helper.getPaciente();
 				//Criacao do objeto DAO
-				UsuarioDAO dao = new UsuarioDAO(AgenteDadosActivity.this);
+				UsuarioDAO dao = new UsuarioDAO(PacienteDadosActivity.this);
 				
 				//Validando os campos
 				if(helper.validar()==true){		
 					// Verificacao para salvar ou cadastrar o aluno
-					if (agente.getId() == null) {
-						dao.cadastrar(agente);
+					if (paciente.getId() == null) {
+						dao.cadastrar(paciente);
 					} else {
-						dao.alterar(agente);
+						dao.alterar(paciente);
 					}//Fechando a conexao com o BD
 					dao.close();
 					//Encerrando a activity

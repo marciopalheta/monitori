@@ -1,4 +1,4 @@
-package br.fucapi.fapeam.monitori.activity;
+package br.fucapi.fapeam.monitori.activity.unidadeSaude;
 
 import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.model.bean.UnidadeSaude;

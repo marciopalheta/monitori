@@ -1,6 +1,9 @@
 package br.fucapi.fapeam.monitori.activity;
 
 import br.fucapi.fapeam.monitori.R;
+import br.fucapi.fapeam.monitori.activity.agente.AgenteActivity;
+import br.fucapi.fapeam.monitori.activity.medico.MedicoActivity;
+import br.fucapi.fapeam.monitori.activity.paciente.PacienteActivity;
 import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
 import android.app.Activity;
 import android.content.Intent;

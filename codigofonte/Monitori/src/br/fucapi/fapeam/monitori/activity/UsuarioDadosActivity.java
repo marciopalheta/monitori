@@ -3,8 +3,10 @@ package br.fucapi.fapeam.monitori.activity;
 import java.io.File;
 import java.util.List;
 import br.fucapi.fapeam.monitori.R;
+import br.fucapi.fapeam.monitori.activity.unidadeSaude.UnidadeSaudeDadosActivity;
 import br.fucapi.fapeam.monitori.model.bean.UnidadeSaude;
 import br.fucapi.fapeam.monitori.model.dao.UnidadeSaudeDAO;
+import br.fucapi.fapeam.monitori.utils.RequestCodes;
 import br.fucapi.fapeam.monitori.utils.SpinnerAdapter;
 import android.net.Uri;
 import android.os.Bundle;
@@ -37,9 +39,7 @@ public class UsuarioDadosActivity extends FragmentActivity {
 		private SpinnerAdapter adapter = null;
 		
 		private int selectionCurrent;
-
-		private final int REQUEST_CODE_UBS = 12;
-		private static final int REQUEST_CODE_FOTO = 123;
+		
 		
 		@Override
 		protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +63,7 @@ public class UsuarioDadosActivity extends FragmentActivity {
 
 					irParaCamera.putExtra(MediaStore.EXTRA_OUTPUT, localFoto);
 					
-					startActivityForResult(irParaCamera, REQUEST_CODE_FOTO);
+					startActivityForResult(irParaCamera, RequestCodes.FOTO_REQUESTCODE );
 
 				}
 			});
@@ -148,21 +148,21 @@ public class UsuarioDadosActivity extends FragmentActivity {
 					UnidadeSaudeDadosActivity.class);
 			
 			//form.putExtra("PACIENTE_SELECIONADO", pacienteSelecionado);
-			startActivityForResult(intent, REQUEST_CODE_UBS );					
+			startActivityForResult(intent, RequestCodes.UBS_REQUESTCODE );					
 		}
 		
 		@Override
 	    public void onActivityResult(int requestCode, int resultCode, Intent data) {
 	        super.onActivityResult(requestCode, resultCode, data);
 
-	        if(requestCode == REQUEST_CODE_UBS) {
+	        if(requestCode == RequestCodes.UBS_REQUESTCODE ) {
 	            if(resultCode == Activity.RESULT_OK) {
 	                String nomeUBS = data.getStringExtra("NOVA_UBS");
 	                //Log.e("REQUEST", nomeUBS);
 	                //atualizar aqui a listagem
 	                atualizarListaUbs(nomeUBS);
 	            }
-	        }else if (requestCode == REQUEST_CODE_FOTO) {
+	        }else if (requestCode == RequestCodes.FOTO_REQUESTCODE ) {
 				if (resultCode == Activity.RESULT_OK) {
 					//helper.carregarFoto(this.localArquivo);
 					carregarFoto(localArquivo);

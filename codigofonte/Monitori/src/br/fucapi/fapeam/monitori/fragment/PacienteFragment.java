@@ -1,39 +1,43 @@
-package br.fucapi.fapeam.monitori.activity;
+package br.fucapi.fapeam.monitori.fragment;
 
 import java.util.List;
 import br.fucapi.fapeam.monitori.R;
+import br.fucapi.fapeam.monitori.activity.paciente.PacienteDadosActivity;
+import br.fucapi.fapeam.monitori.model.bean.Paciente;
 import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import br.fucapi.fapeam.monitori.model.dao.UsuarioDAO;
 import android.os.Bundle;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class AgenteActivity extends Activity {
+public class PacienteFragment extends Fragment {
 
 	//Definicao das constantes
-	private final String TAG = "CADASTRO_AGENTE";
+	private final String TAG = "CADASTRO_PACIENTE";
 	
 	//Atributos de Tela
 	private ListView lvListagem;
 	
 	//Colecao de pacientes a serem exibidos na tela
-	private List<Usuario> listaAgente;
+	private List<Usuario> listaPaciente;
 	
 	//ArrayAdapter para adaptar lista em View
 	private ArrayAdapter<Usuario> adapter;
@@ -44,56 +48,64 @@ public class AgenteActivity extends Activity {
 	//Usuario selecionando com o click longo
 	private Usuario usuarioSelecionado = null;	
 	
+	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.agente);
-		
-		//getActionBar().setHomeButtonEnabled(true);
-		//getActionBar().setDisplayHomeAsUpEnabled(true);
-		
+		setHasOptionsMenu(true); //adicionar itens ao OptionsMenu 								
+	}
+	    
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {		
+		//Log.d("FragmentLifecycle", "onCreateView savedInstanceState is " + (savedInstanceState == null?"":"not ") + "null");
+		View layout = inflater.inflate(R.layout.paciente, container, false);
+				
 		//Ligacao dos componentes de TELA aos atributos da Activity
-		lvListagem = (ListView) findViewById(R.id.lvListagem);
-		//Informa que a ListView tem um menu de contexto
-		registerForContextMenu(lvListagem);
-		
-		//Metodo do click longo
-		lvListagem.setOnItemLongClickListener(new OnItemLongClickListener() {
-			@Override
-			public boolean onItemLongClick(AdapterView<?> adapter, View view,
-					int posicao, long id) {
-				//Marca o usuario selecionado
-				usuarioSelecionado = (Usuario) adapter.getItemAtPosition(posicao);
-				Log.i(TAG, "Usuario Selecionado ListView.LongClick()"
-						+ usuarioSelecionado.getNome());
-				return false;
-			}
-		});
+				lvListagem = (ListView) layout.findViewById(R.id.lvListagem);
+				//Informa que a ListView tem um menu de contexto
+				registerForContextMenu(lvListagem);
+				
+				//Metodo do click longo
+				lvListagem.setOnItemLongClickListener(new OnItemLongClickListener() {
+					@Override
+					public boolean onItemLongClick(AdapterView<?> adapter, View view,
+							int posicao, long id) {
+						//Marca o usuario selecionado
+						usuarioSelecionado = (Paciente) adapter.getItemAtPosition(posicao);
+						Log.i(TAG, "Usuario Selecionado ListView.LongClick()"
+								+ usuarioSelecionado.getNome());
+						return false;
+					}
+				});
 
-		// Metodo que "escuta" o evento de Click SIMPLES
+				// Metodo que "escuta" o evento de Click SIMPLES
 				lvListagem.setOnItemClickListener(new OnItemClickListener() {
 					@Override
 					public void onItemClick(AdapterView<?> adapter, View view,
 							int posicao, long id) {
 
-						Intent form = new Intent(AgenteActivity.this,
-								AgenteDadosActivity.class);
+						Intent form = new Intent(getActivity(),
+								PacienteDadosActivity.class);
 
-						usuarioSelecionado = (Usuario) lvListagem
+						usuarioSelecionado = (Paciente) lvListagem
 								.getItemAtPosition(posicao);
 
-						form.putExtra("AGENTE_SELECIONADO", usuarioSelecionado);
+						form.putExtra("PACIENTE_SELECIONADO", usuarioSelecionado);
+
 						startActivity(form);
 					}
-				});			
+				});
+		
+		return layout;		
 	}
+		
 
-	protected void onSaveInstanceState(Bundle outState){
+	public void onSaveInstanceState(Bundle outState){
 		//Inclusao da lista paciente no objeto Bundle
 	//	outState.putStringArrayList(PACIENTES_KEY, (ArrayList<Usuario>) listaPaciente);
 		//Persistencia do objeto bundle
 		super.onSaveInstanceState(outState);
-		Log.i(TAG, "onsaveRestoreState(): "	+ listaAgente);
+		Log.i(TAG, "onsaveRestoreState(): "	+ listaPaciente);
 	}
 	
 	public boolean onOptionsItemSelected(MenuItem item){
@@ -102,8 +114,8 @@ public class AgenteActivity extends Activity {
 			//Verifica se foi selecionado um item novo
 			case R.id.menu_novo:
 				//Especialista em mudanca de tela
-				Intent intent = new Intent(AgenteActivity.this,
-						AgenteDadosActivity.class);
+				Intent intent = new Intent(getActivity() ,
+						PacienteDadosActivity.class);
 				//Carrega a nova tela
 				startActivity(intent);
 				
@@ -114,39 +126,33 @@ public class AgenteActivity extends Activity {
 	}
 	
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		//Definicao do menu inflater
-		MenuInflater inflater = this.getMenuInflater();
-		
-		//Inflar um XML
-		inflater.inflate(R.menu.agente, menu);
-		
-		return true;
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		  inflater.inflate(R.menu.paciente, menu);
 	}
-	
+		
 	public void carregarLista(){
 		//Criacao do objeto DAO
-		UsuarioDAO dao = new UsuarioDAO(this);
+		UsuarioDAO dao = new UsuarioDAO(getActivity());
 		//Chamado do metodo listar
-		this.listaAgente = dao.listar(TipoUsuario.AGENTE);
+		this.listaPaciente = dao.listar(TipoUsuario.PACIENTE);
 		//fim da conexao do DB
 		dao.close();
 		
 		//O objeto arrayadapter converte lista em view
-		this.adapter = new ArrayAdapter<Usuario>(this, adapterLayout, listaAgente);
+		this.adapter = new ArrayAdapter<Usuario>(getActivity(), adapterLayout, listaPaciente);
 		//associacao do adapter ao listView
 		this.lvListagem.setAdapter(adapter);
 	}
 	
 	private void excluirUsuario() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setMessage("Confirma a exclusao de: "
 				+ usuarioSelecionado.getNome());
 
 		builder.setPositiveButton("Sim", new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int witch) {
-				UsuarioDAO dao = new UsuarioDAO(AgenteActivity.this);
+				UsuarioDAO dao = new UsuarioDAO(getActivity());
 				dao.deletar(usuarioSelecionado);
 				dao.close();
 				carregarLista();
@@ -162,8 +168,9 @@ public class AgenteActivity extends Activity {
 	public void onCreateContextMenu(ContextMenu menu, View view,
 			ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, view, menuInfo);
-
-		getMenuInflater().inflate(R.menu.menu_contexto, menu);
+		
+		getActivity().getMenuInflater().inflate(R.menu.menu_contexto, menu);
+		//getMenuInflater().inflate(R.menu.menu_contexto, menu);
 	}
 
 	@Override
@@ -171,13 +178,13 @@ public class AgenteActivity extends Activity {
 		switch (item.getItemId()) {
 			case R.id.menu_editar:
 				
-				Intent form = new Intent(AgenteActivity.this,
-						AgenteDadosActivity.class);				
-				form.putExtra("AGENTE_SELECIONADO", usuarioSelecionado);
+				Intent form = new Intent(getActivity(),
+						PacienteDadosActivity.class);				
+				form.putExtra("PACIENTE_SELECIONADO", usuarioSelecionado);
 
-				startActivity(form);
-	
+				startActivity(form);	
 				break;
+				
 			case R.id.menu_deletar:
 				excluirUsuario();
 				break;
@@ -186,8 +193,8 @@ public class AgenteActivity extends Activity {
 		}
 		return super.onContextItemSelected(item);
 	}
-
-	protected void onResume(){
+	
+	public void onResume(){
 		super.onResume();
 		this.carregarLista();
 	}

@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.util.Log;
 import br.fucapi.fapeam.monitori.model.bean.Bairro;
+import br.fucapi.fapeam.monitori.sqlite.SQLiteDatabaseHelper;
 
 public class BairroDAO extends AbstractDataBase{
 		
@@ -28,23 +29,23 @@ public class BairroDAO extends AbstractDataBase{
 		//objeto para armazenar os valores dos camopos
 		ContentValues values = new ContentValues();
 		//Definicao dos valores dos campos
-		values.put("nome", bairro.getNome());			
+		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_BAIRRO.nome, bairro.getNome());			
 		
 		//Inserir dados do Bairro
-		getWritableDatabase().insert(AbstractDataBase.TABLE_BAIRRO, null, values);
+		getWritableDatabase().insert(SQLiteDatabaseHelper.TABLE_BAIRRO_NAME, null, values);
 						
 		Log.i(TAG, "nome: "+ bairro.getNome() );						
 	}
 	
 	/** 
-	 * metodo responsavel pela listagem dos usuarios na tela
+	 * metodo responsavel pela listagem dos bairros na tela
 	 * */
 	public List<Bairro> listar(){
 		//Colecao de usuarios
 		List<Bairro> list_bairros = new ArrayList<Bairro>();
 		Bairro bairro;
 		//Definicao da instrucao SQL
-		String sql = "Select * from "+AbstractDataBase.TABLE_BAIRRO +" ";
+		String sql = "Select * from "+SQLiteDatabaseHelper.TABLE_BAIRRO_NAME +" ";
 				
 		//Objeto que reebe os registros do banco de dados
 		Cursor cursor = getReadableDatabase().rawQuery(sql, null);
@@ -54,8 +55,8 @@ public class BairroDAO extends AbstractDataBase{
 				
 				//Log.e(TAG, "nome bairro = "+ cursor.getString(cursor.getColumnIndex("nome")) );
 				//Carregar os atributos das UBS
-				bairro.setId(cursor.getLong(cursor.getColumnIndex("id") )); 
-				bairro.setNome(cursor.getString(cursor.getColumnIndex("nome")));																												
+				bairro.setId(cursor.getLong(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_BAIRRO.id ) )); 
+				bairro.setNome(cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_BAIRRO.nome )));																												
 				
 				//Adiciona um novo usuario a lista
 				list_bairros.add(bairro);
@@ -72,14 +73,14 @@ public class BairroDAO extends AbstractDataBase{
 		//Colecao de usuarios
 		List<String> list_bairros = new ArrayList<String>();		
 		//Definicao da instrucao SQL
-		String sql = "Select * from "+AbstractDataBase.TABLE_BAIRRO +" ";
+		String sql = "Select * from "+SQLiteDatabaseHelper.TABLE_BAIRRO_NAME +" ";
 				
 		//Objeto que reebe os registros do banco de dados
 		Cursor cursor = getReadableDatabase().rawQuery(sql, null);
 		try{
 			while(cursor.moveToNext()){				
 				//Adiciona um novo usuario a lista
-				list_bairros.add( cursor.getString(cursor.getColumnIndex("nome")) );
+				list_bairros.add( cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_BAIRRO.nome )) );
 			}
 		}catch(SQLException e){
 			Log.e(TAG, e.getMessage());
@@ -97,7 +98,7 @@ public class BairroDAO extends AbstractDataBase{
 		String[] args = {bairro.getId().toString()};
 		
 		//Exclusao do usuario
-		getWritableDatabase().delete(AbstractDataBase.TABLE_BAIRRO, "id=?", args);
+		getWritableDatabase().delete(SQLiteDatabaseHelper.TABLE_BAIRRO_NAME, "id=?", args);
 		Log.i(TAG, "Bairro Deletado: " +bairro.getNome());
 	}
 	
@@ -107,7 +108,7 @@ public class BairroDAO extends AbstractDataBase{
 	public void alterar(Bairro bairro) {
 		ContentValues values = new ContentValues();
 		
-		values.put("nome", bairro.getNome());			
+		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_BAIRRO.nome, bairro.getNome());			
 								
 		Log.i(TAG, "nome: "+ bairro.getNome() );
 		
@@ -115,7 +116,7 @@ public class BairroDAO extends AbstractDataBase{
 		String[] args = { bairro.getId().toString() };
 
 		// Altera dados do Aluno no BD
-		getWritableDatabase().update(AbstractDataBase.TABLE_BAIRRO, values, "id=?", args);
+		getWritableDatabase().update(SQLiteDatabaseHelper.TABLE_BAIRRO_NAME, values, "id=?", args);
 		Log.i(TAG, "bairro alterado: " + bairro.getNome());
 	}
 
@@ -124,7 +125,7 @@ public class BairroDAO extends AbstractDataBase{
 		Bairro bairro = null;
 		
 		//Definicao da instrucao SQL
-		String sql = "Select * from "+AbstractDataBase.TABLE_BAIRRO+" where id='"+idBairro+"' ";
+		String sql = "Select * from "+SQLiteDatabaseHelper.TABLE_BAIRRO_NAME+" where "+SQLiteDatabaseHelper.FIELDS_TABLE_BAIRRO.id+"='"+idBairro+"' ";
 		
 		//Objeto que reebe os registros do banco de dados
 		Cursor cursor = getReadableDatabase().rawQuery(sql, null);
@@ -133,8 +134,8 @@ public class BairroDAO extends AbstractDataBase{
 				
 				bairro = new Bairro();
 				
-				bairro.setId(cursor.getLong(cursor.getColumnIndex("id") ));							
-				bairro.setNome(cursor.getString(cursor.getColumnIndex("nome") ));		
+				bairro.setId(cursor.getLong(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_BAIRRO.id) ));							
+				bairro.setNome(cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_BAIRRO.nome) ));		
 			}
 		}catch(SQLException e){
 			Log.e(TAG, e.getMessage());
@@ -144,28 +145,4 @@ public class BairroDAO extends AbstractDataBase{
 		return bairro;
 	}
 	
-	public Bairro getBairro(String nome){
-
-		Bairro bairro = null;
-		
-		//Definicao da instrucao SQL
-		String sql = "Select * from "+AbstractDataBase.TABLE_BAIRRO+" where nome='"+nome+"' ";
-		
-		//Objeto que reebe os registros do banco de dados
-		Cursor cursor = getReadableDatabase().rawQuery(sql, null);
-		try{
-			if(cursor.moveToNext()){				
-				
-				bairro = new Bairro();
-				
-				bairro.setId(cursor.getLong(cursor.getColumnIndex("id") ));							
-				bairro.setNome(cursor.getString(cursor.getColumnIndex("nome") ));
-			}
-		}catch(SQLException e){
-			Log.e(TAG, e.getMessage());
-		}finally{
-			cursor.close();
-		}
-		return bairro;
-	}
 }

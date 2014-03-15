@@ -8,20 +8,40 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.util.Log;
+import br.fucapi.fapeam.monitori.model.bean.Bairro;
 import br.fucapi.fapeam.monitori.model.bean.UnidadeSaude;
 import br.fucapi.fapeam.monitori.sqlite.SQLiteDatabaseHelper;
+import br.fucapi.fapeam.monitori.utils.SpinnerObject;
 
 public class UnidadeSaudeDAO extends AbstractDataBase{
 		
 	//Constante para log no LogCat
 	private static final String TAG = "CADASTRO_UBS";
-		
+	private	Context context;
 	public UnidadeSaudeDAO (Context context){
 		
 		//Chamando o construtor que sabe acessar o BD
 		super(context);
+		this.context = context;
 	}	
 
+	
+	public long getLastInsertId() {
+	    long lastId = 0;
+	    	    
+	    String sql = "Select ROWID from "+SQLiteDatabaseHelper.TABLE_UBS_NAME +" order by ROWID DESC limit 1 ";
+		
+		//Objeto que reebe os registros do banco de dados
+		Cursor cursor = getReadableDatabase().rawQuery(sql, null);
+	    
+	    if (cursor != null && cursor.moveToFirst()) {
+	        lastId = cursor.getLong(0); //The 0 is the column index, we only have 1 column, so the index is 0
+	    }
+	    
+	    cursor.close();
+	    return lastId;
+	}
+	
 	/** 
 	 * metodo responsavel pelo cadastro do usuario
 	 * */
@@ -33,8 +53,12 @@ public class UnidadeSaudeDAO extends AbstractDataBase{
 		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_UBS.endereco, ubs.getEndereco());
 		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_UBS.numero, ubs.getNumeroUBS() );
 		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_UBS.cep, ubs.getCep() );		
-		//values.put("bairro", ubs.getBairro().getId());	
 		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_UBS.telefone, ubs.getFone());
+		
+		if(ubs.getBairro() != null){			
+			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_UBS.idBairro, ubs.getBairro().getId());
+		}
+				
 
 		//Inserir dados da UBS
 		getWritableDatabase().insert(SQLiteDatabaseHelper.TABLE_UBS_NAME, null, values);
@@ -71,11 +95,11 @@ public class UnidadeSaudeDAO extends AbstractDataBase{
 				ubs.setCep(cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_UBS.cep)));
 				ubs.setFone(cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_UBS.telefone)));
 				ubs.setNumeroUBS(cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_UBS.numero)));
-				/*
-				BairroDAO bairroDao = new BairroDAO();
-				bairroDao.
-				ubs.setBairro( cursor.getString(cursor.getColumnIndex("fone")));
-				*/																		
+				
+				BairroDAO bairroDao = new BairroDAO(context);				
+				Bairro bairro = bairroDao.getBairro( cursor.getLong(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_UBS.idBairro ) ) );
+				ubs.setBairro(bairro);
+																						
 				
 				//Adiciona um novo usuario a lista
 				lista.add(ubs);
@@ -87,6 +111,34 @@ public class UnidadeSaudeDAO extends AbstractDataBase{
 		}
 		return lista;
 	}
+	
+	
+public List <SpinnerObject> getUbsForSpinner(){
+	    
+		//Colecao de bairros
+		List<SpinnerObject> list_ubs = new ArrayList<SpinnerObject>();		
+		//Definicao da instrucao SQL
+		String sql = "Select * from "+SQLiteDatabaseHelper.TABLE_UBS_NAME +" ";
+				
+		//Objeto que reebe os registros do banco de dados
+		Cursor cursor = getReadableDatabase().rawQuery(sql, null);
+		try{
+			while(cursor.moveToNext()){				
+				//Adiciona um novo bairro a lista								
+				list_ubs.add ( new SpinnerObject ( 
+						cursor.getLong(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_UBS.id) ) , 
+						cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_UBS.nome) )
+						) );
+			}
+		}catch(SQLException e){
+			Log.e(TAG, e.getMessage());
+		}finally{
+			cursor.close();
+		}
+		return list_ubs;
+	    	    
+	}
+	
 	
 	/** 
 	 * metodo responsavel pela exclusao de UBS
@@ -109,9 +161,12 @@ public class UnidadeSaudeDAO extends AbstractDataBase{
 				
 		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_UBS.endereco, ubs.getEndereco());
 		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_UBS.numero, ubs.getNumeroUBS() );
-		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_UBS.cep, ubs.getCep() );		
-		//values.put("bairro", ubs.getBairro().getId());	
+		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_UBS.cep, ubs.getCep() );					
 		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_UBS.telefone, ubs.getFone());
+		
+		if(ubs.getBairro() != null){			
+			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_UBS.idBairro, ubs.getBairro().getId());
+		}
 								
 		Log.i(TAG, "nome: "+ ubs.getNome() );
 		Log.i(TAG, "endereco: "+ ubs.getEndereco() );

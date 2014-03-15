@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -167,6 +168,23 @@ public class BairroDialog extends DialogFragment {
 	void atualizarListaBairro(String novoBairro){
 		
 		BairroDAO daoBairro = new BairroDAO(getActivity()); 
+		List<SpinnerObject> listaBairros = daoBairro.getBairrosForSpinner();
+							
+		String[] StringArray = new String[listaBairros.size()];
+		int index=0;
+		for (SpinnerObject bairros : listaBairros) {			
+			StringArray[index++] = bairros.toString();			
+		}
+		//ArrayAdapter dataAdapter = new SpinnerAdapter(fragmentActivity, R.layout.spinner_generic, StringArray ,listaBairros);
+		//spinBairro.setAdapter(dataAdapter);
+		
+		adapter = new SpinnerAdapter(getActivity(), R.layout.spinner_generic, StringArray ,listaBairros);
+		spinBairro.setAdapter(adapter);
+		
+		
+		/*
+		
+		BairroDAO daoBairro = new BairroDAO(getActivity()); 
 		List<Bairro> listaBairros = daoBairro.listar();										
 		
 		String[] stringArray = new String[listaBairros.size()+1];
@@ -187,6 +205,7 @@ public class BairroDialog extends DialogFragment {
 		adapter = new SpinnerAdapter(getActivity(), R.layout.spinner_generic,stringArray,intArray);
 	    spinBairro.setAdapter(adapter);	    	    
 	    
-		spinBairro.setSelection(indexB);		
+		spinBairro.setSelection(indexB);
+		*/	
 	}	
 }

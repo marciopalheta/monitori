@@ -58,6 +58,7 @@
 	            android:layout_marginLeft="@dimen/margem_editext"
 	            android:padding="@dimen/padding"
 				android:hint="@string/nome"
+				android:inputType="text"
 				android:layout_marginBottom="10dp" />
 
 	        <TextView
@@ -197,6 +198,7 @@
 				android:padding="@dimen/padding"
 				android:textSize="@dimen/fontes_para_textos"
 				android:layout_marginBottom="10dp"
+				android:inputType="text|number"
 				android:hint="@string/numero"/>
 	       
 			<TextView

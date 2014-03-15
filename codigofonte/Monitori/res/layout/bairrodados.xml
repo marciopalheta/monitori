@@ -26,6 +26,7 @@
             android:layout_marginRight="@dimen/margem_editext"
             android:padding="@dimen/padding"
 			android:hint="@string/nome"
+			android:inputType="text"
 			android:layout_marginBottom="10dp"
 			android:focusable="true"			
 			android:focusableInTouchMode="true"			

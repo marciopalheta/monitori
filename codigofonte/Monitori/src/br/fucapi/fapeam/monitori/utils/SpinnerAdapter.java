@@ -1,48 +1,43 @@
 package br.fucapi.fapeam.monitori.utils;
 
+import java.util.List;
 import android.app.Activity;
 import android.content.Context;
-import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import br.fucapi.fapeam.monitori.R;
 
-public class SpinnerAdapter extends ArrayAdapter<String> {
+public class SpinnerAdapter extends ArrayAdapter {
 
-	private Context context;
-	private String []textArray = null;
-	private Integer[]intArray = null;
-	private OnClickListener clickListener = null;
-	
-	public OnClickListener getClickListener() {
-		return clickListener;
-	}
-	public void setClickListener(OnClickListener clickListener) {
-		this.clickListener = clickListener;
-	}
+	private Context context;	
+	private List<SpinnerObject> spinnerObjects;		
 
 	private int textViewResourceId;	
 	public SpinnerAdapter(Context context, int textViewResourceId,
             String[] objects) {
-		super(context, textViewResourceId, objects);
-		this.context = context;
-		this.textArray = objects;
+		super(context, textViewResourceId,objects);
+		this.context = context;		
 		this.textViewResourceId = textViewResourceId;
-	}    
-		public SpinnerAdapter(Context context, int textViewResourceId,
-                        String[] objects, Integer[] intArray) {
-                  super(context, textViewResourceId, objects);
-                  this.context = context;
-                  this.textArray = objects;
-                  this.intArray = intArray;
-                  this.textViewResourceId = textViewResourceId;
-            }
-        
+	}    		
+	
+	@Override
+	public SpinnerObject getItem(int position) {
+		return spinnerObjects.get(position);
+	}
+	
+	public SpinnerAdapter(Context context, int textViewResourceId, String [] objects,
+				List<SpinnerObject> spinnerObjects) {
+			super(context, textViewResourceId,objects);
+						
+          this.context = context;          
+          this.spinnerObjects = spinnerObjects;          
+          this.textViewResourceId = textViewResourceId;
+}
+		
 			@Override
         public View getDropDownView(int position, View convertView,ViewGroup parent) {
             return getCustomView(position, convertView, parent);
@@ -59,21 +54,33 @@ public class SpinnerAdapter extends ArrayAdapter<String> {
             View row=inflater.inflate(textViewResourceId, parent, false);
             		                        
 	            if(textViewResourceId == R.layout.spinner_sexo ){
-	            	TextView label=(TextView)row.findViewById(R.id.textView1);
-	            	label.setText(textArray[position]);            
-	            	ImageView icon=(ImageView)row.findViewById(R.id.imageView1);
-	            	icon.setImageResource(intArray[position]);
+	            	if(spinnerObjects!=null){	            	
+		            	TextView label=(TextView)row.findViewById(R.id.textView1);
+		            	label.setText( spinnerObjects.get(position).getValue() );            
+		            	ImageView icon=(ImageView)row.findViewById(R.id.imageView1);
+		            	icon.setImageResource( spinnerObjects.get(position).getImageResourse() );
+	            	}
+	            	
 	            }else if(textViewResourceId == R.layout.spinner_generic){
-	            	TextView id=(TextView)row.findViewById(R.id.textID);
-	            	id.setText( String.valueOf( intArray[position] ) );            
-	            	
-	            	TextView label=(TextView)row.findViewById(R.id.textView1);
-	            	label.setText(textArray[position]);
-	            	
-	            	if(intArray[position] == 0){
-	            		label.setOnClickListener(clickListener);
-	            	}   		            	
+	            	if(spinnerObjects!=null){	            	
+		            	TextView id=(TextView)row.findViewById(R.id.textID);
+		            	id.setText( String.valueOf( spinnerObjects.get(position).getId() ) );            
+		            	
+		            	TextView label=(TextView)row.findViewById(R.id.textView1);
+		            	label.setText( spinnerObjects.get(position).getValue() );
+		            	
+	            	}
 	            }	            
 	            return row;
             }
+        
+        
+    	public List<SpinnerObject> getSpinnerObjects() {
+    		return spinnerObjects;
+    	}
+
+    	public void setSpinnerObjects(List<SpinnerObject> spinnerObjects) {
+    		this.spinnerObjects = spinnerObjects;
+    	}
+        
    }

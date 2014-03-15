@@ -122,8 +122,8 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
     
     // UnidadeBasicaSaude table create statement
     private static final String CREATE_TABLE_UBS = "CREATE TABLE " + TABLE_UBS_NAME
-            + "(" + FIELDS_TABLE_UBS.id + " INTEGER PRIMARY KEY," 
-            + FIELDS_TABLE_UBS.nome+"TEXT, "+FIELDS_TABLE_UBS.endereco+" TEXT, " 
+            + "(" + FIELDS_TABLE_UBS.id + " INTEGER PRIMARY KEY, " 
+            + FIELDS_TABLE_UBS.nome+" TEXT, "+FIELDS_TABLE_UBS.endereco+" TEXT, " 
             + FIELDS_TABLE_UBS.numero+" TEXT, "+ FIELDS_TABLE_UBS.cep+" TEXT, " 
             + FIELDS_TABLE_UBS.telefone+" TEXT, "+FIELDS_TABLE_UBS.idBairro+" INTEGER )";
  	

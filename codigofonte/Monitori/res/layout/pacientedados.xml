@@ -57,6 +57,7 @@
 	            android:textSize="@dimen/fontes_para_textos"
 	            android:layout_marginLeft="@dimen/margem_editext"
 	            android:padding="@dimen/padding"
+	            android:inputType="text"
 				android:hint="@string/nome"
 				android:layout_marginBottom="10dp" />
 	        
@@ -174,6 +175,7 @@
 				android:layout_marginLeft="@dimen/margem_editext"
 				android:padding="@dimen/padding"
 				android:textSize="@dimen/fontes_para_textos"
+				android:inputType="text|number"
 				android:layout_marginBottom="10dp"
 				android:hint="@string/numero"/>
 	       
@@ -206,6 +208,7 @@
 	            android:textSize="@dimen/fontes_para_textos"
 	            android:layout_marginBottom="10dp" />       
 	       <Spinner
+	           
 	        android:id="@+id/spinBairro"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
@@ -214,7 +217,8 @@
 	        android:entries="@array/bairro_arrays"
 	        android:prompt="@string/bairro_prompt" 
 	        android:background="#ebedea"
-	        
+	        android:focusable="true"
+	        android:focusableInTouchMode="true"	        	       
 	        android:layout_marginBottom="10dp"
 	        />
 	       
@@ -236,9 +240,11 @@
 	        android:textSize="@dimen/fontes_para_textos"            
 	        android:entries="@array/sexo_arrays"
 	        android:prompt="@string/sexo_prompt" 
-	        android:background="#ebedea"
-	        
+	        android:background="#ebedea"	        	        	        
 	        android:layout_marginBottom="10dp"
+	        android:focusable="true"
+	        android:focusableInTouchMode="true"
+	        
 	        />
 	                   
 	     	
@@ -305,6 +311,7 @@
 	                android:layout_marginBottom="10dp"
 	                android:background="#ebedea"
 	                android:hint="@string/nome_mae"
+	                android:inputType="text"
 	                android:padding="@dimen/padding"
 	                android:textSize="@dimen/fontes_para_textos" />
 			
@@ -326,7 +333,8 @@
 	        android:entries="@array/ubs_arrays"
 	        android:prompt="@string/ubs_prompt" 
 	        android:background="#ebedea"
-	        
+	        android:focusable="true"
+	        android:focusableInTouchMode="true"
 	        android:layout_marginBottom="10dp"
 	        />
 			 

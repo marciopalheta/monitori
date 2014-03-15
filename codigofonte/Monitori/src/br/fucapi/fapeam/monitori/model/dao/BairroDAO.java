@@ -10,6 +10,7 @@ import android.database.SQLException;
 import android.util.Log;
 import br.fucapi.fapeam.monitori.model.bean.Bairro;
 import br.fucapi.fapeam.monitori.sqlite.SQLiteDatabaseHelper;
+import br.fucapi.fapeam.monitori.utils.SpinnerObject;
 
 public class BairroDAO extends AbstractDataBase{
 		
@@ -69,9 +70,10 @@ public class BairroDAO extends AbstractDataBase{
 		return list_bairros;
 	}
 	
-	public List<String> listaBairros(){
-		//Colecao de usuarios
-		List<String> list_bairros = new ArrayList<String>();		
+	public List <SpinnerObject> getBairrosForSpinner(){
+	    
+		//Colecao de bairros
+		List<SpinnerObject> list_bairros = new ArrayList<SpinnerObject>();		
 		//Definicao da instrucao SQL
 		String sql = "Select * from "+SQLiteDatabaseHelper.TABLE_BAIRRO_NAME +" ";
 				
@@ -79,8 +81,11 @@ public class BairroDAO extends AbstractDataBase{
 		Cursor cursor = getReadableDatabase().rawQuery(sql, null);
 		try{
 			while(cursor.moveToNext()){				
-				//Adiciona um novo usuario a lista
-				list_bairros.add( cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_BAIRRO.nome )) );
+				//Adiciona um novo bairro a lista								
+				list_bairros.add ( new SpinnerObject ( 
+						cursor.getLong(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_BAIRRO.id) ) , 
+						cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_BAIRRO.nome) )
+						) );
 			}
 		}catch(SQLException e){
 			Log.e(TAG, e.getMessage());
@@ -88,7 +93,9 @@ public class BairroDAO extends AbstractDataBase{
 			cursor.close();
 		}
 		return list_bairros;
+	    	    
 	}
+		
 	
 	/** 
 	 * metodo responsavel pela exclusao de UBS

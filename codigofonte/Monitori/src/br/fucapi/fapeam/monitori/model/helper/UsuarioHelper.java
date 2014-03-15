@@ -1,32 +1,35 @@
 package br.fucapi.fapeam.monitori.model.helper;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import br.fucapi.fapeam.monitori.R;
-import br.fucapi.fapeam.monitori.model.bean.Agente;
-import br.fucapi.fapeam.monitori.model.bean.Bairro;
-import br.fucapi.fapeam.monitori.model.bean.Medico;
-import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import br.fucapi.fapeam.monitori.model.dao.BairroDAO;
 import br.fucapi.fapeam.monitori.utils.BairroDialog;
 import br.fucapi.fapeam.monitori.utils.Funcoes;
 import br.fucapi.fapeam.monitori.utils.Mask;
 import br.fucapi.fapeam.monitori.utils.SpinnerAdapter;
+import br.fucapi.fapeam.monitori.utils.SpinnerObject;
 
+import android.R.array;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.TextView.OnEditorActionListener;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -46,22 +49,21 @@ public class UsuarioHelper {
 	
 	private EditText dataNascimento;		
 	private ImageButton ibDataNascimento;	
-	private Spinner spinBairro;		 	
-	private Spinner spinUbs;	
-	
+	private Spinner spinBairro;			
+	private Spinner spinUbs;
+			
 	private static final String DATE_FORMAT = "dd/MM/yyyy";	    
     private SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);           
     
 	private Calendar dtCalendar = Calendar.getInstance();			
-	
-	private Agente agente;
-	
+			
 	private ImageView foto;
 	private Spinner sexo;	
 	private Usuario usuario;
 	private Context context;		        		        
 	private FragmentActivity fragmentActivity;
-	private int selectionCurrent;	
+	private boolean onCreateFlag = true;
+	
     //private Calendar myCalendar;
 
 
@@ -89,7 +91,8 @@ public class UsuarioHelper {
 
 	};
 
-	private ArrayAdapter<String> adapter;
+	//private ArrayAdapter<String> adapter;
+	SpinnerAdapter adapter;
 	
 	public UsuarioHelper(final FragmentActivity fragmentActivity){
 		//Associacao de campos de tela ao controller
@@ -128,24 +131,39 @@ public class UsuarioHelper {
 	        }
 	    });
 		
-		spinUbs = (Spinner) fragmentActivity.findViewById(R.id.spinUbs);
 		
+		spinUbs = (Spinner) fragmentActivity.findViewById(R.id.spinUbs);		
 		spinBairro = (Spinner) fragmentActivity.findViewById(R.id.spinBairro);
+		sexo = (Spinner) fragmentActivity.findViewById(R.id.spinSexo);		
 		
-		selectionCurrent = spinBairro.getSelectedItemPosition();
-		
+		sexo.setOnTouchListener(new View.OnTouchListener() {            
+			@Override
+			public boolean onTouch(View view, MotionEvent event) {
+				if(view !=null){
+					
+					Funcoes.hideKeyboard(fragmentActivity );
+					sexo.requestFocusFromTouch();
+					
+					//return true;
+				}
+				return false;
+			}
+        });
+						
+				
 		spinBairro.setOnTouchListener(new View.OnTouchListener() {            
 			@Override
 			public boolean onTouch(View view, MotionEvent event) {
-				if(view !=null){					
+				if(view !=null){
+					Funcoes.hideKeyboard(fragmentActivity );
+					spinBairro.requestFocusFromTouch();
 					TextView textId = (TextView)view.findViewById(R.id.textID);
 					 if(event.getAction()==MotionEvent.ACTION_UP){
 						 if (textId.getText().toString().equals("0") ){						
 								getNovoBairro();
 								return true;
 						   }
-		              }
-		            
+		              }					 
 				}
 				return false;
 			}
@@ -155,57 +173,95 @@ public class UsuarioHelper {
 			@Override
 			public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
 								
+								
 				if(selectedItemView !=null){
-					if(selectionCurrent!=position){
-						TextView textId = (TextView)selectedItemView.findViewById(R.id.textID);
-						
-						if (textId.getText().toString().equals("0") ){
-							spinBairro.setSelection(0);						
-							//Toast.makeText(fragmentActivity, "funcionou", Toast.LENGTH_LONG).show();
-							getNovoBairro();
-					    }
-					}
+										
+					//if(position != spinBairro.getCount()-1 ){
+						if(!onCreateFlag){
+							spinBairro.clearFocus();
+				            sexo.requestFocus();
+				            sexo.requestFocusFromTouch();
+				            sexo.performClick();
+						}else{
+							onCreateFlag = false;
+						}
+					//}else{
+						//spinBairro.setSelection(0);
+						//getNovoBairro();
+					//}
+												           
+					
 				}
+				
+
 			} 			
 
 			@Override
 			public void onNothingSelected(AdapterView<?> parentView) {
-			    // your code here
+				
 			}
 
 			});
 		
-		sexo = (Spinner) fragmentActivity.findViewById(R.id.spinSexo);		
+		
+		cep.setOnEditorActionListener(new OnEditorActionListener() {
+
+			@Override
+			public boolean onEditorAction(TextView textView, int actionId,
+					KeyEvent event) {
+				
+				if (actionId == EditorInfo.IME_ACTION_NEXT) {
+					Funcoes.hideKeyboard(fragmentActivity );
+		            textView.clearFocus();		            
+		            
+		            spinBairro.requestFocus();		            
+		            spinBairro.requestFocusFromTouch();
+		            
+		            spinBairro.performClick();
+		        }
+		        return true;
+								
+			}
+		});
+
 		
 		
-		String[] list = fragmentActivity.getResources().getStringArray(R.array.sexo_arrays);
-		Integer[] imageSexo={R.drawable.ic_man,R.drawable.ic_woman};
-							    
-		adapter = new SpinnerAdapter(fragmentActivity, R.layout.spinner_sexo,list,imageSexo);		
+		//String[] list = fragmentActivity.getResources().getStringArray(R.array.sexo_arrays);
+		//Integer[] imageSexo={R.drawable.ic_man,R.drawable.ic_woman};
+		
+		List<SpinnerObject> listSexo = new ArrayList<SpinnerObject>();
+		listSexo.add( new SpinnerObject(fragmentActivity.getResources().getString(R.string.masculino ) , R.drawable.ic_man ) );
+		listSexo.add( new SpinnerObject(fragmentActivity.getResources().getString(R.string.feminino ) , R.drawable.ic_woman ) );
+								
+		String[] StringArray = new String[listSexo.size()];
+		int i=0;
+		for(SpinnerObject s: listSexo){
+			StringArray[i++] = s.toString();
+		}				
+		
+		adapter = new SpinnerAdapter(fragmentActivity, R.layout.spinner_sexo,StringArray,listSexo );		
 	    sexo.setAdapter(adapter);
-	    //sexo.setAdapter(new MyAdapter(activity, R.layout.spinner_item, data1));
 	    atualizarListaBairros();
 	    		
 	}
+		
 	
 	private void atualizarListaBairros(){
+		
+		
 		BairroDAO daoBairro = new BairroDAO(fragmentActivity); 
-		List<Bairro> listaBairros = daoBairro.listar();										
+		List<SpinnerObject> listaBairros = daoBairro.getBairrosForSpinner();
+							
+		String[] StringArray = new String[listaBairros.size()];
+		int index=0;
+		for (SpinnerObject bairros : listaBairros) {			
+			StringArray[index++] = bairros.toString();			
+		}
+		//ArrayAdapter dataAdapter = new SpinnerAdapter(fragmentActivity, R.layout.spinner_generic, StringArray ,listaBairros);
+		//spinBairro.setAdapter(dataAdapter);
 		
-		String[] stringArray = new String[listaBairros.size()+1];
-		Integer[] intArray = new Integer[listaBairros.size()+1];
-		int index = 0;		
-		for (Bairro bairro : listaBairros) {
-			stringArray[index] = bairro.getNome();
-			
-			intArray[index] = Integer.parseInt(bairro.getId().toString());
-		  index++;
-		}				
-		
-		stringArray[index] = context.getString(R.string.bairro_novo); 				
-		intArray[index] = 0;
-		adapter = new SpinnerAdapter(fragmentActivity, R.layout.spinner_generic,stringArray,intArray);
-	    spinBairro.setAdapter(adapter);	    	    	    
+		adapter = new SpinnerAdapter(fragmentActivity, R.layout.spinner_generic, StringArray ,listaBairros);
+		spinBairro.setAdapter(adapter);	    	    	    			    
 	    
 	}
 	

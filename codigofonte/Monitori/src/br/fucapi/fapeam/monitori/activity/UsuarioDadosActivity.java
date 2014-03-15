@@ -5,9 +5,12 @@ import java.util.List;
 import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.activity.unidadeSaude.UnidadeSaudeDadosActivity;
 import br.fucapi.fapeam.monitori.model.bean.UnidadeSaude;
+import br.fucapi.fapeam.monitori.model.dao.BairroDAO;
 import br.fucapi.fapeam.monitori.model.dao.UnidadeSaudeDAO;
+import br.fucapi.fapeam.monitori.utils.Funcoes;
 import br.fucapi.fapeam.monitori.utils.RequestCodes;
 import br.fucapi.fapeam.monitori.utils.SpinnerAdapter;
+import br.fucapi.fapeam.monitori.utils.SpinnerObject;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -38,8 +41,9 @@ public class UsuarioDadosActivity extends FragmentActivity {
 
 		private SpinnerAdapter adapter = null;
 		
-		private int selectionCurrent;
-		
+		private int selectionCurrent;		
+		private FragmentActivity fragmentActivity = this;
+				
 		
 		@Override
 		protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +73,8 @@ public class UsuarioDadosActivity extends FragmentActivity {
 			});
 			
 			spinUbs = (Spinner) findViewById(R.id.spinUbs);		
-			atualizarListaUbs("");
+			
+			atualizarListaUbs(0);
 			
 			selectionCurrent = spinUbs.getSelectedItemPosition();
 			
@@ -77,6 +82,7 @@ public class UsuarioDadosActivity extends FragmentActivity {
 				@Override
 				public boolean onTouch(View view, MotionEvent event) {
 					if(view !=null){					
+						Funcoes.hideKeyboard(fragmentActivity );
 						TextView textId = (TextView)view.findViewById(R.id.textID);
 						 if(event.getAction()==MotionEvent.ACTION_UP){
 							 if (textId.getText().toString().equals("0") ){						
@@ -113,33 +119,30 @@ public class UsuarioDadosActivity extends FragmentActivity {
 				});
 		}
 		
-		private void atualizarListaUbs(String nomeUBS){
-			UnidadeSaudeDAO daoUbs = new UnidadeSaudeDAO(this); 
-			List<UnidadeSaude> listaUbs = daoUbs.listar();										
+		private void atualizarListaUbs(long idUBS){
 			
-			String[] stringArray = new String[listaUbs.size()+1];
-			Integer[] intArray = new Integer[listaUbs.size()+1];
-			int index = 0;
-			int indexB = 0;
-			for (UnidadeSaude ubs : listaUbs) {
-				stringArray[index] = ubs.getNome();
-				if(ubs.getNome().equals(nomeUBS)){
-					indexB = index;	
+			UnidadeSaudeDAO daoUbs = new UnidadeSaudeDAO(this);
+			List<SpinnerObject> listaUbs = daoUbs.getUbsForSpinner();
+			
+								
+			String[] StringArray = new String[listaUbs.size()];
+			int index=0, indexKey = 0;
+			
+			for (SpinnerObject ubs : listaUbs) {
+				if(ubs.getId() == idUBS ){
+					indexKey = index;	
 				}
-				intArray[index] = Integer.parseInt(ubs.getId().toString());
-			  index++;
-			}				
+				StringArray[index++] = listaUbs.toString();			
+			}
+			//ArrayAdapter dataAdapter = new SpinnerAdapter(fragmentActivity, R.layout.spinner_generic, StringArray ,listaBairros);
+			//spinBairro.setAdapter(dataAdapter);
 			
-			stringArray[index] = getString(R.string.ubs_novo); 				
-			intArray[index] = 0;
-			adapter = new SpinnerAdapter(this, R.layout.spinner_generic,stringArray,intArray);
-		    
-			Log.i("Construtor teste", "Executou");
-			
-			spinUbs.setAdapter(adapter);	    	    
-		    
+			adapter = new SpinnerAdapter(fragmentActivity, R.layout.spinner_generic, StringArray ,listaUbs);
+			spinUbs.setAdapter(adapter);
+								    
 		    //ArrayAdapter<String> array_spinner=(ArrayAdapter<String>)getSpinBairro().getAdapter();
-			spinUbs.setSelection(indexB);		   	    
+			spinUbs.setSelection(indexKey);
+					   	    
 		}
 
 		private void getNovaUbs() {
@@ -157,10 +160,12 @@ public class UsuarioDadosActivity extends FragmentActivity {
 
 	        if(requestCode == RequestCodes.UBS_REQUESTCODE ) {
 	            if(resultCode == Activity.RESULT_OK) {
-	                String nomeUBS = data.getStringExtra("NOVA_UBS");
+	                //long idUBS = data.getLongExtra("ID_UBS");
+	                long idUBS = data.getLongExtra("ID_UBS",0);
 	                //Log.e("REQUEST", nomeUBS);
 	                //atualizar aqui a listagem
-	                atualizarListaUbs(nomeUBS);
+
+	                atualizarListaUbs(idUBS);
 	            }
 	        }else if (requestCode == RequestCodes.FOTO_REQUESTCODE ) {
 				if (resultCode == Activity.RESULT_OK) {

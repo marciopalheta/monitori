@@ -121,4 +121,38 @@ public class ColetarDadosDAO extends AbstractDataBase{
 		Log.i(TAG, "Coleta de Dados Alterado: " +coletaDados.getSis());
 		
 	}
+	
+	public ColetarDados getColetarDados(long id){
+		//Colecao de usuarios
+		ColetarDados coletaDados = null;
+		
+		//Definicao da instrucao SQL
+		String sql = "Select * from "+SQLiteDatabaseHelper.TABLE_COLETAR_DADOS_NAME+
+				" where "+SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.id+"='"+id+"' ";
+		
+		//Objeto que reebe os registros do banco de dados
+		Cursor cursor = getReadableDatabase().rawQuery(sql, null);
+		try{
+			if(cursor.moveToNext()){				
+				
+				coletaDados = new ColetarDados();
+				
+				coletaDados.setId(cursor.getLong(cursor.getColumnIndex
+						(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.id) ));							
+				coletaDados.setSis(cursor.getString(cursor.getColumnIndex
+						(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.sis)));				
+				coletaDados.setPosPandrial(cursor.getString(cursor.getColumnIndex
+						(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.pos_pandrial)));								
+				coletaDados.setGlicose(cursor.getString(cursor.getColumnIndex
+						(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.glicose)));								
+				coletaDados.setJejum(cursor.getString(cursor.getColumnIndex
+						(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.jejum)));							
+			}
+		}catch(SQLException e){
+			Log.e(TAG, e.getMessage());
+		}finally{
+			cursor.close();
+		}
+		return coletaDados;
+	}
 }

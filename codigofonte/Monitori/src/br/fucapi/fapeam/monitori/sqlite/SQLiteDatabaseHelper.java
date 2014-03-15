@@ -21,6 +21,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_USUARIO_NAME = "Usuario";
     public static final String TABLE_UBS_NAME = "UnidadeSaude";
     public static final String TABLE_BAIRRO_NAME = "Bairro";
+    public static final String TABLE_COLETAR_DADOS_NAME = "ColetarDados";
     
 	//Constantes para auxiliar o controle de versoes
 	
@@ -127,7 +128,30 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
             + FIELDS_TABLE_UBS.numero+" TEXT, "+ FIELDS_TABLE_UBS.cep+" TEXT, " 
             + FIELDS_TABLE_UBS.telefone+" TEXT, "+FIELDS_TABLE_UBS.idBairro+" INTEGER )";
  	
+    public static interface FIELDS_TABLE_COLETAR_DADOS{
+    	String id = KEY_ID;
+    	String sis = "sis";
+    	String glicose = "glicose";
+    	String jejum = "jejum";
+    	String pos_pandrial = "pos_pandrial";
+    	String datacoleta = "dataColeta";
+    	
+    }
     
+    public static String ALL_FIELDS_TABLE_COLETAR_DADOS = 
+    		TABLE_COLETAR_DADOS_NAME +"."+FIELDS_TABLE_COLETAR_DADOS.id+","+
+    		TABLE_COLETAR_DADOS_NAME +"."+FIELDS_TABLE_COLETAR_DADOS.sis+","+
+    		TABLE_COLETAR_DADOS_NAME +"."+FIELDS_TABLE_COLETAR_DADOS.glicose+","+
+    		TABLE_COLETAR_DADOS_NAME +"."+FIELDS_TABLE_COLETAR_DADOS.jejum+","+
+    		TABLE_COLETAR_DADOS_NAME +"."+FIELDS_TABLE_COLETAR_DADOS.pos_pandrial+","+
+    		TABLE_COLETAR_DADOS_NAME +"."+FIELDS_TABLE_COLETAR_DADOS.datacoleta+",";
+    
+    private static final String CREATE_TABLE_COLETAR_DADOS = "CREATE TABLE" + TABLE_COLETAR_DADOS_NAME
+    		+ "(" + FIELDS_TABLE_COLETAR_DADOS.id + "INTERGER PRIMARY KEY, "
+    		+ FIELDS_TABLE_COLETAR_DADOS.sis+" TEXT, "+FIELDS_TABLE_COLETAR_DADOS.glicose+"TEXT, "
+    		+ FIELDS_TABLE_COLETAR_DADOS.jejum+" TEXT, "+FIELDS_TABLE_COLETAR_DADOS.pos_pandrial+"TEXT, "
+    		+ FIELDS_TABLE_COLETAR_DADOS.datacoleta+" TEXT )";
+
     public static interface FIELDS_TABLE_BAIRRO {
         String id = KEY_ID;
         String nome = "nome";                        
@@ -169,6 +193,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
 		database.execSQL(CREATE_INDEX_TABLE_USUARIO);		
 		database.execSQL(CREATE_TABLE_UBS);
 		database.execSQL(CREATE_TABLE_BAIRRO);
+		database.execSQL(CREATE_TABLE_COLETAR_DADOS);
 	}
 
 	/**
@@ -181,6 +206,8 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
 		database.execSQL("DROP TABLE IF EXISTS " + TABLE_USUARIO_NAME);
 		database.execSQL("DROP TABLE IF EXISTS " + TABLE_UBS_NAME);
 		database.execSQL("DROP TABLE IF EXISTS " + TABLE_UBS_NAME);
+		database.execSQL("DROP TABLE IF EXISTS " + TABLE_COLETAR_DADOS_NAME);
+		
 				
 		//Chamando o metodo de construcao da base de dados
 		onCreate(database);
@@ -193,6 +220,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
 		database.execSQL("DROP TABLE IF EXISTS " + TABLE_USUARIO_NAME);
 		database.execSQL("DROP TABLE IF EXISTS " + TABLE_UBS_NAME);
 		database.execSQL("DROP TABLE IF EXISTS " + TABLE_UBS_NAME);
+		database.execSQL("DROP TABLE IF EXISTS " + TABLE_COLETAR_DADOS_NAME);
 				
 		//Chamando o metodo de construcao da base de dados
 		onCreate(database);

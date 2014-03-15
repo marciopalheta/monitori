@@ -65,6 +65,8 @@ public class ColetarDadosDAO extends AbstractDataBase{
 						(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.pos_pandrial)));
 				coletaDados.setJejum(cursor.getString(cursor.getColumnIndex
 						(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.jejum)));
+				coletaDados.setGlicose(cursor.getString(cursor.getColumnIndex
+						(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.glicose)));
 		
 				//adiciona na lista
 				lista.add(coletaDados);
@@ -105,6 +107,18 @@ public class ColetarDadosDAO extends AbstractDataBase{
 		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.jejum,
 				coletaDados.getJejum());
 		
-	}
+		Log.i(TAG, "sis: " +coletaDados.getSis());
+		Log.i(TAG, "pos_pandiral: " +coletaDados.getPosPandrial());
+		Log.i(TAG, "glicose: " +coletaDados.getGlicose());
+		Log.i(TAG, "jejum: " +coletaDados.getJejum());
+		
+		// Colecao de valores de parametros do SQL
+		String[] args = { coletaDados.getId().toString() };
 
+		// Altera dados do Aluno no BD
+		getWritableDatabase().update(SQLiteDatabaseHelper.TABLE_COLETAR_DADOS_NAME, 
+				values, "id=?", args);
+		Log.i(TAG, "Coleta de Dados Alterado: " +coletaDados.getSis());
+		
+	}
 }

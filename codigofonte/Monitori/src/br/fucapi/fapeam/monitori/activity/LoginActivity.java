@@ -84,6 +84,15 @@ public class LoginActivity extends Activity {
 				
 				return false;
 				
+			case R.id.menu_coletar_dados:
+				//Especialista em mudanca de tela
+				intent = new Intent(LoginActivity.this,
+						ColetarDadosActivity.class);
+				//Carrega a nova tela
+				startActivity(intent);
+				
+				return false;
+				
 			case R.id.menu_principal:
 				//Especialista em mudanca de tela
 				intent = new Intent(LoginActivity.this,

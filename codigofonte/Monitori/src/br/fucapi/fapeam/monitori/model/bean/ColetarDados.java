@@ -4,31 +4,38 @@ public class ColetarDados extends AbstractEntityBean{
 	
 	private String sis;
 	private String glicose;
-	private String jejum;
-	private String posPandrial;
+	private boolean jejum;
+	private boolean posPandrial;
 	
 	public String getSis() {
 		return sis;
 	}
+	
 	public void setSis(String sis) {
 		this.sis = sis;
 	}
+	
 	public String getGlicose() {
 		return glicose;
 	}
+	
 	public void setGlicose(String glicose) {
 		this.glicose = glicose;
 	}
-	public String getJejum() {
-		return jejum;
-	}
-	public void setJejum(String jejum) {
-		this.jejum = jejum;
-	}
-	public String getPosPandrial() {
+	
+	public boolean isPos_pandrial() {
 		return posPandrial;
 	}
-	public void setPosPandrial(String posPandrial) {
-		this.posPandrial = posPandrial;
+
+	public void setPos_pandrial(boolean pos_pandrial) {
+		this.posPandrial = pos_pandrial;
+	}
+
+	public boolean isJejum() {
+		return jejum;
+	}
+
+	public void setJejum(boolean jejum) {
+		this.jejum = jejum;
 	}
 }

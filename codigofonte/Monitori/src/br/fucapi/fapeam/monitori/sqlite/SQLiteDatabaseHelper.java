@@ -134,7 +134,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
     	String glicose = "glicose";
     	String jejum = "jejum";
     	String pos_pandrial = "pos_pandrial";
-    	String datacoleta = "dataColeta";
+    	//String datacoleta = "dataColeta";
     	
     }
     
@@ -143,14 +143,13 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
     		TABLE_COLETAR_DADOS_NAME +"."+FIELDS_TABLE_COLETAR_DADOS.sis+","+
     		TABLE_COLETAR_DADOS_NAME +"."+FIELDS_TABLE_COLETAR_DADOS.glicose+","+
     		TABLE_COLETAR_DADOS_NAME +"."+FIELDS_TABLE_COLETAR_DADOS.jejum+","+
-    		TABLE_COLETAR_DADOS_NAME +"."+FIELDS_TABLE_COLETAR_DADOS.pos_pandrial+","+
-    		TABLE_COLETAR_DADOS_NAME +"."+FIELDS_TABLE_COLETAR_DADOS.datacoleta+",";
+    		TABLE_COLETAR_DADOS_NAME +"."+FIELDS_TABLE_COLETAR_DADOS.pos_pandrial+",";
+    		//TABLE_COLETAR_DADOS_NAME +"."+FIELDS_TABLE_COLETAR_DADOS.datacoleta+",";
     
-    private static final String CREATE_TABLE_COLETAR_DADOS = "CREATE TABLE" + TABLE_COLETAR_DADOS_NAME
-    		+ "(" + FIELDS_TABLE_COLETAR_DADOS.id + "INTERGER PRIMARY KEY, "
+    private static final String CREATE_TABLE_COLETAR_DADOS = "CREATE TABLE " + TABLE_COLETAR_DADOS_NAME
+    		+ "(" + FIELDS_TABLE_COLETAR_DADOS.id + " INTERGER PRIMARY KEY, "
     		+ FIELDS_TABLE_COLETAR_DADOS.sis+" TEXT, "+FIELDS_TABLE_COLETAR_DADOS.glicose+"TEXT, "
-    		+ FIELDS_TABLE_COLETAR_DADOS.jejum+" TEXT, "+FIELDS_TABLE_COLETAR_DADOS.pos_pandrial+"TEXT, "
-    		+ FIELDS_TABLE_COLETAR_DADOS.datacoleta+" TEXT )";
+    		+ FIELDS_TABLE_COLETAR_DADOS.jejum+" TEXT, "+FIELDS_TABLE_COLETAR_DADOS.pos_pandrial+"TEXT )";
 
     public static interface FIELDS_TABLE_BAIRRO {
         String id = KEY_ID;
@@ -192,8 +191,9 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
 		database.execSQL(CREATE_TABLE_USUARIO);
 		database.execSQL(CREATE_INDEX_TABLE_USUARIO);		
 		database.execSQL(CREATE_TABLE_UBS);
-		database.execSQL(CREATE_TABLE_BAIRRO);
 		database.execSQL(CREATE_TABLE_COLETAR_DADOS);
+		database.execSQL(CREATE_TABLE_BAIRRO);
+		
 	}
 
 	/**
@@ -205,13 +205,16 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
 		Log.i(TAG, "upgrade database from {"+oldVersion+"} to {"+newVersion+"}");
 		database.execSQL("DROP TABLE IF EXISTS " + TABLE_USUARIO_NAME);
 		database.execSQL("DROP TABLE IF EXISTS " + TABLE_UBS_NAME);
-		database.execSQL("DROP TABLE IF EXISTS " + TABLE_UBS_NAME);
 		database.execSQL("DROP TABLE IF EXISTS " + TABLE_COLETAR_DADOS_NAME);
+		database.execSQL("DROP TABLE IF EXISTS " + TABLE_BAIRRO_NAME);
+		
 		
 				
 		//Chamando o metodo de construcao da base de dados
 		onCreate(database);
 	}
+	
+	
 	
 	@Override
 	public void onDowngrade(SQLiteDatabase database, int oldVersion, int newVersion) {
@@ -219,13 +222,12 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
 		Log.i(TAG, "Downgrade database from {"+oldVersion+"} to {"+newVersion+"}");
 		database.execSQL("DROP TABLE IF EXISTS " + TABLE_USUARIO_NAME);
 		database.execSQL("DROP TABLE IF EXISTS " + TABLE_UBS_NAME);
-		database.execSQL("DROP TABLE IF EXISTS " + TABLE_UBS_NAME);
 		database.execSQL("DROP TABLE IF EXISTS " + TABLE_COLETAR_DADOS_NAME);
+		database.execSQL("DROP TABLE IF EXISTS " + TABLE_BAIRRO_NAME);
+		
 				
 		//Chamando o metodo de construcao da base de dados
 		onCreate(database);
 				
 	}
-	
-	
 }

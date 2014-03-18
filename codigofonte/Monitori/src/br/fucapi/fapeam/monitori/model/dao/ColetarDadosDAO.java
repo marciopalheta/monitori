@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.fucapi.fapeam.monitori.model.bean.ColetarDados;
+import br.fucapi.fapeam.monitori.model.bean.Paciente;
 import br.fucapi.fapeam.monitori.sqlite.SQLiteDatabaseHelper;
 import android.app.ListActivity;
 import android.content.ContentValues;
@@ -29,16 +30,19 @@ public class ColetarDadosDAO extends AbstractDataBase{
 		//Definicao dos valores dos campos
 		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.sis, coletaDados.getSis());
 		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.glicose, coletaDados.getGlicose());
-		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.jejum, coletaDados.getJejum());
-		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.pos_pandrial, coletaDados.getPosPandrial());
-	
+		//sao checkbox
+		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.jejum, String.valueOf
+				(((ColetarDados)coletaDados).isJejum() ));
+		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.pos_pandrial, String.valueOf
+				(((ColetarDados)coletaDados).isJejum() ));
+		
 		//inserindo os dados
 		getWritableDatabase().insert(SQLiteDatabaseHelper.TABLE_COLETAR_DADOS_NAME, null, values);
 		
 		Log.i(TAG, "sis: "+ coletaDados.getSis());
 		Log.i(TAG, "glicose: "+ coletaDados.getGlicose());
-		Log.i(TAG, "jejum: "+ coletaDados.getJejum());
-		Log.i(TAG, "pos_pandrial"+ coletaDados.getPosPandrial());
+		Log.i(TAG, "jejum: "+ coletaDados.isJejum());
+		Log.i(TAG, "pos_pandrial"+ coletaDados.isPos_pandrial());
 	}
 	
 	public List<ColetarDados> listar(){
@@ -61,13 +65,12 @@ public class ColetarDadosDAO extends AbstractDataBase{
 						(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.id)));
 				coletaDados.setSis(cursor.getString(cursor.getColumnIndex
 						(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.sis)));
-				coletaDados.setPosPandrial(cursor.getString(cursor.getColumnIndex
-						(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.pos_pandrial)));
-				coletaDados.setJejum(cursor.getString(cursor.getColumnIndex
-						(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.jejum)));
 				coletaDados.setGlicose(cursor.getString(cursor.getColumnIndex
 						(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.glicose)));
-		
+				coletaDados.setJejum(Boolean.parseBoolean( cursor.getString(cursor.getColumnIndex
+						( SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.jejum))));
+				coletaDados.setJejum(Boolean.parseBoolean( cursor.getString(cursor.getColumnIndex
+						( SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.pos_pandrial))));
 				//adiciona na lista
 				lista.add(coletaDados);
 			}
@@ -100,17 +103,15 @@ public class ColetarDadosDAO extends AbstractDataBase{
 		
 		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.sis, 
 				coletaDados.getSis());
-		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.pos_pandrial,
-				coletaDados.getPosPandrial());
 		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.glicose,
 				coletaDados.getGlicose());
-		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.jejum,
-				coletaDados.getJejum());
+		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.pos_pandrial, 
+				String.valueOf( coletaDados.isPos_pandrial()));
+		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.jejum, 
+				String.valueOf( coletaDados.isJejum()));
 		
 		Log.i(TAG, "sis: " +coletaDados.getSis());
-		Log.i(TAG, "pos_pandiral: " +coletaDados.getPosPandrial());
 		Log.i(TAG, "glicose: " +coletaDados.getGlicose());
-		Log.i(TAG, "jejum: " +coletaDados.getJejum());
 		
 		// Colecao de valores de parametros do SQL
 		String[] args = { coletaDados.getId().toString() };
@@ -141,12 +142,10 @@ public class ColetarDadosDAO extends AbstractDataBase{
 						(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.id) ));							
 				coletaDados.setSis(cursor.getString(cursor.getColumnIndex
 						(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.sis)));				
-				coletaDados.setPosPandrial(cursor.getString(cursor.getColumnIndex
-						(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.pos_pandrial)));								
-				coletaDados.setGlicose(cursor.getString(cursor.getColumnIndex
-						(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.glicose)));								
-				coletaDados.setJejum(cursor.getString(cursor.getColumnIndex
-						(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.jejum)));							
+				coletaDados.setPos_pandrial(Boolean.parseBoolean(cursor.getString
+						(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.pos_pandrial))));
+				coletaDados.setJejum(Boolean.parseBoolean(cursor.getString
+						(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.jejum))));
 			}
 		}catch(SQLException e){
 			Log.e(TAG, e.getMessage());

@@ -18,6 +18,13 @@
         android:orderInCategory="100"
         android:showAsAction="never"               
         android:title="@string/title_activity_medico"/>
+    
+    <item
+        android:id="@+id/menu_coletar_dados"
+        android:orderInCategory="100"
+        android:showAsAction="never"               
+        android:title="@string/title_activity_coletar_dados"/>
+    
     <item
         android:id="@+id/menu_principal"
         android:orderInCategory="100"

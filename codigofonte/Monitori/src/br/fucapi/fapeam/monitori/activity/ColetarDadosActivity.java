@@ -7,6 +7,8 @@ import android.view.Menu;
 
 public class ColetarDadosActivity extends Activity {
 
+	//atributos para manipulacao de telas
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

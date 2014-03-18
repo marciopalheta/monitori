@@ -55,6 +55,11 @@ public class MenuPrincipalActivity extends Activity implements OnClickListener {
     		Intent intent3 = new Intent(this, MedicoActivity.class);
     		if(v == btMedico) {
     			startActivity(intent3);
-    		}  
+    		} 
+    		
+    		Intent intent4 = new Intent(this, ColetarDadosActivity.class);
+    		if(v == btcoletadados){
+    			startActivity(intent4);
+    		}
 	}
 }

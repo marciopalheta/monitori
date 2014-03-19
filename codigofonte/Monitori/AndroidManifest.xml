@@ -93,7 +93,7 @@
             android:label="@string/title_activity_menu_principal" >
         </activity>
         <activity
-            android:name="br.fucapi.fapeam.monitori.ColetarActivity"
+            android:name="br.fucapi.fapeam.monitori.activity.ColetarActivity"
             android:label="@string/title_activity_coletar" >
         </activity>
     </application>

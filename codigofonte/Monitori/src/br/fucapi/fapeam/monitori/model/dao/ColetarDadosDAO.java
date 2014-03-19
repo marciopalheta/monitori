@@ -24,6 +24,22 @@ public class ColetarDadosDAO extends AbstractDataBase{
 				super(context);
 	}
 	
+	public long getLastInsertId() {
+	    long lastId = 0;
+	    	    
+	    String sql = "Select ROWID from "+SQLiteDatabaseHelper.TABLE_COLETAR_DADOS_NAME +" order by ROWID DESC limit 1 ";
+		
+		//Objeto que reebe os registros do banco de dados
+		Cursor cursor = getReadableDatabase().rawQuery(sql, null);
+	    
+	    if (cursor != null && cursor.moveToFirst()) {
+	        lastId = cursor.getLong(0); //The 0 is the column index, we only have 1 column, so the index is 0
+	    }
+	    
+	    cursor.close();
+	    return lastId;
+	}
+	
 	public void cadastrar (ColetarDados coletaDados){
 		//objeto para armazenar os valores dos camopos
 		ContentValues values = new ContentValues();

@@ -102,22 +102,20 @@
     <string name="menu_paciente">Paciente</string>
     <string name="menu_medico">Medico</string>
     <string name="menu_coletadados">Coletar Dados</string>
-	 <string name="erro_conexao_indisponivel">Conexão indisponível, por favor ative sua rede móvel ou Wi-Fi.</string>
-	 
-	 
-	<string name="ubs_prompt">Selecione uma UBS</string>
+    <string name="erro_conexao_indisponivel">Conexão indisponível, por favor ative sua rede móvel ou Wi-Fi.</string>
+    <string name="ubs_prompt">Selecione uma UBS</string>
     <string name="ubs_novo">Incluir UBS</string>
 
     <string-array name="ubs_arrays">
         <item>@string/ubs_novo</item>
     </string-array>
-	
+
     <string name="mask_date">dd/mm/yyyy</string>
     <string name="mask_cep">#####-###</string>
     <string name="mask_telefone">(##)####-####</string>
-    
-	<!-- novas strings -->
-        
+
+    <!-- novas strings -->
+
     <string name="splashscreen_text">Carregando aplicação</string>
     <string name="splashscreen_label">Carregando...</string>
     <string name="preferences_label">Preferencias</string>
@@ -134,11 +132,12 @@
     <!-- For sample -->
 
     <string name="mainmenu_button1">@string/title_activity_paciente </string>
-    <string name="mainmenu_button2">Airport (AsyncTask)</string>    
+    <string name="mainmenu_button2">Airport (AsyncTask)</string>
     <string name="eula_title">Contrato de Licença de Usuário Final</string>
     <string name="eula_accept">Aceitar</string>
     <string name="eula_refuse">Recusar</string>
-    <string name="eula_close">Fechar</string>    
-    <string name="title_activity_your_app_main">YourAppMainActivity</string>    
-    	 
+    <string name="eula_close">Fechar</string>
+    <string name="title_activity_your_app_main">YourAppMainActivity</string>
+    <string name="title_activity_coletar">Lista de Coletagem de Dados</string>
+
 </resources>

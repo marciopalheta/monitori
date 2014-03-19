@@ -15,7 +15,6 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        
         <activity
             android:name="br.fucapi.fapeam.monitori.activity.SplashScreenActivity"
             android:label="@string/app_name"
@@ -26,14 +25,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
         <activity
             android:name="br.fucapi.fapeam.monitori.activity.AppMainActivity"
-            android:label="@string/app_name" 
-            android:theme="@style/CustomTheme"
-            android:logo="@drawable/ic_launcher">
+            android:label="@string/app_name"
+            android:logo="@drawable/ic_launcher"
+            android:theme="@style/CustomTheme" >
         </activity>
-        
         <activity
             android:name="br.fucapi.fapeam.monitori.activity.MainActivity"
             android:label="@string/app_name" >
@@ -51,7 +48,7 @@
             android:label="@string/title_activity_medico" >
         </activity>
         <activity
-            android:name="br.fucapi.fapeam.monitori.activity.medico.MedicoDadosActivity"            
+            android:name="br.fucapi.fapeam.monitori.activity.medico.MedicoDadosActivity"
             android:label="@string/title_activity_medico_dados" >
         </activity>
         <activity
@@ -95,7 +92,10 @@
             android:name="br.fucapi.fapeam.monitori.activity.MenuPrincipalActivity"
             android:label="@string/title_activity_menu_principal" >
         </activity>
-        
+        <activity
+            android:name="br.fucapi.fapeam.monitori.ColetarActivity"
+            android:label="@string/title_activity_coletar" >
+        </activity>
     </application>
 
 </manifest>

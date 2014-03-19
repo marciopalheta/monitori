@@ -21,10 +21,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.SQLException;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 
 public class UsuarioDAO extends AbstractDataBase{
 		
@@ -35,6 +37,7 @@ public class UsuarioDAO extends AbstractDataBase{
 		
     private SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
     private Context context;
+    private String dataForDB=null;
 	public UsuarioDAO (Context context){
 		
 		//Chamando o construtor que sabe acessar o BD
@@ -47,84 +50,124 @@ public class UsuarioDAO extends AbstractDataBase{
 	 * */
 	public void cadastrar (Usuario usuario){
 		//objeto para armazenar os valores dos camopos
-		ContentValues values = new ContentValues();
-		//Definicao dos valores dos campos
-		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.nome, usuario.getNome());
+		ContentValues values = new ContentValues();	
 		
-		String dataForDB=null;	
-		Calendar cal =  usuario.getDataNascimento();
-		if(cal!=null){
-			dataForDB = dateFormat.format(usuario.getDataNascimento().getTime());
+		getWritableDatabase().beginTransaction();
+		
+		try{
+			
+			//Definicao dos valores dos campos
+			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.nome, usuario.getNome());
+			
+			dataForDB=null;	
+			Calendar cal =  usuario.getDataNascimento();
+			if(cal!=null){
+				dataForDB = dateFormat.format(usuario.getDataNascimento().getTime());
+			}
+			values.put( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.dataNascimento, dataForDB);
+					
+			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.endereco , usuario.getEndereco());
+			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.numero, usuario.getNumero());
+			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.cep, usuario.getCep());
+			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.celular, usuario.getCelular());
+			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.telefone, usuario.getTelefone());		
+			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.sexo, usuario.getSexo() );
+			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.nomeMae, usuario.getNomeMae());		
+			
+			if(usuario.getBairro() != null){
+				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.idBairro, usuario.getBairro().getId());
+			}
+			if(usuario.getUnidadeSaude() != null){
+				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.idUnidadeSaude, usuario.getUnidadeSaude().getId());
+			}
+			
+			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.tipoUsuario, usuario.getTipoUsuario().toString() );
+			
+			if(usuario instanceof Paciente){									
+				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.numeroSus, usuario.getNumSus());
+				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.login, usuario.getNumSus());
+				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.senha, usuario.getNumSus());
+				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.hipertenso, String.valueOf( ((Paciente)usuario).isHipertenso() ) );
+				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.diabetico1, String.valueOf( ((Paciente)usuario).isDiabetico1() ) );
+				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.diabetico2, String.valueOf( ((Paciente)usuario).isDiabetico2() ) );			
+			}
+			
+			if(usuario instanceof Medico){			
+				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.crm, ((Medico)usuario).getCrm() );
+				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.login, ((Medico) usuario).getCrm());
+				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.senha, ((Medico) usuario).getCrm());
+			}
+			
+			if(usuario instanceof Agente){			
+				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.matricula, ((Agente)usuario).getMatricula() );
+				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.login, ((Agente) usuario).getMatricula());
+				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.senha, ((Agente) usuario).getMatricula());
+					
+			}
+			
+			
+			//Inserir dados do usuario
+			getWritableDatabase().insert(SQLiteDatabaseHelper.TABLE_USUARIO_NAME, null, values);
+			
+			getWritableDatabase().setTransactionSuccessful();// marks a commit
+									
+			
+		}catch(SQLiteConstraintException e) {
+			if(usuario instanceof Paciente){										
+				Toast.makeText(context, "Numero do Sus: "+usuario.getNumSus() +" ja existente", Toast.LENGTH_LONG).show();
+				Log.e(TAG, "Numero do Sus: "+usuario.getNumSus() +" ja existente" );
+			}				
+			if(usuario instanceof Medico){										
+				Toast.makeText(context, "Crm: "+((Medico)usuario).getCrm() +" ja existente", Toast.LENGTH_LONG).show();
+			}
+			if(usuario instanceof Agente){						
+				Toast.makeText(context, "Matricula: "+((Agente) usuario).getMatricula() +" ja existente", Toast.LENGTH_LONG).show();
+			}
+			
+			
+		}catch(SQLException sqlE) {	
+			Log.e(TAG, "SqlException: "+sqlE.getMessage() );	
+		}finally{
+			getWritableDatabase().endTransaction();
+			
+			
+			Log.i(TAG, "Usuario Cadastrado: "+ usuario.getNome() );
+			Log.i(TAG, "dataMascimento: "+ dataForDB );		
+			
+			Log.i(TAG, "Login: "+ usuario.getLogin() );
+			Log.i(TAG, "Senha: "+ usuario.getSenha() );
+			Log.i(TAG, "endereco: "+ usuario.getEndereco() );
+			Log.i(TAG, "numero: "+ usuario.getNumero());
+			Log.i(TAG, "cep: "+ usuario.getCep() );
+
+			if(usuario.getBairro() != null){
+				Log.i(TAG, "idBairro: "+ usuario.getBairro().getId() );
+			}
+			if(usuario.getUnidadeSaude() != null){
+				Log.i(TAG, "idUbs: "+ usuario.getUnidadeSaude().getId() );
+			}
+								
+			Log.i(TAG, "celular: "+ usuario.getCelular() );
+			Log.i(TAG, "telefone: "+ usuario.getTelefone() );
+			Log.i(TAG, "sexo: "+ usuario.getSexo() );		
+			Log.i(TAG, "tipoUsuario: "+ usuario.getTipoUsuario().toString() );
+			
+			if(usuario instanceof Paciente){						
+				Log.i(TAG, "hipertenso: "+ ((Paciente)usuario).isHipertenso() );
+				Log.i(TAG, "diabetico1: "+ ((Paciente)usuario).isDiabetico1() );
+				Log.i(TAG, "diabetico2: "+ ((Paciente)usuario).isDiabetico2() );
+			}				
+			if(usuario instanceof Medico){						
+				Log.i(TAG, "crm: "+ ((Medico)usuario).getCrm() );
+			}
+			if(usuario instanceof Agente){						
+				Log.i(TAG, "matricula: "+ ((Agente)usuario).getMatricula() );
+			}
+
+			
 		}
-		values.put( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.dataNascimento, dataForDB);
-				
-		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.endereco , usuario.getEndereco());
-		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.numero, usuario.getNumero());
-		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.cep, usuario.getCep());
-		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.celular, usuario.getCelular());
-		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.telefone, usuario.getTelefone());		
-		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.sexo, usuario.getSexo() );
-		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.nomeMae, usuario.getNomeMae());		
 		
-		if(usuario.getBairro() != null){
-			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.idBairro, usuario.getBairro().getId());
-		}
-		if(usuario.getUnidadeSaude() != null){
-			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.idUnidadeSaude, usuario.getUnidadeSaude().getId());
-		}
 		
-		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.tipoUsuario, usuario.getTipoUsuario().toString() );
-		
-		if(usuario instanceof Paciente){									
-			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.numeroSus, usuario.getNumSus());
-			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.login, usuario.getNumSus());
-			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.senha, usuario.getNumSus());
-			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.hipertenso, String.valueOf( ((Paciente)usuario).isHipertenso() ) );
-			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.diabetico1, String.valueOf( ((Paciente)usuario).isDiabetico1() ) );
-			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.diabetico2, String.valueOf( ((Paciente)usuario).isDiabetico2() ) );			
-		}
-		
-		if(usuario instanceof Medico){			
-			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.crm, ((Medico)usuario).getCrm() );
-			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.login, ((Medico) usuario).getCrm());
-			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.senha, ((Medico) usuario).getCrm());
-		}
-		
-		if(usuario instanceof Agente){			
-			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.matricula, ((Agente)usuario).getMatricula() );
-			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.login, ((Agente) usuario).getMatricula());
-			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.senha, ((Agente) usuario).getMatricula());
-				
-		}
-		
-		//Inserir dados do usuario
-		getWritableDatabase().insert(SQLiteDatabaseHelper.TABLE_USUARIO_NAME, null, values);
-		Log.i(TAG, "Usuario Cadastrado: "+ usuario.getNome() );
-		Log.i(TAG, "dataMascimento: "+ dataForDB );		
-		
-		Log.i(TAG, "Login: "+ usuario.getLogin() );
-		Log.i(TAG, "Senha: "+ usuario.getSenha() );
-		Log.i(TAG, "endereco: "+ usuario.getEndereco() );
-		Log.i(TAG, "numero: "+ usuario.getNumero());
-		Log.i(TAG, "cep: "+ usuario.getCep() );
-		Log.i(TAG, "idBairro: "+ usuario.getBairro().getId() );
-				
-		Log.i(TAG, "celular: "+ usuario.getCelular() );
-		Log.i(TAG, "telefone: "+ usuario.getTelefone() );
-		Log.i(TAG, "sexo: "+ usuario.getSexo() );		
-		Log.i(TAG, "tipoUsuario: "+ usuario.getTipoUsuario().toString() );
-		
-		if(usuario instanceof Paciente){						
-			Log.i(TAG, "hipertenso: "+ ((Paciente)usuario).isHipertenso() );
-			Log.i(TAG, "diabetico1: "+ ((Paciente)usuario).isDiabetico1() );
-			Log.i(TAG, "diabetico2: "+ ((Paciente)usuario).isDiabetico2() );
-		}				
-		if(usuario instanceof Medico){						
-			Log.i(TAG, "crm: "+ ((Medico)usuario).getCrm() );
-		}
-		if(usuario instanceof Agente){						
-			Log.i(TAG, "matricula: "+ ((Agente)usuario).getMatricula() );
-		}
 	}
 	
 	/** 
@@ -233,8 +276,7 @@ public class UsuarioDAO extends AbstractDataBase{
 	public void alterar(Usuario usuario) {
 		ContentValues values = new ContentValues();
 		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.nome , usuario.getNome());
-		
-		String dataForDB=null;	
+				
 		Calendar cal =  usuario.getDataNascimento();
 		if(cal!=null){
 			dataForDB = dateFormat.format(usuario.getDataNascimento().getTime());
@@ -254,9 +296,13 @@ public class UsuarioDAO extends AbstractDataBase{
 		
 		if(usuario.getBairro() != null){
 			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.idBairro, usuario.getBairro().getId());
+		}else{
+			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.idBairro, "");
 		}
 		if(usuario.getUnidadeSaude() != null){
 			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.idUnidadeSaude, usuario.getUnidadeSaude().getId());
+		}else{
+			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.idUnidadeSaude, "null");
 		}
 		
 		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.tipoUsuario, usuario.getTipoUsuario().toString() );

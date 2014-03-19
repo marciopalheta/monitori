@@ -8,6 +8,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.util.Log;
+import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.model.bean.Bairro;
 import br.fucapi.fapeam.monitori.model.bean.UnidadeSaude;
 import br.fucapi.fapeam.monitori.sqlite.SQLiteDatabaseHelper;
@@ -118,8 +119,15 @@ public List <SpinnerObject> getUbsForSpinner(){
 		//Colecao de bairros
 		List<SpinnerObject> list_ubs = new ArrayList<SpinnerObject>();		
 		//Definicao da instrucao SQL
-		String sql = "Select * from "+SQLiteDatabaseHelper.TABLE_UBS_NAME +" ";
+		
+		
+		//primeiro elemento da lista
+		String text = context.getString(R.string.ubs_prompt);
+		list_ubs.add(new SpinnerObject(0, text));
 				
+		//Definicao da instrucao SQL		
+		String sql = "Select * from "+SQLiteDatabaseHelper.TABLE_UBS_NAME +" order by "+SQLiteDatabaseHelper.FIELDS_TABLE_UBS.nome;		
+		
 		//Objeto que reebe os registros do banco de dados
 		Cursor cursor = getReadableDatabase().rawQuery(sql, null);
 		try{

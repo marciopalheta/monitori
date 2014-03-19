@@ -28,7 +28,13 @@
     <item
         android:id="@+id/menu_principal"
         android:orderInCategory="100"
-        android:showAsAction="always"               
+        android:showAsAction="never"               
         android:title="@string/title_activity_menu_principal"/>
+    
+    <item
+        android:id="@+id/app_principal"
+        android:orderInCategory="100"
+        android:showAsAction="always"               
+        android:title="App Principal"/>
 
 </menu>

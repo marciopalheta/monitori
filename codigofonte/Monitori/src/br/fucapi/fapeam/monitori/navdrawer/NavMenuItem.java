@@ -25,6 +25,17 @@ public class NavMenuItem implements NavDrawerItem {
 		item.setId(id);
 		item.setLabel(label);
 		item.setIcon(ResourceUtils.getDrawableIdByName(icon, context));
+		//item.setIcon(icon);
+		item.setUpdateActionBarTitle(updateActionBarTitle);
+		return item;
+	}
+	
+	public static NavMenuItem create( int id, String label, int icon, boolean updateActionBarTitle, Context context ) {
+		NavMenuItem item = new NavMenuItem();
+		item.setId(id);
+		item.setLabel(label);
+		//item.setIcon(ResourceUtils.getDrawableIdByName(icon, context));
+		item.setIcon(icon);
 		item.setUpdateActionBarTitle(updateActionBarTitle);
 		return item;
 	}

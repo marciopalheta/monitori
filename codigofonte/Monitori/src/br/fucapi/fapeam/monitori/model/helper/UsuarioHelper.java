@@ -157,13 +157,14 @@ public class UsuarioHelper {
 				if(view !=null){
 					Funcoes.hideKeyboard(fragmentActivity );
 					spinBairro.requestFocusFromTouch();
+					/*
 					TextView textId = (TextView)view.findViewById(R.id.textID);
 					 if(event.getAction()==MotionEvent.ACTION_UP){
 						 if (textId.getText().toString().equals("0") ){						
 								getNovoBairro();
 								return true;
 						   }
-		              }					 
+		              }*/					 
 				}
 				return false;
 			}

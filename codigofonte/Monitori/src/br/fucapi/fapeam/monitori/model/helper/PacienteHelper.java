@@ -158,27 +158,32 @@ public class PacienteHelper extends UsuarioHelper {
 				
 		paciente.setSexo( String.valueOf(getSexo().getSelectedItem()) );
 
-						
-		posicao = getSpinBairro().getSelectedItemPosition();
-		SpinAux = (SpinnerObject)getSpinBairro().getAdapter().getItem(posicao);
-						
-		Bairro auxBairro = new Bairro();
-		auxBairro.setId( SpinAux.getId() );
-		auxBairro.setNome( SpinAux.getValue() );
+				
+		if(!getSpinBairro().getAdapter().isEmpty()){
+					
+					posicao = getSpinBairro().getSelectedItemPosition();
+					SpinAux = (SpinnerObject)getSpinBairro().getAdapter().getItem(posicao);
+					if(SpinAux.getId() != 0){
+						Bairro auxBairro = new Bairro();
+						auxBairro.setId( SpinAux.getId() );
+						auxBairro.setNome( SpinAux.getValue() );
+						paciente.setBairro(auxBairro);
+					}
+		}									
 		
-		paciente.setBairro(auxBairro);
-							
 		
-		posicao = getSpinUbs().getSelectedItemPosition();
-		 
-		SpinAux = (SpinnerObject)getSpinUbs().getAdapter().getItem(posicao);				
-		
-		UnidadeSaude auxUbs = new UnidadeSaude();
-		auxUbs.setId( SpinAux.getId() );
-		auxUbs.setNome( SpinAux.getValue() );						
-		
-		paciente.setUnidadeSaude(auxUbs);
-		
+		if(!getSpinUbs().getAdapter().isEmpty()){
+			posicao = getSpinUbs().getSelectedItemPosition();
+			 
+			SpinAux = (SpinnerObject)getSpinUbs().getAdapter().getItem(posicao);				
+			if(SpinAux.getId() != 0){
+				UnidadeSaude auxUbs = new UnidadeSaude();
+				auxUbs.setId( SpinAux.getId() );
+				auxUbs.setNome( SpinAux.getValue() );						
+				
+				paciente.setUnidadeSaude(auxUbs);
+			}
+		}
 		
 		paciente.setTipoUsuario(TipoUsuario.PACIENTE);
 		

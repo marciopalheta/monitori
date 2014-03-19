@@ -5,9 +5,12 @@ import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.controller.NavigationController;
 import br.fucapi.fapeam.monitori.eula.Eula;
 import br.fucapi.fapeam.monitori.fragment.AgenteFragment;
+import br.fucapi.fapeam.monitori.fragment.LoginFragment;
 import br.fucapi.fapeam.monitori.fragment.MainFragment;
 import br.fucapi.fapeam.monitori.fragment.MedicoFragment;
+import br.fucapi.fapeam.monitori.fragment.MenuPrincipalFragment;
 import br.fucapi.fapeam.monitori.fragment.PacienteFragment;
+import br.fucapi.fapeam.monitori.fragment.UnidadeSaudeFragment;
 import br.fucapi.fapeam.monitori.navdrawer.AbstractNavDrawerActivity;
 import br.fucapi.fapeam.monitori.navdrawer.NavDrawerActivityConfiguration;
 import br.fucapi.fapeam.monitori.navdrawer.NavDrawerAdapter;
@@ -24,6 +27,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 public class AppMainActivity extends AbstractNavDrawerActivity {
+		
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -40,9 +44,16 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 		
 		NavDrawerItem[] menu = new NavDrawerItem[] {
 				NavMenuSection.create( 100, "Demos"),
-				NavMenuItem.create(101,"Lista Pacientes (Fragment)", "navdrawer_friends", true, this),
-				NavMenuItem.create(102, "Lista Agentes (Fragment)", "ic_agente", true, this),
-				NavMenuItem.create(103,"Lista Medicos (Fragment)", "ic_medico", true, this),
+				NavMenuItem.create( RequestCodes.MENU_PACIENTE , getString(R.string.title_activity_paciente), R.drawable.navdrawer_friends, true, this),
+				NavMenuItem.create(RequestCodes.MENU_AGENTE , getString(R.string.title_activity_agente) , R.drawable.ic_agente, true, this),
+				NavMenuItem.create(RequestCodes.MENU_MEDICO,getString(R.string.title_activity_medico), R.drawable.ic_medico, true, this),
+				NavMenuSection.create(300, "Testes"),
+				NavMenuItem.create(301,getString(R.string.title_activity_menu_principal), android.R.drawable.ic_popup_sync, true, this),
+				NavMenuItem.create(RequestCodes.MENU_LOGIN,getString(R.string.title_activity_login), android.R.drawable.btn_star, true, this),
+				NavMenuItem.create(RequestCodes.MENU_COLETA_DADOS,getString(R.string.title_activity_coletar_dados), android.R.drawable.sym_def_app_icon, true, this),
+				NavMenuItem.create(RequestCodes.MENU_UBS,getString(R.string.title_activity_ubs), "ic_medico", true, this),
+				//NavMenuItem.create(103,getString(R.string.title_activity_), "ic_medico", true, this),
+				
 				NavMenuSection.create(200, "General"),
 				NavMenuItem.create(202, "Rate this app", "navdrawer_rating", false, this),
 				NavMenuItem.create(203, "Eula", "navdrawer_eula", false, this), 
@@ -64,26 +75,14 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 	@Override
 	protected void onNavItemSelected(int id) {
 		switch ((int)id) {
-		case 101:
-			//getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new PacienteMainFragment()).commit();
-			
-			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new PacienteFragment()).commit();
-			
-			//Intent intent = new Intent(this, PacienteActivity.class);
-			//startActivity(intent);
-						
+		case RequestCodes.MENU_PACIENTE:		
+			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new PacienteFragment()).commit();			
 			break;
-		case 102:
-			//retirado
-			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new AgenteFragment()).commit();
-			
-			//getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new AirportFragment()).commit();
+		case RequestCodes.MENU_AGENTE:
+			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new AgenteFragment()).commit();			//
 			break;
-		case 103:
-			//retirado
-			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new MedicoFragment()).commit();
-			
-			//getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new AirportFragment()).commit();
+		case RequestCodes.MENU_MEDICO:
+			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new MedicoFragment()).commit();			
 			break;
 		case 201:
 			//NavigationController.getInstance().showSettings(this);
@@ -97,6 +96,20 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 		case 204:
 			NavigationController.getInstance().showExitDialog(this);
 			break;
+			
+		case 301:
+			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new MenuPrincipalFragment()).commit();		
+			break;
+		case RequestCodes.MENU_LOGIN:			
+			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new LoginFragment()).commit();								
+			break;
+		case RequestCodes.MENU_COLETA_DADOS:
+			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new AgenteFragment()).commit();		
+			break;
+		case RequestCodes.MENU_UBS:			
+			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new UnidadeSaudeFragment()).commit();
+			break;
+			
 		}
 	}
 	

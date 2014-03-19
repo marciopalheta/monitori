@@ -50,9 +50,9 @@ public class SplashScreenActivity extends FragmentActivity {
 	 * 
 	 */
 	protected void startNextActivity() {
-		Intent intent = new Intent(this, AppMainActivity.class);
-		//Intent intent = new Intent(this, LoginActivity.class);
-		this.startActivity(intent);
+		//Intent intent = new Intent(this, AppMainActivity.class);
+		Intent intent = new Intent(this, LoginActivity.class);
+		this.startActivity(intent);		
 		this.finish();
 	}
 

@@ -1,6 +1,7 @@
 package br.fucapi.fapeam.monitori.model.helper;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import br.fucapi.fapeam.monitori.R;
@@ -10,6 +11,7 @@ import br.fucapi.fapeam.monitori.model.bean.Medico;
 import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
 import br.fucapi.fapeam.monitori.model.bean.UnidadeSaude;
 import br.fucapi.fapeam.monitori.utils.Funcoes;
+import br.fucapi.fapeam.monitori.utils.SpinnerObject;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -50,18 +52,35 @@ public Medico getMedico(){
 		medico.setTelefone(getTelefone().getText().toString());
 		medico.setDataNascimento(getDataNascimento());					
 		medico.setSexo( String.valueOf(getSexo().getSelectedItem()) );
-
-		Bairro auxBairro = new Bairro();				
-		TextView idBairro = (TextView)getSpinBairro().getSelectedView().findViewById(R.id.textID); 
-		auxBairro.setId(Long.parseLong( idBairro.getText().toString() ) );
-		auxBairro.setNome(getSpinBairro().getSelectedItem().toString());					
-		medico.setBairro(auxBairro);
+		
+		SpinnerObject SpinAux;
+		int posicao;
 				
-		UnidadeSaude auxUbs = new UnidadeSaude();
-		TextView idUbs = (TextView)getSpinUbs().getSelectedView().findViewById(R.id.textID); 
-		auxUbs.setId(Long.parseLong( idUbs.getText().toString() ) );
-		auxUbs.setNome(getSpinUbs().getSelectedItem().toString());					
-		medico.setUnidadeSaude(auxUbs);
+		if(!getSpinBairro().getAdapter().isEmpty()){
+			
+			posicao = getSpinBairro().getSelectedItemPosition();
+			SpinAux = (SpinnerObject)getSpinBairro().getAdapter().getItem(posicao);
+			if(SpinAux.getId() != 0){
+				Bairro auxBairro = new Bairro();
+				auxBairro.setId( SpinAux.getId() );
+				auxBairro.setNome( SpinAux.getValue() );
+				medico.setBairro(auxBairro);
+			}
+		}
+		
+		if(!getSpinUbs().getAdapter().isEmpty()){
+			posicao = getSpinUbs().getSelectedItemPosition();
+			 
+			SpinAux = (SpinnerObject)getSpinUbs().getAdapter().getItem(posicao);				
+			if(SpinAux.getId() != 0){
+				UnidadeSaude auxUbs = new UnidadeSaude();
+				auxUbs.setId( SpinAux.getId() );
+				auxUbs.setNome( SpinAux.getValue() );						
+				
+				medico.setUnidadeSaude(auxUbs);
+			}
+		}
+				
 		
 		medico.setTipoUsuario(TipoUsuario.MEDICO);
 		
@@ -83,18 +102,50 @@ public Medico getMedico(){
 		getTelefone().setText(medico.getTelefone());												
 		setDataNascimento(medico.getDataNascimento());
 		
-		ArrayAdapter<String> array_spinner=(ArrayAdapter<String>)getSexo().getAdapter();
-		getSexo().setSelection(array_spinner.getPosition( medico.getSexo() ));
-	    				
-		ArrayAdapter<String> array_bairro=(ArrayAdapter<String>)getSpinBairro().getAdapter();
-		if(medico.getBairro() !=null){
-			getSpinBairro().setSelection(array_bairro.getPosition( medico.getBairro().getNome() ) );
+		
+		adapter = (br.fucapi.fapeam.monitori.utils.SpinnerAdapter) getSexo().getAdapter();
+		List<SpinnerObject> list_sexo = adapter.getSpinnerObjects();
+		int index=0, indexKey=0;		
+		for (SpinnerObject sexo : list_sexo) {
+			if(sexo.getValue().equals(medico.getSexo()) ){
+				indexKey = index;
+				break;	
+			}
+			index++;					
 		}
+		getSexo().setSelection(indexKey);
 			
-		ArrayAdapter<String> array_ubs=(ArrayAdapter<String>)getSpinUbs().getAdapter();
-		if(medico.getUnidadeSaude() !=null){
-			getSpinUbs().setSelection(array_ubs.getPosition( medico.getUnidadeSaude().getNome() ) );
+		
+		
+		adapter = (br.fucapi.fapeam.monitori.utils.SpinnerAdapter) getSpinBairro().getAdapter();
+		List<SpinnerObject> list_bairro = adapter.getSpinnerObjects();
+		index=0; indexKey=0;		
+		if(medico.getBairro() !=null){
+			for (SpinnerObject sobairro : list_bairro) {
+				if(sobairro.getId() == medico.getBairro().getId() ){
+					indexKey = index;
+					break;	
+				}
+				index++;					
+			}
 		}
+		getSpinBairro().setSelection(indexKey);
+		
+		adapter = (br.fucapi.fapeam.monitori.utils.SpinnerAdapter) getSpinUbs().getAdapter();
+		List<SpinnerObject> list_ubs = adapter.getSpinnerObjects();
+		index=0; indexKey=0;		
+		if(medico.getUnidadeSaude() !=null){
+			for (SpinnerObject soUbs: list_ubs) {
+				if(soUbs.getId() == medico.getUnidadeSaude().getId() ){
+					indexKey = index;
+					break;	
+				}
+				index++;					
+			}
+		}
+		getSpinUbs().setSelection(indexKey);
+		
+		
 		
 		crm.setText(medico.getCrm());
 		this.medico= medico;

@@ -92,13 +92,22 @@ public class LoginActivity extends Activity {
 				startActivity(intent);
 				
 				return false;
-				
+			
 			case R.id.menu_principal:
-				//Especialista em mudanca de tela
-				intent = new Intent(LoginActivity.this,
-						MenuPrincipalActivity.class);
+				//Especialista em mudanca de tela				
+				intent = new Intent(LoginActivity.this,MenuPrincipalActivity.class);
 				//Carrega a nova tela
 				startActivity(intent);
+				
+				return false;	
+				
+			case R.id.app_principal:
+				//Especialista em mudanca de tela
+				intent = new Intent(this, AppMainActivity.class);
+				//intent = new Intent(this,MenuPrincipalActivity.class);
+				//Carrega a nova tela
+				this.startActivity(intent);
+				this.finish();				
 				
 				return false;
 

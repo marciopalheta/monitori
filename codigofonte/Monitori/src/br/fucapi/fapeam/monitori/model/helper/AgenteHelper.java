@@ -1,6 +1,7 @@
 package br.fucapi.fapeam.monitori.model.helper;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import br.fucapi.fapeam.monitori.R;
@@ -10,6 +11,7 @@ import br.fucapi.fapeam.monitori.model.bean.Bairro;
 import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
 import br.fucapi.fapeam.monitori.model.bean.UnidadeSaude;
 import br.fucapi.fapeam.monitori.utils.Funcoes;
+import br.fucapi.fapeam.monitori.utils.SpinnerObject;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -64,17 +66,34 @@ public class AgenteHelper extends UsuarioHelper {
 		agente.setDataNascimento(getDataNascimento());					
 		agente.setSexo( String.valueOf(getSexo().getSelectedItem()) );
 
-		Bairro auxBairro = new Bairro();				
-		TextView idBairro = (TextView)getSpinBairro().getSelectedView().findViewById(R.id.textID); 
-		auxBairro.setId(Long.parseLong( idBairro.getText().toString() ) );
-		auxBairro.setNome(getSpinBairro().getSelectedItem().toString());					
-		agente.setBairro(auxBairro);
+		SpinnerObject SpinAux;
+		int posicao;
 		
-		UnidadeSaude auxUbs = new UnidadeSaude();
-		TextView idUbs = (TextView)getSpinUbs().getSelectedView().findViewById(R.id.textID); 
-		auxUbs.setId(Long.parseLong( idUbs.getText().toString() ) );
-		auxUbs.setNome(getSpinUbs().getSelectedItem().toString());					
-		agente.setUnidadeSaude(auxUbs);
+		if(!getSpinBairro().getAdapter().isEmpty()){
+			
+			posicao = getSpinBairro().getSelectedItemPosition();
+			SpinAux = (SpinnerObject)getSpinBairro().getAdapter().getItem(posicao);
+			if(SpinAux.getId() != 0){
+				Bairro auxBairro = new Bairro();
+				auxBairro.setId( SpinAux.getId() );
+				auxBairro.setNome( SpinAux.getValue() );
+				agente.setBairro(auxBairro);
+			}
+		}
+		
+		if(!getSpinUbs().getAdapter().isEmpty()){
+			posicao = getSpinUbs().getSelectedItemPosition();
+			 
+			SpinAux = (SpinnerObject)getSpinUbs().getAdapter().getItem(posicao);				
+			if(SpinAux.getId() != 0){
+				UnidadeSaude auxUbs = new UnidadeSaude();
+				auxUbs.setId( SpinAux.getId() );
+				auxUbs.setNome( SpinAux.getValue() );						
+				
+				agente.setUnidadeSaude(auxUbs);
+			}
+		}
+		
 		
 		agente.setTipoUsuario(TipoUsuario.AGENTE);
 		
@@ -97,18 +116,51 @@ public class AgenteHelper extends UsuarioHelper {
 		getTelefone().setText(agente.getTelefone());												
 		setDataNascimento(agente.getDataNascimento());
 		
-		ArrayAdapter<String> array_spinner=(ArrayAdapter<String>)getSexo().getAdapter();
-		getSexo().setSelection(array_spinner.getPosition( agente.getSexo() ));
-	    				
-		ArrayAdapter<String> array_bairro=(ArrayAdapter<String>)getSpinBairro().getAdapter();
+		
+		adapter = (br.fucapi.fapeam.monitori.utils.SpinnerAdapter) getSexo().getAdapter();
+		List<SpinnerObject> list_sexo = adapter.getSpinnerObjects();
+		int index=0, indexKey=0;		
+		for (SpinnerObject sexo : list_sexo) {
+			if(sexo.getValue().equals(agente.getSexo()) ){
+				indexKey = index;
+				break;	
+			}
+			index++;					
+		}
+		getSexo().setSelection(indexKey);
+			
+		
+		
+		adapter = (br.fucapi.fapeam.monitori.utils.SpinnerAdapter) getSpinBairro().getAdapter();
+		List<SpinnerObject> list_bairro = adapter.getSpinnerObjects();
+		index=0; indexKey=0;		
 		if(agente.getBairro() !=null){
-			getSpinBairro().setSelection(array_bairro.getPosition( agente.getBairro().getNome() ) );
+			for (SpinnerObject sobairro : list_bairro) {
+				if(sobairro.getId() == agente.getBairro().getId() ){
+					indexKey = index;
+					break;	
+				}
+				index++;					
+			}
 		}
-			    						
-		ArrayAdapter<String> array_ubs=(ArrayAdapter<String>)getSpinUbs().getAdapter();
+		getSpinBairro().setSelection(indexKey);
+		
+		adapter = (br.fucapi.fapeam.monitori.utils.SpinnerAdapter) getSpinUbs().getAdapter();
+		List<SpinnerObject> list_ubs = adapter.getSpinnerObjects();
+		index=0; indexKey=0;		
 		if(agente.getUnidadeSaude() !=null){
-			getSpinUbs().setSelection(array_ubs.getPosition( agente.getUnidadeSaude().getNome() ) );
+			for (SpinnerObject soUbs: list_ubs) {
+				if(soUbs.getId() == agente.getUnidadeSaude().getId() ){
+					indexKey = index;
+					break;	
+				}
+				index++;					
+			}
 		}
+		getSpinUbs().setSelection(indexKey);
+		
+		
+		
 		
 		matricula.setText(agente.getMatricula());
 		this.agente= agente;

@@ -8,6 +8,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.util.Log;
+import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.model.bean.Bairro;
 import br.fucapi.fapeam.monitori.sqlite.SQLiteDatabaseHelper;
 import br.fucapi.fapeam.monitori.utils.SpinnerObject;
@@ -16,11 +17,12 @@ public class BairroDAO extends AbstractDataBase{
 		
 	//Constante para log no LogCat
 	private static final String TAG = "CADASTRO_BAIRRO";
-		
+	private Context context; 
 	public BairroDAO (Context context){
 		
 		//Chamando o construtor que sabe acessar o BD
 		super(context);
+		this.context=context;
 	}	
 
 	/** 
@@ -74,9 +76,14 @@ public class BairroDAO extends AbstractDataBase{
 	    
 		//Colecao de bairros
 		List<SpinnerObject> list_bairros = new ArrayList<SpinnerObject>();		
+		
+		//primeiro elemento da lista
+		String text = context.getString(R.string.bairro_prompt);
+		list_bairros.add(new SpinnerObject(0, text));
+		
 		//Definicao da instrucao SQL
-		String sql = "Select * from "+SQLiteDatabaseHelper.TABLE_BAIRRO_NAME +" ";
-				
+		String sql = "Select * from "+SQLiteDatabaseHelper.TABLE_BAIRRO_NAME +" order by "+SQLiteDatabaseHelper.FIELDS_TABLE_BAIRRO.nome;
+						
 		//Objeto que reebe os registros do banco de dados
 		Cursor cursor = getReadableDatabase().rawQuery(sql, null);
 		try{

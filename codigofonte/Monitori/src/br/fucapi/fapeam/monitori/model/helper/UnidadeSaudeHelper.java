@@ -160,15 +160,19 @@ public class UnidadeSaudeHelper {
 		ubs.setNumeroUBS( numero.getText().toString());
 		ubs.setFone(fone.getText().toString());				
 		
-		
-		posicao = spinBairro.getSelectedItemPosition();
-		SpinAux = (SpinnerObject)spinBairro.getAdapter().getItem(posicao);
 						
-		Bairro auxBairro = new Bairro();
-		auxBairro.setId( SpinAux.getId() );
-		auxBairro.setNome( SpinAux.getValue() );
-		
-		ubs.setBairro(auxBairro);
+		if(!spinBairro.getAdapter().isEmpty()){
+			
+			posicao = spinBairro.getSelectedItemPosition();
+			SpinAux = (SpinnerObject)spinBairro.getAdapter().getItem(posicao);
+			if(SpinAux.getId() != 0){
+				Bairro auxBairro = new Bairro();
+				auxBairro.setId( SpinAux.getId() );
+				auxBairro.setNome( SpinAux.getValue() );
+				ubs.setBairro(auxBairro);
+			}
+		}
+						
 		
 		return ubs;		
 	}
@@ -181,11 +185,10 @@ public class UnidadeSaudeHelper {
 		cep.setText(ubs.getCep() );
 		
 		numero.setText(ubs.getNumeroUBS());
-				
-		
+										
 		adapter = (br.fucapi.fapeam.monitori.utils.SpinnerAdapter) spinBairro.getAdapter();
 		List<SpinnerObject> list_bairro = adapter.getSpinnerObjects();
-		int index=0, indexKey=0;		
+		int index=0, indexKey=0;				
 		if(ubs.getBairro() !=null){
 			for (SpinnerObject sobairro : list_bairro) {
 				if(sobairro.getId() == ubs.getBairro().getId() ){

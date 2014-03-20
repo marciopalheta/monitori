@@ -24,6 +24,8 @@ public class LoginActivity extends Activity {
 	private EditText senha;
 	private Button bt_Logar;
 	
+	private Usuario usuarioLogado = null;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -107,7 +109,7 @@ public class LoginActivity extends Activity {
 				//intent = new Intent(this,MenuPrincipalActivity.class);
 				//Carrega a nova tela
 				this.startActivity(intent);
-				this.finish();				
+				//this.finish();				
 				
 				return false;
 
@@ -116,26 +118,28 @@ public class LoginActivity extends Activity {
 		}
 	}
 	
-	private void mudarTela(){
-		//mudando de activity caso usuario logado
-				//Especialista em mudanca de tela
-					Intent intent = new Intent(LoginActivity.this,
-					MenuPrincipalActivity.class);
-					//Carrega a nova tela
-					startActivity(intent);
+	private void mudarTela(){		
+		
+		//Intent intent = new Intent(LoginActivity.this,MenuPrincipalActivity.class);
+		Intent intent = new Intent(this, AppMainActivity.class);
+		
+		intent.putExtra("USUARIO_LOGADO", usuarioLogado);
+		startActivity(intent);//Carrega a nova tela		
+				
+		this.finish();
 	}
 	
 	public void validarUsuario(){
 		//Criacao do objeto DAO
 		UsuarioDAO dao = new UsuarioDAO(this);
-		Usuario usuario = new Usuario();
+		usuarioLogado = new Usuario();
 		//Chamado do metodo listar
-		usuario = dao.getUsuario(login.getText().toString(), senha.getText().toString());
+		usuarioLogado = dao.getUsuario(login.getText().toString(), senha.getText().toString());
 		//fim da conexao do DB
 		dao.close();
 				
-		if(usuario != null){
-			Toast.makeText(LoginActivity.this, "usuario: "+usuario.getNome()+" autenticado", Toast.LENGTH_LONG).show();
+		if(usuarioLogado != null){
+			Toast.makeText(LoginActivity.this, "usuario: "+usuarioLogado.getNome()+" autenticado", Toast.LENGTH_LONG).show();
 			mudarTela();
 		}else{
 			Toast.makeText(LoginActivity.this, "Login Falhou", Toast.LENGTH_LONG).show();

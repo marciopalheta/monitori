@@ -341,19 +341,28 @@ public class UsuarioDAO extends AbstractDataBase{
 		try{
 			if(cursor.moveToNext()){				
 				
-				if(cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.tipoUsuario )).equals(TipoUsuario.PACIENTE.toString()) ){
+				if(cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.tipoUsuario )).equals(TipoUsuario.ADMINISTRADOR.toString()) ){
+					usuario = new Usuario();
+					usuario.setTipoUsuario(TipoUsuario.ADMINISTRADOR );
+					Log.i(TAG, "Tipo usuario = " + cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.tipoUsuario.toString()) ));
+				}else if(cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.tipoUsuario )).equals(TipoUsuario.PACIENTE.toString()) ){
 					usuario = new Paciente();					
+					usuario.setTipoUsuario(TipoUsuario.PACIENTE );
 					((Paciente)usuario).setHipertenso( Boolean.parseBoolean( cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.hipertenso))  ) );
 					((Paciente)usuario).setDiabetico1( Boolean.parseBoolean( cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.diabetico1))  ) );
 					((Paciente)usuario).setDiabetico2( Boolean.parseBoolean( cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.diabetico2))  ) );
 				}else if(cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.tipoUsuario)).equals(TipoUsuario.AGENTE.toString()) ){
 					usuario = new Agente();					
+					usuario.setTipoUsuario(TipoUsuario.AGENTE );
 					((Agente)usuario).setMatricula( cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.matricula))   );
 					
 				}else if(cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.tipoUsuario)).equals(TipoUsuario.MEDICO.toString()) ){
 					usuario = new Medico();					
+					usuario.setTipoUsuario(TipoUsuario.MEDICO );
 					((Medico)usuario).setCrm( cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.crm))   );
 				}																 
+				
+				Log.i(TAG, "Id usuario = " + cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.id) ));				
 				
 				//Carregar os atributos dos usuarios
 				usuario.setId( cursor.getLong(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.id) )); 

@@ -1,6 +1,7 @@
 package br.fucapi.fapeam.monitori.sqlite;
 
 
+import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
@@ -96,7 +97,10 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
     		"CREATE UNIQUE INDEX index_"+FIELDS_TABLE_USUARIO.numeroSus+" on "+TABLE_USUARIO_NAME+" ("+FIELDS_TABLE_USUARIO.numeroSus+"); " +
     		"CREATE UNIQUE INDEX index_"+FIELDS_TABLE_USUARIO.matricula+" on "+TABLE_USUARIO_NAME+" ("+FIELDS_TABLE_USUARIO.matricula+"); " +
     		"CREATE UNIQUE INDEX index_"+FIELDS_TABLE_USUARIO.crm+" on "+TABLE_USUARIO_NAME+" ("+FIELDS_TABLE_USUARIO.crm+"); "; 
-    		
+    private static final String CREATE_ADMIN_USER = 
+    		"INSERT INTO "+TABLE_USUARIO_NAME+
+    		"("+FIELDS_TABLE_USUARIO.nome+","+FIELDS_TABLE_USUARIO.tipoUsuario+","+FIELDS_TABLE_USUARIO.login+","+FIELDS_TABLE_USUARIO.senha+") " +
+    		"VALUES('admin','"+TipoUsuario.ADMINISTRADOR+"','admin','admin');";	
     
     
     
@@ -189,7 +193,10 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
 		Log.i(TAG, "create database");
 					
 		database.execSQL(CREATE_TABLE_USUARIO);
-		database.execSQL(CREATE_INDEX_TABLE_USUARIO);		
+		database.execSQL(CREATE_INDEX_TABLE_USUARIO);
+		
+		database.execSQL(CREATE_ADMIN_USER);		
+		
 		database.execSQL(CREATE_TABLE_UBS);
 		database.execSQL(CREATE_TABLE_COLETAR_DADOS);
 		database.execSQL(CREATE_TABLE_BAIRRO);

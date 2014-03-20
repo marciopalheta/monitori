@@ -2,6 +2,7 @@ package br.fucapi.fapeam.monitori.navdrawer;
 
 
 import br.fucapi.fapeam.monitori.R;
+import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -26,6 +27,8 @@ public abstract class AbstractNavDrawerActivity extends FragmentActivity {
     private CharSequence mTitle;
 	
     private NavDrawerActivityConfiguration navConf ;
+	
+    private Usuario usuarioLogado;
     
 	protected abstract NavDrawerActivityConfiguration getNavDrawerConfiguration();
 	
@@ -34,6 +37,9 @@ public abstract class AbstractNavDrawerActivity extends FragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		usuarioLogado = (Usuario) getIntent().getSerializableExtra(
+				"USUARIO_LOGADO");		
 		
 		navConf = getNavDrawerConfiguration();
 		
@@ -161,4 +167,9 @@ public abstract class AbstractNavDrawerActivity extends FragmentActivity {
         mTitle = title;
         getActionBar().setTitle(mTitle);
     }
+
+	public Usuario getUsuarioLogado() {
+		// TODO Auto-generated method stub
+		return usuarioLogado;
+	}
 }

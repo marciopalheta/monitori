@@ -138,6 +138,7 @@
     <string name="eula_refuse">Recusar</string>
     <string name="eula_close">Fechar</string>
     <string name="title_activity_your_app_main">YourAppMainActivity</string>
-    <string name="title_activity_coletar">Lista de Coletagem de Dados</string>
+    <string name="title_activity_coletar">Lista Coletar Dados</string>
+    <string name="cadastrar_coletarDados">Nova Coleta</string>
 
 </resources>

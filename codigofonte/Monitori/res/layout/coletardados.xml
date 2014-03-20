@@ -113,33 +113,5 @@
  </LinearLayout>    
 </RelativeLayout>
 
- <LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_centerInParent="true"
-    android:layout_below="@id/fundo"
-     >
-    
-    <Button 
-    	android:layout_width="@dimen/bt_width"
-    	android:layout_height="@dimen/bt_heigth"
-    	android:background="#000000"
-    	android:text="@string/salvar"
-    	android:textSize="@dimen/fontes_para_textos"   
-    	android:textColor="#ffffff" 
-    	android:id="@+id/btsalvar"
-    	android:layout_marginBottom="10dp"/>
-    
-    <Button 
-    	android:layout_width="@dimen/bt_width"
-    	android:layout_height="@dimen/bt_heigth"
-    	android:background="#000000"
-    	android:text="@string/enviar"
-    	android:textSize="@dimen/fontes_para_textos"   
-    	android:textColor="#ffffff" 
-    	android:id="@+id/btenviar"
-    	android:layout_marginLeft="10dp"
-    	android:layout_marginBottom="10dp"  />
-   
-  </LinearLayout>
+
 </RelativeLayout>

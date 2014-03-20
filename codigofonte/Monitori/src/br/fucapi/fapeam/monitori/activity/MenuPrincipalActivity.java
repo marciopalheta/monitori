@@ -57,7 +57,7 @@ public class MenuPrincipalActivity extends Activity implements OnClickListener {
     			startActivity(intent3);
     		} 
     		
-    		Intent intent4 = new Intent(this, ColetarDadosActivity.class);
+    		Intent intent4 = new Intent(this, ColetarActivity.class);
     		if(v == btcoletadados){
     			startActivity(intent4);
     		}

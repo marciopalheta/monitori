@@ -1,6 +1,7 @@
 package br.fucapi.fapeam.monitori.fragment;
 
 import br.fucapi.fapeam.monitori.R;
+import br.fucapi.fapeam.monitori.activity.ColetarActivity;
 import br.fucapi.fapeam.monitori.activity.ColetarDadosActivity;
 import br.fucapi.fapeam.monitori.activity.agente.AgenteActivity;
 import br.fucapi.fapeam.monitori.activity.medico.MedicoActivity;
@@ -103,7 +104,7 @@ public class MenuPrincipalFragment extends Fragment implements OnClickListener {
     			startActivity(intent3);
     		} 
     		
-    		Intent intent4 = new Intent(getActivity(), ColetarDadosActivity.class);
+    		Intent intent4 = new Intent(getActivity(), ColetarActivity.class);
     		if(v == btcoletadados){
     			startActivity(intent4);
     		}

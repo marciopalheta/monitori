@@ -26,6 +26,7 @@ import br.fucapi.fapeam.monitori.model.bean.ColetarDados;
 import br.fucapi.fapeam.monitori.model.bean.Paciente;
 import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
 import br.fucapi.fapeam.monitori.model.bean.UnidadeSaude;
+import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import br.fucapi.fapeam.monitori.utils.Funcoes;
 import br.fucapi.fapeam.monitori.utils.Mask;
 import br.fucapi.fapeam.monitori.utils.SpinnerAdapter;
@@ -39,14 +40,15 @@ public class ColetarDadosHelper{
 	private CheckBox jejum;
 	private CheckBox pos_pandrial;
 	private Activity activity;
-	
+	private Usuario usuario;
 	SpinnerAdapter adapter;
 	private boolean onCreateFlag = true;
 	
 	private FragmentActivity fragmentActivity;	
 	
-	public ColetarDadosHelper(final FragmentActivity fragmentActivity){
-		this.fragmentActivity = fragmentActivity;	
+	public ColetarDadosHelper(final FragmentActivity fragmentActivity, Usuario usuario){
+		this.fragmentActivity = fragmentActivity;
+		this.usuario=usuario;
 		//criacao do objeto paciente
 		coletaDados = new ColetarDados();
 		
@@ -85,6 +87,7 @@ public class ColetarDadosHelper{
 											
 		coletaDados.setJejum(jejum.isChecked());
 		coletaDados.setPos_pandrial(pos_pandrial.isChecked());
+		coletaDados.setUsuario(usuario);
 		
 		return (ColetarDados) coletaDados;		
 	}
@@ -98,6 +101,8 @@ public class ColetarDadosHelper{
 		Log.e("TESTE", "is Jejum: " + coletaDados.isJejum() );
 		jejum.setChecked(coletaDados.isJejum() );
 		pos_pandrial.setChecked(coletaDados.isPos_pandrial() );
+		
+		usuario = coletaDados.getUsuario();
 		
 		this.coletaDados = coletaDados;	
 	//Validando dados

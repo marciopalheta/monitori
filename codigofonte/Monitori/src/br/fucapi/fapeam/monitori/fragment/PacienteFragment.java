@@ -2,7 +2,10 @@ package br.fucapi.fapeam.monitori.fragment;
 
 import java.util.List;
 import br.fucapi.fapeam.monitori.R;
+import br.fucapi.fapeam.monitori.activity.ColetarActivity;
+import br.fucapi.fapeam.monitori.activity.ColetarDadosActivity;
 import br.fucapi.fapeam.monitori.activity.paciente.PacienteDadosActivity;
+import br.fucapi.fapeam.monitori.model.bean.ColetarDados;
 import br.fucapi.fapeam.monitori.model.bean.Paciente;
 import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
@@ -48,11 +51,20 @@ public class PacienteFragment extends Fragment {
 	//Usuario selecionando com o click longo
 	private Usuario usuarioSelecionado = null;	
 	
+	private Usuario usuarioLogado = null;	
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setHasOptionsMenu(true); //adicionar itens ao OptionsMenu 								
+		
+		usuarioLogado = (Usuario) this.getArguments().getSerializable("USUARIO_LOGADO");
+		
+		setHasOptionsMenu(true); //adicionar itens ao OptionsMenu
+		
+		if(usuarioLogado!=null){
+			Log.i("BELEZA", "Funcionou usando arguments");
+		}
+		
 	}
 	    
 	@Override
@@ -128,8 +140,11 @@ public class PacienteFragment extends Fragment {
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		  inflater.inflate(R.menu.paciente, menu);
+		  //MenuItem coletar = menu.findItem(R.id.menu_coletar_dados);      
+		  //coletar.setVisible(true);
 	}
-		
+					
+	
 	public void carregarLista(){
 		//Criacao do objeto DAO
 		UsuarioDAO dao = new UsuarioDAO(getActivity());
@@ -171,14 +186,60 @@ public class PacienteFragment extends Fragment {
 		
 		getActivity().getMenuInflater().inflate(R.menu.menu_contexto, menu);
 		//getMenuInflater().inflate(R.menu.menu_contexto, menu);
+		MenuItem coletar = menu.findItem(R.id.menu_coletar);
+		MenuItem historico = menu.findItem(R.id.menu_historico);
+		   if(coletar!=null){
+			   //if() //caso o usuario Logado seja do tipo Agente, setar a coleta de dados como Visivel
+			   
+			   if(usuarioLogado!=null){									
+					if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.AGENTE)){	
+						coletar.setVisible(true);
+						historico.setVisible(true);
+					}
+				}
+			   			   
+		   }
+		
 	}
 
 	@Override
+	public void onPrepareOptionsMenu(Menu menu) {
+		   MenuItem coletar = menu.findItem(R.id.menu_coletar_dados);    
+		   if(coletar!=null){
+			   if(usuarioLogado!=null){									
+					if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.AGENTE)){	
+						coletar.setVisible(true);
+					}
+				}			   
+		   }
+	}
+	
+	@Override
 	public boolean onContextItemSelected(MenuItem item) {
+		Intent form=null;
 		switch (item.getItemId()) {
+			case R.id.menu_coletar:
+			
+			form = new Intent(getActivity(),
+					ColetarDadosActivity.class);				
+			form.putExtra("PACIENTE_SELECIONADO", usuarioSelecionado);
+
+			startActivity(form);	
+			break;
+
+			case R.id.menu_historico:
+				
+			form = new Intent(getActivity(),
+					ColetarActivity.class);				
+			form.putExtra("PACIENTE_SELECIONADO", usuarioSelecionado);
+
+			startActivity(form);	
+			break;
+
+			
 			case R.id.menu_editar:
 				
-				Intent form = new Intent(getActivity(),
+				form = new Intent(getActivity(),
 						PacienteDadosActivity.class);				
 				form.putExtra("PACIENTE_SELECIONADO", usuarioSelecionado);
 

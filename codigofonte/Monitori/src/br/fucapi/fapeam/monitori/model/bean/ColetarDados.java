@@ -8,7 +8,7 @@ public class ColetarDados extends AbstractEntityBean implements Serializable{
 	private String glicose;
 	private boolean jejum;
 	private boolean posPandrial;
-		
+	private Usuario usuario;		
 	
 	public String getSis() {
 		return sis;
@@ -47,6 +47,14 @@ public class ColetarDados extends AbstractEntityBean implements Serializable{
 	public String toString() {
 		
 		return getSis();
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 	
 }

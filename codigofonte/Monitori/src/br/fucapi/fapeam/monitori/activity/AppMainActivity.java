@@ -26,6 +26,7 @@ import br.fucapi.fapeam.monitori.utils.RequestCodes;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.widget.Toast;
 
 public class AppMainActivity extends AbstractNavDrawerActivity {
@@ -145,7 +146,12 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 	protected void onNavItemSelected(int id) {
 		switch ((int)id) {
 		case RequestCodes.MENU_PACIENTE:		
-			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new PacienteFragment()).commit();			
+			Fragment frag = new PacienteFragment();
+			Bundle args = new Bundle();			
+			args.putSerializable("USUARIO_LOGADO", usuarioLogado);
+			frag.setArguments(args);
+			
+			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, frag ).commit();			
 			break;
 		case RequestCodes.MENU_AGENTE:
 			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new AgenteFragment()).commit();			//

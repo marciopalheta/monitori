@@ -1,9 +1,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
+    
+    <item
+        android:id="@+id/menu_coletar_dados"        
+        android:title="@string/coletar_dados"
+    	android:icon="@android:drawable/ic_popup_sync" 
+    	android:showAsAction="always|withText"
+    	android:visible="false"     />
+    
     <item
         android:id="@+id/menu_novo"        
         android:title="@string/cadastrar_paciente"
     	android:icon="@android:drawable/ic_input_add"               
     	android:showAsAction="always|withText" />
-
+	               
+    	
+    
 </menu>

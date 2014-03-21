@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
     
+    
+    <item
+        android:id="@+id/menu_coletar"        
+        android:title="@string/coletar_dados"    	           
+    	android:visible="false"     />    
+    <item
+        android:id="@+id/menu_historico"        
+        android:title="@string/historico_diagnostico"    	           
+    	android:visible="false"     />
+    
     <item 
         android:id="@+id/menu_editar"
         android:title="@string/editar"/>
     <item 
         android:id="@+id/menu_deletar"
         android:title="@string/deletar"/>
+        
     
 
 </menu>

@@ -416,4 +416,92 @@ public class UsuarioDAO extends AbstractDataBase{
 		}
 		return usuario;
 	}
+	
+	public Usuario getUsuario(long id){
+		//Colecao de usuarios
+		Usuario usuario = null;		
+		//Definicao da instrucao SQL
+		String sql = "Select * from "+SQLiteDatabaseHelper.TABLE_USUARIO_NAME+" where "+SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.id+"='"+id+"' ";
+		
+		//Objeto que reebe os registros do banco de dados
+		Cursor cursor = getReadableDatabase().rawQuery(sql, null);
+		try{
+			if(cursor.moveToNext()){				
+				
+				if(cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.tipoUsuario )).equals(TipoUsuario.ADMINISTRADOR.toString()) ){
+					usuario = new Usuario();
+					usuario.setTipoUsuario(TipoUsuario.ADMINISTRADOR );
+					Log.i(TAG, "Tipo usuario = " + cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.tipoUsuario.toString()) ));
+				}else if(cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.tipoUsuario )).equals(TipoUsuario.PACIENTE.toString()) ){
+					usuario = new Paciente();					
+					usuario.setTipoUsuario(TipoUsuario.PACIENTE );
+					((Paciente)usuario).setHipertenso( Boolean.parseBoolean( cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.hipertenso))  ) );
+					((Paciente)usuario).setDiabetico1( Boolean.parseBoolean( cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.diabetico1))  ) );
+					((Paciente)usuario).setDiabetico2( Boolean.parseBoolean( cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.diabetico2))  ) );
+				}else if(cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.tipoUsuario)).equals(TipoUsuario.AGENTE.toString()) ){
+					usuario = new Agente();					
+					usuario.setTipoUsuario(TipoUsuario.AGENTE );
+					((Agente)usuario).setMatricula( cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.matricula))   );
+					
+				}else if(cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.tipoUsuario)).equals(TipoUsuario.MEDICO.toString()) ){
+					usuario = new Medico();					
+					usuario.setTipoUsuario(TipoUsuario.MEDICO );
+					((Medico)usuario).setCrm( cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.crm))   );
+				}																 
+				
+				Log.i(TAG, "Id usuario = " + cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.id) ));				
+				
+				//Carregar os atributos dos usuarios
+				usuario.setId( cursor.getLong(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.id) )); 
+				usuario.setNome(cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.nome)));
+				
+				usuario.setEndereco(cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.endereco)));
+				usuario.setNumero(cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.numero)));
+				usuario.setNomeMae(cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.nomeMae)));
+				usuario.setNumSus(cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.numeroSus)));
+	
+				
+				BairroDAO bairroDao = new BairroDAO(context);				
+				Bairro bairro = bairroDao.getBairro( cursor.getLong(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.idBairro) ) );
+				usuario.setBairro(bairro); 
+				
+				UnidadeSaudeDAO ubsDao = new UnidadeSaudeDAO(context);				
+				UnidadeSaude ubs = ubsDao.getUnidadeSaude( cursor.getLong(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.idUnidadeSaude) ) );
+				usuario.setUnidadeSaude(ubs);
+				
+				usuario.setCep(cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.cep))); 
+				//usuario.setUnidadeSaude(cursor.getString(5) );
+				
+				usuario.setCelular(cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.celular)));
+				String dtNascto=null;
+				
+				dtNascto = cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.dataNascimento));								
+					
+					if(dtNascto !=null){
+						Calendar cal = Calendar.getInstance();
+						try {
+							cal.setTime(dateFormat.parse(dtNascto));
+							usuario.setDataNascimento(cal);
+						} catch (ParseException e) {
+							usuario.setDataNascimento(null);	
+							Log.e(TAG, e.getMessage());							
+						}						
+					}else{
+						usuario.setDataNascimento(null);
+					}
+								
+				usuario.setTelefone(cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.telefone)));
+				usuario.setSexo( cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.sexo)) );
+				//usuario.setObservacao( cursor.getString(cursor.getColumnIndex("observacao")) );
+	
+				//Adiciona um novo usuario a lista
+			}
+		}catch(SQLException e){
+			Log.e(TAG, e.getMessage());
+		}finally{
+			cursor.close();
+		}
+		return usuario;
+	}
+	
 }

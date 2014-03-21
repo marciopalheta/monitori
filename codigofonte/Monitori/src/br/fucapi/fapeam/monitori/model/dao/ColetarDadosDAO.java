@@ -3,8 +3,10 @@ package br.fucapi.fapeam.monitori.model.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.fucapi.fapeam.monitori.model.bean.Bairro;
 import br.fucapi.fapeam.monitori.model.bean.ColetarDados;
 import br.fucapi.fapeam.monitori.model.bean.Paciente;
+import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import br.fucapi.fapeam.monitori.sqlite.SQLiteDatabaseHelper;
 import android.app.ListActivity;
 import android.content.ContentValues;
@@ -17,11 +19,12 @@ public class ColetarDadosDAO extends AbstractDataBase{
 	
 	//constante para Log no LogCat
 	private static final String TAG = "CADASTRO_COLETAR_DADOS";
-
+	private Context context;
 	public ColetarDadosDAO(Context context) {
 		
 		//Chamando o construtor que sabe acessar o BD
-				super(context);
+		super(context);
+		this.context=context;
 	}
 	
 	public long getLastInsertId() {
@@ -45,6 +48,7 @@ public class ColetarDadosDAO extends AbstractDataBase{
 		ContentValues values = new ContentValues();
 		//Definicao dos valores dos campos
 		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.sis, coletaDados.getSis());
+		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.idPaciente, coletaDados.getUsuario().getId());
 		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.glicose, coletaDados.getGlicose());
 		//sao checkbox
 		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.jejum, String.valueOf
@@ -87,6 +91,55 @@ public class ColetarDadosDAO extends AbstractDataBase{
 						( SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.jejum))));
 				coletaDados.setJejum(Boolean.parseBoolean( cursor.getString(cursor.getColumnIndex
 						( SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.pos_pandrial))));
+				
+				UsuarioDAO usuarioDao = new UsuarioDAO(context);				
+				Usuario usuario = usuarioDao.getUsuario( cursor.getLong(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.idPaciente) )) ;
+				coletaDados.setUsuario(usuario); 				
+				
+				
+				//adiciona na lista
+				lista.add(coletaDados);
+			}
+		}catch(SQLException e){
+			Log.e(TAG, e.getMessage());
+		}finally{
+			cursor.close();
+		}
+		return lista;
+	}
+	
+	public List<ColetarDados> listar(Usuario paciente){
+		//colecao de coletagem de dados
+		List<ColetarDados> lista = new ArrayList<ColetarDados>();
+		ColetarDados coletaDados;
+		
+		//definicao da instrucao sql
+		String sql = "Select * from "+SQLiteDatabaseHelper.TABLE_COLETAR_DADOS_NAME +" where "+SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.idPaciente+"='"+paciente.getId()+"' " ;
+		
+		//objeto que recebe os registros do banco de dados
+		Cursor cursor = getReadableDatabase().rawQuery(sql, null);
+		
+		try{
+			while (cursor.moveToNext()) {
+				coletaDados = new ColetarDados();
+				
+				//carregar os atributos de coletar dados
+				coletaDados.setId(cursor.getLong(cursor.getColumnIndex
+						(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.id)));
+				coletaDados.setSis(cursor.getString(cursor.getColumnIndex
+						(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.sis)));
+				coletaDados.setGlicose(cursor.getString(cursor.getColumnIndex
+						(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.glicose)));
+				coletaDados.setJejum(Boolean.parseBoolean( cursor.getString(cursor.getColumnIndex
+						( SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.jejum))));
+				coletaDados.setJejum(Boolean.parseBoolean( cursor.getString(cursor.getColumnIndex
+						( SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.pos_pandrial))));
+				
+				UsuarioDAO usuarioDao = new UsuarioDAO(context);				
+				Usuario usuario = usuarioDao.getUsuario( cursor.getLong(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.idPaciente) )) ;
+				coletaDados.setUsuario(usuario); 				
+				
+				
 				//adiciona na lista
 				lista.add(coletaDados);
 			}
@@ -162,6 +215,11 @@ public class ColetarDadosDAO extends AbstractDataBase{
 						(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.pos_pandrial))));
 				coletaDados.setJejum(Boolean.parseBoolean(cursor.getString
 						(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.jejum))));
+				
+				UsuarioDAO usuarioDao = new UsuarioDAO(context);				
+				Usuario usuario = usuarioDao.getUsuario( cursor.getLong(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.idPaciente) )) ;
+				coletaDados.setUsuario(usuario);
+				
 			}
 		}catch(SQLException e){
 			Log.e(TAG, e.getMessage());

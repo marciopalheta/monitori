@@ -2,6 +2,8 @@ package br.fucapi.fapeam.monitori.activity;
 
 import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.model.bean.ColetarDados;
+import br.fucapi.fapeam.monitori.model.bean.Paciente;
+import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import br.fucapi.fapeam.monitori.model.dao.ColetarDadosDAO;
 import br.fucapi.fapeam.monitori.model.helper.ColetarDadosHelper;
 import android.os.Bundle;
@@ -11,29 +13,47 @@ import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class ColetarDadosActivity extends FragmentActivity {
 
 	//atributos para manipulacao de telas
 	private ColetarDadosHelper helper;
 	private ColetarDados coletaDadosParaSerAlterada=null;
-	
+	private Paciente pacienteSelecionado = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.coletardados);
 		
-		//criacao do objeto helper
-		helper = new ColetarDadosHelper(this);
-		
-		//busca para ser alterado
+		pacienteSelecionado = (Paciente) getIntent().getSerializableExtra(
+				"PACIENTE_SELECIONADO");
 		coletaDadosParaSerAlterada = (ColetarDados)getIntent().getSerializableExtra
 				("COLETA_SELECIONADA");
+		
 		if(coletaDadosParaSerAlterada != null){
-			//atualiza a tela
-			helper.setColetarDados(coletaDadosParaSerAlterada);
+			pacienteSelecionado = (Paciente) coletaDadosParaSerAlterada.getUsuario(); 		
 		}
+		
+		if (pacienteSelecionado == null) {
+			// Atualiza a tela com dados do Aluno			
+			Toast.makeText(this, "PACIENTE NAO INFORMADO", Toast.LENGTH_LONG).show();
+			finish();
+		}else{
+			//criacao do objeto helper
+			helper = new ColetarDadosHelper(this,pacienteSelecionado);
+			//busca para ser alterado					
+						
+			if(coletaDadosParaSerAlterada != null){
+				//atualiza a tela				
+				helper.setColetarDados(coletaDadosParaSerAlterada);
+			}
+			
+		}
+		
+		
+				
 	}
 
 	@Override

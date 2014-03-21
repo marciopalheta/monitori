@@ -6,6 +6,7 @@ import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.R.layout;
 import br.fucapi.fapeam.monitori.R.menu;
 import br.fucapi.fapeam.monitori.model.bean.ColetarDados;
+import br.fucapi.fapeam.monitori.model.bean.Paciente;
 import br.fucapi.fapeam.monitori.model.dao.ColetarDadosDAO;
 import android.os.Bundle;
 import android.app.Activity;
@@ -24,6 +25,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class ColetarActivity extends Activity {
@@ -46,10 +48,22 @@ public class ColetarActivity extends Activity {
 	//selecao com o click longo
 	private ColetarDados coletaSelecionada = null;
 	
+	private Paciente pacienteSelecionado = null;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.coletar);
+		
+		pacienteSelecionado = (Paciente) getIntent().getSerializableExtra(
+				"PACIENTE_SELECIONADO");
+		
+		
+		if (pacienteSelecionado == null) {
+			// Atualiza a tela com dados do Aluno			
+			Toast.makeText(this, "PACIENTE NAO INFORMADO", Toast.LENGTH_LONG).show();
+			finish();
+		}
 		
 		//ligacao dos componentes de TELA aos atributos da activity
 		lvListagem = (ListView) findViewById(R.id.lvListagem);
@@ -98,7 +112,7 @@ public class ColetarActivity extends Activity {
 		switch(item.getItemId()){
 		//verifica se foi selecionado um item novo
 		case R.id.menu_novo:
-			//especialista em mudança de tela
+			//especialista em mudanï¿½a de tela
 			Intent intent = new Intent(ColetarActivity.this, ColetarDadosActivity.class);
 			//carrega a nova tela
 			startActivity(intent);
@@ -123,8 +137,11 @@ public class ColetarActivity extends Activity {
 		ColetarDadosDAO dao = new ColetarDadosDAO(this);
 		Log.i(TAG, "chamou o listar: ");
 		//chamado do metodo listar
-		this.listaColetar = dao.listar();
-		
+		if(pacienteSelecionado!=null){
+			this.listaColetar = dao.listar(pacienteSelecionado);
+		}else{
+			this.listaColetar = dao.listar();	
+		}
 		//fim de conexao com o DB
 		dao.close();
 		

@@ -134,6 +134,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
  	
     public static interface FIELDS_TABLE_COLETAR_DADOS{
     	String id = KEY_ID;
+    	String idPaciente = "idPaciente";
     	String sis = "sis";
     	String glicose = "glicose";
     	String jejum = "jejum";
@@ -144,16 +145,18 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
     
     public static String ALL_FIELDS_TABLE_COLETAR_DADOS = 
     		TABLE_COLETAR_DADOS_NAME +"."+FIELDS_TABLE_COLETAR_DADOS.id+","+
+    		TABLE_COLETAR_DADOS_NAME +"."+FIELDS_TABLE_COLETAR_DADOS.idPaciente+","+
     		TABLE_COLETAR_DADOS_NAME +"."+FIELDS_TABLE_COLETAR_DADOS.sis+","+
     		TABLE_COLETAR_DADOS_NAME +"."+FIELDS_TABLE_COLETAR_DADOS.glicose+","+
     		TABLE_COLETAR_DADOS_NAME +"."+FIELDS_TABLE_COLETAR_DADOS.jejum+","+
-    		TABLE_COLETAR_DADOS_NAME +"."+FIELDS_TABLE_COLETAR_DADOS.pos_pandrial+",";
+    		TABLE_COLETAR_DADOS_NAME +"."+FIELDS_TABLE_COLETAR_DADOS.pos_pandrial+" ";    		
     		//TABLE_COLETAR_DADOS_NAME +"."+FIELDS_TABLE_COLETAR_DADOS.datacoleta+",";
     
     private static final String CREATE_TABLE_COLETAR_DADOS = "CREATE TABLE " + TABLE_COLETAR_DADOS_NAME
     		+ "(" + FIELDS_TABLE_COLETAR_DADOS.id + " INTERGER PRIMARY KEY, "
-    		+ FIELDS_TABLE_COLETAR_DADOS.sis+" TEXT, "+FIELDS_TABLE_COLETAR_DADOS.glicose+" TEXT, "
-    		+ FIELDS_TABLE_COLETAR_DADOS.jejum+" TEXT, "+FIELDS_TABLE_COLETAR_DADOS.pos_pandrial+" TEXT )";
+    		+FIELDS_TABLE_COLETAR_DADOS.idPaciente+" INTEGER ," + FIELDS_TABLE_COLETAR_DADOS.sis+" TEXT, "
+    		+FIELDS_TABLE_COLETAR_DADOS.glicose+" TEXT, "+ FIELDS_TABLE_COLETAR_DADOS.jejum+" TEXT, "
+    		+FIELDS_TABLE_COLETAR_DADOS.pos_pandrial+" TEXT )";
 
     public static interface FIELDS_TABLE_BAIRRO {
         String id = KEY_ID;

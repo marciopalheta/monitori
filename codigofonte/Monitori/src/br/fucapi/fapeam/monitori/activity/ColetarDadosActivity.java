@@ -29,7 +29,7 @@ public class ColetarDadosActivity extends FragmentActivity {
 		
 		//busca para ser alterado
 		coletaDadosParaSerAlterada = (ColetarDados)getIntent().getSerializableExtra
-				("Dados selecionados");
+				("COLETA_SELECIONADA");
 		if(coletaDadosParaSerAlterada != null){
 			//atualiza a tela
 			helper.setColetarDados(coletaDadosParaSerAlterada);

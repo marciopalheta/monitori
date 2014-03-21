@@ -1,11 +1,14 @@
 package br.fucapi.fapeam.monitori.model.bean;
 
-public class ColetarDados extends AbstractEntityBean{
+import java.io.Serializable;
+
+public class ColetarDados extends AbstractEntityBean implements Serializable{
 	
 	private String sis;
 	private String glicose;
 	private boolean jejum;
 	private boolean posPandrial;
+		
 	
 	public String getSis() {
 		return sis;
@@ -38,4 +41,12 @@ public class ColetarDados extends AbstractEntityBean{
 	public void setJejum(boolean jejum) {
 		this.jejum = jejum;
 	}
+	
+	
+	@Override
+	public String toString() {
+		
+		return getSis();
+	}
+	
 }

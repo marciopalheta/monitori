@@ -173,7 +173,12 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new LoginFragment()).commit();								
 			break;
 		case RequestCodes.MENU_COLETA_DADOS:
-			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new AgenteFragment()).commit();		
+			Intent intent = new Intent(this, ColetarActivity.class);
+			//intent = new Intent(this,MenuPrincipalActivity.class);
+			//Carrega a nova tela
+			this.startActivity(intent);
+			//getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new AgenteFragment()).commit();
+			
 			break;
 		case RequestCodes.MENU_UBS:			
 			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new UnidadeSaudeFragment()).commit();

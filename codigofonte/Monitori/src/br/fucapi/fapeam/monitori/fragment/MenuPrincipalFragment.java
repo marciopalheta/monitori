@@ -88,8 +88,8 @@ public class MenuPrincipalFragment extends Fragment implements OnClickListener {
 	
 	@Override
 	public void onClick(View v) {
-        	//Intent intent = new Intent(this, AgenteActivity.class);
-			Intent intent = new Intent(getActivity(), UnidadeSaudeActivity.class);
+        	Intent intent = new Intent(getActivity(), AgenteActivity.class);
+			//Intent intent = new Intent(getActivity(), UnidadeSaudeActivity.class);
     		if(v == btAgente) {
     			startActivity(intent);
     		}

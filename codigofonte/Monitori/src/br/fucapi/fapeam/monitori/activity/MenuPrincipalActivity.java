@@ -2,6 +2,7 @@ package br.fucapi.fapeam.monitori.activity;
 
 import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.activity.agente.AgenteActivity;
+import br.fucapi.fapeam.monitori.activity.agente.AgenteDadosActivity;
 import br.fucapi.fapeam.monitori.activity.medico.MedicoActivity;
 import br.fucapi.fapeam.monitori.activity.paciente.PacienteActivity;
 import br.fucapi.fapeam.monitori.activity.unidadeSaude.UnidadeSaudeActivity;
@@ -42,7 +43,7 @@ public class MenuPrincipalActivity extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
         	//Intent intent = new Intent(this, AgenteActivity.class);
-			Intent intent = new Intent(this, UnidadeSaudeActivity.class);
+			Intent intent = new Intent(this, AgenteActivity.class);
     		if(v == btAgente) {
     			startActivity(intent);
     		}

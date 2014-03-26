@@ -16,27 +16,27 @@ import android.widget.TextView;
 
 public class ListaAdapter extends BaseAdapter{
 
-	private final  List<Usuario> listaAgente;
+	private final  List<Usuario> listaUsuario;
 	private final Activity activity;
 	
-	public ListaAdapter(Activity activity, List<Usuario> listaAgente) {
-		this.listaAgente = listaAgente;
+	public ListaAdapter(Activity activity, List<Usuario> listaUsuario) {
+		this.listaUsuario = listaUsuario;
 		this.activity = activity;
 	}
 	
 	@Override
 	public int getCount() {
-		return listaAgente.size();
+		return listaUsuario.size();
 	}
 
 	@Override
 	public long getItemId(int posicao) {
-		return listaAgente.get(posicao).getId();
+		return listaUsuario.get(posicao).getId();
 	}
 	
 	@Override
 	public Object getItem(int posicao) {
-		return listaAgente.get(posicao);
+		return listaUsuario.get(posicao);
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class ListaAdapter extends BaseAdapter{
 		//Infla o layout na view
 		View view = activity.getLayoutInflater().inflate(R.layout.item, null);
 		
-		Usuario agente = listaAgente.get(posicao);
+		Usuario agente = listaUsuario.get(posicao);
 		
 		//configuração do nome
 		TextView nome = (TextView) view.findViewById(R.id.itemNome);

@@ -5,6 +5,7 @@ import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.activity.ColetarActivity;
 import br.fucapi.fapeam.monitori.activity.ColetarDadosActivity;
 import br.fucapi.fapeam.monitori.activity.paciente.PacienteDadosActivity;
+import br.fucapi.fapeam.monitori.adapter.ListaAdapter;
 import br.fucapi.fapeam.monitori.model.bean.ColetarDados;
 import br.fucapi.fapeam.monitori.model.bean.Paciente;
 import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
@@ -43,10 +44,10 @@ public class PacienteFragment extends Fragment {
 	private List<Usuario> listaPaciente;
 	
 	//ArrayAdapter para adaptar lista em View
-	private ArrayAdapter<Usuario> adapter;
+	private ListaAdapter adapter;
 	
 	//Definicao do Layout de exibicao da lista
-	private int adapterLayout = android.R.layout.simple_list_item_1;
+	//private int adapterLayout = android.R.layout.simple_list_item_1;
 	
 	//Usuario selecionando com o click longo
 	private Usuario usuarioSelecionado = null;	
@@ -154,7 +155,7 @@ public class PacienteFragment extends Fragment {
 		dao.close();
 		
 		//O objeto arrayadapter converte lista em view
-		this.adapter = new ArrayAdapter<Usuario>(getActivity(), adapterLayout, listaPaciente);
+		this.adapter = new ListaAdapter(getActivity(), listaPaciente);
 		//associacao do adapter ao listView
 		this.lvListagem.setAdapter(adapter);
 	}

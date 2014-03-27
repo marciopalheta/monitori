@@ -61,6 +61,28 @@
 				android:hint="@string/nome"
 				android:layout_marginBottom="10dp" />
 	        
+	        <TextView
+			    android:id="@+id/tvCpf"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+				android:text="@string/cpf"
+	            android:layout_marginLeft="@dimen/margem_editext"
+	            android:textSize="@dimen/fontes_para_textos"
+	            android:layout_marginBottom="10dp" />
+	        
+	        <EditText
+			    android:id="@+id/edCpf"
+			    android:background="#ebedea"
+			    android:layout_width="370dp"
+			    android:layout_height="@dimen/heigth_editext"
+	            android:textSize="@dimen/fontes_para_textos"
+	            android:layout_marginLeft="@dimen/margem_editext"
+	            android:padding="@dimen/padding"
+	            android:inputType="number"
+				android:hint="@string/cpf"
+				android:layout_marginBottom="10dp" />
+	        
+	        
 			<TextView
 			    android:id="@+id/tvDataNascimento"
 			    android:layout_width="wrap_content"

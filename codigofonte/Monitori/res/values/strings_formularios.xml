@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	    
+    <!-- Informacoes pessoais que todos usuarios irao ter -->
+    <string name="nome">Nome</string>
+    <string name="cpf">Cpf</string>
+    <string name="endereco">Endereco</string>
+    <string name="numero">Numero</string>
+    <string name="bairro">Bairro</string>
+    <string name="cep">Cep</string>
+    <string name="telefone">Telefone</string>
+    <string name="celular">Celular</string>
+    <string name="dtNascimento">Data Nascimento</string>
+    <string name="observacao">Observacao</string>
+    <string name="unidadeSaude">Unidade Basica de Saude</string>
+    <string name="foto">Foto</string>
+    <string name="salvar">Salvar</string>
+    <string name="feminino">Feminino</string>
+    <string name="masculino">Masculino</string>
+    <string name="sexo">Sexo</string>
+	<string-array name="sexo_arrays">
+        <item>@string/masculino</item>
+        <item>@string/feminino</item>
+    </string-array>
+
+	<string name="ubs_prompt">Selecione uma UBS</string>
+    <string name="ubs_novo">Incluir UBS</string>
+
+    <string-array name="ubs_arrays">
+        <item>@string/ubs_novo</item>
+    </string-array>
+	    
+    <string name="bairro_prompt">Selecione um Bairro</string>
+    <string name="bairro_novo">Incluir Bairro</string>
+
+    <string-array name="bairro_arrays">
+        <item>@string/bairro_novo</item>
+    </string-array>
+    
+    	
+	<!-- Mascara de Campos -->
+    <string name="mask_date">dd/mm/yyyy</string>
+    <string name="mask_cep">#####-###</string>
+    <string name="mask_telefone">(##)####-####</string>
+    
+    	
+    <!-- CRUD Paciente -->
+    <string name="title_activity_paciente_dados">Dados do Paciente</string>
+    <string name="title_activity_paciente">Lista de Pacientes</string>
+    
+    <string name="hipertenso">Hipertensao</string>
+    <string name="diabetes">Diabetes</string>
+    <string name="tipo1">Tipo 1</string>
+    <string name="tipo2">Tipo 2</string>    
+    <string name="sus">Adicione o numero do SUS</string>
+    <string name="nome_mae">Nome da Mae</string>    
+        
+    <string name="cadastrar_paciente">Novo paciente</string>
+    <string name="cadastrar_agente">Novo agente</string>
+    
+    
+    <!-- CRUD Medico -->
+    <string name="title_activity_medico">Lista de Medicos</string>
+    <string name="title_activity_medico_dados">Dados do Medico</string>
+    <!-- Informacoes do Medico -->    
+    <string name="crm">CRM</string>
+        
+    <!-- CRUD Agente -->
+    <string name="title_activity_agente">Lista de Agentes</string>
+    <string name="title_activity_agentes_dados">Dados do Agente</string>
+	<!-- Informacoes do Agente -->    
+	<string name="matricula">Matricula</string>
+    
+
+    <!-- login -->
+    <string name="login">usuario</string>
+    <string name="senha">senha</string>
+    <string name="entrar">entrar</string>
+    <string name="title_activity_login">Login</string>
+    <string name="lista_pacientes">Listar Pacientes</string>
+
+    <!-- Menu de contexto -->
+    <string name="deletar">Deletar</string>
+    <string name="cadastrar_medico">Novo Medico</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="title_activity_coletar_dados">Coletar Dados</string>
+
+    <!-- coletar dados -->
+    <string name="coletar_dados">Coletada dados</string>
+    <string name="pa">PA</string>
+    <string name="sis">SIS</string>
+    <string name="glicose">Glicose</string>
+    <string name="jejum">Jejum</string>
+    <string name="pos_pandrial">Pós-pandrial</string>
+    <string name="data_coleta">15 de Fevereiro de 2014</string>
+    <string name="title_activity_diagnosticar">Diagnosticar</string>
+
+    <!-- historico diagnostico -->
+    <string name="historico_diagnostico">Histórico de diagnóstico</string>
+    <string name="lorem_ipsum">Lorem ipsum loren</string>
+    <string name="data">23/02/2014</string>
+
+    <!-- diagnosticar -->
+    <string name="diagnosticar">Diagnósticar</string>
+    <string name="descrever">Descrever diagnóstico:</string>
+    <string name="title_activity_historico">Historico</string>
+    <string name="editar">Editar</string>
+    <string name="sexo_prompt">Selecione um sexo</string>
+    
+
+    <string name="title_activity_ubs">Lista de UBS</string>
+    <string name="title_activity_ubs_dados">Dados de UBS</string>
+
+    <string name="title_activity_menu_principal">Menu Principal</string>
+    <!-- Menu principal -->
+    <string name="menu_agente">Agente</string>
+    <string name="menu_paciente">Paciente</string>
+    <string name="menu_medico">Medico</string>
+    <string name="menu_coletadados">Coletar Dados</string>
+    <string name="erro_conexao_indisponivel">Conexão indisponível, por favor ative sua rede móvel ou Wi-Fi.</string>
+
+    <!-- novas strings -->
+
+    <string name="splashscreen_text">Carregando aplicação</string>
+    <string name="splashscreen_label">Carregando#8230;</string>
+    <string name="preferences_label">Preferencias</string>
+    <string name="menuitem_refresh">Refresh</string>
+    <string name="menuitem_preferences">Settings</string>
+    <string name="menuitem_quit">Sair</string>
+    <string name="confirm_quit">Você tem certeza que deseja sair da aplicação?</string>
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
+    <string name="error_retrievingdata">Error retrieving data</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
+    <!-- For sample -->
+
+    <string name="mainmenu_button1">@string/title_activity_paciente </string>
+    <string name="mainmenu_button2">Airport (AsyncTask)</string>
+    <string name="eula_title">Contrato de Licença de Usuário Final</string>
+    <string name="eula_accept">Aceitar</string>
+    <string name="eula_refuse">Recusar</string>
+    <string name="eula_close">Fechar</string>
+    <string name="title_activity_your_app_main">YourAppMainActivity</string>
+    <string name="title_activity_coletar">Lista Coletar Dados</string>
+    <string name="cadastrar_coletarDados">Nova Coleta</string>
+
+</resources>

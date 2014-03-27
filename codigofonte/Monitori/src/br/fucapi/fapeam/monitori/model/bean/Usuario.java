@@ -6,6 +6,7 @@ import java.util.Calendar;
 public class Usuario extends AbstractEntityBean {
 
 	private String nome;
+	private String cpf;
 	private String endereco;
 	private String numero;
 	private Bairro bairro;
@@ -84,6 +85,14 @@ public class Usuario extends AbstractEntityBean {
 		this.nome = nome;
 	}
 
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+	
 	public UnidadeSaude getUnidadeSaude() {
 		return unidadeSaude;
 	}

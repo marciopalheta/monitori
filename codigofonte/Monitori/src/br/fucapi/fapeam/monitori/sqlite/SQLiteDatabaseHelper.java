@@ -32,6 +32,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
     public static interface FIELDS_TABLE_USUARIO {
         String id = KEY_ID;
         String nome = "nome";
+        String cpf = "cpf";
         String endereco = "endereco";
         String numero = "numero";
         String cep = "cep";        
@@ -59,6 +60,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
     public static String ALL_FIELDS_TABLE_USUARIO =
     		TABLE_USUARIO_NAME +"."+FIELDS_TABLE_USUARIO.id+","+
     		TABLE_USUARIO_NAME +"."+FIELDS_TABLE_USUARIO.nome+","+
+    		TABLE_USUARIO_NAME +"."+FIELDS_TABLE_USUARIO.cpf+","+
     		TABLE_USUARIO_NAME +"."+FIELDS_TABLE_USUARIO.endereco+","+
     		TABLE_USUARIO_NAME +"."+FIELDS_TABLE_USUARIO.numero+","+
     		TABLE_USUARIO_NAME +"."+FIELDS_TABLE_USUARIO.cep+","+    		
@@ -85,8 +87,8 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
     // Table Create Statements
     private static final String CREATE_TABLE_USUARIO = "CREATE TABLE "
             + TABLE_USUARIO_NAME + "(" + FIELDS_TABLE_USUARIO.id + " INTEGER PRIMARY KEY," 
-            + FIELDS_TABLE_USUARIO.nome+ "  TEXT, "+FIELDS_TABLE_USUARIO.endereco+" TEXT, "+FIELDS_TABLE_USUARIO.numero+" TEXT, "+FIELDS_TABLE_USUARIO.idBairro+" INTEGER, "
-			+ FIELDS_TABLE_USUARIO.cep+ " TEXT, "+FIELDS_TABLE_USUARIO.idUnidadeSaude+" INTEGER, "+FIELDS_TABLE_USUARIO.celular+" TEXT, "
+            + FIELDS_TABLE_USUARIO.nome+ "  TEXT, "+ FIELDS_TABLE_USUARIO.cpf+ " TEXT, " +FIELDS_TABLE_USUARIO.endereco+" TEXT, "+FIELDS_TABLE_USUARIO.numero+" TEXT, "+FIELDS_TABLE_USUARIO.idBairro+" INTEGER, "
+            + FIELDS_TABLE_USUARIO.cep+ " TEXT, "+FIELDS_TABLE_USUARIO.idUnidadeSaude+" INTEGER, "+FIELDS_TABLE_USUARIO.celular+" TEXT, "
 			+ FIELDS_TABLE_USUARIO.telefone+" TEXT, "+FIELDS_TABLE_USUARIO.dataNascimento+" TEXT, "+FIELDS_TABLE_USUARIO.login+" TEXT, "
 			+ FIELDS_TABLE_USUARIO.senha+" TEXT, "+FIELDS_TABLE_USUARIO.numeroSus+" TEXT, "
 			+ FIELDS_TABLE_USUARIO.nomeMae+" TEXT, "+FIELDS_TABLE_USUARIO.foto+" TEXT, "+FIELDS_TABLE_USUARIO.hipertenso+" TEXT, "+FIELDS_TABLE_USUARIO.sexo+" TEXT, "
@@ -95,6 +97,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
     
     private static final String CREATE_INDEX_TABLE_USUARIO = 
     		"CREATE UNIQUE INDEX index_"+FIELDS_TABLE_USUARIO.numeroSus+" on "+TABLE_USUARIO_NAME+" ("+FIELDS_TABLE_USUARIO.numeroSus+"); " +
+    		"CREATE UNIQUE INDEX index_"+FIELDS_TABLE_USUARIO.cpf+" on "+TABLE_USUARIO_NAME+" ("+FIELDS_TABLE_USUARIO.cpf+"); " +
     		"CREATE UNIQUE INDEX index_"+FIELDS_TABLE_USUARIO.matricula+" on "+TABLE_USUARIO_NAME+" ("+FIELDS_TABLE_USUARIO.matricula+"); " +
     		"CREATE UNIQUE INDEX index_"+FIELDS_TABLE_USUARIO.crm+" on "+TABLE_USUARIO_NAME+" ("+FIELDS_TABLE_USUARIO.crm+"); "; 
     private static final String CREATE_ADMIN_USER = 

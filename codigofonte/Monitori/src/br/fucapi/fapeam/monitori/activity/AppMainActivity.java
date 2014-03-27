@@ -5,6 +5,7 @@ import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.controller.NavigationController;
 import br.fucapi.fapeam.monitori.eula.Eula;
 import br.fucapi.fapeam.monitori.fragment.AgenteFragment;
+import br.fucapi.fapeam.monitori.fragment.ColetarFragment;
 import br.fucapi.fapeam.monitori.fragment.LoginFragment;
 import br.fucapi.fapeam.monitori.fragment.MainFragment;
 import br.fucapi.fapeam.monitori.fragment.MedicoFragment;
@@ -19,6 +20,7 @@ import br.fucapi.fapeam.monitori.navdrawer.NavDrawerAdapter;
 import br.fucapi.fapeam.monitori.navdrawer.NavDrawerItem;
 import br.fucapi.fapeam.monitori.navdrawer.NavMenuItem;
 import br.fucapi.fapeam.monitori.navdrawer.NavMenuSection;
+import br.fucapi.fapeam.monitori.utils.PutExtras;
 import br.fucapi.fapeam.monitori.utils.RequestCodes;
 
 
@@ -73,7 +75,7 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 						NavMenuSection.create( 100, "Demos"),
 						NavMenuItem.create(RequestCodes.MENU_COLETA_DADOS,getString(R.string.title_activity_coletar_dados), android.R.drawable.sym_def_app_icon, true, this),
 						
-						NavMenuItem.create( 500 , getString(R.string.title_activity_historico), R.drawable.navdrawer_friends, true, this),
+						NavMenuItem.create( RequestCodes.MENU_HISTORICO , getString(R.string.title_activity_historico), R.drawable.navdrawer_friends, true, this),
 																		
 						NavMenuSection.create(200, "General"),
 						NavMenuItem.create(202, "Rate this app", "navdrawer_rating", false, this),
@@ -144,11 +146,14 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 	
 	@Override
 	protected void onNavItemSelected(int id) {
+		Intent intent;
+		Fragment frag;
+		Bundle args;
 		switch ((int)id) {
 		case RequestCodes.MENU_PACIENTE:		
-			Fragment frag = new PacienteFragment();
-			Bundle args = new Bundle();			
-			args.putSerializable("USUARIO_LOGADO", usuarioLogado);
+			frag = new PacienteFragment();
+			args = new Bundle();			
+			args.putSerializable(PutExtras.USUARIO_LOGADO, usuarioLogado);
 			frag.setArguments(args);
 			
 			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, frag ).commit();			
@@ -179,11 +184,39 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new LoginFragment()).commit();								
 			break;
 		case RequestCodes.MENU_COLETA_DADOS:
-			Intent intent = new Intent(this, ColetarActivity.class);
-			//intent = new Intent(this,MenuPrincipalActivity.class);
+			
+			intent = new Intent(this, ColetarDadosActivity.class);
+			if(usuarioLogado!=null){
+				if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.PACIENTE)){
+					intent.putExtra(PutExtras.PACIENTE_SELECIONADO, usuarioLogado);
+				}
+			}
 			//Carrega a nova tela
 			this.startActivity(intent);
 			//getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new AgenteFragment()).commit();
+			
+			break;
+		case RequestCodes.MENU_HISTORICO:
+			if(usuarioLogado!=null){
+							
+				if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.PACIENTE)){
+					frag = new ColetarFragment();
+					args = new Bundle();			
+					args.putSerializable(PutExtras.USUARIO_LOGADO, usuarioLogado);
+					frag.setArguments(args);
+					getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, frag ).commit();
+				}else{
+					
+					intent = new Intent(this, ColetarActivity.class);
+					//intent.putExtra(PutExtras.PACIENTE_SELECIONADO, usuarioLogado);
+					//intent = new Intent(this,MenuPrincipalActivity.class);
+					//Carrega a nova tela
+					this.startActivity(intent);
+					
+				}
+			}
+		
+						
 			
 			break;
 		case RequestCodes.MENU_UBS:			

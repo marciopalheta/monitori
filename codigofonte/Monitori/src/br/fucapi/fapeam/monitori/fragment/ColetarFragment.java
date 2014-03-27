@@ -4,11 +4,11 @@ import java.util.List;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -113,7 +113,7 @@ public class ColetarFragment extends Fragment {
 			switch(item.getItemId()){
 			//verifica se foi selecionado um item novo
 			case R.id.menu_novo:
-				//especialista em mudança de tela
+				//especialista em mudanï¿½a de tela
 				Intent intent = new Intent(getActivity(), ColetarDadosActivity.class);
 				//carrega a nova tela
 				startActivity(intent);

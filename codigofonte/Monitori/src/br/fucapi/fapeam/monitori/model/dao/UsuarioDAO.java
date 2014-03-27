@@ -59,6 +59,8 @@ public class UsuarioDAO extends AbstractDataBase{
 			//Definicao dos valores dos campos
 			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.nome, usuario.getNome());
 			
+			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.cpf, usuario.getCpf());
+			
 			dataForDB=null;	
 			Calendar cal =  usuario.getDataNascimento();
 			if(cal!=null){
@@ -132,6 +134,7 @@ public class UsuarioDAO extends AbstractDataBase{
 			
 			
 			Log.i(TAG, "Usuario Cadastrado: "+ usuario.getNome() );
+			Log.i(TAG, "cpf: "+ usuario.getCpf() );
 			Log.i(TAG, "dataMascimento: "+ dataForDB );		
 			
 			Log.i(TAG, "Login: "+ usuario.getLogin() );
@@ -208,6 +211,8 @@ public class UsuarioDAO extends AbstractDataBase{
 				//Carregar os atributos dos usuarios
 				usuario.setId( cursor.getLong(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.id) )); 
 				usuario.setNome(cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.nome)));
+				usuario.setCpf(cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.cpf)));
+											
 				
 				usuario.setEndereco(cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.endereco )));
 				usuario.setNumero(cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.numero )));
@@ -276,7 +281,9 @@ public class UsuarioDAO extends AbstractDataBase{
 	public void alterar(Usuario usuario) {
 		ContentValues values = new ContentValues();
 		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.nome , usuario.getNome());
-				
+		
+		//values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.cpf, usuario.getCpf());
+		
 		Calendar cal =  usuario.getDataNascimento();
 		if(cal!=null){
 			dataForDB = dateFormat.format(usuario.getDataNascimento().getTime());
@@ -362,12 +369,13 @@ public class UsuarioDAO extends AbstractDataBase{
 					((Medico)usuario).setCrm( cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.crm))   );
 				}																 
 				
-				Log.i(TAG, "Id usuario = " + cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.id) ));				
+				//Log.i(TAG, "Id usuario = " + cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.id) ));				
 				
 				//Carregar os atributos dos usuarios
 				usuario.setId( cursor.getLong(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.id) )); 
 				usuario.setNome(cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.nome)));
-				
+				usuario.setCpf(cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.cpf)));
+				//Log.i(TAG, "cpf: "+ usuario.getCpf() );		
 				usuario.setEndereco(cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.endereco)));
 				usuario.setNumero(cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.numero)));
 				usuario.setNomeMae(cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.nomeMae)));
@@ -449,11 +457,12 @@ public class UsuarioDAO extends AbstractDataBase{
 					((Medico)usuario).setCrm( cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.crm))   );
 				}																 
 				
-				Log.i(TAG, "Id usuario = " + cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.id) ));				
+				//Log.i(TAG, "Id usuario = " + cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.id) ));				
 				
 				//Carregar os atributos dos usuarios
 				usuario.setId( cursor.getLong(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.id) )); 
 				usuario.setNome(cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.nome)));
+				usuario.setCpf(cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.cpf)));
 				
 				usuario.setEndereco(cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.endereco)));
 				usuario.setNumero(cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.numero)));

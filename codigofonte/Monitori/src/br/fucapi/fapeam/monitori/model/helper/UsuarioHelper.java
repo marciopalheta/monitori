@@ -8,6 +8,12 @@ import java.util.List;
 import java.util.Map;
 
 import br.fucapi.fapeam.monitori.R;
+import br.fucapi.fapeam.monitori.model.bean.Agente;
+import br.fucapi.fapeam.monitori.model.bean.Bairro;
+import br.fucapi.fapeam.monitori.model.bean.Medico;
+import br.fucapi.fapeam.monitori.model.bean.Paciente;
+import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
+import br.fucapi.fapeam.monitori.model.bean.UnidadeSaude;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import br.fucapi.fapeam.monitori.model.dao.BairroDAO;
 import br.fucapi.fapeam.monitori.utils.BairroDialog;
@@ -40,12 +46,12 @@ import android.widget.TextView;
 
 public class UsuarioHelper {
 	private EditText nome;
+	private EditText cpf;
 	private EditText endereco;
 	private EditText numero;
 	private EditText cep;	
 	private EditText celular;
 	private EditText telefone;
-	private EditText nomeMae;
 	
 	private EditText dataNascimento;		
 	private ImageButton ibDataNascimento;	
@@ -94,12 +100,25 @@ public class UsuarioHelper {
 	//private ArrayAdapter<String> adapter;
 	SpinnerAdapter adapter;
 	
-	public UsuarioHelper(final FragmentActivity fragmentActivity){
+	public UsuarioHelper(final FragmentActivity fragmentActivity, TipoUsuario tipoUsuario){
 		//Associacao de campos de tela ao controller
 		this.context = fragmentActivity;						
 		this.fragmentActivity = fragmentActivity;
+		
+		if(tipoUsuario == TipoUsuario.PACIENTE){
+			usuario = new Paciente();
+		}else if(tipoUsuario == TipoUsuario.AGENTE){
+			usuario = new Agente();
+		}else if(tipoUsuario == TipoUsuario.MEDICO){
+			usuario = new Medico();
+		}else{
+			usuario = new Usuario();
+		}
 		nome = (EditText) fragmentActivity.findViewById(R.id.edNome);
-			
+		
+		cpf = (EditText) fragmentActivity.findViewById(R.id.edCpf);
+		cpf.addTextChangedListener(Mask.insert("###.###.###-##", cpf));
+		
 		endereco = (EditText) fragmentActivity.findViewById(R.id.edEndereco);					
 		numero = (EditText) fragmentActivity.findViewById(R.id.edNumero);
 		
@@ -112,7 +131,7 @@ public class UsuarioHelper {
 		telefone = (EditText) fragmentActivity.findViewById(R.id.edTefone);
 		telefone.addTextChangedListener(Mask.insert("(##)####-####", telefone));
 		
-		nomeMae = (EditText) fragmentActivity.findViewById(R.id.edNomedamae);
+		
 		//numSus = (EditText) fragmentActivity.findViewById(R.id.edit_sus);
 		
 		dataNascimento = (EditText) fragmentActivity.findViewById(R.id.edDataNascimento); 				
@@ -278,16 +297,7 @@ public class UsuarioHelper {
 		 			 	
 			dataNascimento.setText(dateForButton);	        	       
 	 }		
-	
-	public EditText getNomeMae() {
-		return nomeMae;
-	}
-
-	public void setNomeMae(EditText nomeMae) {
-		this.nomeMae = nomeMae;
-	}
-
-	
+		
 	public EditText getEditTextDataNascimento() {
 		return dataNascimento;
 	}
@@ -295,14 +305,7 @@ public class UsuarioHelper {
 	public void setEditTextDataNascimento(EditText dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-	
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
+			
 
 	public EditText getNome() {
 		return nome;
@@ -312,6 +315,14 @@ public class UsuarioHelper {
 		this.nome = nome;
 	}
 
+	public EditText getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(EditText cpf) {
+		this.cpf = cpf;
+	}
+	
 	public EditText getEndereco() {
 		return endereco;
 	}
@@ -439,5 +450,120 @@ public class UsuarioHelper {
 	public void setSpinUbs(Spinner spinUbs) {
 		this.spinUbs= spinUbs;
 	}
+	
+	
+	
+	public Usuario getUsuario(){
+		SpinnerObject SpinAux;
+		int posicao;
+		usuario.setNome(getNome().getText().toString());
+		usuario.setEndereco(getEndereco().getText().toString());
+		usuario.setNumero(getNumero().getText().toString());
+		usuario.setCep(getCep().getText().toString());
+		usuario.setCelular(getCelular().getText().toString());
+		usuario.setTelefone(getTelefone().getText().toString());		
 		
+		usuario.setDataNascimento(getDataNascimento());					
+		usuario.setCpf(cpf.getText().toString());		
+		
+		usuario.setSexo( String.valueOf(getSexo().getSelectedItem()) );
+				
+		if(!getSpinBairro().getAdapter().isEmpty()){
+					
+					posicao = getSpinBairro().getSelectedItemPosition();
+					SpinAux = (SpinnerObject)getSpinBairro().getAdapter().getItem(posicao);
+					if(SpinAux.getId() != 0){
+						Bairro auxBairro = new Bairro();
+						auxBairro.setId( SpinAux.getId() );
+						auxBairro.setNome( SpinAux.getValue() );
+						usuario.setBairro(auxBairro);
+					}
+		}									
+		
+		
+		if(!getSpinUbs().getAdapter().isEmpty()){
+			posicao = getSpinUbs().getSelectedItemPosition();
+			 
+			SpinAux = (SpinnerObject)getSpinUbs().getAdapter().getItem(posicao);				
+			if(SpinAux.getId() != 0){
+				UnidadeSaude auxUbs = new UnidadeSaude();
+				auxUbs.setId( SpinAux.getId() );
+				auxUbs.setNome( SpinAux.getValue() );						
+				
+				usuario.setUnidadeSaude(auxUbs);
+			}
+		}
+				
+		
+		//usuario.setLogin(usuario.getCpf());
+		//usuario.setSenha(usuario.getCpf());
+		usuario.setLogin(usuario.getCpf());
+		usuario.setSenha(usuario.getCpf());				
+				
+		return usuario;		
+	}
+
+	
+	public void setUsuario(Usuario usuario){
+		
+		getNome().setText(usuario.getNome());		
+		getTelefone().setText(usuario.getTelefone());
+		getEndereco().setText(usuario.getEndereco());	
+		getNumero().setText(usuario.getNumero());
+		getCep().setText(usuario.getCep() );
+		getCelular().setText(usuario.getCelular());
+		getTelefone().setText(usuario.getTelefone());										
+		
+		cpf.setText(usuario.getCpf());
+		
+		setDataNascimento(usuario.getDataNascimento());
+		
+		
+		adapter = (br.fucapi.fapeam.monitori.utils.SpinnerAdapter) getSexo().getAdapter();
+		List<SpinnerObject> list_sexo = adapter.getSpinnerObjects();
+		int index=0, indexKey=0;		
+		for (SpinnerObject sexo : list_sexo) {
+			if(sexo.getValue().equals(usuario.getSexo()) ){
+				indexKey = index;
+				break;	
+			}
+			index++;					
+		}
+		getSexo().setSelection(indexKey);
+			
+		
+		
+		adapter = (br.fucapi.fapeam.monitori.utils.SpinnerAdapter) getSpinBairro().getAdapter();
+		List<SpinnerObject> list_bairro = adapter.getSpinnerObjects();
+		index=0; indexKey=0;		
+		if(usuario.getBairro() !=null){
+			for (SpinnerObject sobairro : list_bairro) {
+				if(sobairro.getId() == usuario.getBairro().getId() ){
+					indexKey = index;
+					break;	
+				}
+				index++;					
+			}
+		}
+		getSpinBairro().setSelection(indexKey);
+		
+		adapter = (br.fucapi.fapeam.monitori.utils.SpinnerAdapter) getSpinUbs().getAdapter();
+		List<SpinnerObject> list_ubs = adapter.getSpinnerObjects();
+		index=0; indexKey=0;		
+		if(usuario.getUnidadeSaude() !=null){
+			for (SpinnerObject soUbs: list_ubs) {
+				if(soUbs.getId() == usuario.getUnidadeSaude().getId() ){
+					indexKey = index;
+					break;	
+				}
+				index++;					
+			}
+		}
+		getSpinUbs().setSelection(indexKey);						
+		
+		this.usuario = usuario;	
+	//Validando dados
+	}
+	
+	
 }

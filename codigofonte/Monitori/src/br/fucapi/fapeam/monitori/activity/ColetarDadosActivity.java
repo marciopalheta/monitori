@@ -6,6 +6,7 @@ import br.fucapi.fapeam.monitori.model.bean.Paciente;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import br.fucapi.fapeam.monitori.model.dao.ColetarDadosDAO;
 import br.fucapi.fapeam.monitori.model.helper.ColetarDadosHelper;
+import br.fucapi.fapeam.monitori.utils.PutExtras;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -28,9 +29,9 @@ public class ColetarDadosActivity extends FragmentActivity {
 		setContentView(R.layout.coletardados);
 		
 		pacienteSelecionado = (Paciente) getIntent().getSerializableExtra(
-				"PACIENTE_SELECIONADO");
+				PutExtras.PACIENTE_SELECIONADO);
 		coletaDadosParaSerAlterada = (ColetarDados)getIntent().getSerializableExtra
-				("COLETA_SELECIONADA");
+				(PutExtras.COLETA_SELECIONADA);
 		
 		if(coletaDadosParaSerAlterada != null){
 			pacienteSelecionado = (Paciente) coletaDadosParaSerAlterada.getUsuario(); 		
@@ -84,24 +85,18 @@ public class ColetarDadosActivity extends FragmentActivity {
 				ColetarDados coletaDados = helper.getColetarDados();
 				//Criacao do objeto DAO
 				ColetarDadosDAO dao = new ColetarDadosDAO(ColetarDadosActivity.this);
-				long id;
+				
 				//Validando os campos
 				if(helper.validar()==true){		
 					// Verificacao para salvar ou cadastrar o aluno
 					if (coletaDados.getId() == null) {
-						dao.cadastrar(coletaDados);
-						id = dao.getLastInsertId();
+						dao.cadastrar(coletaDados);						
 					} else {
 						dao.alterar(coletaDados);
-						id = coletaDados.getId();
+						
 					}//Fechando a conexao com o BD
 					dao.close();
-					
-					Intent result = new Intent();
-	                //System.out.println("from second activity: \"" + txtStr + "\"");
-	                result.putExtra("ID_COLETARDADOS", id);
-	                setResult(Activity.RESULT_OK, result);
-					
+										
 					//Encerrando a activity
 					finish();
 				}

@@ -77,6 +77,7 @@
     <string name="senha">senha</string>
     <string name="entrar">entrar</string>
     <string name="title_activity_login">Login</string>
+    <string name="title_activity_photo">Camera Exemplo</string>
     <string name="lista_pacientes">Listar Pacientes</string>
 
     <!-- Menu de contexto -->
@@ -145,5 +146,10 @@
     <string name="title_activity_your_app_main">YourAppMainActivity</string>
     <string name="title_activity_coletar">Lista Coletar Dados</string>
     <string name="cadastrar_coletarDados">Nova Coleta</string>
-
+	    
+    <string name="camera_add_foto">Adicionar Foto</string>
+    <string name="camera_foto">Tirar Foto</string>
+    <string name="camera_galeria">Escolher da Galeria de Fotos</string>
+    <string name="camera_cancelar">Cancelar</string>
+    
 </resources>

@@ -2,13 +2,16 @@ package br.fucapi.fapeam.monitori.model.bean;
 
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 public class ColetarDados extends AbstractEntityBean implements Serializable{
-	
+		
 	private String sis;
 	private String glicose;
 	private boolean jejum;
 	private boolean posPandrial;
 	private Usuario usuario;		
+	
+	
 	
 	public String getSis() {
 		return sis;

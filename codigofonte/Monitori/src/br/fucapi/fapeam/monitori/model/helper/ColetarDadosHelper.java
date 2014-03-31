@@ -38,11 +38,8 @@ public class ColetarDadosHelper{
 	private EditText sis;
 	private EditText glicose;
 	private CheckBox jejum;
-	private CheckBox pos_pandrial;
-	private Activity activity;
-	private Usuario usuario;
-	SpinnerAdapter adapter;
-	private boolean onCreateFlag = true;
+	private CheckBox pos_pandrial;	
+	private Usuario usuario;	
 	
 	private FragmentActivity fragmentActivity;	
 	
@@ -80,8 +77,7 @@ public class ColetarDadosHelper{
 	}
 	
 	public ColetarDados getColetarDados(){
-		SpinnerObject SpinAux;
-		int posicao;
+		
 		coletaDados.setSis(getSis().getText().toString());
 		coletaDados.setGlicose(getGlicose().getText().toString());				
 											
@@ -107,25 +103,7 @@ public class ColetarDadosHelper{
 		this.coletaDados = coletaDados;	
 	//Validando dados
 	}
-	
-	public boolean validarDados(View view, String mensagem) {
-		  if (view instanceof EditText) {
-			  EditText edTexto = (EditText) view;
-			  Editable texto = edTexto.getText();
-			  if (texto != null) {
-				  String strTexto = texto.toString();
-				  if (!TextUtils.isEmpty(strTexto)) {
-					  return true;
-				  }
-			  }
-			  // em qualquer outra condição é gerado um erro
-			  edTexto.setError(mensagem);
-			  edTexto.setFocusable(true);
-			  edTexto.requestFocus();
-			  return false;
-		  }
-		  return false;
-	}
+		
 	
 	public boolean validar(){
 				
@@ -133,13 +111,10 @@ public class ColetarDadosHelper{
 		Map<View, String> mapaDeCampos = new LinkedHashMap<View, String>();
 		mapaDeCampos.put(sis, "Campo obrigatorio");		
 		mapaDeCampos.put(glicose, "Campo obrigatorio");
-		//mapaDeCampos.put(endereco, "Campo obrigatorio");
-		//mapaDeCampos.put(numero, "Telefone obrigatorio");
-		//mapaDeCampos.put(cep, "Cep obrigatorio");		
 		
 		for(View chave: mapaDeCampos.keySet()){
 		    //System.out.println("chave: "+chave+", valor: "+mapaDeCampos.get(chave)+".");
-		    if(validarDados(chave,  mapaDeCampos.get(chave) ) == false){
+		    if(Funcoes.validarDados(chave,  mapaDeCampos.get(chave) ) == false){
 				return false;
 			}
 		}

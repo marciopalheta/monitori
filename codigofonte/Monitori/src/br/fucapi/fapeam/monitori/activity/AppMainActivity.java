@@ -61,6 +61,7 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 						NavMenuSection.create(300, "Testes"),
 						NavMenuItem.create(301,getString(R.string.title_activity_menu_principal), android.R.drawable.ic_popup_sync, true, this),
 						NavMenuItem.create(RequestCodes.MENU_LOGIN,getString(R.string.title_activity_login), android.R.drawable.btn_star, true, this),
+						NavMenuItem.create(RequestCodes.MENU_HISTORICO,getString(R.string.title_activity_coletar_dados), android.R.drawable.sym_def_app_icon, true, this),
 						NavMenuItem.create(RequestCodes.MENU_COLETA_DADOS,getString(R.string.title_activity_coletar_dados), android.R.drawable.sym_def_app_icon, true, this),
 						NavMenuItem.create(RequestCodes.MENU_UBS,getString(R.string.title_activity_ubs), "ic_medico", true, this),
 						//NavMenuItem.create(103,getString(R.string.title_activity_), "ic_medico", true, this),
@@ -120,6 +121,7 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 					NavMenuSection.create(300, "Testes"),
 					NavMenuItem.create(301,getString(R.string.title_activity_menu_principal), android.R.drawable.ic_popup_sync, true, this),
 					NavMenuItem.create(RequestCodes.MENU_LOGIN,getString(R.string.title_activity_login), android.R.drawable.btn_star, true, this),
+					NavMenuItem.create(RequestCodes.MENU_HISTORICO,getString(R.string.title_activity_historico), android.R.drawable.sym_def_app_icon, true, this),
 					NavMenuItem.create(RequestCodes.MENU_COLETA_DADOS,getString(R.string.title_activity_coletar_dados), android.R.drawable.sym_def_app_icon, true, this),
 					NavMenuItem.create(RequestCodes.MENU_UBS,getString(R.string.title_activity_ubs), "ic_medico", true, this),
 					//NavMenuItem.create(103,getString(R.string.title_activity_), "ic_medico", true, this),
@@ -202,7 +204,7 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 				if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.PACIENTE)){
 					frag = new ColetarFragment();
 					args = new Bundle();			
-					args.putSerializable(PutExtras.USUARIO_LOGADO, usuarioLogado);
+					args.putSerializable(PutExtras.PACIENTE_SELECIONADO, usuarioLogado);
 					frag.setArguments(args);
 					getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, frag ).commit();
 				}else{

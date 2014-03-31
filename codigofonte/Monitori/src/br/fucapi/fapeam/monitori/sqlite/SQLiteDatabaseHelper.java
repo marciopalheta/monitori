@@ -155,12 +155,19 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
     		TABLE_COLETAR_DADOS_NAME +"."+FIELDS_TABLE_COLETAR_DADOS.pos_pandrial+" ";    		
     		//TABLE_COLETAR_DADOS_NAME +"."+FIELDS_TABLE_COLETAR_DADOS.datacoleta+",";
     
-    private static final String CREATE_TABLE_COLETAR_DADOS = "CREATE TABLE " + TABLE_COLETAR_DADOS_NAME
+    private static final String CREATE_TABLE_COLETAR_DADOS1 = "CREATE TABLE " + TABLE_COLETAR_DADOS_NAME
     		+ "(" + FIELDS_TABLE_COLETAR_DADOS.id + " INTERGER PRIMARY KEY, "
     		+FIELDS_TABLE_COLETAR_DADOS.idPaciente+" INTEGER ," + FIELDS_TABLE_COLETAR_DADOS.sis+" TEXT, "
     		+FIELDS_TABLE_COLETAR_DADOS.glicose+" TEXT, "+ FIELDS_TABLE_COLETAR_DADOS.jejum+" TEXT, "
     		+FIELDS_TABLE_COLETAR_DADOS.pos_pandrial+" TEXT )";
 
+    private static final String CREATE_TABLE_COLETAR_DADOS = "CREATE TABLE "
+            + TABLE_COLETAR_DADOS_NAME + "(" + FIELDS_TABLE_COLETAR_DADOS.id + " INTEGER PRIMARY KEY," 
+            + FIELDS_TABLE_COLETAR_DADOS.sis+ "  TEXT, "+ FIELDS_TABLE_COLETAR_DADOS.glicose+ " TEXT, "
+            + FIELDS_TABLE_COLETAR_DADOS.jejum+ " TEXT, "+FIELDS_TABLE_COLETAR_DADOS.idPaciente+" INTEGER, "
+            +FIELDS_TABLE_COLETAR_DADOS.pos_pandrial+" TEXT) ";			
+    
+    
     public static interface FIELDS_TABLE_BAIRRO {
         String id = KEY_ID;
         String nome = "nome";                        

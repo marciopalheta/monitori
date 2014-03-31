@@ -62,7 +62,7 @@ public class ColetarActivity extends Activity {
 		if (pacienteSelecionado == null) {
 			// Atualiza a tela com dados do Aluno			
 			Toast.makeText(this, "PACIENTE NAO INFORMADO", Toast.LENGTH_LONG).show();
-			finish();
+			//finish();
 		}
 		
 		//ligacao dos componentes de TELA aos atributos da activity

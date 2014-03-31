@@ -24,10 +24,14 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.activity.ColetarDadosActivity;
 import br.fucapi.fapeam.monitori.model.bean.ColetarDados;
+import br.fucapi.fapeam.monitori.model.bean.Paciente;
+import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import br.fucapi.fapeam.monitori.model.dao.ColetarDadosDAO;
+import br.fucapi.fapeam.monitori.utils.PutExtras;
 
 public class ColetarFragment extends Fragment {
 	//definicao das constantes
@@ -47,11 +51,23 @@ public class ColetarFragment extends Fragment {
 		
 		//selecao com o click longo
 		private ColetarDados coletaSelecionada = null;
+		private Paciente pacienteSelecionado = null;
 		
 		@Override
 		public void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
 			setHasOptionsMenu(true);//adiciona itens ao OptionsMenu
+			
+			
+			pacienteSelecionado = (Paciente) this.getArguments().getSerializable(PutExtras.PACIENTE_SELECIONADO);									
+			
+			if (pacienteSelecionado == null) {
+				// Atualiza a tela com dados do Aluno			
+				Toast.makeText(getActivity(), "PACIENTE NAO INFORMADO", Toast.LENGTH_LONG).show();
+								
+			}
+
+			
 		}
 		
 		public View onCreateView(LayoutInflater inflater, ViewGroup
@@ -90,7 +106,7 @@ public class ColetarFragment extends Fragment {
 					Intent form = new Intent(getActivity(), ColetarDadosActivity.class);
 					
 					coletaSelecionada = (ColetarDados) lvListagem.getItemAtPosition(posicao);
-					form.putExtra("COLETA_SELECIONADA", coletaSelecionada);
+					form.putExtra(PutExtras.COLETA_SELECIONADA, coletaSelecionada);
 					startActivity(form);
 				}			
 			});
@@ -115,6 +131,10 @@ public class ColetarFragment extends Fragment {
 			case R.id.menu_novo:
 				//especialista em mudan�a de tela
 				Intent intent = new Intent(getActivity(), ColetarDadosActivity.class);
+				
+				intent.putExtra(PutExtras.PACIENTE_SELECIONADO, pacienteSelecionado);
+				//intent.putExtra(PutExtras.COLETA_SELECIONADA, coletaSelecionada);								
+
 				//carrega a nova tela
 				startActivity(intent);
 				return false;
@@ -143,12 +163,13 @@ public class ColetarFragment extends Fragment {
 					
 					Intent form = new Intent(getActivity(),
 							ColetarDadosActivity.class);				
-					form.putExtra("COLETAR_SELECIONADO", coletaSelecionada);
+					form.putExtra(PutExtras.PACIENTE_SELECIONADO, pacienteSelecionado);
+					form.putExtra(PutExtras.COLETA_SELECIONADA, coletaSelecionada);
 
 					startActivity(form);
 					break;
 				case R.id.menu_deletar:
-					excluirUsuario();
+					excluirColeta();
 					break;
 				default:
 					break;
@@ -166,7 +187,13 @@ public class ColetarFragment extends Fragment {
 			ColetarDadosDAO dao = new ColetarDadosDAO(getActivity());
 			Log.i(TAG, "chamou o listar: ");
 			//chamado do metodo listar
+						
 			this.listaColetar = dao.listar();
+			if(pacienteSelecionado!=null){
+				//this.listaColetar = dao.listar(pacienteSelecionado);
+			}else{
+				//this.listaColetar = dao.listar();	
+			}
 			
 			//fim de conexao com o DB
 			dao.close();
@@ -178,7 +205,7 @@ public class ColetarFragment extends Fragment {
 			this.lvListagem.setAdapter(adapter);
 		}
 		
-		private void excluirUsuario() {
+		private void excluirColeta() {
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			builder.setMessage("Confirma a exclusao de: "
 					+ coletaSelecionada.getSis());

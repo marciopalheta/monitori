@@ -59,6 +59,8 @@ public class UsuarioDAO extends AbstractDataBase{
 			//Definicao dos valores dos campos
 			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.nome, usuario.getNome());
 			
+			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.foto, usuario.getFoto());						
+			
 			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.cpf, usuario.getCpf());
 			
 			dataForDB=null;	
@@ -210,7 +212,11 @@ public class UsuarioDAO extends AbstractDataBase{
 				
 				//Carregar os atributos dos usuarios
 				usuario.setId( cursor.getLong(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.id) )); 
+								
 				usuario.setNome(cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.nome)));
+				
+				usuario.setFoto(cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.foto)));
+				
 				usuario.setCpf(cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.cpf)));
 											
 				
@@ -282,6 +288,7 @@ public class UsuarioDAO extends AbstractDataBase{
 		ContentValues values = new ContentValues();
 		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.nome , usuario.getNome());
 		
+		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.foto, usuario.getFoto());
 		//values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.cpf, usuario.getCpf());
 		
 		Calendar cal =  usuario.getDataNascimento();
@@ -374,6 +381,9 @@ public class UsuarioDAO extends AbstractDataBase{
 				//Carregar os atributos dos usuarios
 				usuario.setId( cursor.getLong(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.id) )); 
 				usuario.setNome(cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.nome)));
+				
+				usuario.setFoto(cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.foto)));
+				
 				usuario.setCpf(cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.cpf)));
 				//Log.i(TAG, "cpf: "+ usuario.getCpf() );		
 				usuario.setEndereco(cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.endereco)));

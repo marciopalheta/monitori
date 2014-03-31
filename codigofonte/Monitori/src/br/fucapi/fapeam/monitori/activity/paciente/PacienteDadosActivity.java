@@ -5,6 +5,7 @@ import br.fucapi.fapeam.monitori.activity.UsuarioDadosActivity;
 import br.fucapi.fapeam.monitori.model.bean.Paciente;
 import br.fucapi.fapeam.monitori.model.dao.UsuarioDAO;
 import br.fucapi.fapeam.monitori.model.helper.PacienteHelper;
+import br.fucapi.fapeam.monitori.model.helper.UsuarioHelper;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,8 +24,7 @@ public class PacienteDadosActivity extends UsuarioDadosActivity {
 		//setContentView(R.layout.pacientedados);
 				
 		//Criacao do objeto helper
-		helper = new PacienteHelper(this);
-						
+		 helper = (PacienteHelper) getHelper();				
 		// Busca o paciente a ser alterado
 		pacienteParaSerAlterado = (Paciente) getIntent().getSerializableExtra(
 						"PACIENTE_SELECIONADO");
@@ -82,4 +82,10 @@ public class PacienteDadosActivity extends UsuarioDadosActivity {
 	    }
 	    return super.onOptionsItemSelected(item);
 	}
+
+	@Override
+	public UsuarioHelper abstractHelper() { 
+		return new PacienteHelper(this);
+	}
+	
 }

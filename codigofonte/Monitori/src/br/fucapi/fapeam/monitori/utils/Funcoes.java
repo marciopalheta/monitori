@@ -1,6 +1,11 @@
 package br.fucapi.fapeam.monitori.utils;
 
+import java.io.IOException;
+
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.util.Log;
@@ -68,6 +73,39 @@ public class Funcoes {
 	    }
 	    
 	}
+	
+
+	
+	public static int resolveBitmapOrientation(String bitmapFile) throws IOException {
+        ExifInterface exif = null;
+        exif = new ExifInterface(bitmapFile);
+
+        return exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+    }
+	
+	public static Bitmap applyOrientation(Bitmap bitmap, int orientation) {
+        int rotate = 0;
+        switch (orientation) {
+            case ExifInterface.ORIENTATION_ROTATE_270:
+                rotate = 270;
+                break;
+            case ExifInterface.ORIENTATION_ROTATE_180:
+                rotate = 180;
+                break;
+            case ExifInterface.ORIENTATION_ROTATE_90:
+                rotate = 90;
+                break;
+            default:
+                return bitmap;
+        }
+
+        int w = bitmap.getWidth();
+        int h = bitmap.getHeight();
+        Matrix mtx = new Matrix();
+        mtx.postRotate(rotate);
+        return Bitmap.createBitmap(bitmap, 0, 0, w, h, mtx, true);
+    }
+	
 	
 	
 }

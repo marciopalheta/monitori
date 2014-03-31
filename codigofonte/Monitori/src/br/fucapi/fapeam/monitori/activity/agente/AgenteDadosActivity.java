@@ -5,6 +5,7 @@ import br.fucapi.fapeam.monitori.activity.UsuarioDadosActivity;
 import br.fucapi.fapeam.monitori.model.bean.Agente;
 import br.fucapi.fapeam.monitori.model.dao.UsuarioDAO;
 import br.fucapi.fapeam.monitori.model.helper.AgenteHelper;
+import br.fucapi.fapeam.monitori.model.helper.UsuarioHelper;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,11 +20,8 @@ public class AgenteDadosActivity extends UsuarioDadosActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.setContentView(R.layout.agentesdados);
-		super.onCreate(savedInstanceState);
-						
-		//Criacao do objeto helper
-		helper = new AgenteHelper(this);		
-						
+		super.onCreate(savedInstanceState);									
+		helper = (AgenteHelper) getHelper();				
 		// Busca o paciente a ser alterado
 		agenteParaSerAlterado = (Agente) getIntent().getSerializableExtra(
 						"AGENTE_SELECIONADO");
@@ -81,4 +79,9 @@ public class AgenteDadosActivity extends UsuarioDadosActivity {
 	    }
 	    return super.onOptionsItemSelected(item);
 	}
+	
+	@Override
+	public UsuarioHelper abstractHelper() {
+		return new AgenteHelper(this);
+	}	
 }

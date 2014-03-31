@@ -1,5 +1,7 @@
 package br.fucapi.fapeam.monitori.model.helper;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -25,6 +27,10 @@ import br.fucapi.fapeam.monitori.utils.SpinnerObject;
 import android.R.array;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -43,6 +49,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class UsuarioHelper {
 	private EditText nome;
@@ -116,6 +123,8 @@ public class UsuarioHelper {
 		}
 		nome = (EditText) fragmentActivity.findViewById(R.id.edNome);
 		
+		foto = (ImageView) fragmentActivity.findViewById(R.id.foto);
+				
 		cpf = (EditText) fragmentActivity.findViewById(R.id.edCpf);
 		cpf.addTextChangedListener(Mask.insert("###.###.###-##", cpf));
 		
@@ -451,12 +460,49 @@ public class UsuarioHelper {
 		this.spinUbs= spinUbs;
 	}
 	
+
+	public void carregarFoto(String localFoto) {
+		try {			
+			// bimatp factory
+			BitmapFactory.Options options = new BitmapFactory.Options();									
+			
+			// downsizing image as it throws OutOfMemory Exception for larger
+			// images
+			options.inSampleSize = 8;			
+			Bitmap bitmapFoto = BitmapFactory.decodeFile(localFoto,
+					options);			
+						
+			if(bitmapFoto==null){
+				Toast.makeText(context, "Impossivel abrir esse arquivo", Toast.LENGTH_SHORT).show();
+				return;
+			}else{
+				
+				try {
+					bitmapFoto = Funcoes.applyOrientation(bitmapFoto,Funcoes.resolveBitmapOrientation(localFoto) );
+					
+					if(bitmapFoto.getWidth() < 100){
+						bitmapFoto = BitmapFactory.decodeFile(localFoto);
+					}
+										
+				} catch (IOException e) {
+					Log.d("IMAGE_NOT_FOUND", e.getMessage() );
+					
+				}
+			}			
+				
+			usuario.setFoto(localFoto);
+			foto.setImageBitmap(bitmapFoto);
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	
 	public Usuario getUsuario(){
 		SpinnerObject SpinAux;
 		int posicao;
-		usuario.setNome(getNome().getText().toString());
+		usuario.setNome(getNome().getText().toString());				
+		
 		usuario.setEndereco(getEndereco().getText().toString());
 		usuario.setNumero(getNumero().getText().toString());
 		usuario.setCep(getCep().getText().toString());
@@ -513,6 +559,11 @@ public class UsuarioHelper {
 		getCep().setText(usuario.getCep() );
 		getCelular().setText(usuario.getCelular());
 		getTelefone().setText(usuario.getTelefone());										
+		
+
+		if (usuario.getFoto() != null) {
+			carregarFoto(usuario.getFoto());
+		}
 		
 		cpf.setText(usuario.getCpf());
 		

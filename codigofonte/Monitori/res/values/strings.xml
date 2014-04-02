@@ -8,5 +8,6 @@
     <!-- Strings para itens de menu -->
     <string name="novo">Novo Cadastro</string>
     <string name="sincronizar">Sincronizar</string>
+    <string name="title_activity_diagnosticar">Historico Diagnostico</string>
 
 </resources>

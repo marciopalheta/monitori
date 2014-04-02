@@ -64,6 +64,7 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 						NavMenuItem.create(RequestCodes.MENU_HISTORICO,getString(R.string.title_activity_coletar_dados), android.R.drawable.sym_def_app_icon, true, this),
 						NavMenuItem.create(RequestCodes.MENU_COLETA_DADOS,getString(R.string.title_activity_coletar_dados), android.R.drawable.sym_def_app_icon, true, this),
 						NavMenuItem.create(RequestCodes.MENU_UBS,getString(R.string.title_activity_ubs), "ic_medico", true, this),
+						NavMenuItem.create(RequestCodes.MENU_DIAGNOSTICAR, getString(R.string.title_activity_diagnosticar_dados), android.R.drawable.ic_popup_sync, true, this),
 						//NavMenuItem.create(103,getString(R.string.title_activity_), "ic_medico", true, this),
 						
 						NavMenuSection.create(200, "General"),
@@ -88,7 +89,7 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 				menu = new NavDrawerItem[] {
 						NavMenuSection.create( 100, "Demos"),
 						NavMenuItem.create( RequestCodes.MENU_PACIENTE , getString(R.string.title_activity_paciente), R.drawable.navdrawer_friends, true, this),
-						NavMenuItem.create(301,getString(R.string.title_activity_diagnosticar), android.R.drawable.ic_popup_sync, true, this),
+						NavMenuItem.create(301,getString(R.string.title_activity_diagnosticar_dados), android.R.drawable.ic_popup_sync, true, this),
 																		
 						NavMenuSection.create(200, "General"),
 						NavMenuItem.create(202, "Rate this app", "navdrawer_rating", false, this),
@@ -124,6 +125,7 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 					NavMenuItem.create(RequestCodes.MENU_HISTORICO,getString(R.string.title_activity_historico), android.R.drawable.sym_def_app_icon, true, this),
 					NavMenuItem.create(RequestCodes.MENU_COLETA_DADOS,getString(R.string.title_activity_coletar_dados), android.R.drawable.sym_def_app_icon, true, this),
 					NavMenuItem.create(RequestCodes.MENU_UBS,getString(R.string.title_activity_ubs), "ic_medico", true, this),
+					NavMenuItem.create(RequestCodes.MENU_DIAGNOSTICAR, getString(R.string.title_activity_diagnosticar_dados), android.R.drawable.ic_popup_sync, true, this),
 					//NavMenuItem.create(103,getString(R.string.title_activity_), "ic_medico", true, this),
 					
 					NavMenuSection.create(200, "General"),

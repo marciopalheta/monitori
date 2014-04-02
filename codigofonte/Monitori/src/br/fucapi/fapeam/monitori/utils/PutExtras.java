@@ -11,7 +11,8 @@ public class PutExtras {
 	public static final String UBS_SELECIONADO = "UBS_SELECIONADO";
 	
 	public static final String ID_UBS = "ID_UBS";
-	public static final String ID_COLETARDADOS = "ID_COLETARDADOS";				
+	public static final String ID_COLETARDADOS = "ID_COLETARDADOS";		
+	public static final String DIAGNOSTICO_SELECIONADO = "DIAGNOSTICO_SELECIONADO";
 				
 	
 }

@@ -23,6 +23,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_UBS_NAME = "UnidadeSaude";
     public static final String TABLE_BAIRRO_NAME = "Bairro";
     public static final String TABLE_COLETAR_DADOS_NAME = "ColetarDados";
+    public static final String TABLE_DIAGNOSTICAR_NAME = "diagnosticar";
     
 	//Constantes para auxiliar o controle de versoes
 	
@@ -181,9 +182,23 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
             + "(" + FIELDS_TABLE_BAIRRO.id + " INTEGER PRIMARY KEY," 
             + FIELDS_TABLE_BAIRRO.nome+" TEXT )";
 	                
-        
+   public static interface FIELDS_TABLE_DIAGNOSTICAR {
+	   String id = KEY_ID;
+	   String idPaciente = "idPaciente";
+	   String descrever = "descrever";
+   }
+   
+   public static String ALL_FIELDS_TABLE_DIAGNOSTICAR =
+		   TABLE_DIAGNOSTICAR_NAME +"."+FIELDS_TABLE_DIAGNOSTICAR.id+","+
+		   TABLE_DIAGNOSTICAR_NAME +"."+FIELDS_TABLE_DIAGNOSTICAR.idPaciente+","+
+		   TABLE_DIAGNOSTICAR_NAME +"."+FIELDS_TABLE_DIAGNOSTICAR.descrever+" ";
+   
+   private static final String CREATE_TABLE_DIAGNOSTICAR = "CREATE TABLE " + TABLE_DIAGNOSTICAR_NAME
+		   + "(" + FIELDS_TABLE_DIAGNOSTICAR.id + " INTEGER PRIMARY KEY,"
+		   + FIELDS_TABLE_DIAGNOSTICAR.idPaciente + " INTEGER, "
+		   + FIELDS_TABLE_DIAGNOSTICAR.descrever+" TEXT )";
+    
 	private static final String TAG = "SqlLiteDataBase" ;
-	
 	
 	/**
 	 * @param context androdi context
@@ -213,7 +228,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
 		database.execSQL(CREATE_TABLE_UBS);
 		database.execSQL(CREATE_TABLE_COLETAR_DADOS);
 		database.execSQL(CREATE_TABLE_BAIRRO);
-		
+		database.execSQL(CREATE_TABLE_DIAGNOSTICAR);
 	}
 
 	/**
@@ -227,9 +242,8 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
 		database.execSQL("DROP TABLE IF EXISTS " + TABLE_UBS_NAME);
 		database.execSQL("DROP TABLE IF EXISTS " + TABLE_COLETAR_DADOS_NAME);
 		database.execSQL("DROP TABLE IF EXISTS " + TABLE_BAIRRO_NAME);
+		database.execSQL("DROP TABLE IF EXISTS " + TABLE_DIAGNOSTICAR_NAME);
 		
-		
-				
 		//Chamando o metodo de construcao da base de dados
 		onCreate(database);
 	}
@@ -244,10 +258,9 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
 		database.execSQL("DROP TABLE IF EXISTS " + TABLE_UBS_NAME);
 		database.execSQL("DROP TABLE IF EXISTS " + TABLE_COLETAR_DADOS_NAME);
 		database.execSQL("DROP TABLE IF EXISTS " + TABLE_BAIRRO_NAME);
-		
+		database.execSQL("DROP TABLE IF EXISTS " + TABLE_DIAGNOSTICAR_NAME);
 				
 		//Chamando o metodo de construcao da base de dados
 		onCreate(database);
-				
 	}
 }

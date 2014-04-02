@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"    
+    android:background="#efeaea"
+    android:layout_centerHorizontal="true"
+    android:layout_centerVertical="true"
+    >
+    
+     <LinearLayout 
+       android:id="@+id/barraPreta"
+       android:layout_width="fill_parent"
+       android:layout_height="@dimen/barraPreta_heigth"
+       android:background="#000000"
+       android:orientation="horizontal"
+       >   
+   </LinearLayout>  
+    
+    <TextView 
+        android:layout_below="@id/barraPreta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/diagnosticar"
+        android:id="@+id/text_diagnosticar"
+        android:textColor="#555858"
+        android:textSize="@dimen/cadastrarpaciente"
+        android:layout_marginTop="45dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="30dp"/>
+    
+ <EditText 
+     android:id="@+id/fundo"
+     android:layout_width="400dp"
+     android:layout_height="480dp"
+     android:layout_below="@id/text_diagnosticar"
+     android:layout_centerHorizontal="true"
+     android:layout_centerVertical="true"
+     android:layout_marginBottom="15dp"
+     android:paddingBottom="20dp"
+     android:paddingLeft="30dp"
+     android:paddingRight="50dp"
+     android:paddingTop="20dp"
+     android:textColorHint="#ffffff"
+     
+     />
+  
+    <Button 
+    android:layout_width="@dimen/bt_width"
+    android:layout_height="@dimen/bt_heigth"
+    android:background="#000000"
+    android:text="@string/salvar"
+    android:textSize="@dimen/fontes_para_textos"   
+    android:textColor="#f4f2f2" 
+    android:id="@+id/btsalvar"
+    android:layout_marginBottom="10dp"
+    android:layout_below="@id/fundo"
+    android:layout_centerInParent="true"
+   
+    />
+      
+</RelativeLayout>

@@ -6,6 +6,7 @@ import br.fucapi.fapeam.monitori.controller.NavigationController;
 import br.fucapi.fapeam.monitori.eula.Eula;
 import br.fucapi.fapeam.monitori.fragment.AgenteFragment;
 import br.fucapi.fapeam.monitori.fragment.ColetarFragment;
+import br.fucapi.fapeam.monitori.fragment.DiagnosticarFragment;
 import br.fucapi.fapeam.monitori.fragment.LoginFragment;
 import br.fucapi.fapeam.monitori.fragment.MainFragment;
 import br.fucapi.fapeam.monitori.fragment.MedicoFragment;
@@ -89,7 +90,7 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 				menu = new NavDrawerItem[] {
 						NavMenuSection.create( 100, "Demos"),
 						NavMenuItem.create( RequestCodes.MENU_PACIENTE , getString(R.string.title_activity_paciente), R.drawable.navdrawer_friends, true, this),
-						NavMenuItem.create(301,getString(R.string.title_activity_diagnosticar_dados), android.R.drawable.ic_popup_sync, true, this),
+						NavMenuItem.create(301,getString(R.string.title_activity_diagnosticar), android.R.drawable.ic_popup_sync, true, this),
 																		
 						NavMenuSection.create(200, "General"),
 						NavMenuItem.create(202, "Rate this app", "navdrawer_rating", false, this),
@@ -167,6 +168,10 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 			break;
 		case RequestCodes.MENU_MEDICO:
 			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new MedicoFragment()).commit();			
+			break;
+			
+		case RequestCodes.MENU_DIAGNOSTICAR:
+			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new DiagnosticarFragment()).commit();
 			break;
 		case 201:
 			//NavigationController.getInstance().showSettings(this);

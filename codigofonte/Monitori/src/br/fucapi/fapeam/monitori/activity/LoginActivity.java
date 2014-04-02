@@ -94,6 +94,8 @@ public class LoginActivity extends Activity {
 				startActivity(intent);
 				
 				return false;
+				
+			
 			
 			case R.id.menu_principal:
 				//Especialista em mudanca de tela				
@@ -102,6 +104,8 @@ public class LoginActivity extends Activity {
 				startActivity(intent);
 				
 				return false;	
+				
+			
 				
 			case R.id.app_principal:
 				//Especialista em mudanca de tela

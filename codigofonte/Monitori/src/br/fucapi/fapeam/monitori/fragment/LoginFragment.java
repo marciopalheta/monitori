@@ -133,6 +133,7 @@ public class LoginFragment extends Fragment {
 					startActivity(intent);
 					
 					return false;
+			
 					
 				case R.id.menu_principal:
 					//Especialista em mudanca de tela
@@ -151,7 +152,8 @@ public class LoginFragment extends Fragment {
 		
 		@Override
 		public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-			  inflater.inflate(R.menu.login, menu);			  
+			  inflater.inflate(R.menu.login, menu);		
+		
 		}
 					
 							

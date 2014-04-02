@@ -107,6 +107,7 @@
     <string name="title_activity_historico">Historico</string>
     <string name="editar">Editar</string>
     <string name="sexo_prompt">Selecione um sexo</string>
+    <string name="title_activity_diagnosticar">Historico Diagnostico</string>
     
 
     <string name="title_activity_ubs">Lista de UBS</string>
@@ -146,6 +147,7 @@
     <string name="title_activity_your_app_main">YourAppMainActivity</string>
     <string name="title_activity_coletar">Lista Coletar Dados</string>
     <string name="cadastrar_coletarDados">Nova Coleta</string>
+    <string name="cadastrar_diagnostico">Novo Diagnostico</string>
 	    
     <string name="camera_add_foto">Adicionar Foto</string>
     <string name="camera_foto">Tirar Foto</string>

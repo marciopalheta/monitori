@@ -95,6 +95,7 @@
     <string name="pos_pandrial">Pós-pandrial</string>
     <string name="data_coleta">15 de Fevereiro de 2014</string>
     <string name="title_activity_diagnosticar_dados">Diagnosticar</string>
+    <string name="historico_coletar">Historico Coletar</string>
 
     <!-- historico diagnostico -->
     <string name="historico_diagnostico">Histórico de diagnóstico</string>

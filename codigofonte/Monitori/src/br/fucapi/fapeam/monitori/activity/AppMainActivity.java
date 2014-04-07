@@ -90,7 +90,7 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 				menu = new NavDrawerItem[] {
 						NavMenuSection.create( 100, "Demos"),
 						NavMenuItem.create( RequestCodes.MENU_PACIENTE , getString(R.string.title_activity_paciente), R.drawable.navdrawer_friends, true, this),
-						NavMenuItem.create(301,getString(R.string.title_activity_diagnosticar), android.R.drawable.ic_popup_sync, true, this),
+						NavMenuItem.create(RequestCodes.MENU_DIAGNOSTICAR, getString(R.string.title_activity_diagnosticar), R.drawable.ic_menu_preferences, true, this),
 																		
 						NavMenuSection.create(200, "General"),
 						NavMenuItem.create(202, "Rate this app", "navdrawer_rating", false, this),
@@ -171,7 +171,12 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 			break;
 			
 		case RequestCodes.MENU_DIAGNOSTICAR:
-			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new DiagnosticarFragment()).commit();
+			frag = new DiagnosticarFragment();
+			args = new Bundle();			
+			args.putSerializable(PutExtras.USUARIO_LOGADO, usuarioLogado);
+			frag.setArguments(args);
+			
+			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, frag ).commit();			
 			break;
 		case 201:
 			//NavigationController.getInstance().showSettings(this);

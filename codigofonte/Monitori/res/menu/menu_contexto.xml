@@ -8,13 +8,19 @@
     	android:visible="false"     />    
     <item
         android:id="@+id/menu_historico"        
-        android:title="@string/historico_diagnostico"    	           
+        android:title="@string/historico_coletar"    	           
     	android:visible="false"     />
     
     <item
         android:id="@+id/menu_diagnostico"        
+        android:title="@string/diagnosticar"    	           
+    	android:visible="false"     />
+    
+    <item
+        android:id="@+id/menu_hist_diagnostico"        
         android:title="@string/historico_diagnostico"    	           
     	android:visible="false"     />
+    
     
     <item 
         android:id="@+id/menu_editar"

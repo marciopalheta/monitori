@@ -4,6 +4,8 @@ import java.util.List;
 import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.activity.ColetarActivity;
 import br.fucapi.fapeam.monitori.activity.ColetarDadosActivity;
+import br.fucapi.fapeam.monitori.activity.DiagnosticarActivity;
+import br.fucapi.fapeam.monitori.activity.DiagnosticarDadosActivity;
 import br.fucapi.fapeam.monitori.activity.paciente.PacienteDadosActivity;
 import br.fucapi.fapeam.monitori.adapter.ListaAdapter;
 import br.fucapi.fapeam.monitori.model.bean.ColetarDados;
@@ -189,12 +191,25 @@ public class PacienteFragment extends Fragment {
 		//getMenuInflater().inflate(R.menu.menu_contexto, menu);
 		MenuItem coletar = menu.findItem(R.id.menu_coletar);
 		MenuItem historico = menu.findItem(R.id.menu_historico);
+		MenuItem diagnostico = menu.findItem(R.id.menu_diagnostico);
 		   if(coletar!=null){
 			   //if() //caso o usuario Logado seja do tipo Agente, setar a coleta de dados como Visivel
 			   
 			   if(usuarioLogado!=null){									
 					if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.AGENTE)){	
 						coletar.setVisible(true);
+						historico.setVisible(true);
+					}
+				}
+			   			   
+		   }
+		   
+		   if(diagnostico!=null){
+			   //if() //caso o usuario Logado seja do tipo Agente, setar a coleta de dados como Visivel
+			   
+			   if(usuarioLogado!=null){									
+					if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.MEDICO)){	
+						diagnostico.setVisible(true);
 						historico.setVisible(true);
 					}
 				}
@@ -227,6 +242,24 @@ public class PacienteFragment extends Fragment {
 
 			startActivity(form);	
 			break;
+			
+			case R.id.menu_diagnostico:
+				
+				form = new Intent(getActivity(),
+						DiagnosticarDadosActivity.class);				
+				form.putExtra("PACIENTE_SELECIONADO", usuarioSelecionado);
+
+				startActivity(form);	
+				break;
+				
+			case R.id.menu_hist_diagnostico:
+				
+				form = new Intent(getActivity(), 
+						DiagnosticarActivity.class);
+				form.putExtra("PACIENTE_SELECIONADO", usuarioSelecionado);
+				
+				startActivity(form);
+				break;
 
 			case R.id.menu_historico:
 				
@@ -236,6 +269,8 @@ public class PacienteFragment extends Fragment {
 
 			startActivity(form);	
 			break;
+			
+			
 
 			
 			case R.id.menu_editar:

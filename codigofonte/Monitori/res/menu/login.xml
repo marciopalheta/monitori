@@ -2,7 +2,7 @@
         
 
      <item
-        android:id="@+id/"
+        android:id="@+id/menu_paciente"
         android:orderInCategory="100"
         android:showAsAction="never"               
         android:title="@string/title_activity_paciente"/>

@@ -3,7 +3,7 @@
      <item
         android:id="@+id/menu_novo"
 		android:icon="@android:drawable/ic_input_add"
-        android:title="@string/cadastrar_cdiagnostico"        
+        android:title="@string/cadastrar_diagnostico"        
     	android:showAsAction="always|withText" />
 
 </menu>

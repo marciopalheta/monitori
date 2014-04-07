@@ -198,8 +198,10 @@ public class DiagnosticarFragment extends Fragment{
 				dao.close();
 				
 				//objeto arrayAdapter converte array em view
+				/*
 				this.adapter = new ArrayAdapter<Diagnosticar>(getActivity(),
 						adapterLayout, listaDiagnosticar);
+				*/
 				//associacao do adapter ao listView
 				this.lvListagem.setAdapter(adapter);
 			}

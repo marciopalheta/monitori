@@ -3,49 +3,60 @@
     tools:context=".LoginFragment" 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="130dp"
+    android:layout_centerHorizontal="true"
+    android:layout_centerVertical="true"
+    android:background="#c2f5f6"
     >
     
-     <TextView
-        android:id="@+id/txv_monitori"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/edt_login"
-        android:layout_centerVertical="true"
-        android:text="@string/app_name"
-        android:textSize="44sp" />
+      
+     
+     <ImageView 
+        android:id="@+id/img_logo"
+        android:layout_width="180dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="105dp"
+        android:contentDescription="@string/monitori_logo"
+        android:src="@drawable/monir"/>
+        
     
     <EditText 
         android:id="@+id/edt_login"
         android:layout_width="@dimen/login_Editext_width"
         android:layout_height="@dimen/senha_Editext_heigth"
         android:hint="@string/login"
-        android:background="#e1e0e0"
-        android:layout_below="@id/txv_monitori"
+        android:background="#ecfbfb"
+        android:layout_below="@id/img_logo"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginTop="5dp"
+        android:paddingLeft="5dp"
+        android:textSize="@dimen/fonte_bts_texts"/>
     
     <EditText 
         android:id="@+id/edt_senha"
         android:layout_width="@dimen/login_Editext_width"
         android:layout_height="@dimen/senha_Editext_heigth"
         android:hint="@string/senha"
-        android:background="#e1e0e0"
+        android:background="#ecfbfb"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/edt_login"
         android:layout_marginTop="5dp"
-        android:password="true"/>
+        android:paddingLeft="5dp"
+        android:password="true"
+        android:textSize="@dimen/fonte_bts_texts"/>
 
     <Button
         android:id="@+id/btValidar"
-        android:layout_width="wrap_content"
+        android:layout_width="85dp"
         android:layout_height="@dimen/senha_Editext_heigth"
         android:layout_alignRight="@id/edt_login"
-        android:background="#000000"
+        android:background="#69dbdc"
+        android:textStyle="bold"
         android:text="@string/entrar"
         android:layout_below="@id/edt_senha"
         android:layout_marginTop="5dp"
         android:textColor="#ffffff"
-        android:textSize="@dimen/fonte_bts_texts"/>
+        android:textSize="@dimen/fonte_bts_texts"
+        />
     
 </RelativeLayout>

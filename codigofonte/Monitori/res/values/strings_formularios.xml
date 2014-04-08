@@ -48,6 +48,9 @@
     <string name="title_activity_paciente_dados">Dados do Paciente</string>
     <string name="title_activity_paciente">Lista de Pacientes</string>
     
+    <!-- esta string e nova e faz parte do login -->
+    <string name="monitori_logo">MonitoriLogo</string>
+    
     <string name="hipertenso">Hipertensao</string>
     <string name="diabetes">Diabetes</string>
     <string name="tipo1">Tipo 1</string>

@@ -1,0 +1,49 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:body>
+	<ui:composition template="_template.xhtml">
+		<ui:define name="titulo">#{msg.label_dados_usuario}</ui:define>
+		<ui:define name="conteudo">
+
+			<h:form id="frmUsuarioDados">
+				<p:growl id="growl" autoUpdate="true" />
+				<p:panel id="panel" header="#{msg.label_dados_usuario}">
+					<p:focus context="panel" />
+					<h:panelGrid columns="2" cellpadding="5">
+						<p:outputLabel value="#{msg.label_login}:" />
+						<p:outputLabel value="#{usuarioSessionMB.usuario.login}" />
+						
+						<p:outputLabel value="#{msg.label_senha_atual}:" for="senhaAtual" />
+						<p:password id="senhaAtual" value="#{usuarioMB.senhaAtual}"
+							label="#{msg.label_senha_atual}" required="true" 
+							requiredMessage="#{msg.label_senha_atual}: #{msg.campo_obrigatorio}"/>
+
+						<p:outputLabel value="#{msg.label_senha_nova}:" for="senha" />
+						<p:password id="senha" value="#{usuarioMB.novaSenha}"
+							required="true" feedback="true" label="#{msg.label_senha}"
+							promptLabel="#{msg.hint_senha}" weakLabel="#{msg.hint_senha_fraca}"
+							goodLabel="#{msg.hint_senha_boa}" strongLabel="#{msg.hint_senha_forte}" 
+							match="senha_conf" 
+							requiredMessage="#{msg.label_senha}: #{msg.campo_obrigatorio}" 
+							validatorMessage="#{msg.hint_falha_confirmacao_senha}"/>
+
+						<p:outputLabel value="#{msg.label_confirmacao}:" for="senha_conf" />
+						<p:password id="senha_conf" value="#{usuarioMB.novaSenha}"
+							label="#{msg.label_confirmacao}" required="true" 
+							requiredMessage="#{msg.label_confirmacao}: #{msg.campo_obrigatorio}"/>
+						
+					</h:panelGrid>
+					<p:commandButton value="#{msg.label_salvar}" update="panel"
+						action="#{usuarioMB.alterarSenha}" />
+					<p:commandButton value="#{msg.label_cancelar}" immediate="true"
+						action="#{usuarioMB.alterarSenhaCancelar}" rendered="#{!usuarioSessionMB.usuario.alterarSenha}"/>
+				</p:panel>
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

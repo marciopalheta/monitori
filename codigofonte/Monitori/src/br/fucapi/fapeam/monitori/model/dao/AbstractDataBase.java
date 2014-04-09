@@ -5,11 +5,9 @@ import br.fucapi.fapeam.monitori.sqlite.DatabaseInfo;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 public class AbstractDataBase extends SQLiteOpenHelper{
 		
-	private static final String TAG = "AbstractDataBase" ;
 		
 	public AbstractDataBase (Context context){
 		

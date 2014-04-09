@@ -2,11 +2,8 @@ package br.fucapi.fapeam.monitori.activity;
 
 import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.activity.agente.AgenteActivity;
-import br.fucapi.fapeam.monitori.activity.agente.AgenteDadosActivity;
 import br.fucapi.fapeam.monitori.activity.medico.MedicoActivity;
 import br.fucapi.fapeam.monitori.activity.paciente.PacienteActivity;
-import br.fucapi.fapeam.monitori.activity.unidadeSaude.UnidadeSaudeActivity;
-import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,8 +17,6 @@ public class MenuPrincipalActivity extends Activity implements OnClickListener {
 	private Button btAgente;
 	private Button btPaciente;
 	private Button btcoletadados;
-	private Button btUbs;
-	private TipoUsuario usuario;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

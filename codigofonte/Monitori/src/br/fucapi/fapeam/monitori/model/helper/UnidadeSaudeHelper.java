@@ -8,7 +8,6 @@ import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.model.bean.Bairro;
 import br.fucapi.fapeam.monitori.model.bean.UnidadeSaude;
 import br.fucapi.fapeam.monitori.model.dao.BairroDAO;
-import br.fucapi.fapeam.monitori.utils.BairroDialog;
 import br.fucapi.fapeam.monitori.utils.Funcoes;
 import br.fucapi.fapeam.monitori.utils.Mask;
 import br.fucapi.fapeam.monitori.utils.SpinnerAdapter;

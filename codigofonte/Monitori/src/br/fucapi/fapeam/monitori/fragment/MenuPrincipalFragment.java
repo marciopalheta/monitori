@@ -2,38 +2,19 @@ package br.fucapi.fapeam.monitori.fragment;
 
 import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.activity.ColetarActivity;
-import br.fucapi.fapeam.monitori.activity.ColetarDadosActivity;
 import br.fucapi.fapeam.monitori.activity.agente.AgenteActivity;
 import br.fucapi.fapeam.monitori.activity.medico.MedicoActivity;
 import br.fucapi.fapeam.monitori.activity.paciente.PacienteActivity;
-import br.fucapi.fapeam.monitori.activity.paciente.PacienteDadosActivity;
-import br.fucapi.fapeam.monitori.activity.unidadeSaude.UnidadeSaudeActivity;
-import br.fucapi.fapeam.monitori.model.bean.Paciente;
-import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
-import br.fucapi.fapeam.monitori.model.bean.Usuario;
-import br.fucapi.fapeam.monitori.model.dao.UsuarioDAO;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemLongClickListener;
 
 public class MenuPrincipalFragment extends Fragment implements OnClickListener {
 
@@ -41,8 +22,6 @@ public class MenuPrincipalFragment extends Fragment implements OnClickListener {
 	private Button btAgente;
 	private Button btPaciente;
 	private Button btcoletadados;
-	private Button btUbs;
-	private TipoUsuario usuario;
 	
 	
 	@Override

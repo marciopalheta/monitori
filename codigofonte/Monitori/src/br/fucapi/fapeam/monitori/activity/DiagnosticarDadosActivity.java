@@ -1,16 +1,12 @@
 package br.fucapi.fapeam.monitori.activity;
 
 import br.fucapi.fapeam.monitori.R;
-import br.fucapi.fapeam.monitori.model.bean.ColetarDados;
 import br.fucapi.fapeam.monitori.model.bean.Diagnosticar;
 import br.fucapi.fapeam.monitori.model.bean.Paciente;
-import br.fucapi.fapeam.monitori.model.dao.ColetarDadosDAO;
 import br.fucapi.fapeam.monitori.model.dao.DiagnosticarDAO;
-import br.fucapi.fapeam.monitori.model.helper.ColetarDadosHelper;
 import br.fucapi.fapeam.monitori.model.helper.DiagnosticarHelper;
 import br.fucapi.fapeam.monitori.utils.PutExtras;
 import android.os.Bundle;
-import android.app.Activity;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuInflater;

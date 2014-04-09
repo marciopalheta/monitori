@@ -1,21 +1,14 @@
 package br.fucapi.fapeam.monitori.model.helper;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.activity.agente.AgenteDadosActivity;
 import br.fucapi.fapeam.monitori.model.bean.Agente;
-import br.fucapi.fapeam.monitori.model.bean.Bairro;
 import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
-import br.fucapi.fapeam.monitori.model.bean.UnidadeSaude;
-import br.fucapi.fapeam.monitori.utils.Funcoes;
-import br.fucapi.fapeam.monitori.utils.SpinnerObject;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.TextView;
 
 public class AgenteHelper extends UsuarioHelper {
 		

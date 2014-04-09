@@ -1,36 +1,17 @@
 package br.fucapi.fapeam.monitori.model.helper;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
-import android.app.Activity;
 import android.support.v4.app.FragmentActivity;
-import android.text.Editable;
-import android.text.TextUtils;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.TextView.OnEditorActionListener;
 import br.fucapi.fapeam.monitori.R;
-import br.fucapi.fapeam.monitori.activity.ColetarDadosActivity;
-import br.fucapi.fapeam.monitori.activity.paciente.PacienteDadosActivity;
-import br.fucapi.fapeam.monitori.model.bean.Bairro;
 import br.fucapi.fapeam.monitori.model.bean.ColetarDados;
-import br.fucapi.fapeam.monitori.model.bean.Paciente;
-import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
-import br.fucapi.fapeam.monitori.model.bean.UnidadeSaude;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import br.fucapi.fapeam.monitori.utils.Funcoes;
-import br.fucapi.fapeam.monitori.utils.Mask;
-import br.fucapi.fapeam.monitori.utils.SpinnerAdapter;
-import br.fucapi.fapeam.monitori.utils.SpinnerObject;
 
 public class ColetarDadosHelper{
 	

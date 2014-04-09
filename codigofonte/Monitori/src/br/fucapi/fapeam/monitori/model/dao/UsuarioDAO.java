@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import br.fucapi.fapeam.monitori.activity.paciente.PacienteDadosActivity;
-import br.fucapi.fapeam.monitori.model.bean.AbstractEntityBean;
 import br.fucapi.fapeam.monitori.model.bean.Agente;
 import br.fucapi.fapeam.monitori.model.bean.Bairro;
 import br.fucapi.fapeam.monitori.model.bean.Medico;
@@ -19,12 +17,8 @@ import br.fucapi.fapeam.monitori.sqlite.SQLiteDatabaseHelper;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteConstraintException;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -181,7 +175,6 @@ public class UsuarioDAO extends AbstractDataBase{
 	public List<Usuario> listar(TipoUsuario tipoUsuario){
 		//Colecao de usuarios
 		List<Usuario> lista = new ArrayList<Usuario>();
-		TipoUsuario tipo;
 		//Definicao da instrucao SQL
 		String sql = null;
 						
@@ -346,7 +339,6 @@ public class UsuarioDAO extends AbstractDataBase{
 	public Usuario getUsuario(String login, String senha){
 		//Colecao de usuarios
 		Usuario usuario = null;
-		TipoUsuario tipo;
 		//Definicao da instrucao SQL
 		String sql = "Select * from "+SQLiteDatabaseHelper.TABLE_USUARIO_NAME+" where "+SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.login+"='"+login+"' and "+SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.senha+"='"+senha+"' ";
 		

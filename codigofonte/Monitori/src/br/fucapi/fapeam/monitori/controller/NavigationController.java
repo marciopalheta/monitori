@@ -4,7 +4,6 @@ import br.fucapi.fapeam.monitori.R;
 //import br.fucapi.fapeam.monitori.activity2.MyPreferences;
 import br.fucapi.fapeam.monitori.eula.Eula;
 import br.fucapi.fapeam.monitori.utils.ConfirmDialog;
-import br.fucapi.fapeam.monitori.utils.RequestCodes;
 
 
 

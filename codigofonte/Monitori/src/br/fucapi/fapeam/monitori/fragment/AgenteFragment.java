@@ -3,6 +3,7 @@ package br.fucapi.fapeam.monitori.fragment;
 import java.util.List;
 import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.activity.agente.AgenteDadosActivity;
+import br.fucapi.fapeam.monitori.adapter.ListAdapter;
 import br.fucapi.fapeam.monitori.adapter.ListaAdapter;
 import br.fucapi.fapeam.monitori.model.bean.Agente;
 import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
@@ -42,7 +43,7 @@ public class AgenteFragment extends Fragment {
 	private List<Usuario> listaAgente;
 	
 	//ArrayAdapter para adaptar lista em View
-	private ListaAdapter adapter;
+	private ListAdapter adapter;
 	
 	//Definicao do Layout de exibicao da lista
 	//private int adapterLayout = android.R.layout.simple_list_item_1;
@@ -147,7 +148,8 @@ public class AgenteFragment extends Fragment {
 		dao.close();
 		
 		//O objeto arrayadapter converte lista em view
-		this.adapter = new ListaAdapter(getActivity(), listaAgente);
+		//this.adapter = new ListaAdapter(getActivity(), listaAgente);
+		this.adapter = new ListAdapter(getActivity(), R.layout.row_listview, listaAgente);
 		//associacao do adapter ao listView
 		this.lvListagem.setAdapter(adapter);
 	}

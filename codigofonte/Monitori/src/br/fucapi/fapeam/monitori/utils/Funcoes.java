@@ -1,6 +1,8 @@
 package br.fucapi.fapeam.monitori.utils;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -33,7 +35,60 @@ public class Funcoes {
 		  }
 		  return false;
 		 }
-		
+	
+	 public static boolean validarDateFormat(View pView, String pDateFormat, String pMessage) {
+			 if (pView instanceof EditText) {
+				 EditText edText = (EditText) pView;
+				 Editable text = edText.getText();
+			 
+				 if (text != null) {
+					 String strText = text.toString();
+					 
+					 if (!TextUtils.isEmpty(strText)) {
+						 
+						 SimpleDateFormat format = new SimpleDateFormat(pDateFormat);						 						 
+						 format.setLenient(false);
+						 Calendar cal = Calendar.getInstance();
+						 
+						 try {							 
+							 int currentYear = cal.get(Calendar.YEAR);
+							 Log.d("TAG", "# thisYear : " + currentYear);
+							 
+							 cal.setTime(format.parse(strText));
+							 
+							 int fieldYear = cal.get(Calendar.YEAR);
+							 
+							 if(fieldYear>=currentYear){								 								 
+								 edText.setError(pMessage);
+								 edText.setFocusable(true);
+								 edText.requestFocus();
+								 return false;
+								 
+							 }else if(fieldYear < (currentYear - 1000) ){ //(ano corrente - mil anos)
+								 edText.setError(pMessage);
+								 edText.setFocusable(true);
+								 edText.requestFocus();
+								 
+								 return false;
+							 }
+							 
+							 return true;
+						 } catch (java.text.ParseException e) {
+							e.printStackTrace();
+						}
+					 }
+				 }
+
+				 // em qualquer outra condição é gerado um erro
+				 edText.setError(pMessage);
+				 edText.setFocusable(true);
+				 edText.requestFocus();
+				 return false;
+			 }
+			 return false;
+		}		
+	
+	
 	public static void hideKeyboard(Activity activity) {
 		try {
 	        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(activity.INPUT_METHOD_SERVICE);

@@ -76,7 +76,7 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 				
 				menu = new NavDrawerItem[] {
 						NavMenuSection.create( 100, "Demos"),
-						NavMenuItem.create(RequestCodes.MENU_COLETA_DADOS,getString(R.string.title_activity_coletar_dados), android.R.drawable.sym_def_app_icon, true, this),
+						NavMenuItem.create(RequestCodes.MENU_COLETA_DADOS,getString(R.string.title_activity_coletar_dados), android.R.drawable.sym_def_app_icon, false, this),
 						
 						NavMenuItem.create( RequestCodes.MENU_HISTORICO , getString(R.string.title_activity_historico), R.drawable.navdrawer_friends, true, this),
 																		

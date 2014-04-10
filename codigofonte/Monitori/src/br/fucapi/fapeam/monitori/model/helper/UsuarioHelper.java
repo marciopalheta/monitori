@@ -421,8 +421,16 @@ public class UsuarioHelper {
 			
 		for(View chave: mapaDeCampos.keySet()){
 		    //System.out.println("chave: "+chave+", valor: "+mapaDeCampos.get(chave)+".");
-		    if(Funcoes.validarDados(chave,  mapaDeCampos.get(chave) ) == false){
+			if(Funcoes.validarDados(chave,  mapaDeCampos.get(chave) ) == false){
 				return false;
+			}else{
+				if(chave.equals(dataNascimento)){
+					if(Funcoes.validarDateFormat(chave, DATE_FORMAT, "Data Invalida") == false){
+						return false;
+					}
+					
+							
+				}	
 			}
 		}
 				

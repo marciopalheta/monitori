@@ -41,7 +41,7 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 		super.onCreate(savedInstanceState);
 
 		if ( savedInstanceState == null ) {
-			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new MainFragment()).commit();
+			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new MenuPrincipalFragment()).commit();
 			Eula.show(this, R.string.eula_title, R.string.eula_accept, R.string.eula_refuse);
 		}
 	}

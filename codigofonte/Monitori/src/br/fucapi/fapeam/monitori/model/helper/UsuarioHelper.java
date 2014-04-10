@@ -415,6 +415,7 @@ public class UsuarioHelper {
 		//Map<View, String> mapaDeCampos = new LinkedHashMap<View, String>();
 		
 		mapaDeCampos.put(nome, "Nome obrigatorio");
+		mapaDeCampos.put(cpf, "CPF obrigatorio");
 		mapaDeCampos.put(dataNascimento, "Campo obrigatorio");
 		mapaDeCampos.put(telefone, "Telefone obrigatorio");		
 		mapaDeCampos.put(cep, "Cep obrigatorio");

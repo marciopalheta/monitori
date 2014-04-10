@@ -1,10 +1,13 @@
 package br.fucapi.fapeam.monitori.fragment;
 
 import br.fucapi.fapeam.monitori.R;
+import br.fucapi.fapeam.monitori.activity.AppMainActivity;
 import br.fucapi.fapeam.monitori.activity.ColetarActivity;
 import br.fucapi.fapeam.monitori.activity.agente.AgenteActivity;
 import br.fucapi.fapeam.monitori.activity.medico.MedicoActivity;
 import br.fucapi.fapeam.monitori.activity.paciente.PacienteActivity;
+import br.fucapi.fapeam.monitori.utils.PutExtras;
+import br.fucapi.fapeam.monitori.utils.RequestCodes;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -33,9 +36,7 @@ public class MenuPrincipalFragment extends Fragment implements OnClickListener {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {		
 		//Log.d("FragmentLifecycle", "onCreateView savedInstanceState is " + (savedInstanceState == null?"":"not ") + "null");
-		View layout = inflater.inflate(R.layout.menuprincipal, container, false);
-		
-				
+		View layout = inflater.inflate(R.layout.menuprincipal, container, false);								
 
 		btMedico = (Button) layout.findViewById(R.id.btMedico);
 		btMedico.setOnClickListener(this);
@@ -67,25 +68,23 @@ public class MenuPrincipalFragment extends Fragment implements OnClickListener {
 	
 	@Override
 	public void onClick(View v) {
-        	Intent intent = new Intent(getActivity(), AgenteActivity.class);
-			//Intent intent = new Intent(getActivity(), UnidadeSaudeActivity.class);
-    		if(v == btAgente) {
-    			startActivity(intent);
+        	
+			
+    		if(v == btAgente) {    			
+    			((AppMainActivity)MenuPrincipalFragment.this.getActivity()).selectItem( RequestCodes.MENU_AGENTE );    			
+    			
     		}
     		
-    		Intent intent2 = new Intent(getActivity(), PacienteActivity.class);
     		if(v == btPaciente) {
-    			startActivity(intent2);
+    			((AppMainActivity)MenuPrincipalFragment.this.getActivity()).selectItem( RequestCodes.MENU_PACIENTE );    			
     		}
-    		
-    		Intent intent3 = new Intent(getActivity(), MedicoActivity.class);
-    		if(v == btMedico) {
-    			startActivity(intent3);
+    		    		
+    		if(v == btMedico) {    			
+    			((AppMainActivity)MenuPrincipalFragment.this.getActivity()).selectItem( RequestCodes.MENU_MEDICO );
     		} 
-    		
-    		Intent intent4 = new Intent(getActivity(), ColetarActivity.class);
-    		if(v == btcoletadados){
-    			startActivity(intent4);
+    		    		
+    		if(v == btcoletadados){    			
+    			((AppMainActivity)MenuPrincipalFragment.this.getActivity()).selectItem( RequestCodes.MENU_COLETA_DADOS );
     		}
 	}
 }

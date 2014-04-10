@@ -6,24 +6,24 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:body>
 	<ui:composition template="_template.xhtml">
-		<ui:define name="titulo">#{msg.label_lista_usuarios}</ui:define>
+		<ui:define name="titulo">#{msg.lista_usuarios}</ui:define>
 		<ui:define name="conteudo">
 			<f:event listener="#{usuarioMB.iniciarConversa}" type="preRenderView" />
 			<h:form id="frmUsuario">
 
 				<p:growl id="growl" autoUpdate="true" showDetail="true" />
 
-				<p:panel header="#{msg.label_lista_usuarios}">
+				<p:panel header="#{msg.listaDeUsuarios}">
 
 					<p:outputPanel>
 						<p:inputText value="#{usuarioMB.valorFiltro}" />
-						<p:commandButton id="btBuscar" value="#{msg.label_consultar}"
-							title="#{msg.label_consultar}" icon="ui-icon-search"
+						<p:commandButton id="btBuscar" value="#{msg.consultar}"
+							title="#{msg.consultar}" icon="ui-icon-search"
 							actionListener="#{usuarioMB.filtrar}"
 							update=":frmUsuario:dataTable" />
 
-						<p:commandButton id="btCadastrar" value="#{msg.label_novo}"
-							title="#{msg.hint_cadastrar_usuario}" icon="ui-icon-document"
+						<p:commandButton id="btCadastrar" value="#{msg.novo}"
+							title="#{msg.cadastrarUsuario}" icon="ui-icon-document"
 							action="#{usuarioMB.exibirCadastrar}" />
 					</p:outputPanel>
 
@@ -32,56 +32,56 @@
 					<p:dataTable id="dataTable" var="entidade"
 						value="#{usuarioMB.listaEntidadesPaginada}" paginator="true"
 						rows="10" widgetVar="wdDataTable"
-						paginatorTemplate="#{usuarioMB.listaEntidadesPaginada.rowCount} #{msg.label_tot_registros} {CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						paginatorTemplate="#{usuarioMB.listaEntidadesPaginada.rowCount} #{msg.totalDeRegistros} {CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 						rowsPerPageTemplate="5,10,15" resizableColumns="true"
 						liveResize="true" rowKey="#{entidade.id}" selectionMode="single"
-						lazy="true" emptyMessage="#{msg.label_lista_vazia}"
+						lazy="true" emptyMessage="#{msg.listaVazia}"
 						selection="#{usuarioMB.entidade}" paginatorPosition="bottom">
 
 						<p:column headerText="ID" style="width:5%">
 							#{entidade.id}
 						</p:column>
 	
-						<p:column headerText="#{msg.label_nome}" style="width:30%"
+						<p:column headerText="#{msg.nome}" style="width:30%"
 							sortBy="#{entidade.nome}">
 							<h:outputText value="#{entidade.nome}" />
 						</p:column>
 
-						<p:column headerText="#{msg.label_email}" style="width:30%"
+						<p:column headerText="#{msg.email}" style="width:30%"
 							sortBy="#{entidade.email}">
 							#{entidade.email}
 						</p:column>
 						
-						<p:column headerText="#{msg.label_cpf}"
+						<p:column headerText="#{msg.cpf}"
 							sortBy="#{entidade.cpf}">
 							#{entidade.cpfMask}
 						</p:column>
 
-						<p:column headerText="#{msg.label_login}"
+						<p:column headerText="#{msg.login}"
 							sortBy="#{entidade.login}">
 							#{entidade.login}
 						</p:column>
 						
-						<p:column headerText="#{msg.label_ativo}" style="width:5%">
+						<p:column headerText="#{msg.ativo}" style="width:5%">
 							#{entidade.ativo}
 						</p:column>
 
-						<p:column style="width:5%; text-align:center" headerText="#{msg.label_alterar}">
+						<p:column style="width:5%; text-align:center" headerText="#{msg.alterar}">
 							<p:commandButton id="selectButton" icon="ui-icon-pencil"
-								title="#{msg.label_alterar}" action="#{usuarioMB.exibirAlterar}">
+								title="#{msg.alterar}" action="#{usuarioMB.exibirAlterar}">
 								<f:setPropertyActionListener value="#{entidade}"
 									target="#{usuarioMB.entidade}" />
 							</p:commandButton>
 						</p:column>
 						<p:column style="width:5%; text-align:center" exportable="false"
-						 headerText="#{msg.label_excluir}">
-							<p:commandButton id="btDeletar" title="#{msg.label_excluir}"
+						 headerText="#{msg.excluir}">
+							<p:commandButton id="btDeletar" title="#{msg.excluir}"
 								icon="ui-icon-trash" action="#{usuarioMB.excluir}"
 								update=":frmUsuario">
 								<f:setPropertyActionListener value="#{entidade}"
 									target="#{usuarioMB.entidade}" />
-								<p:confirm header="#{msg.label_solicitacao_confirmacao}"
-									message="#{msg.label_confirma_exclusao}" icon="ui-icon-alert" />
+								<p:confirm header="#{msg.solicitacao_confirmacao}"
+									message="#{msg.confirma_exclusao}" icon="ui-icon-alert" />
 							</p:commandButton>
 						</p:column>
 					</p:dataTable>
@@ -90,9 +90,9 @@
 
 				<p:confirmDialog global="true" showEffect="fade"
 					hideEffect="explode">
-					<p:commandButton value="#{msg.label_sim}" type="button"
+					<p:commandButton value="#{msg.sim}" type="button"
 						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-					<p:commandButton value="#{msg.label_nao}" type="button"
+					<p:commandButton value="#{msg.nao}" type="button"
 						styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
 				</p:confirmDialog>
 			</h:form>

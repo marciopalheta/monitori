@@ -5,40 +5,40 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:body>
 	<ui:composition template="_template.xhtml">
-		<ui:define name="titulo">#{msg.label_dados_usuario}</ui:define>
+		<ui:define name="titulo">#{msg.dadosDoUsuario}</ui:define>
 		<ui:define name="conteudo">
 
 			<h:form id="frmUsuarioDados">
 				<p:growl id="growl" autoUpdate="true" />
-				<p:panel id="panel" header="#{msg.label_dados_usuario}">
+				<p:panel id="panel" header="#{msg.dadosDoUsuario}">
 					<p:focus context="panel" />
 					<h:panelGrid columns="2" cellpadding="5">
-						<p:outputLabel value="#{msg.label_login}:" />
+						<p:outputLabel value="#{msg.login}:" />
 						<p:outputLabel value="#{usuarioSessionMB.usuario.login}" />
 						
-						<p:outputLabel value="#{msg.label_senha_atual}:" for="senhaAtual" />
+						<p:outputLabel value="#{msg.senhaAtual}:" for="senhaAtual" />
 						<p:password id="senhaAtual" value="#{usuarioMB.senhaAtual}"
-							label="#{msg.label_senha_atual}" required="true" 
-							requiredMessage="#{msg.label_senha_atual}: #{msg.campo_obrigatorio}"/>
+							label="#{msg.senhaAtual}" required="true" 
+							requiredMessage="#{msg.senhaAtual}: #{msg.campoObrigatorio}"/>
 
-						<p:outputLabel value="#{msg.label_senha_nova}:" for="senha" />
+						<p:outputLabel value="#{msg.senhaNova}:" for="senha" />
 						<p:password id="senha" value="#{usuarioMB.novaSenha}"
-							required="true" feedback="true" label="#{msg.label_senha}"
-							promptLabel="#{msg.hint_senha}" weakLabel="#{msg.hint_senha_fraca}"
-							goodLabel="#{msg.hint_senha_boa}" strongLabel="#{msg.hint_senha_forte}" 
+							required="true" feedback="true" label="#{msg.senha}"
+							promptLabel="#{msg.senha}" weakLabel="#{msg.senhaFraca}"
+							goodLabel="#{msg.senhaBoa}" strongLabel="#{msg.senhaForte}" 
 							match="senha_conf" 
-							requiredMessage="#{msg.label_senha}: #{msg.campo_obrigatorio}" 
-							validatorMessage="#{msg.hint_falha_confirmacao_senha}"/>
+							requiredMessage="#{msg.senha}: #{msg.campoObrigatorio}" 
+							validatorMessage="#{msg.senhaFalhaConfirmacao}"/>
 
-						<p:outputLabel value="#{msg.label_confirmacao}:" for="senha_conf" />
+						<p:outputLabel value="#{msg.confirmacao}:" for="senha_conf" />
 						<p:password id="senha_conf" value="#{usuarioMB.novaSenha}"
-							label="#{msg.label_confirmacao}" required="true" 
-							requiredMessage="#{msg.label_confirmacao}: #{msg.campo_obrigatorio}"/>
+							label="#{msg.confirmacao}" required="true" 
+							requiredMessage="#{msg.confirmacao}: #{msg.campoObrigatorio}"/>
 						
 					</h:panelGrid>
-					<p:commandButton value="#{msg.label_salvar}" update="panel"
+					<p:commandButton value="#{msg.salvar}" update="panel"
 						action="#{usuarioMB.alterarSenha}" />
-					<p:commandButton value="#{msg.label_cancelar}" immediate="true"
+					<p:commandButton value="#{msg.cancelar}" immediate="true"
 						action="#{usuarioMB.alterarSenhaCancelar}" rendered="#{!usuarioSessionMB.usuario.alterarSenha}"/>
 				</p:panel>
 			</h:form>

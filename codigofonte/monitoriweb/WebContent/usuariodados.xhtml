@@ -5,54 +5,54 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:body>
 	<ui:composition template="_template.xhtml">
-		<ui:define name="titulo">#{msg.label_dados_usuario}</ui:define>
+		<ui:define name="titulo">#{msg.dadosDoUsuario}</ui:define>
 		<ui:define name="conteudo">
 
 			<h:form id="frmUsuarioDados">
 				<p:growl id="growl" autoUpdate="true"/>
-				<p:panel id="panel" header="#{msg.label_dados_usuario}">
+				<p:panel id="panel" header="#{msg.dadosDoUsuario}">
 					<p:focus context="panel" />
 					<h:panelGrid columns="2" cellpadding="5">
-						<h:outputLabel value="#{msg.label_codigo}:" for="codigo"
+						<h:outputLabel value="#{msg.codigo}:" for="codigo"
 							rendered="#{usuarioMB.entidade.id != null}" />
-						<p:inputText id="codigo" label="#{msg.label_codigo}" size="10"
+						<p:inputText id="codigo" label="#{msg.codigo}" size="10"
 							rendered="#{usuarioMB.entidade.id != null}" readonly="true"
 							value="#{usuarioMB.entidade.id}" />
 
-						<p:outputLabel value="#{msg.label_nome}:" for="nome" />
-						<p:inputText id="nome" label="#{msg.label_nome}" size="50"
+						<p:outputLabel value="#{msg.nome}:" for="nome" />
+						<p:inputText id="nome" label="#{msg.nome}" size="50"
 							required="true" value="#{usuarioMB.entidade.nome}"
-							requiredMessage="#{msg.label_nome}: #{msg.campo_obrigatorio}"/>
+							requiredMessage="#{msg.nome}: #{msg.campoObrigatorio}"/>
 
-						<p:outputLabel value="#{msg.label_cpf}:" for="cpf" />
-						<p:inputMask mask="999.999.999-99" id="cpf" label="#{msg.label_cpf}" size="30"
+						<p:outputLabel value="#{msg.cpf}:" for="cpf" />
+						<p:inputMask mask="999.999.999-99" id="cpf" label="#{msg.cpf}" size="30"
 							required="true" value="#{usuarioMB.entidade.cpf}"
-							requiredMessage="#{msg.label_cpf}: #{msg.campo_obrigatorio}"/>
+							requiredMessage="#{msg.cpf}: #{msg.campoObrigatorio}"/>
 							
 
-						<p:outputLabel value="#{msg.label_email}:" for="email" />
-						<p:inputText id="email" label="#{msg.label_email}" size="50"
+						<p:outputLabel value="#{msg.email}:" for="email" />
+						<p:inputText id="email" label="#{msg.email}" size="50"
 							required="true" value="#{usuarioMB.entidade.email}" 
-							requiredMessage="#{msg.label_email}: #{msg.campo_obrigatorio}"/>
+							requiredMessage="#{msg.email}: #{msg.campoObrigatorio}"/>
 
-						<p:outputLabel value="#{msg.label_login}:" for="login" />
-						<p:inputText id="login" label="#{msg.label_login}" size="20"
+						<p:outputLabel value="#{msg.login}:" for="login" />
+						<p:inputText id="login" label="#{msg.login}" size="20"
 							maxlength="10" required="true"
-							requiredMessage="#{msg.label_login}: #{msg.campo_obrigatorio}"
+							requiredMessage="#{msg.login}: #{msg.campoObrigatorio}"
 							value="#{usuarioMB.entidade.login}" />
 
 												
-						<p:outputLabel value="#{msg.label_ativo}:" for="ativo" />	
+						<p:outputLabel value="#{msg.ativo}:" for="ativo" />	
 						<p:selectBooleanCheckbox id="ativo" value="#{usuarioMB.entidade.ativo}" />
 
-						<p:outputLabel value="#{msg.label_recriar_senha}:" for="alterarSenha" />	
+						<p:outputLabel value="#{msg.recriarSenha}:" for="alterarSenha" />	
 						<p:selectBooleanCheckbox id="alterarSenha" value="#{usuarioMB.entidade.alterarSenha}" />
 
 
 					</h:panelGrid>
-					<p:commandButton value="#{msg.label_salvar}" update="panel"
+					<p:commandButton value="#{msg.salvar}" update="panel"
 						action="#{usuarioMB.salvar}" />
-					<p:commandButton value="#{msg.label_cancelar}" immediate="true"
+					<p:commandButton value="#{msg.cancelar}" immediate="true"
 						action="#{usuarioMB.cancelar}" />
 				</p:panel>
 			</h:form>

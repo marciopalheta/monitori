@@ -140,9 +140,11 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
     	String id = KEY_ID;
     	String idPaciente = "idPaciente";
     	String sis = "sis";
+    	String sistole = "sistole";
     	String glicose = "glicose";
     	String jejum = "jejum";
     	String pos_pandrial = "pos_pandrial";
+    	String dataColeta = "dataColeta";
     	//String datacoleta = "dataColeta";
     	
     }
@@ -151,22 +153,20 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
     		TABLE_COLETAR_DADOS_NAME +"."+FIELDS_TABLE_COLETAR_DADOS.id+","+
     		TABLE_COLETAR_DADOS_NAME +"."+FIELDS_TABLE_COLETAR_DADOS.idPaciente+","+
     		TABLE_COLETAR_DADOS_NAME +"."+FIELDS_TABLE_COLETAR_DADOS.sis+","+
+    		TABLE_COLETAR_DADOS_NAME +"."+FIELDS_TABLE_COLETAR_DADOS.sistole+","+
     		TABLE_COLETAR_DADOS_NAME +"."+FIELDS_TABLE_COLETAR_DADOS.glicose+","+
     		TABLE_COLETAR_DADOS_NAME +"."+FIELDS_TABLE_COLETAR_DADOS.jejum+","+
-    		TABLE_COLETAR_DADOS_NAME +"."+FIELDS_TABLE_COLETAR_DADOS.pos_pandrial+" ";    		
+    		TABLE_COLETAR_DADOS_NAME +"."+FIELDS_TABLE_COLETAR_DADOS.pos_pandrial+","+
+    		TABLE_COLETAR_DADOS_NAME +"."+FIELDS_TABLE_COLETAR_DADOS.dataColeta+" ";    		
     		//TABLE_COLETAR_DADOS_NAME +"."+FIELDS_TABLE_COLETAR_DADOS.datacoleta+",";
     
-    private static final String CREATE_TABLE_COLETAR_DADOS1 = "CREATE TABLE " + TABLE_COLETAR_DADOS_NAME
-    		+ "(" + FIELDS_TABLE_COLETAR_DADOS.id + " INTERGER PRIMARY KEY, "
-    		+FIELDS_TABLE_COLETAR_DADOS.idPaciente+" INTEGER ," + FIELDS_TABLE_COLETAR_DADOS.sis+" TEXT, "
-    		+FIELDS_TABLE_COLETAR_DADOS.glicose+" TEXT, "+ FIELDS_TABLE_COLETAR_DADOS.jejum+" TEXT, "
-    		+FIELDS_TABLE_COLETAR_DADOS.pos_pandrial+" TEXT )";
-
-    private static final String CREATE_TABLE_COLETAR_DADOS = "CREATE TABLE "
+   private static final String CREATE_TABLE_COLETAR_DADOS = "CREATE TABLE "
             + TABLE_COLETAR_DADOS_NAME + "(" + FIELDS_TABLE_COLETAR_DADOS.id + " INTEGER PRIMARY KEY," 
-            + FIELDS_TABLE_COLETAR_DADOS.sis+ "  TEXT, "+ FIELDS_TABLE_COLETAR_DADOS.glicose+ " TEXT, "
+            + FIELDS_TABLE_COLETAR_DADOS.sis+ "  TEXT, " + FIELDS_TABLE_COLETAR_DADOS.sistole + " TEXT, "
+            + FIELDS_TABLE_COLETAR_DADOS.glicose+ " TEXT, "
             + FIELDS_TABLE_COLETAR_DADOS.jejum+ " TEXT, "+FIELDS_TABLE_COLETAR_DADOS.idPaciente+" INTEGER, "
-            +FIELDS_TABLE_COLETAR_DADOS.pos_pandrial+" TEXT) ";			
+            +FIELDS_TABLE_COLETAR_DADOS.pos_pandrial+" TEXT "
+            +FIELDS_TABLE_COLETAR_DADOS.dataColeta+ " TEXT )";			
     
     
     public static interface FIELDS_TABLE_BAIRRO {

@@ -67,6 +67,22 @@
         android:padding="@dimen/padding"/>
      
      <EditText 
+        android:id="@+id/edt_sistole"
+        android:layout_width="250dp"
+	    android:layout_height="@dimen/heigth_editext"
+        android:hint="@string/sistole"
+        android:background="#e1e0e0"
+        android:layout_marginTop="10dp"
+        android:padding="@dimen/padding"/>
+     
+     <TextView 
+         android:id="@+id/glicose"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:textSize="@dimen/cadastrarpaciente"
+         android:text="@string/glicose"/>
+     
+     <EditText 
         android:id="@+id/edt_glicose"
         android:layout_width="250dp"
 		android:layout_height="@dimen/heigth_editext"
@@ -102,6 +118,7 @@
 		</LinearLayout>	
 		
      <TextView 
+         android:id="@+id/dataColeta"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:layout_gravity="right"

@@ -1,14 +1,17 @@
 package br.fucapi.fapeam.monitori.model.bean;
 
 import java.io.Serializable;
+import java.util.Calendar;
 
 @SuppressWarnings("serial")
 public class ColetarDados extends AbstractEntityBean implements Serializable{
 		
 	private String sis;
+	private String sistole;
 	private String glicose;
 	private boolean jejum;
 	private boolean posPandrial;
+	private Calendar dataColeta;
 	private Usuario usuario;		
 	
 	
@@ -21,6 +24,22 @@ public class ColetarDados extends AbstractEntityBean implements Serializable{
 		this.sis = sis;
 	}
 	
+	public String getSistole() {
+		return sistole;
+	}
+
+	public void setSistole(String sistole) {
+		this.sistole = sistole;
+	}
+
+	public Calendar getDataColeta() {
+		return dataColeta;
+	}
+
+	public void setDataColeta(Calendar dataColeta) {
+		this.dataColeta = dataColeta;
+	}
+
 	public String getGlicose() {
 		return glicose;
 	}

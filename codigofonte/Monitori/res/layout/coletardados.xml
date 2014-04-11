@@ -1,31 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content" 
-    android:background="#f7f6f6"
-    android:fillViewport="true">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"    
+    android:background="#f2f2f2"
+    android:layout_centerHorizontal="true"
+    android:layout_centerVertical="true"
+    >
     
-     <LinearLayout 
-       android:id="@+id/barraPreta"
-       android:layout_width="fill_parent"
-       android:layout_height="@dimen/barraPreta_heigth"
-       android:background="#000000"
-       android:orientation="horizontal"
-       >   
-   </LinearLayout>  
+     
+  
     
     <TextView 
-        android:layout_below="@id/barraPreta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/coletar_dados"
         android:id="@+id/text_coletar"
-        android:textColor="#000000"
+        android:textColor="#4ab3b4"
         android:textSize="@dimen/cadastrarpaciente"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="30dp"
-        android:layout_marginBottom="30dp"/>
+        android:layout_marginBottom="30dp"
+        />
     
+   
+ <RelativeLayout
+        android:id="@+id/fundo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/text_coletar"
+        android:background="#ffffff"
+        android:paddingTop="10dp"
+        android:paddingRight="15dp"
+        android:paddingLeft="15dp"
+        android:paddingBottom="15dp"
+        android:layout_marginBottom="15dp"
+        
+        >
+        
          
  <LinearLayout
     android:layout_width="wrap_content"
@@ -111,7 +123,7 @@
          android:paddingRight="10dp"/>
         
  </LinearLayout>    
+</RelativeLayout>
 
 
-
-</ScrollView>
+</RelativeLayout>

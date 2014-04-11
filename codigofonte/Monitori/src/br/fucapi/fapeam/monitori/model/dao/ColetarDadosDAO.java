@@ -36,9 +36,9 @@ public class ColetarDadosDAO extends AbstractDataBase{
 		
 		try{
 			
-			
 			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.sis, coletaDados.getSis());
 			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.idPaciente, coletaDados.getUsuario().getId());
+			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.sistole, coletaDados.getSistole());
 			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.glicose, coletaDados.getGlicose());
 			//sao checkbox
 			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.jejum, 
@@ -62,10 +62,7 @@ public class ColetarDadosDAO extends AbstractDataBase{
 			Log.i(TAG, "glicose: "+ coletaDados.getGlicose());
 			Log.i(TAG, "jejum: "+ coletaDados.isJejum());
 			Log.i(TAG, "pos_pandrial"+ coletaDados.isPos_pandrial());						
-			
 		}
-		
-		
 	}
 	
 	/** 
@@ -98,16 +95,15 @@ public class ColetarDadosDAO extends AbstractDataBase{
 				
 				coletaDados.setGlicose(cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.glicose)));
 				coletaDados.setSis(cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.sis)));
-								
+				coletaDados.setSistole(cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.sistole)));
+				
 				UsuarioDAO usuarioDao = new UsuarioDAO(context);				
 				Usuario usuario = usuarioDao.getUsuario( cursor.getLong(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.idPaciente) )) ;
 				coletaDados.setUsuario(usuario); 				
 				
-				
 				coletaDados.setJejum( Boolean.parseBoolean( cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.jejum)) ) );
-				coletaDados.setPos_pandrial( Boolean.parseBoolean( cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.jejum)) ) );
+				coletaDados.setPos_pandrial( Boolean.parseBoolean( cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.pos_pandrial)) ) );
 				
-														
 				lista.add(coletaDados);
 			}
 		}catch(SQLException e){
@@ -128,7 +124,7 @@ public class ColetarDadosDAO extends AbstractDataBase{
 			sql = "Select " +
 					SQLiteDatabaseHelper.ALL_FIELDS_TABLE_COLETAR_DADOS+ " "+					
 					" from "+SQLiteDatabaseHelper.TABLE_COLETAR_DADOS_NAME +" " +					
-					" where "+SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.idPaciente+"='"+paciente.getId()+"' " +
+					" where "+SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.idPaciente+" = '"+paciente.getId()+" " +
 					" order by "+SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.sis+" ";		
 		
 		//Objeto que reebe os registros do banco de dados
@@ -142,13 +138,13 @@ public class ColetarDadosDAO extends AbstractDataBase{
 				coletaDados.setId( cursor.getLong(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.id) )); 
 				coletaDados.setGlicose(cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.glicose)));
 				coletaDados.setSis(cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.sis)));
-												
+				coletaDados.setSistole(cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.sistole)));
+				
 				coletaDados.setUsuario(paciente); 				
 								
 				coletaDados.setJejum( Boolean.parseBoolean( cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.jejum)) ) );
-				coletaDados.setPos_pandrial( Boolean.parseBoolean( cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.jejum)) ) );
+				coletaDados.setPos_pandrial( Boolean.parseBoolean( cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.pos_pandrial)) ) );
 				
-														
 				lista.add(coletaDados);
 			}
 		}catch(SQLException e){
@@ -159,8 +155,6 @@ public class ColetarDadosDAO extends AbstractDataBase{
 		return lista;
 	}
 
-	
-	
 	/** 
 	 * metodo responsavel pela exclusao de usuarios
 	 * */
@@ -182,6 +176,7 @@ public class ColetarDadosDAO extends AbstractDataBase{
 		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.sis, coletaDados.getSis());
 		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.idPaciente, coletaDados.getUsuario().getId());
 		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.glicose, coletaDados.getGlicose());
+		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.sistole, coletaDados.getSistole());
 		//sao checkbox
 		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.jejum, 
 				String.valueOf( coletaDados.isJejum() ));
@@ -196,7 +191,6 @@ public class ColetarDadosDAO extends AbstractDataBase{
 		Log.i(TAG, "Coleta alterado: " + coletaDados.getSis());
 	}
 			
-	
 	public ColetarDados getColetarDados(long id){
 		//Colecao de usuarios
 		ColetarDados coletaDados = null;
@@ -215,7 +209,9 @@ public class ColetarDadosDAO extends AbstractDataBase{
 				coletaDados.setId(cursor.getLong(cursor.getColumnIndex
 						(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.id) ));							
 				coletaDados.setSis(cursor.getString(cursor.getColumnIndex
-						(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.sis)));				
+						(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.sis)));
+				coletaDados.setSistole(cursor.getString(cursor.getColumnIndex
+						(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.sistole)));
 				coletaDados.setPos_pandrial(Boolean.parseBoolean(cursor.getString
 						(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.pos_pandrial))));
 				coletaDados.setJejum(Boolean.parseBoolean(cursor.getString
@@ -224,7 +220,6 @@ public class ColetarDadosDAO extends AbstractDataBase{
 				UsuarioDAO usuarioDao = new UsuarioDAO(context);				
 				Usuario usuario = usuarioDao.getUsuario( cursor.getLong(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.idPaciente) )) ;
 				coletaDados.setUsuario(usuario);
-				
 			}
 		}catch(SQLException e){
 			Log.e(TAG, e.getMessage());
@@ -233,6 +228,4 @@ public class ColetarDadosDAO extends AbstractDataBase{
 		}
 		return coletaDados;
 	}
-	
-	
 }

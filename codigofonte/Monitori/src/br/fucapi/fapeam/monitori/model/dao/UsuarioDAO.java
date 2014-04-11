@@ -161,12 +161,8 @@ public class UsuarioDAO extends AbstractDataBase{
 			}
 			if(usuario instanceof Agente){						
 				Log.i(TAG, "matricula: "+ ((Agente)usuario).getMatricula() );
-			}
-
-			
+			}	
 		}
-		
-		
 	}
 	
 	/** 
@@ -201,8 +197,6 @@ public class UsuarioDAO extends AbstractDataBase{
 					usuario = new Medico();					
 					((Medico)usuario).setCrm( cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.crm ))   );
 				}
-																				 
-				
 				//Carregar os atributos dos usuarios
 				usuario.setId( cursor.getLong(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.id) )); 
 								
@@ -211,14 +205,12 @@ public class UsuarioDAO extends AbstractDataBase{
 				usuario.setFoto(cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.foto)));
 				
 				usuario.setCpf(cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.cpf)));
-											
-				
+													
 				usuario.setEndereco(cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.endereco )));
 				usuario.setNumero(cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.numero )));
 				usuario.setNomeMae(cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.nomeMae )));
 				usuario.setNumSus(cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.numeroSus )));
 	
-				
 				BairroDAO bairroDao = new BairroDAO(context);				
 				Bairro bairro = bairroDao.getBairro( cursor.getLong(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.idBairro ) ) );
 				usuario.setBairro(bairro); 
@@ -282,7 +274,7 @@ public class UsuarioDAO extends AbstractDataBase{
 		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.nome , usuario.getNome());
 		
 		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.foto, usuario.getFoto());
-		//values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.cpf, usuario.getCpf());
+		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.cpf, usuario.getCpf());
 		
 		Calendar cal =  usuario.getDataNascimento();
 		if(cal!=null){

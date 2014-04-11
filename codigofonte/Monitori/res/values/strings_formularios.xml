@@ -90,7 +90,7 @@
     <string name="title_activity_coletar_dados">Coletar Dados</string>
 
     <!-- coletar dados -->
-    <string name="coletar_dados">Coletada dados</string>
+    <string name="coletar_dados">Coleta de dados</string>
     <string name="pa">PA</string>
     <string name="sis">SIS</string>
     <string name="sistole">Sistole</string>

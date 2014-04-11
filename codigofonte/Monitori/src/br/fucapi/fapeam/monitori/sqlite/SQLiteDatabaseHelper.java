@@ -144,8 +144,8 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
     	String glicose = "glicose";
     	String jejum = "jejum";
     	String pos_pandrial = "pos_pandrial";
-    	//String datacoleta = "dataColeta";
-    	
+    	String datacoleta = "dataColeta";
+    	String horacoleta = "horaColeta";
     }
     
     public static String ALL_FIELDS_TABLE_COLETAR_DADOS = 
@@ -155,14 +155,16 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
     		TABLE_COLETAR_DADOS_NAME +"."+FIELDS_TABLE_COLETAR_DADOS.sistole+","+
     		TABLE_COLETAR_DADOS_NAME +"."+FIELDS_TABLE_COLETAR_DADOS.glicose+","+
     		TABLE_COLETAR_DADOS_NAME +"."+FIELDS_TABLE_COLETAR_DADOS.jejum+","+
-    		TABLE_COLETAR_DADOS_NAME +"."+FIELDS_TABLE_COLETAR_DADOS.pos_pandrial+",";    		
-    		//TABLE_COLETAR_DADOS_NAME +"."+FIELDS_TABLE_COLETAR_DADOS.datacoleta+",";
+    		TABLE_COLETAR_DADOS_NAME +"."+FIELDS_TABLE_COLETAR_DADOS.pos_pandrial+","+    		
+    		TABLE_COLETAR_DADOS_NAME +"."+FIELDS_TABLE_COLETAR_DADOS.datacoleta+", "+
+    		TABLE_COLETAR_DADOS_NAME +"."+FIELDS_TABLE_COLETAR_DADOS.horacoleta+" ";
     
    private static final String CREATE_TABLE_COLETAR_DADOS = "CREATE TABLE "
             + TABLE_COLETAR_DADOS_NAME + "(" + FIELDS_TABLE_COLETAR_DADOS.id + " INTEGER PRIMARY KEY," 
             + FIELDS_TABLE_COLETAR_DADOS.idPaciente+" INTEGER, "+ FIELDS_TABLE_COLETAR_DADOS.sis+ "  TEXT, "
-            + FIELDS_TABLE_COLETAR_DADOS.sistole+" TEXT, "+ FIELDS_TABLE_COLETAR_DADOS.glicose+ " TEXT, " 
-            + FIELDS_TABLE_COLETAR_DADOS.jejum+" TEXT, "+ FIELDS_TABLE_COLETAR_DADOS.pos_pandrial+" TEXT )";			
+            + FIELDS_TABLE_COLETAR_DADOS.sistole+" TEXT, "+ FIELDS_TABLE_COLETAR_DADOS.glicose+ " TEXT, "
+            + FIELDS_TABLE_COLETAR_DADOS.jejum+" TEXT, "+ FIELDS_TABLE_COLETAR_DADOS.pos_pandrial+" TEXT, " 
+            + FIELDS_TABLE_COLETAR_DADOS.datacoleta+" TEXT, "+ FIELDS_TABLE_COLETAR_DADOS.horacoleta+" TEXT )";			
     
     
     public static interface FIELDS_TABLE_BAIRRO {

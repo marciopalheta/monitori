@@ -23,12 +23,18 @@ public class ColetarDadosHelper{
 	private EditText sistole;
 	private EditText glicose;
 	private CheckBox jejum;
-	private CheckBox pos_pandrial;
-	private TextView dataColetas;
-	private Calendar dataColeta = Calendar.getInstance();
-	private SimpleDateFormat data = new SimpleDateFormat("d 'de' MMMM 'de' yyyy HH:mm");
-	private Usuario usuario;	
+	private CheckBox pos_pandrial;	
+	private Calendar dataHoraColeta = Calendar.getInstance();
 	
+	private SimpleDateFormat sdfDate;
+	private SimpleDateFormat sdfTime;
+	
+	
+	private TextView dataColeta;
+	private TextView horaColeta;
+	
+	private Usuario usuario;	
+		
 	private FragmentActivity fragmentActivity;	
 	
 	public ColetarDadosHelper(final FragmentActivity fragmentActivity, Usuario usuario){
@@ -42,10 +48,11 @@ public class ColetarDadosHelper{
 		glicose = (EditText) fragmentActivity.findViewById(R.id.edt_glicose);
 		jejum =(CheckBox) fragmentActivity.findViewById(R.id.chbjejum);
 		pos_pandrial =(CheckBox) fragmentActivity.findViewById(R.id.chbpos_pandrial);
-		dataColetas = (TextView) fragmentActivity.findViewById(R.id.dataColeta);
-	
-		String result = data.format(dataColeta.getTime());
-		dataColetas.setText(result);
+		
+		dataColeta = (TextView) fragmentActivity.findViewById(R.id.dataColeta);
+		horaColeta = (TextView) fragmentActivity.findViewById(R.id.horaColeta);
+		
+		updateLabel();
 	}
 
 
@@ -84,6 +91,8 @@ public class ColetarDadosHelper{
 		coletaDados.setPos_pandrial(pos_pandrial.isChecked());
 		coletaDados.setUsuario(usuario);
 		
+		coletaDados.setDataHoraColeta(dataHoraColeta);		
+		
 		return (ColetarDados) coletaDados;		
 	}
 	
@@ -96,6 +105,8 @@ public class ColetarDadosHelper{
 		Log.e("TESTE", "is Jejum: " + coletaDados.isJejum() );
 		jejum.setChecked(coletaDados.isJejum() );
 		pos_pandrial.setChecked(coletaDados.isPos_pandrial() );
+		
+		setDataHoraColeta(coletaDados.getDataHoraColeta() );
 		
 		usuario = coletaDados.getUsuario();
 		
@@ -120,5 +131,46 @@ public class ColetarDadosHelper{
 		}
 			return true;
 	}
+
+	
+	public TextView getTextViewDataColeta() {
+		return dataColeta;
+	}
+
+	public void setTextViewDataColeta(TextView dataColeta) {
+		this.dataColeta = dataColeta;
+	}
+
+	public TextView getTextViewHoraColeta() {
+		return horaColeta;
+	}
+
+	public void setTextViewHoraColeta(TextView horaColeta) {
+		this.horaColeta = horaColeta;
+	}
+	
+	public Calendar getDataHoraColeta() {											
+		return dataHoraColeta;
+	}
+
+	public void setDataHoraColeta(Calendar dataHoraColeta) {
+		if(dataHoraColeta!=null){
+			this.dataHoraColeta = dataHoraColeta;			
+			updateLabel();
+		}	
+	}
+
+	private void updateLabel() {
+		  		 			 			 			 			 	 	
+		sdfDate = new SimpleDateFormat(fragmentActivity.getString(R.string.DATE_LONG_FORMAT_APLICATION));
+		sdfTime = new SimpleDateFormat(fragmentActivity.getString(R.string.TIME_FORMAT_APLICATION));
+		String dateFormated = sdfDate.format(dataHoraColeta.getTime());
+		String timeFormated = sdfTime.format(dataHoraColeta.getTime());
+		
+		dataColeta.setText(dateFormated);
+		horaColeta.setText(timeFormated);
+	 	 	 			 			        	      
+	}
+
 	
 }

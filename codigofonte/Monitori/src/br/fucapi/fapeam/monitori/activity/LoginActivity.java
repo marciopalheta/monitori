@@ -37,11 +37,11 @@ public class LoginActivity extends Activity {
 		bt_Logar = (Button) findViewById(R.id.btValidar);
 		
 		login.setText("admin");
-		login.addTextChangedListener(Mask.insert("###.###.###-##", login));
+		//login.addTextChangedListener(Mask.insert("###.###.###-##", login));
 		
 		
 		senha.setText("admin");
-		senha.addTextChangedListener(Mask.insert("###.###.###-##", senha));
+		//senha.addTextChangedListener(Mask.insert("###.###.###-##", senha));
 		
 		bt_Logar.setOnClickListener(new OnClickListener() {
 			

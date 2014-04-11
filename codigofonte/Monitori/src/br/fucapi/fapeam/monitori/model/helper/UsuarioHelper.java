@@ -59,8 +59,8 @@ public class UsuarioHelper {
 	private Spinner spinBairro;			
 	private Spinner spinUbs;
 			
-	private static final String DATE_FORMAT = "dd/MM/yyyy";	    
-    private SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);           
+	private String DATE_FORMAT;	    
+    private SimpleDateFormat dateFormat;           
     
 	private Calendar dtCalendar = Calendar.getInstance();			
 			
@@ -105,6 +105,10 @@ public class UsuarioHelper {
 		//Associacao de campos de tela ao controller
 		this.context = fragmentActivity;						
 		this.fragmentActivity = fragmentActivity;
+				
+	    DATE_FORMAT = context.getString(R.string.DATE_FORMAT_APLICATION);
+		dateFormat = new SimpleDateFormat(DATE_FORMAT);
+	    
 		
 		if(tipoUsuario == TipoUsuario.PACIENTE){
 			usuario = new Paciente();

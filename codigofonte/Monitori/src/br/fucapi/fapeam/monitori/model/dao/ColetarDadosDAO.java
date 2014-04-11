@@ -1,8 +1,12 @@
 package br.fucapi.fapeam.monitori.model.dao;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
+import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.model.bean.ColetarDados;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import br.fucapi.fapeam.monitori.sqlite.SQLiteDatabaseHelper;
@@ -17,12 +21,25 @@ public class ColetarDadosDAO extends AbstractDataBase{
 	//Constante para log no LogCat
 	private static final String TAG = "CADASTRO_COLETAR_DADOS";
 		
-    private Context context;    
+    private Context context;
+    
+	private String DATE_FORMAT;	
+	
+	private SimpleDateFormat sdfDate;
+	private SimpleDateFormat sdfTime;
+	String dateFormated;
+	String timeFormated;
+	
 	public ColetarDadosDAO (Context context){
 		
 		//Chamando o construtor que sabe acessar o BD
 		super(context);
 		this.context = context;
+		
+		
+		sdfDate = new SimpleDateFormat(context.getString(R.string.DATE_FORMAT_DATABASE));
+		sdfTime = new SimpleDateFormat(context.getString(R.string.TIME_FORMAT_APLICATION));						
+		
 	}
 	
 	 /** 
@@ -45,7 +62,20 @@ public class ColetarDadosDAO extends AbstractDataBase{
 					String.valueOf( coletaDados.isJejum() ));
 			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.pos_pandrial, 
 					String.valueOf(coletaDados.isPos_pandrial() ));
-																	
+			
+			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.pos_pandrial, 
+					String.valueOf(coletaDados.isPos_pandrial() ));
+			
+			
+			dateFormated = sdfDate.format(coletaDados.getDataHoraColeta().getTime());
+			timeFormated = sdfTime.format(coletaDados.getDataHoraColeta().getTime());
+			
+			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.datacoleta, 
+					dateFormated );
+			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.horacoleta, 
+					timeFormated );
+						
+			
 			//Inserir dados do usuario
 			getWritableDatabase().insert(SQLiteDatabaseHelper.TABLE_COLETAR_DADOS_NAME, null, values);
 			
@@ -61,7 +91,9 @@ public class ColetarDadosDAO extends AbstractDataBase{
 			Log.i(TAG, "sis: "+ coletaDados.getSis());
 			Log.i(TAG, "glicose: "+ coletaDados.getGlicose());
 			Log.i(TAG, "jejum: "+ coletaDados.isJejum());
-			Log.i(TAG, "pos_pandrial"+ coletaDados.isPos_pandrial());						
+			Log.i(TAG, "pos_pandrial: "+ coletaDados.isPos_pandrial());
+			Log.i(TAG, "DataColeta: "+ dateFormated );
+			Log.i(TAG, "HoraColeta: "+ timeFormated );			
 		}
 	}
 	
@@ -104,9 +136,24 @@ public class ColetarDadosDAO extends AbstractDataBase{
 				coletaDados.setJejum( Boolean.parseBoolean( cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.jejum)) ) );
 				coletaDados.setPos_pandrial( Boolean.parseBoolean( cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.pos_pandrial)) ) );
 				
+				String dataColeta = cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.datacoleta));								
+				String horaColeta = cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.horacoleta));
+				
+				String dataHora = dataColeta + " " +horaColeta;
+				
+				SimpleDateFormat sdfDateTime = new SimpleDateFormat( context.getString(R.string.DATE_FORMAT_DATABASE) +" " + context.getString(R.string.TIME_FORMAT_APLICATION) );
+								
+							
+				Calendar cal = Calendar.getInstance();
+				cal.setTime(sdfDateTime.parse(dataHora));
+				coletaDados.setDataHoraColeta(cal);
+				
+				
 				lista.add(coletaDados);
 			}
 		}catch(SQLException e){
+			Log.e(TAG, e.getMessage());
+		} catch (ParseException e) {
 			Log.e(TAG, e.getMessage());
 		}finally{
 			cursor.close();
@@ -144,10 +191,24 @@ public class ColetarDadosDAO extends AbstractDataBase{
 								
 				coletaDados.setJejum( Boolean.parseBoolean( cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.jejum)) ) );
 				coletaDados.setPos_pandrial( Boolean.parseBoolean( cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.pos_pandrial)) ) );
+																
+				String dataColeta = cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.datacoleta));								
+				String horaColeta = cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.horacoleta));
+				
+				String dataHora = dataColeta + " " +horaColeta;
+				
+				SimpleDateFormat sdfDateTime = new SimpleDateFormat( context.getString(R.string.DATE_FORMAT_DATABASE) +" " + context.getString(R.string.TIME_FORMAT_APLICATION) );
+								
+							
+				Calendar cal = Calendar.getInstance();
+				cal.setTime(sdfDateTime.parse(dataHora));
+				coletaDados.setDataHoraColeta(cal);								
 				
 				lista.add(coletaDados);
 			}
 		}catch(SQLException e){
+			Log.e(TAG, e.getMessage());
+		} catch (ParseException e) {
 			Log.e(TAG, e.getMessage());
 		}finally{
 			cursor.close();

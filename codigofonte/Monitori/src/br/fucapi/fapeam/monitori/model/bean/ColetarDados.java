@@ -11,7 +11,7 @@ public class ColetarDados extends AbstractEntityBean implements Serializable{
 	private String glicose;
 	private boolean jejum;
 	private boolean posPandrial;
-	private Calendar dataColeta;
+	private Calendar dataHoraColeta;
 	private Usuario usuario;		
 	
 	
@@ -32,12 +32,12 @@ public class ColetarDados extends AbstractEntityBean implements Serializable{
 		this.sistole = sistole;
 	}
 
-	public Calendar getDataColeta() {
-		return dataColeta;
+	public Calendar getDataHoraColeta() {
+		return dataHoraColeta;
 	}
 
-	public void setDataColeta(Calendar dataColeta) {
-		this.dataColeta = dataColeta;
+	public void setDataHoraColeta(Calendar dataHoraColeta) {
+		this.dataHoraColeta = dataHoraColeta;
 	}
 
 	public String getGlicose() {

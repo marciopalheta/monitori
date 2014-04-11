@@ -30,6 +30,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
         android:paddingLeft="5dp"
+        android:inputType="number"
         android:textSize="@dimen/fonte_bts_texts"/>
     
     <EditText 
@@ -42,7 +43,8 @@
         android:layout_below="@id/edt_login"
         android:layout_marginTop="5dp"
         android:paddingLeft="5dp"
-        android:password="true"
+        android:inputType="textPassword|number"
+        
         android:textSize="@dimen/fonte_bts_texts"/>
 
     <Button

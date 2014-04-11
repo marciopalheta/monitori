@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.model.bean.Agente;
 import br.fucapi.fapeam.monitori.model.bean.Bairro;
 import br.fucapi.fapeam.monitori.model.bean.Medico;
@@ -27,9 +28,9 @@ public class UsuarioDAO extends AbstractDataBase{
 	//Constante para log no LogCat
 	private static final String TAG = "CADASTRO_USUARIO";
 	
-	private static final String DATE_FORMAT = "dd-MM-yyyy";
+	private String DATE_FORMAT;
 		
-    private SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
+    private SimpleDateFormat dateFormat;
     private Context context;
     private String dataForDB=null;
 	public UsuarioDAO (Context context){
@@ -37,6 +38,8 @@ public class UsuarioDAO extends AbstractDataBase{
 		//Chamando o construtor que sabe acessar o BD
 		super(context);
 		this.context = context;
+		DATE_FORMAT = context.getString(R.string.DATE_FORMAT_DATABASE);
+		dateFormat = new SimpleDateFormat(DATE_FORMAT);
 	}
 	
 	 /** 

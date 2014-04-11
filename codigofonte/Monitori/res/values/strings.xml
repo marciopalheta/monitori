@@ -9,5 +9,11 @@
     <string name="novo">Novo Cadastro</string>
     <string name="sincronizar">Sincronizar</string>
     
-
+    <string name="DATE_FORMAT_APLICATION">dd/MM/yyyy</string>
+    <string name="DATE_FORMAT_DATABASE">yyyy-MM-dd</string>
+    <string name="DATE_LONG_FORMAT_APLICATION">d \'de\' MMMM \'de\' yyyy</string>
+    <string name="TIME_FORMAT_APLICATION">HH:mm</string>
+    
+    
+    
 </resources>

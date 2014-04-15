@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import android.annotation.SuppressLint;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +17,7 @@ import br.fucapi.fapeam.monitori.model.bean.ColetarDados;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import br.fucapi.fapeam.monitori.utils.Funcoes;
 
+@SuppressLint("SimpleDateFormat")
 public class ColetarDadosHelper{
 	
 	private ColetarDados coletaDados;

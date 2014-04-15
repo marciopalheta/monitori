@@ -22,11 +22,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.activity.ColetarDadosActivity;
+import br.fucapi.fapeam.monitori.adapter.ColetaAdapter;
 import br.fucapi.fapeam.monitori.model.bean.ColetarDados;
 import br.fucapi.fapeam.monitori.model.bean.Paciente;
 import br.fucapi.fapeam.monitori.model.dao.ColetarDadosDAO;
@@ -43,10 +43,9 @@ public class ColetarFragment extends Fragment {
 		private List<ColetarDados> listaColetar;
 		
 		//ArrayAdapter para adaptar lista em view
-		private ArrayAdapter<ColetarDados> adapter;
+		private ColetaAdapter adapter;
 		
 		//definicao do layout de exibicao da lista
-		private int adapterLayout = android.R.layout.simple_list_item_1;
 		
 		//selecao com o click longo
 		private ColetarDados coletaSelecionada = null;
@@ -198,8 +197,8 @@ public class ColetarFragment extends Fragment {
 			dao.close();
 			
 			//objeto arrayAdapter converte array em view
-			this.adapter = new ArrayAdapter<ColetarDados>(getActivity(),
-					adapterLayout, listaColetar);
+			this.adapter = new ColetaAdapter(getActivity(),
+					listaColetar);
 			//associacao do adapter ao listView
 			this.lvListagem.setAdapter(adapter);
 		}

@@ -3,6 +3,7 @@ package br.fucapi.fapeam.monitori.activity;
 import java.util.List;
 
 import br.fucapi.fapeam.monitori.R;
+import br.fucapi.fapeam.monitori.adapter.ColetaAdapter;
 import br.fucapi.fapeam.monitori.model.bean.ColetarDados;
 import br.fucapi.fapeam.monitori.model.bean.Paciente;
 import br.fucapi.fapeam.monitori.model.dao.ColetarDadosDAO;
@@ -21,7 +22,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
@@ -38,10 +38,9 @@ public class ColetarActivity extends Activity {
 	private List<ColetarDados> listaColetar;
 	
 	//ArrayAdapter para adaptar lista em view
-	private ArrayAdapter<ColetarDados> adapter;
+	private ColetaAdapter adapter;
 	
 	//definicao do layout de exibicao da lista
-	private int adapterLayout = android.R.layout.simple_list_item_1;
 	
 	//selecao com o click longo
 	private ColetarDados coletaSelecionada = null;
@@ -144,8 +143,8 @@ public class ColetarActivity extends Activity {
 		dao.close();
 		
 		//objeto arrayAdapter converte array em view
-		this.adapter = new ArrayAdapter<ColetarDados>(this,
-				adapterLayout, listaColetar);
+		this.adapter = new ColetaAdapter(this,
+				listaColetar);
 		//associacao do adapter ao listView
 		this.lvListagem.setAdapter(adapter);
 	}

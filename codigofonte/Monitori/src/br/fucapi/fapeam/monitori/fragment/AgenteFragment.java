@@ -4,7 +4,6 @@ import java.util.List;
 import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.activity.agente.AgenteDadosActivity;
 import br.fucapi.fapeam.monitori.adapter.ListAdapter;
-import br.fucapi.fapeam.monitori.adapter.ListaAdapter;
 import br.fucapi.fapeam.monitori.model.bean.Agente;
 import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;

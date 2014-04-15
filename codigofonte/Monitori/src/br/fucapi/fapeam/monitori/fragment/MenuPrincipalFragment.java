@@ -2,13 +2,7 @@ package br.fucapi.fapeam.monitori.fragment;
 
 import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.activity.AppMainActivity;
-import br.fucapi.fapeam.monitori.activity.ColetarActivity;
-import br.fucapi.fapeam.monitori.activity.agente.AgenteActivity;
-import br.fucapi.fapeam.monitori.activity.medico.MedicoActivity;
-import br.fucapi.fapeam.monitori.activity.paciente.PacienteActivity;
-import br.fucapi.fapeam.monitori.utils.PutExtras;
 import br.fucapi.fapeam.monitori.utils.RequestCodes;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;

@@ -8,7 +8,6 @@ import br.fucapi.fapeam.monitori.activity.DiagnosticarActivity;
 import br.fucapi.fapeam.monitori.activity.DiagnosticarDadosActivity;
 import br.fucapi.fapeam.monitori.activity.paciente.PacienteDadosActivity;
 import br.fucapi.fapeam.monitori.adapter.ListAdapter;
-import br.fucapi.fapeam.monitori.adapter.ListaAdapter;
 import br.fucapi.fapeam.monitori.model.bean.Paciente;
 import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;

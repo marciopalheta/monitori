@@ -6,7 +6,6 @@ import br.fucapi.fapeam.monitori.activity.medico.MedicoActivity;
 import br.fucapi.fapeam.monitori.activity.paciente.PacienteActivity;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import br.fucapi.fapeam.monitori.model.dao.UsuarioDAO;
-import br.fucapi.fapeam.monitori.utils.Mask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;

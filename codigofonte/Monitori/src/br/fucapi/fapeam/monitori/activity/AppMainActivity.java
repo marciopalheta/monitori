@@ -8,7 +8,6 @@ import br.fucapi.fapeam.monitori.fragment.AgenteFragment;
 import br.fucapi.fapeam.monitori.fragment.ColetarFragment;
 import br.fucapi.fapeam.monitori.fragment.DiagnosticarFragment;
 import br.fucapi.fapeam.monitori.fragment.LoginFragment;
-import br.fucapi.fapeam.monitori.fragment.MainFragment;
 import br.fucapi.fapeam.monitori.fragment.MedicoFragment;
 import br.fucapi.fapeam.monitori.fragment.MenuPrincipalFragment;
 import br.fucapi.fapeam.monitori.fragment.PacienteFragment;

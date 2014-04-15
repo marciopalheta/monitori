@@ -19,20 +19,26 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.Toast;
+import android.widget.ListView;
+
 
 public class BairroDialog extends DialogFragment {
 	
 	EditText nomeBairro;
-
+	
 	String savedStateNome;
 	AlertDialog dialog;	
-	View.OnClickListener clickListener = null;
+	private List<Bairro> listaBairro;
+	private ListView lvListagem;
+	
+	private Bairro bairroSelecionado;
+	
+	//private Spinner spinBairro;
 
-	private Spinner spinBairro;
-
-	private SpinnerAdapter adapter;
+	private ArrayAdapter<Bairro> adapter;
+	
+	public BairroDialog(){}
+	
 	
 	public static BairroDialog newInstance() {
         return new BairroDialog();
@@ -42,20 +48,54 @@ public class BairroDialog extends DialogFragment {
 	public void onCreate(Bundle savedInstanceState) {
 					       
 		super.onCreate(savedInstanceState);
-		setRetainInstance(true);			
+		setRetainInstance(true);
+		
+		if(this.getArguments() != null){
+			bairroSelecionado = (Bairro) this.getArguments().getSerializable(PutExtras.BAIRRO_SELECIONADO);	
+		}
+		
+		
 	}
 			
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-										
-		//Log.e("Saved Estate1", "string salva = "+ savedNome);
-		
+												 
+		BairroDAO daoBairro = new BairroDAO(getActivity()); 
+		listaBairro = daoBairro.listar();
+				
+				
 		LayoutInflater inflater = LayoutInflater.from(getActivity());
         View layout = inflater.inflate(R.layout.bairrodados, null); //passamos o XML criado
-        //View layout = inflater.inflate(R.layout.bairrodados, (ViewGroup) activity.findViewById(R.id.edNome));
         nomeBairro = (EditText) layout.findViewById(R.id.edNome);
-        spinBairro = (Spinner) getActivity().findViewById(R.id.spinBairro);
-           
+        
+        lvListagem = (ListView) getActivity().findViewById(R.id.lvListagem);
+        
+        if(bairroSelecionado!=null){
+        	nomeBairro.setText(bairroSelecionado.getNome());
+        }
+        dialog =  Bairro(layout);        
+		
+		return dialog;
+	}		
+	
+	public void carregarLista(){
+		//Criacao do objeto DAO
+		BairroDAO dao = new BairroDAO(getActivity());
+				
+		//Chamado do metodo listar
+		this.listaBairro = dao.listar();
+		
+		//fim da conexao do DB
+		dao.close();
+		
+		//O objeto arrayadapter converte lista em view
+		this.adapter = new ArrayAdapter<Bairro>(getActivity(), android.R.layout.simple_list_item_1 , listaBairro);
+		//associacao do adapter ao listView
+		this.lvListagem.setAdapter(adapter);
+	}
+	
+	private AlertDialog Bairro(View layout){
+		
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());		
 		builder.setView(layout);				 		
 
@@ -82,42 +122,59 @@ public class BairroDialog extends DialogFragment {
 
 		        Button b = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
 		        b.setText("Salvar");
-		        
-		        if(clickListener==null){
-			        b.setOnClickListener(new View.OnClickListener() {
+		        		        
+		        b.setOnClickListener(new View.OnClickListener() {
 	
 			            @Override
 			            public void onClick(View view) {
 			            	
 			            	if(Funcoes.validarDados(nomeBairro,  "Campo Obrigatorio" )){
-					        	BairroDAO dao = new BairroDAO(getActivity());
-					        	Bairro bairro = new Bairro();
-					        	bairro.setNome(nomeBairro.getText().toString());
-			            		dao.cadastrar(bairro);
-			            		 //Toast.makeText(getActivity(), "nome Bairro = "+nomeBairro.getText().toString(), Toast.LENGTH_LONG).show();	
-					        	 //CadastrarBairro
-					        	 //atualizarListaBairros
-			            		 atualizarListaBairro(nomeBairro.getText().toString());
+			            		String novoBairro = nomeBairro.getText().toString();
+			            		for (Bairro bairros : listaBairro) {
+			            			if( bairros.getNome().equalsIgnoreCase( novoBairro )){
+			            				
+			            					nomeBairro.setError("Bairro ja Cadastrado");
+			            					nomeBairro.setFocusable(true);
+			            					nomeBairro.requestFocus();			            							            				
+			            				return;
+			            			}			            			
+			            		}
+			            		
+						        	BairroDAO dao = new BairroDAO(getActivity());
+						        if(bairroSelecionado ==null){
+						        	Bairro bairro = new Bairro();
+						        	bairro.setNome(novoBairro);
+				            		dao.cadastrar(bairro);
+				            		carregarLista();
+			            		}else{
+			            			bairroSelecionado.setNome(novoBairro);
+			            			dao.alterar(bairroSelecionado);
+			            			carregarLista();
+			            		}
+
 					        	 dialog.dismiss();			            	
 							}else{
-								Toast.makeText(getActivity(), "Dados Invalidos ", Toast.LENGTH_LONG).show();
+								nomeBairro.setError("Dados Invalidos ");
+            					nomeBairro.setFocusable(true);
+            					nomeBairro.requestFocus();
+            													
 							}
 			            }
 			        });
-		        }else{
-		        	b.setOnClickListener(clickListener);
-		        }
-		    }
+		        }		    
 		});
 
-		
-		dialog.setTitle("Cadastrar Novo Bairro");
+		if(bairroSelecionado==null){
+			dialog.setTitle("Cadastrar Novo Bairro");
+		}else{
+			dialog.setTitle("Alterar Bairro");
+		}
 		// request keyboard   
 		dialog.getWindow().setSoftInputMode (WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
 		
-		
 		return dialog;
-	}		
+	}
+		
 	
 	@Override
 	public void onSaveInstanceState(Bundle savedInstanceState) {		
@@ -137,75 +194,15 @@ public class BairroDialog extends DialogFragment {
 		
 	}
 	
-	/**
-	 * workaround for issue #17423
-	 */
+	
 	@Override
 	public void onDestroyView() {
+		super.onDestroyView();
 		if (getDialog() != null && getRetainInstance())
 			getDialog().setOnDismissListener(null);
 		
-		savedStateNome = nomeBairro.getText().toString();		
-		super.onDestroyView();
+		savedStateNome = nomeBairro.getText().toString();				
 	}
 	
-	public View.OnClickListener getClickListener() {
-		return clickListener;
-	}
-
-	public void setClickListener(View.OnClickListener clickListener) {
-		this.clickListener = clickListener;
-	}
-	
-	public EditText getNomeBairro() {
-		return nomeBairro;
-	}
-
-	public void setNomeBairro(EditText nomeBairro) {
-		this.nomeBairro = nomeBairro;
-	}
-	
-	void atualizarListaBairro(String novoBairro){
-		
-		BairroDAO daoBairro = new BairroDAO(getActivity()); 
-		List<SpinnerObject> listaBairros = daoBairro.getBairrosForSpinner();
-							
-		String[] StringArray = new String[listaBairros.size()];
-		int index=0;
-		for (SpinnerObject bairros : listaBairros) {			
-			StringArray[index++] = bairros.toString();			
-		}
-		//ArrayAdapter dataAdapter = new SpinnerAdapter(fragmentActivity, R.layout.spinner_generic, StringArray ,listaBairros);
-		//spinBairro.setAdapter(dataAdapter);
-		
-		adapter = new SpinnerAdapter(getActivity(), R.layout.spinner_generic, StringArray ,listaBairros);
-		spinBairro.setAdapter(adapter);
-		
-		
-		/*
-		
-		BairroDAO daoBairro = new BairroDAO(getActivity()); 
-		List<Bairro> listaBairros = daoBairro.listar();										
-		
-		String[] stringArray = new String[listaBairros.size()+1];
-		Integer[] intArray = new Integer[listaBairros.size()+1];
-		int index = 0;
-		int indexB = 0;
-		for (Bairro bairro : listaBairros) {
-			stringArray[index] = bairro.getNome();
-			if(bairro.getNome().equals(novoBairro)){
-				indexB = index;	
-			}
-			intArray[index] = Integer.parseInt(bairro.getId().toString());
-		  index++;
-		}				
-		
-		stringArray[index] = getActivity().getString(R.string.bairro_novo); 				
-		intArray[index] = 0;
-		adapter = new SpinnerAdapter(getActivity(), R.layout.spinner_generic,stringArray,intArray);
-	    spinBairro.setAdapter(adapter);	    	    
-	    
-		spinBairro.setSelection(indexB);
-		*/	
-	}	
+			
 }

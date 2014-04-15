@@ -5,6 +5,7 @@ public class PutExtras {
 	public static final String AGENTE_SELECIONADO = "AGENTE_SELECIONADO";	
 	public static final String MEDICO_SELECIONADO = "MEDICO_SELECIONADO";
 	public static final String PACIENTE_SELECIONADO = "PACIENTE_SELECIONADO";
+	public static final String BAIRRO_SELECIONADO = "BAIRRO_SELECIONADO";
 	
 	public static final String COLETA_SELECIONADA = "COLETA_SELECIONADA";
 	public static final String USUARIO_LOGADO = "USUARIO_LOGADO";

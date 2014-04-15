@@ -5,6 +5,7 @@ import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.controller.NavigationController;
 import br.fucapi.fapeam.monitori.eula.Eula;
 import br.fucapi.fapeam.monitori.fragment.AgenteFragment;
+import br.fucapi.fapeam.monitori.fragment.BairroFragment;
 import br.fucapi.fapeam.monitori.fragment.ColetarFragment;
 import br.fucapi.fapeam.monitori.fragment.DiagnosticarFragment;
 import br.fucapi.fapeam.monitori.fragment.LoginFragment;
@@ -54,18 +55,18 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 		if(usuarioLogado!=null){
 			if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.ADMINISTRADOR)){
 				menu = new NavDrawerItem[] {
-						NavMenuSection.create( 100, "Demos"),
+						NavMenuSection.create( 100, "Cadastros"),
+						
 						NavMenuItem.create( RequestCodes.MENU_PACIENTE , getString(R.string.title_activity_paciente), R.drawable.ic_paciente, true, this),
 						NavMenuItem.create(RequestCodes.MENU_AGENTE , getString(R.string.title_activity_agente) , R.drawable.ic_agente, true, this),
-						NavMenuItem.create(RequestCodes.MENU_MEDICO,getString(R.string.title_activity_medico), R.drawable.ic_medico, true, this),
-						NavMenuSection.create(300, "Testes"),
-						NavMenuItem.create(301,getString(R.string.title_activity_menu_principal), android.R.drawable.ic_popup_sync, true, this),
-						NavMenuItem.create(RequestCodes.MENU_LOGIN,getString(R.string.title_activity_login), android.R.drawable.btn_star, true, this),
+						NavMenuItem.create(RequestCodes.MENU_MEDICO,getString(R.string.title_activity_medico), R.drawable.ic_medico, true, this),						
+						NavMenuItem.create(RequestCodes.MENU_BAIRRO,getString(R.string.bairro), R.drawable.ic_bairro, true, this),
+						NavMenuItem.create(RequestCodes.MENU_UBS,getString(R.string.title_activity_ubs), R.drawable.ic_ubs, true, this),
+						
+						NavMenuSection.create(300, "Testes"),																		
 						NavMenuItem.create(RequestCodes.MENU_HISTORICO,getString(R.string.title_activity_coletar_dados), android.R.drawable.sym_def_app_icon, true, this),
-						NavMenuItem.create(RequestCodes.MENU_COLETA_DADOS,getString(R.string.title_activity_coletar_dados), R.drawable.ic_coletar, true, this),
-						NavMenuItem.create(RequestCodes.MENU_UBS,getString(R.string.title_activity_ubs), "ic_ubs", true, this),
+						NavMenuItem.create(RequestCodes.MENU_COLETA_DADOS,getString(R.string.title_activity_coletar_dados), R.drawable.ic_coleta, true, this),						
 						NavMenuItem.create(RequestCodes.MENU_DIAGNOSTICAR, getString(R.string.title_activity_diagnosticar_dados), android.R.drawable.ic_popup_sync, true, this),
-						//NavMenuItem.create(103,getString(R.string.title_activity_), "ic_medico", true, this),
 						
 						NavMenuSection.create(200, "General"),
 						NavMenuItem.create(202, "Rate this app", "navdrawer_rating", false, this),
@@ -74,8 +75,8 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 			}else if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.PACIENTE)){
 				
 				menu = new NavDrawerItem[] {
-						NavMenuSection.create( 100, "Demos"),
-						NavMenuItem.create(RequestCodes.MENU_COLETA_DADOS,getString(R.string.title_activity_coletar_dados), R.drawable.ic_coletar, false, this),
+						//NavMenuSection.create( 100, "Demos"),
+						NavMenuItem.create(RequestCodes.MENU_COLETA_DADOS,getString(R.string.title_activity_coletar_dados), R.drawable.ic_coleta, false, this),
 						
 						NavMenuItem.create( RequestCodes.MENU_HISTORICO , getString(R.string.title_activity_historico), R.drawable.navdrawer_friends, true, this),
 																		
@@ -87,7 +88,7 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 			}else if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.MEDICO)){
 				
 				menu = new NavDrawerItem[] {
-						NavMenuSection.create( 100, "Demos"),
+						//NavMenuSection.create( 100, "Cadastros"),
 						NavMenuItem.create( RequestCodes.MENU_PACIENTE , getString(R.string.title_activity_paciente), R.drawable.ic_paciente, true, this),
 						NavMenuItem.create(RequestCodes.MENU_DIAGNOSTICAR, getString(R.string.title_activity_diagnosticar), R.drawable.ic_menu_preferences, true, this),
 																		
@@ -99,10 +100,11 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 			}if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.AGENTE)){
 				
 				menu = new NavDrawerItem[] {
-						NavMenuSection.create( 100, "Demos"),
+						NavMenuSection.create( 100, "Cadastros"),
 						NavMenuItem.create( RequestCodes.MENU_PACIENTE , getString(R.string.title_activity_paciente), R.drawable.ic_paciente, true, this),						
 						NavMenuItem.create(RequestCodes.MENU_MEDICO,getString(R.string.title_activity_medico), R.drawable.ic_medico, true, this),
-						NavMenuItem.create(RequestCodes.MENU_COLETA_DADOS,getString(R.string.title_activity_coletar_dados), R.drawable.ic_coletar, true, this),
+						
+						NavMenuItem.create(RequestCodes.MENU_COLETA_DADOS,getString(R.string.title_activity_coletar_dados), R.drawable.ic_coleta, true, this),
 						NavMenuItem.create( 500 , getString(R.string.title_activity_historico), R.drawable.navdrawer_friends, true, this),
 																														
 						NavMenuSection.create(200, "General"),
@@ -114,20 +116,7 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 						
 		}else{
 			
-			menu = new NavDrawerItem[] {
-					NavMenuSection.create( 100, "Demos"),
-					NavMenuItem.create( RequestCodes.MENU_PACIENTE , getString(R.string.title_activity_paciente), R.drawable.ic_paciente, true, this),
-					NavMenuItem.create(RequestCodes.MENU_AGENTE , getString(R.string.title_activity_agente) , R.drawable.ic_agente, true, this),
-					NavMenuItem.create(RequestCodes.MENU_MEDICO,getString(R.string.title_activity_medico), R.drawable.ic_medico, true, this),
-					NavMenuSection.create(300, "Testes"),
-					NavMenuItem.create(301,getString(R.string.title_activity_menu_principal), android.R.drawable.ic_popup_sync, true, this),
-					NavMenuItem.create(RequestCodes.MENU_LOGIN,getString(R.string.title_activity_login), android.R.drawable.btn_star, true, this),
-					NavMenuItem.create(RequestCodes.MENU_HISTORICO,getString(R.string.title_activity_historico), android.R.drawable.sym_def_app_icon, true, this),
-					NavMenuItem.create(RequestCodes.MENU_COLETA_DADOS,getString(R.string.title_activity_coletar_dados), R.drawable.ic_coletar, true, this),
-					NavMenuItem.create(RequestCodes.MENU_UBS,getString(R.string.title_activity_ubs), "ic_ubs", true, this),
-					NavMenuItem.create(RequestCodes.MENU_DIAGNOSTICAR, getString(R.string.title_activity_diagnosticar_dados), android.R.drawable.ic_popup_sync, true, this),
-					//NavMenuItem.create(103,getString(R.string.title_activity_), "ic_medico", true, this),
-					
+			menu = new NavDrawerItem[] {					
 					NavMenuSection.create(200, "General"),
 					NavMenuItem.create(202, "Rate this app", "navdrawer_rating", false, this),
 					NavMenuItem.create(203, "Eula", "navdrawer_eula", false, this), 
@@ -232,11 +221,17 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 						
 			
 			break;
+		
 		case RequestCodes.MENU_UBS:			
 			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new UnidadeSaudeFragment()).commit();
+			break;					
+		
+		case RequestCodes.MENU_BAIRRO:			
+			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new BairroFragment()).commit();
 			break;
 			
 		}
+		
 	}
 	
 	@Override

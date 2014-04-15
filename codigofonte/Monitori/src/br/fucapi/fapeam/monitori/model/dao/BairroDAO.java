@@ -48,7 +48,7 @@ public class BairroDAO extends AbstractDataBase{
 		List<Bairro> list_bairros = new ArrayList<Bairro>();
 		Bairro bairro;
 		//Definicao da instrucao SQL
-		String sql = "Select * from "+SQLiteDatabaseHelper.TABLE_BAIRRO_NAME +" ";
+		String sql = "Select * from "+SQLiteDatabaseHelper.TABLE_BAIRRO_NAME +" ORDER BY " + SQLiteDatabaseHelper.FIELDS_TABLE_BAIRRO.nome;
 				
 		//Objeto que reebe os registros do banco de dados
 		Cursor cursor = getReadableDatabase().rawQuery(sql, null);

@@ -14,7 +14,8 @@ public class RequestCodes {
 	public static final int MENU_AGENTE = 2;
 	public static final int MENU_MEDICO = 3;
 	public static final int MENU_UBS = 4;
-	public static final int MENU_COLETA_DADOS = 5;
-	public static final int MENU_HISTORICO = 6;
-	public static final int MENU_DIAGNOSTICAR = 7;
+	public static final int MENU_BAIRRO = 5;
+	public static final int MENU_COLETA_DADOS = 6;
+	public static final int MENU_HISTORICO = 7;
+	public static final int MENU_DIAGNOSTICAR = 8;
 }

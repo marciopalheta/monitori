@@ -1,94 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:baselineAligned="false"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal" > 
 
     <LinearLayout 
-        android:layout_width="wrap_content"
-    	android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	android:layout_weight="1"
+    	android:background="@color/color_light"
+    	    	
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
     	android:orientation="vertical">
         
         <TextView
 		    android:id="@+id/tvPa"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
-			android:text="@string/pa"
-            android:layout_marginLeft="@dimen/margem_editext"
-            android:textSize="@dimen/fontes_para_textos"
-            android:layout_marginBottom="10dp" />
+			android:text="@string/pa"            
+            android:textSize="@dimen/fontes_para_textos"/>
           
 	    <TextView
 		    android:id="@+id/itemSis"
 		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margem_editext"
-            android:textSize="@dimen/fontes_para_textos"
-            android:layout_marginBottom="10dp" />
+		    android:layout_height="wrap_content"            
+            android:textSize="@dimen/fontes_para_textos"/>
 	
 	    <TextView
 		    android:id="@+id/itemSistole"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margem_editext"
-            android:textSize="@dimen/fontes_para_textos"
-            android:layout_marginBottom="10dp" />
+            android:textSize="@dimen/fontes_para_textos" />
 	
     </LinearLayout>
     
     <LinearLayout 
-        android:layout_width="wrap_content"
-    	android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	android:layout_weight="1"
+    	android:background="@color/color_dark"    	
+    	android:layout_marginBottom="10dp"
+    	android:gravity="center"
     	android:orientation="vertical">
         
         <TextView
 		    android:id="@+id/tvGlicose"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
-			android:text="@string/glicose"
-            android:layout_marginLeft="@dimen/margem_editext"
-            android:textSize="@dimen/fontes_para_textos"
-            android:layout_marginBottom="10dp" />
+			android:text="@string/glicose"            
+            android:textSize="@dimen/fontes_para_textos"/>
 	    
 	    <TextView
 		    android:id="@+id/itemGlicose"
 		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margem_editext"
-            android:textSize="@dimen/fontes_para_textos"
-            android:layout_marginBottom="10dp" />
+		    android:layout_height="wrap_content"            
+            android:textSize="@dimen/fontes_para_textos"/>
         
     </LinearLayout>
     
     <LinearLayout 
-        android:layout_width="wrap_content"
-    	android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	android:layout_weight="1"    	
+    	android:background="@color/color_middle"
+    	android:gravity="center"    	
+    	android:layout_marginBottom="10dp"
     	android:orientation="vertical">
 	    
         <TextView
 		    android:id="@+id/tvData"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
-		    android:text="@string/dataColeta"
-            android:layout_marginLeft="@dimen/margem_editext"
-            android:textSize="@dimen/fontes_para_textos"
-            android:layout_marginBottom="10dp" />
+		    android:text="@string/dataColeta"            
+            android:textSize="@dimen/fontes_para_textos"/>
         
         <TextView
 		    android:id="@+id/itemData"
 		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margem_editext"
-            android:textSize="@dimen/fontes_para_textos"
-            android:layout_marginBottom="10dp" />
+		    android:layout_height="wrap_content"            
+            android:textSize="@dimen/fontes_para_textos"/>
         
         <TextView
 		    android:id="@+id/itemHora"
 		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margem_editext"
-            android:textSize="@dimen/fontes_para_textos"
-            android:layout_marginBottom="10dp" />
+		    android:layout_height="wrap_content"            
+            android:textSize="@dimen/fontes_para_textos"/>
         
     </LinearLayout>
 </LinearLayout>

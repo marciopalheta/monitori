@@ -45,7 +45,7 @@
 			android:text="@string/menu_coletadados"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:drawableTop="@drawable/ic_coletar"
+			android:drawableTop="@drawable/ic_coleta"
 			android:drawablePadding="10dp"
 			android:background="@null"
 			android:textStyle="bold"

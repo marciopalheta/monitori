@@ -40,6 +40,7 @@
         android:layout_width="250dp"
 	    android:layout_height="@dimen/heigth_editext"
         android:hint="@string/sis"
+        android:inputType="number"
         android:background="#e1e0e0"
         android:layout_marginTop="10dp"
         android:padding="@dimen/padding"/>
@@ -49,6 +50,7 @@
         android:layout_width="250dp"
 	    android:layout_height="@dimen/heigth_editext"
         android:hint="@string/sistole"
+        android:inputType="number"
         android:background="#e1e0e0"
         android:layout_marginTop="10dp"
         android:padding="@dimen/padding"/>
@@ -65,6 +67,7 @@
         android:layout_width="250dp"
 		android:layout_height="@dimen/heigth_editext"
         android:hint="@string/glicose"
+        android:inputType="number"
         android:background="#e1e0e0"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="15dp"

@@ -226,8 +226,8 @@ public class UnidadeSaudeHelper {
 				
 		// cria o mapa
 		Map<View, String> mapaDeCampos = new LinkedHashMap<View, String>();
-		mapaDeCampos.put(nome, "Nome obrigatorio");		
-		mapaDeCampos.put(fone, "Telefone obrigatorio");
+		mapaDeCampos.put(nome, "Nome Obrigatório");		
+		mapaDeCampos.put(fone, "Telefone Obrigatório");
 		//mapaDeCampos.put(endereco, "Campo obrigatorio");
 		//mapaDeCampos.put(numero, "Telefone obrigatorio");
 		//mapaDeCampos.put(cep, "Cep obrigatorio");		

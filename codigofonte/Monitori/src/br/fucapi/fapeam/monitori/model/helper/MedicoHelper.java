@@ -25,11 +25,11 @@ public class MedicoHelper extends UsuarioHelper {
 		
 		Map<View, String> mapaDeCampos = new LinkedHashMap<View, String>();
 		
-		mapaDeCampos.put(getNome(), "Nome obrigatorio");
-		mapaDeCampos.put(crm, "Campo obrigatorio");
-		mapaDeCampos.put(getEditTextDataNascimento(), "Campo obrigatorio");
-		mapaDeCampos.put(getTelefone(), "Telefone obrigatorio");		
-		mapaDeCampos.put(getCep(), "Cep obrigatorio");
+		mapaDeCampos.put(getNome(), "Nome Obrigatório");
+		mapaDeCampos.put(crm, "Campo Obrigatório");
+		mapaDeCampos.put(getEditTextDataNascimento(), "Campo Obrigatório");
+		mapaDeCampos.put(getTelefone(), "Telefone Obrigatório");		
+		mapaDeCampos.put(getCep(), "Cep Obrigatório");
 		
 		setMapaDeCampos(mapaDeCampos);
 		

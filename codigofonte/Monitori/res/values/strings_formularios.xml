@@ -4,15 +4,15 @@
     <!-- Informacoes pessoais que todos usuarios irao ter -->
     <string name="nome">Nome</string>
     <string name="cpf">Cpf</string>
-    <string name="endereco">Endereco</string>
-    <string name="numero">Numero</string>
+    <string name="endereco">Endereço</string>
+    <string name="numero">Número</string>
     <string name="bairro">Bairro</string>
     <string name="cep">Cep</string>
     <string name="telefone">Telefone</string>
     <string name="celular">Celular</string>
     <string name="dtNascimento">Data Nascimento</string>
-    <string name="observacao">Observacao</string>
-    <string name="unidadeSaude">Unidade Basica de Saude</string>
+    <string name="observacao">Observação</string>
+    <string name="unidadeSaude">Unidade Básica de Saúde</string>
     <string name="foto">Foto</string>
     <string name="salvar">Salvar</string>
     <string name="feminino">Feminino</string>
@@ -51,20 +51,20 @@
     <!-- esta string e nova e faz parte do login -->
     <string name="monitori_logo">MonitoriLogo</string>
     
-    <string name="hipertenso">Hipertensao</string>
+    <string name="hipertenso">Hipertensão</string>
     <string name="diabetes">Diabetes</string>
     <string name="tipo1">Tipo 1</string>
     <string name="tipo2">Tipo 2</string>    
-    <string name="sus">Adicione o numero do SUS</string>
-    <string name="nome_mae">Nome da Mae</string>    
+    <string name="sus">Adicione o número do SUS</string>
+    <string name="nome_mae">Nome da Mãe</string>    
         
     <string name="cadastrar_paciente">Novo paciente</string>
     <string name="cadastrar_agente">Novo agente</string>
     
     
     <!-- CRUD Medico -->
-    <string name="title_activity_medico">Lista de Medicos</string>
-    <string name="title_activity_medico_dados">Dados do Medico</string>
+    <string name="title_activity_medico">Lista de Médicos</string>
+    <string name="title_activity_medico_dados">Dados do Médico</string>
     <!-- Informacoes do Medico -->    
     <string name="crm">CRM</string>
         
@@ -72,11 +72,11 @@
     <string name="title_activity_agente">Lista de Agentes</string>
     <string name="title_activity_agentes_dados">Dados do Agente</string>
 	<!-- Informacoes do Agente -->    
-	<string name="matricula">Matricula</string>
+	<string name="matricula">Matrícula</string>
     
 
     <!-- login -->
-    <string name="login">usuario</string>
+    <string name="login">usuário</string>
     <string name="senha">senha</string>
     <string name="entrar">entrar</string>
     <string name="title_activity_login">Login</string>
@@ -85,7 +85,7 @@
 
     <!-- Menu de contexto -->
     <string name="deletar">Deletar</string>
-    <string name="cadastrar_medico">Novo Medico</string>
+    <string name="cadastrar_medico">Novo Médico</string>
     <string name="cancelar">Cancelar</string>
     <string name="title_activity_coletar_dados">Coletar Dados</string>
 
@@ -93,7 +93,7 @@
     <string name="coletar_dados">Coleta de dados</string>
     <string name="pa">PA</string>
     <string name="sis">SIS</string>
-    <string name="sistole">Sistole</string>
+    <string name="sistole">DIS</string>
     <string name="glicose">Glicose</string>
     <string name="jejum">Jejum</string>
     <string name="pos_pandrial">Pós-pandrial</string>
@@ -123,7 +123,7 @@
     <!-- Menu principal -->
     <string name="menu_agente">Agente</string>
     <string name="menu_paciente">Paciente</string>
-    <string name="menu_medico">Medico</string>
+    <string name="menu_medico">Médico</string>
     <string name="menu_coletadados">Coletar Dados</string>
     <string name="erro_conexao_indisponivel">Conexão indisponível, por favor ative sua rede móvel ou Wi-Fi.</string>
 
@@ -131,7 +131,7 @@
 
     <string name="splashscreen_text">Carregando aplicação</string>
     <string name="splashscreen_label">Carregando#8230;</string>
-    <string name="preferences_label">Preferencias</string>
+    <string name="preferences_label">Preferências</string>
     <string name="menuitem_refresh">Refresh</string>
     <string name="menuitem_preferences">Settings</string>
     <string name="menuitem_quit">Sair</string>

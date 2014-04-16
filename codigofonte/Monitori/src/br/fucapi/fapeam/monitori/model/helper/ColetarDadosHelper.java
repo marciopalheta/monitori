@@ -121,9 +121,9 @@ public class ColetarDadosHelper{
 				
 		// cria o mapa
 		Map<View, String> mapaDeCampos = new LinkedHashMap<View, String>();
-		mapaDeCampos.put(sis, "Campo obrigatorio");		
-		mapaDeCampos.put(sistole, "Campo obrigatorio");
-		mapaDeCampos.put(glicose, "Campo obrigatorio");
+		mapaDeCampos.put(sis, "Campo Obrigatório");		
+		mapaDeCampos.put(sistole, "Campo Obrigatório");
+		mapaDeCampos.put(glicose, "Campo Obrigatório");
 		
 		for(View chave: mapaDeCampos.keySet()){
 		    //System.out.println("chave: "+chave+", valor: "+mapaDeCampos.get(chave)+".");

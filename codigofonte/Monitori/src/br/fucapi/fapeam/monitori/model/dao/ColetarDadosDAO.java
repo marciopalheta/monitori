@@ -171,7 +171,7 @@ public class ColetarDadosDAO extends AbstractDataBase{
 			sql = "Select " +
 					SQLiteDatabaseHelper.ALL_FIELDS_TABLE_COLETAR_DADOS+ " "+					
 					" from "+SQLiteDatabaseHelper.TABLE_COLETAR_DADOS_NAME +" " +					
-					" where "+SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.idPaciente+" = '"+paciente.getId()+" " +
+					" where "+SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.idPaciente+" = '"+paciente.getId()+"' " +
 					" order by "+SQLiteDatabaseHelper.FIELDS_TABLE_COLETAR_DADOS.sis+" ";		
 		
 		//Objeto que reebe os registros do banco de dados

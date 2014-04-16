@@ -20,7 +20,7 @@ public class DiagnosticarHelper {
 		//criacao do objeto paciente
 		diagnosticar = new Diagnosticar();
 		
-		descrever = (EditText) fragmentActivity.findViewById(R.id.text_diagnosticar);
+		descrever = (EditText) fragmentActivity.findViewById(R.id.edDiagnosticar);
 	}
 
 	public Diagnosticar getDiagnosticar() {

@@ -1,5 +1,7 @@
 package br.fucapi.fapeam.monitori.navdrawer;
 
+import java.util.List;
+
 import br.fucapi.fapeam.monitori.R;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -13,7 +15,7 @@ public class NavDrawerAdapter extends ArrayAdapter<NavDrawerItem> {
 
 	private LayoutInflater inflater;
 	
-	public NavDrawerAdapter(Context context, int textViewResourceId, NavDrawerItem[] objects ) {
+	public NavDrawerAdapter(Context context, int textViewResourceId, List<NavDrawerItem> objects ) {
 		super(context, textViewResourceId, objects);
 		this.inflater = LayoutInflater.from(context);
 	}

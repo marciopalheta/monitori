@@ -121,9 +121,14 @@
 
     <string name="title_activity_menu_principal">Menu Principal</string>
     <!-- Menu principal -->
-    <string name="menu_agente">Agente</string>
+    <string name="menu_agente">Agente de Saúde</string>
     <string name="menu_paciente">Paciente</string>
     <string name="menu_medico">Médico</string>
+    
+    <string name="menu_bairro">Bairros</string>
+    <string name="menu_ubs">Unidade Basica de Saude</string>       
+    <string name="menu_login">Trocar Usuario</string>
+    
     <string name="menu_coletadados">Coletar Dados</string>
     <string name="erro_conexao_indisponivel">Conexão indisponível, por favor ative sua rede móvel ou Wi-Fi.</string>
 

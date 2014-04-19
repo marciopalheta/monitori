@@ -418,11 +418,11 @@ public class UsuarioHelper {
 
 		//Map<View, String> mapaDeCampos = new LinkedHashMap<View, String>();
 		
-		mapaDeCampos.put(nome, "Nome Obrigatório");
-		mapaDeCampos.put(cpf, "CPF Obrigatório");
-		mapaDeCampos.put(dataNascimento, "Campo Obrigatório");
-		mapaDeCampos.put(telefone, "Telefone Obrigatório");		
-		mapaDeCampos.put(cep, "Cep Obrigatório");
+		mapaDeCampos.put(nome, "Nome Obrigatï¿½rio");
+		mapaDeCampos.put(cpf, "CPF Obrigatï¿½rio");
+		mapaDeCampos.put(dataNascimento, "Campo Obrigatï¿½rio");
+		mapaDeCampos.put(telefone, "Telefone Obrigatï¿½rio");		
+		mapaDeCampos.put(cep, "Cep Obrigatï¿½rio");
 			
 		for(View chave: mapaDeCampos.keySet()){
 		    //System.out.println("chave: "+chave+", valor: "+mapaDeCampos.get(chave)+".");
@@ -618,6 +618,10 @@ public class UsuarioHelper {
 			}
 		}
 		getSpinUbs().setSelection(indexKey);						
+		
+		//usuario.setLogin(usuario.getCpf());
+		//usuario.setSenha(usuario.getCpf());
+		
 		
 		this.usuario = usuario;	
 	//Validando dados

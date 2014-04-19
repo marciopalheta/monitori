@@ -1,6 +1,9 @@
 package br.fucapi.fapeam.monitori.activity;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.controller.NavigationController;
 import br.fucapi.fapeam.monitori.eula.Eula;
@@ -50,77 +53,109 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 	protected NavDrawerActivityConfiguration getNavDrawerConfiguration() {
 		
 		NavDrawerItem[] menu = null;
+		
+		List<NavDrawerItem> listMenu = new ArrayList<NavDrawerItem>();
+		
 		usuarioLogado = super.getUsuarioLogado();
+		
+		NavDrawerItem secaoCadastro = NavMenuSection.create( 100, "Cadastros");
+		NavDrawerItem menuPaciente = NavMenuItem.create( RequestCodes.MENU_PACIENTE , getString(R.string.menu_paciente), R.drawable.ic_paciente, true, this);
+		NavDrawerItem menuAgente = NavMenuItem.create(RequestCodes.MENU_AGENTE , getString(R.string.menu_agente) , R.drawable.ic_agente, true, this);
+		NavDrawerItem menuMedico = NavMenuItem.create(RequestCodes.MENU_MEDICO,getString(R.string.menu_medico), R.drawable.ic_medico, true, this);						
+		NavDrawerItem menuBairro = NavMenuItem.create(RequestCodes.MENU_BAIRRO,getString(R.string.menu_bairro), R.drawable.ic_bairro, true, this);
+		NavDrawerItem menuUbs = NavMenuItem.create(RequestCodes.MENU_UBS,getString(R.string.menu_ubs), R.drawable.ic_ubs, true, this);
+		NavDrawerItem secaoFuncionalidades = NavMenuSection.create(300, "Funcionalidades");
+		
+		NavDrawerItem menuHistorico = NavMenuItem.create(RequestCodes.MENU_HISTORICO,getString(R.string.title_activity_historico), android.R.drawable.sym_def_app_icon, true, this);
+		NavDrawerItem menuColetaDados = NavMenuItem.create(RequestCodes.MENU_COLETA_DADOS,getString(R.string.title_activity_coletar_dados), R.drawable.ic_coleta, true, this);						
+		NavDrawerItem menuDiagnosticar = NavMenuItem.create(RequestCodes.MENU_DIAGNOSTICAR, getString(R.string.title_activity_diagnosticar_dados), android.R.drawable.ic_popup_sync, true, this);
+		NavDrawerItem menuHistDiagnostico = NavMenuItem.create(RequestCodes.MENU_HISTORICO_DIAGNOSTICO, getString(R.string.title_activity_diagnosticar), android.R.drawable.ic_popup_sync, true, this);
+		
+		NavDrawerItem secaoApp = NavMenuSection.create(200, "Aplicação");
+		
+		NavDrawerItem menuLogin = NavMenuItem.create(RequestCodes.MENU_LOGIN, getString(R.string.menu_login), R.drawable.navdrawer_friends, true, this);
+		
+		NavDrawerItem menuAvaliar = NavMenuItem.create(202, "Avaliar este app", "navdrawer_rating", false, this);
+		NavDrawerItem menuEULA = NavMenuItem.create(203, "Licença de Uso", "navdrawer_eula", false, this);
+		NavDrawerItem menuSair = NavMenuItem.create(204, "Quit", "navdrawer_quit", false, this);
+		
+		
 		
 		if(usuarioLogado!=null){
 			if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.ADMINISTRADOR)){
-				menu = new NavDrawerItem[] {
-						NavMenuSection.create( 100, "Cadastros"),
-						
-						NavMenuItem.create( RequestCodes.MENU_PACIENTE , getString(R.string.title_activity_paciente), R.drawable.ic_paciente, true, this),
-						NavMenuItem.create(RequestCodes.MENU_AGENTE , getString(R.string.title_activity_agente) , R.drawable.ic_agente, true, this),
-						NavMenuItem.create(RequestCodes.MENU_MEDICO,getString(R.string.title_activity_medico), R.drawable.ic_medico, true, this),						
-						NavMenuItem.create(RequestCodes.MENU_BAIRRO,getString(R.string.bairro), R.drawable.ic_bairro, true, this),
-						NavMenuItem.create(RequestCodes.MENU_UBS,getString(R.string.title_activity_ubs), R.drawable.ic_ubs, true, this),
-						
-						NavMenuSection.create(300, "Testes"),																		
-						NavMenuItem.create(RequestCodes.MENU_HISTORICO,getString(R.string.title_activity_coletar_dados), android.R.drawable.sym_def_app_icon, true, this),
-						NavMenuItem.create(RequestCodes.MENU_COLETA_DADOS,getString(R.string.title_activity_coletar_dados), R.drawable.ic_coleta, true, this),						
-						NavMenuItem.create(RequestCodes.MENU_DIAGNOSTICAR, getString(R.string.title_activity_diagnosticar_dados), android.R.drawable.ic_popup_sync, true, this),
-						
-						NavMenuSection.create(200, "General"),
-						NavMenuItem.create(202, "Rate this app", "navdrawer_rating", false, this),
-						NavMenuItem.create(203, "Eula", "navdrawer_eula", false, this), 
-						NavMenuItem.create(204, "Quit", "navdrawer_quit", false, this)};	
-			}else if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.PACIENTE)){
 				
-				menu = new NavDrawerItem[] {
-						//NavMenuSection.create( 100, "Demos"),
-						NavMenuItem.create(RequestCodes.MENU_COLETA_DADOS,getString(R.string.title_activity_coletar_dados), R.drawable.ic_coleta, false, this),
-						
-						NavMenuItem.create( RequestCodes.MENU_HISTORICO , getString(R.string.title_activity_historico), R.drawable.navdrawer_friends, true, this),
-																		
-						NavMenuSection.create(200, "General"),
-						NavMenuItem.create(202, "Rate this app", "navdrawer_rating", false, this),
-						NavMenuItem.create(203, "Eula", "navdrawer_eula", false, this), 
-						NavMenuItem.create(204, "Quit", "navdrawer_quit", false, this)};
+				listMenu.add(secaoCadastro);
+				listMenu.add(menuPaciente);
+				listMenu.add(menuAgente);
+				listMenu.add(menuMedico);
+				listMenu.add(menuBairro);
+				listMenu.add(menuUbs);
+				/*
+				listMenu.add(secaoFuncionalidades);
+				
+				listMenu.add(menuHistorico);
+				listMenu.add(menuColetaDados);
+				listMenu.add(menuDiagnosticar);
+				*/
+				listMenu.add(secaoApp);
+				listMenu.add(menuLogin);
+				listMenu.add(menuAvaliar);
+				listMenu.add(menuEULA);
+				listMenu.add(menuSair);				
+				
+				
+			}else if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.PACIENTE)){
+								
+				listMenu.add(secaoFuncionalidades);				
+								
+				listMenu.add(menuColetaDados);
+				listMenu.add(menuHistorico);
+				listMenu.add(menuHistDiagnostico);
+				
+				listMenu.add(secaoApp);
+				listMenu.add(menuLogin);
+				listMenu.add(menuAvaliar);
+				listMenu.add(menuEULA);
+				listMenu.add(menuSair);
+				
 				
 			}else if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.MEDICO)){
+								
+				listMenu.add(secaoCadastro);
+				listMenu.add(menuPaciente);
+				listMenu.add(secaoFuncionalidades);
+								
+				listMenu.add(menuDiagnosticar);
 				
-				menu = new NavDrawerItem[] {
-						//NavMenuSection.create( 100, "Cadastros"),
-						NavMenuItem.create( RequestCodes.MENU_PACIENTE , getString(R.string.title_activity_paciente), R.drawable.ic_paciente, true, this),
-						NavMenuItem.create(RequestCodes.MENU_DIAGNOSTICAR, getString(R.string.title_activity_diagnosticar), R.drawable.ic_menu_preferences, true, this),
-																		
-						NavMenuSection.create(200, "General"),
-						NavMenuItem.create(202, "Rate this app", "navdrawer_rating", false, this),
-						NavMenuItem.create(203, "Eula", "navdrawer_eula", false, this), 
-						NavMenuItem.create(204, "Quit", "navdrawer_quit", false, this)};
-				
+				listMenu.add(secaoApp);
+				listMenu.add(menuLogin);
+				listMenu.add(menuAvaliar);
+				listMenu.add(menuEULA);
+				listMenu.add(menuSair);
+								
 			}if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.AGENTE)){
 				
-				menu = new NavDrawerItem[] {
-						NavMenuSection.create( 100, "Cadastros"),
-						NavMenuItem.create( RequestCodes.MENU_PACIENTE , getString(R.string.title_activity_paciente), R.drawable.ic_paciente, true, this),						
-						NavMenuItem.create(RequestCodes.MENU_MEDICO,getString(R.string.title_activity_medico), R.drawable.ic_medico, true, this),
-						
-						NavMenuItem.create(RequestCodes.MENU_COLETA_DADOS,getString(R.string.title_activity_coletar_dados), R.drawable.ic_coleta, true, this),
-						NavMenuItem.create( 500 , getString(R.string.title_activity_historico), R.drawable.navdrawer_friends, true, this),
-																														
-						NavMenuSection.create(200, "General"),
-						NavMenuItem.create(202, "Rate this app", "navdrawer_rating", false, this),
-						NavMenuItem.create(203, "Eula", "navdrawer_eula", false, this), 
-						NavMenuItem.create(204, "Quit", "navdrawer_quit", false, this)};
+				listMenu.add(secaoCadastro);
+				listMenu.add(menuPaciente);				
+				listMenu.add(menuMedico);
+				listMenu.add(menuBairro);
+				listMenu.add(menuUbs);
+				listMenu.add(secaoFuncionalidades);
+				
+				listMenu.add(menuHistorico);
+				listMenu.add(menuColetaDados);				
+				
+				listMenu.add(secaoApp);
+				listMenu.add(menuLogin);
+				listMenu.add(menuAvaliar);
+				listMenu.add(menuEULA);
+				listMenu.add(menuSair);
+								
 				
 			}
 						
 		}else{
 			
-			menu = new NavDrawerItem[] {					
-					NavMenuSection.create(200, "General"),
-					NavMenuItem.create(202, "Rate this app", "navdrawer_rating", false, this),
-					NavMenuItem.create(203, "Eula", "navdrawer_eula", false, this), 
-					NavMenuItem.create(204, "Quit", "navdrawer_quit", false, this)};
 		}
 				
 		
@@ -128,12 +163,12 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 		navDrawerActivityConfiguration.setMainLayout(R.layout.main);
 		navDrawerActivityConfiguration.setDrawerLayoutId(R.id.drawer_layout);
 		navDrawerActivityConfiguration.setLeftDrawerId(R.id.left_drawer);
-		navDrawerActivityConfiguration.setNavItems(menu);
+		navDrawerActivityConfiguration.setNavItems(listMenu);
 		navDrawerActivityConfiguration.setDrawerShadow(R.drawable.drawer_shadow);		
 		navDrawerActivityConfiguration.setDrawerOpenDesc(R.string.drawer_open);
 		navDrawerActivityConfiguration.setDrawerCloseDesc(R.string.drawer_close);
 		navDrawerActivityConfiguration.setBaseAdapter(
-			new NavDrawerAdapter(this, R.layout.navdrawer_item, menu ));
+			new NavDrawerAdapter(this, R.layout.navdrawer_item, listMenu ));
 		return navDrawerActivityConfiguration;
 	}
 	

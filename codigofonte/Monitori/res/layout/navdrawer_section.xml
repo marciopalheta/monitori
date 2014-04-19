@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:background="@color/color_dark">
-    z
+    
     <TextView
         android:id="@+id/navmenusection_label"
         android:layout_width="fill_parent"

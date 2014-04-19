@@ -35,11 +35,11 @@ public class AgenteHelper extends UsuarioHelper {
 		
 		Map<View, String> mapaDeCampos = new LinkedHashMap<View, String>();
 		
-		mapaDeCampos.put(getNome(), "Nome Obrigatório");
-		mapaDeCampos.put(matricula, "Campo Obrigatório");
-		mapaDeCampos.put(getEditTextDataNascimento(), "Campo Obrigatório");
-		mapaDeCampos.put(getTelefone(), "Telefone Obrigatório");		
-		mapaDeCampos.put(getCep(), "Cep Obrigatório");
+		mapaDeCampos.put(getNome(), "Nome Obrigatï¿½rio");
+		mapaDeCampos.put(matricula, "Campo Obrigatï¿½rio");
+		mapaDeCampos.put(getEditTextDataNascimento(), "Campo Obrigatï¿½rio");
+		mapaDeCampos.put(getTelefone(), "Telefone Obrigatï¿½rio");		
+		mapaDeCampos.put(getCep(), "Cep Obrigatï¿½rio");
 		
 		
 		
@@ -54,8 +54,8 @@ public class AgenteHelper extends UsuarioHelper {
 				
 		agente.setMatricula(matricula.getText().toString());
 		
-		agente.setLogin(matricula.getText().toString());
-		agente.setSenha(matricula.getText().toString());
+		//agente.setLogin(matricula.getText().toString());
+		//agente.setSenha(matricula.getText().toString());
 		
 		return agente;		
 	}

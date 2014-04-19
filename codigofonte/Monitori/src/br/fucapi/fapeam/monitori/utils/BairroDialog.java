@@ -24,10 +24,10 @@ import android.widget.ListView;
 
 public class BairroDialog extends DialogFragment {
 	
-	EditText nomeBairro;
+	private EditText nomeBairro;
 	
-	String savedStateNome;
-	AlertDialog dialog;	
+	private String savedStateNome;
+	private AlertDialog dialog;	
 	private List<Bairro> listaBairro;
 	private ListView lvListagem;
 	

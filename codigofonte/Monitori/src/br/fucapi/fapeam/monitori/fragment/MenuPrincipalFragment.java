@@ -18,7 +18,7 @@ public class MenuPrincipalFragment extends Fragment implements OnClickListener {
 	private Button btMedico;
 	private Button btAgente;
 	private Button btPaciente;
-	private Button btcoletadados;
+	//private Button btcoletadados;
 	
 	
 	@Override
@@ -38,9 +38,14 @@ public class MenuPrincipalFragment extends Fragment implements OnClickListener {
 		btAgente.setOnClickListener(this);
 		btPaciente = (Button) layout.findViewById(R.id.btPaciente);
 		btPaciente.setOnClickListener(this);
+		
+		
+		//((AppMainActivity)MenuPrincipalFragment.this.getActivity()).selectItem( RequestCodes.MENU_AGENTE );
+		
+		/*
 		btcoletadados = (Button) layout.findViewById(R.id.btcoletadados);
 		btcoletadados.setOnClickListener(this);
-		
+		*/
 		return layout;		
 	}
 		
@@ -76,9 +81,11 @@ public class MenuPrincipalFragment extends Fragment implements OnClickListener {
     		if(v == btMedico) {    			
     			((AppMainActivity)MenuPrincipalFragment.this.getActivity()).selectItem( RequestCodes.MENU_MEDICO );
     		} 
-    		    		
+    		
+    		/*
     		if(v == btcoletadados){    			
     			((AppMainActivity)MenuPrincipalFragment.this.getActivity()).selectItem( RequestCodes.MENU_COLETA_DADOS );
-    		}
+    		}*/
+    		
 	}
 }

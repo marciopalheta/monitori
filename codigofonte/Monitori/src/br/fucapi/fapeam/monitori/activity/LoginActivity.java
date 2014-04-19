@@ -6,6 +6,7 @@ import br.fucapi.fapeam.monitori.activity.medico.MedicoActivity;
 import br.fucapi.fapeam.monitori.activity.paciente.PacienteActivity;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import br.fucapi.fapeam.monitori.model.dao.UsuarioDAO;
+import br.fucapi.fapeam.monitori.utils.Mask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -34,13 +35,11 @@ public class LoginActivity extends Activity {
 		login = (EditText) findViewById(R.id.edt_login);
 		senha = (EditText) findViewById(R.id.edt_senha);
 		bt_Logar = (Button) findViewById(R.id.btValidar);
-		
-		login.setText("admin");
-		//login.addTextChangedListener(Mask.insert("###.###.###-##", login));
-		
-		
+		login.setText("admin");				
 		senha.setText("admin");
-		//senha.addTextChangedListener(Mask.insert("###.###.###-##", senha));
+		
+		login.addTextChangedListener(Mask.insert("###.###.###-##", login));
+		senha.addTextChangedListener(Mask.insert("###.###.###-##", senha));
 		
 		bt_Logar.setOnClickListener(new OnClickListener() {
 			
@@ -60,6 +59,7 @@ public class LoginActivity extends Activity {
 		return true;
 	}
 	
+	/*
 	public boolean onOptionsItemSelected(MenuItem item){
 		Intent intent;
 		//Verifica o item do menu selecionado
@@ -128,6 +128,7 @@ public class LoginActivity extends Activity {
 				return super.onOptionsItemSelected(item);
 		}
 	}
+	*/
 	
 	private void mudarTela(){		
 		
@@ -145,6 +146,11 @@ public class LoginActivity extends Activity {
 		UsuarioDAO dao = new UsuarioDAO(this);
 		usuarioLogado = new Usuario();
 		//Chamado do metodo listar
+		
+		//Toast.makeText(LoginActivity.this, "login: "+login.getText().toString() , Toast.LENGTH_LONG).show();
+		//Toast.makeText(LoginActivity.this, "senha: "+senha.getText().toString() , Toast.LENGTH_LONG).show();
+		
+		
 		usuarioLogado = dao.getUsuario(login.getText().toString(), senha.getText().toString());
 		//fim da conexao do DB
 		dao.close();

@@ -1,13 +1,16 @@
 package br.fucapi.fapeam.monitori.fragment;
 
 import br.fucapi.fapeam.monitori.R;
+import br.fucapi.fapeam.monitori.activity.AppMainActivity;
 import br.fucapi.fapeam.monitori.activity.ColetarDadosActivity;
+import br.fucapi.fapeam.monitori.activity.LoginActivity;
 import br.fucapi.fapeam.monitori.activity.MenuPrincipalActivity;
 import br.fucapi.fapeam.monitori.activity.agente.AgenteActivity;
 import br.fucapi.fapeam.monitori.activity.medico.MedicoActivity;
 import br.fucapi.fapeam.monitori.activity.paciente.PacienteActivity;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import br.fucapi.fapeam.monitori.model.dao.UsuarioDAO;
+import br.fucapi.fapeam.monitori.utils.Mask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -31,7 +34,8 @@ public class LoginFragment extends Fragment {
 	private EditText login;
 	private EditText senha;
 	private Button bt_Logar;
-		
+
+	private Usuario usuarioLogado = null;		
 		@Override
 		public void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
@@ -49,6 +53,14 @@ public class LoginFragment extends Fragment {
 			login = (EditText) layout.findViewById(R.id.edt_login);
 			senha = (EditText) layout.findViewById(R.id.edt_senha);
 			bt_Logar = (Button) layout.findViewById(R.id.btValidar);
+			
+			login.setText("admin");				
+			senha.setText("admin");
+
+			
+			login.addTextChangedListener(Mask.insert("###.###.###-##", login));
+			senha.addTextChangedListener(Mask.insert("###.###.###-##", senha));
+			
 			
 			bt_Logar.setOnClickListener(new OnClickListener() {
 				
@@ -77,6 +89,7 @@ public class LoginFragment extends Fragment {
 			super.onSaveInstanceState(outState);			
 		}
 		
+		/*
 		public boolean onOptionsItemSelected(MenuItem item){
 			Intent intent;
 			//Verifica o item do menu selecionado
@@ -134,6 +147,7 @@ public class LoginFragment extends Fragment {
 			}			
 			
 		}
+		*/
 		
 		@Override
 		public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -144,28 +158,42 @@ public class LoginFragment extends Fragment {
 							
 		
 		private void mudarTela(){
-			//mudando de activity caso usuario logado
-					//Especialista em mudanca de tela
-						Intent intent = new Intent(getActivity(),
-						MenuPrincipalActivity.class);
+			/*
+			Intent intent = new Intent(getActivity(),
+					MenuPrincipalActivity.class);
 						//Carrega a nova tela
-						startActivity(intent);
+			startActivity(intent);
+						*/
+			
+			Intent intent = new Intent(getActivity(), AppMainActivity.class);
+						
+			intent.putExtra("USUARIO_LOGADO", usuarioLogado);
+			startActivity(intent);//Carrega a nova tela		
+			getActivity().finish();					
+			
+						
+						
 		}
 		
 		public void validarUsuario(){
 			//Criacao do objeto DAO
 			UsuarioDAO dao = new UsuarioDAO(getActivity());
-			Usuario usuario = new Usuario();
+			usuarioLogado = new Usuario();
 			//Chamado do metodo listar
-			usuario = dao.getUsuario(login.getText().toString(), senha.getText().toString());
+					
+			
+			usuarioLogado = dao.getUsuario(login.getText().toString(), senha.getText().toString());
 			//fim da conexao do DB
 			dao.close();
 					
-			if(usuario != null){
-				Toast.makeText(getActivity(), "usuario: "+usuario.getNome()+" autenticado", Toast.LENGTH_LONG).show();
+			if(usuarioLogado != null){
+				Toast.makeText(getActivity(), "usuario: "+usuarioLogado.getNome()+" autenticado", Toast.LENGTH_LONG).show();
 				mudarTela();
 			}else{
-				Toast.makeText(getActivity(), "Login Falhou", Toast.LENGTH_LONG).show();
+				senha.setError("Falha ao autenticar");
+				senha.setFocusable(true);
+				senha.requestFocus();				
+				//Toast.makeText(LoginActivity.this, "Login Falhou", Toast.LENGTH_LONG).show();
 			}
 		}
 		

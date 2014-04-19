@@ -123,12 +123,12 @@ public class PacienteHelper extends UsuarioHelper {
 
 		Map<View, String> mapaDeCampos = new LinkedHashMap<View, String>();
 		
-		mapaDeCampos.put(getNome(), "Nome Obrigatório");
-		mapaDeCampos.put(getCpf(), "CPF Obrigatório");
-		mapaDeCampos.put(getEditTextDataNascimento(), "Campo Obrigatório");
-		mapaDeCampos.put(getTelefone(), "Telefone Obrigatório");		
-		mapaDeCampos.put(getCep(), "Cep Obrigatório");
-		mapaDeCampos.put(numSus, "Campo Obrigatório");
+		mapaDeCampos.put(getNome(), "Nome Obrigatï¿½rio");
+		mapaDeCampos.put(getCpf(), "CPF Obrigatï¿½rio");
+		mapaDeCampos.put(getEditTextDataNascimento(), "Campo Obrigatï¿½rio");
+		mapaDeCampos.put(getTelefone(), "Telefone Obrigatï¿½rio");		
+		mapaDeCampos.put(getCep(), "Cep Obrigatï¿½rio");
+		mapaDeCampos.put(numSus, "Campo Obrigatï¿½rio");
 		
 		setMapaDeCampos(mapaDeCampos);
 	}
@@ -166,8 +166,8 @@ public class PacienteHelper extends UsuarioHelper {
 		diabetico2.setChecked(paciente.isDiabetico2() );
 		
 		
-		paciente.setLogin(numSus.getText().toString());
-		paciente.setSenha(numSus.getText().toString());
+		//paciente.setLogin(numSus.getText().toString());
+		//paciente.setSenha(numSus.getText().toString());
 		
 		this.paciente = paciente;	
 	//Validando dados

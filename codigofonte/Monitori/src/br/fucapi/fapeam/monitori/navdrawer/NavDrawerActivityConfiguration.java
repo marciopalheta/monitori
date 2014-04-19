@@ -1,5 +1,7 @@
 package br.fucapi.fapeam.monitori.navdrawer;
 
+import java.util.List;
+
 import android.widget.BaseAdapter;
 
 public class NavDrawerActivityConfiguration {
@@ -9,7 +11,10 @@ public class NavDrawerActivityConfiguration {
 	private int drawerLayoutId;
 	private int leftDrawerId;
 	private int[] actionMenuItemsToHideWhenDrawerOpen;
-	private NavDrawerItem[] navItems;
+	//private NavDrawerItem[] navItems;
+	
+	private List<NavDrawerItem> navItems;
+	
 	private int drawerOpenDesc;
 	private int drawerCloseDesc;
 	private BaseAdapter baseAdapter;
@@ -55,6 +60,15 @@ public class NavDrawerActivityConfiguration {
 		this.actionMenuItemsToHideWhenDrawerOpen = actionMenuItemsToHideWhenDrawerOpen;
 	}
 
+	public List<NavDrawerItem> getNavItems() {
+		return navItems;
+	}
+
+	public void setNavItems(List<NavDrawerItem> navItems) {
+		this.navItems = navItems;
+	}
+	
+/*
 	public NavDrawerItem[] getNavItems() {
 		return navItems;
 	}
@@ -62,7 +76,7 @@ public class NavDrawerActivityConfiguration {
 	public void setNavItems(NavDrawerItem[] navItems) {
 		this.navItems = navItems;
 	}
-
+*/
 	public int getDrawerOpenDesc() {
 		return drawerOpenDesc;
 	}

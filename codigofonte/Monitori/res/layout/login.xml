@@ -31,6 +31,7 @@
         android:layout_marginTop="5dp"
         android:paddingLeft="5dp"
         android:inputType="number"
+        android:textColor="@android:color/black"
         android:textSize="@dimen/fonte_bts_texts"/>
     
     <EditText 
@@ -43,7 +44,8 @@
         android:layout_below="@id/edt_login"
         android:layout_marginTop="5dp"
         android:paddingLeft="5dp"
-        android:inputType="textPassword|number"
+        android:textColor="@android:color/black"
+        android:inputType="numberPassword"
         
         android:textSize="@dimen/fonte_bts_texts"/>
 

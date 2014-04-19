@@ -87,6 +87,13 @@ public class PacienteFragment extends Fragment {
 						usuarioSelecionado = (Paciente) adapter.getItemAtPosition(posicao);
 						Log.i(TAG, "Usuario Selecionado ListView.LongClick()"
 								+ usuarioSelecionado.getNome());
+						
+						Log.i(TAG, "Usuario Selecionado ListView.LongClick()"
+								+ usuarioSelecionado.getLogin());
+						
+						Log.i(TAG, "Usuario Selecionado ListView.LongClick()"
+								+ usuarioSelecionado.getSenha());
+						
 						return false;
 					}
 				});

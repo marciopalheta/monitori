@@ -27,6 +27,7 @@
             android:padding="@dimen/padding"
 			android:hint="@string/nome"
 			android:inputType="text"
+			android:textColor="@android:color/black"
 			android:layout_marginBottom="10dp"
 			android:focusable="true"			
 			android:focusableInTouchMode="true"			

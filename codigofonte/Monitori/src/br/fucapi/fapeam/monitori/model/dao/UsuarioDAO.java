@@ -83,11 +83,14 @@ public class UsuarioDAO extends AbstractDataBase{
 			}
 			
 			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.tipoUsuario, usuario.getTipoUsuario().toString() );
+			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.login, usuario.getCpf());
+			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.senha, usuario.getCpf());
+			
 			
 			if(usuario instanceof Paciente){									
 				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.numeroSus, usuario.getNumSus());
-				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.login, usuario.getNumSus());
-				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.senha, usuario.getNumSus());
+				//values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.login, usuario.getNumSus());
+				//values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.senha, usuario.getNumSus());
 				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.hipertenso, String.valueOf( ((Paciente)usuario).isHipertenso() ) );
 				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.diabetico1, String.valueOf( ((Paciente)usuario).isDiabetico1() ) );
 				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.diabetico2, String.valueOf( ((Paciente)usuario).isDiabetico2() ) );			
@@ -95,14 +98,14 @@ public class UsuarioDAO extends AbstractDataBase{
 			
 			if(usuario instanceof Medico){			
 				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.crm, ((Medico)usuario).getCrm() );
-				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.login, ((Medico) usuario).getCrm());
-				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.senha, ((Medico) usuario).getCrm());
+				//values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.login, ((Medico) usuario).getCrm());
+				//values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.senha, ((Medico) usuario).getCrm());
 			}
 			
 			if(usuario instanceof Agente){			
 				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.matricula, ((Agente)usuario).getMatricula() );
-				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.login, ((Agente) usuario).getMatricula());
-				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.senha, ((Agente) usuario).getMatricula());
+				//values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.login, ((Agente) usuario).getMatricula());
+				//values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.senha, ((Agente) usuario).getMatricula());
 					
 			}
 			
@@ -241,6 +244,10 @@ public class UsuarioDAO extends AbstractDataBase{
 								
 				usuario.setTelefone(cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.telefone )));
 				usuario.setSexo( cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.sexo )) );
+				
+				usuario.setLogin( cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.login )) );
+				usuario.setSenha( cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.senha )) );
+				
 				//usuario.setObservacao( cursor.getString(cursor.getColumnIndex("observacao")) );
 										
 				//Adiciona um novo usuario a lista
@@ -278,6 +285,10 @@ public class UsuarioDAO extends AbstractDataBase{
 		
 		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.foto, usuario.getFoto());
 		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.cpf, usuario.getCpf());
+		
+		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.login, usuario.getCpf());
+		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.senha, usuario.getCpf());
+		
 		
 		Calendar cal =  usuario.getDataNascimento();
 		if(cal!=null){
@@ -334,8 +345,14 @@ public class UsuarioDAO extends AbstractDataBase{
 	public Usuario getUsuario(String login, String senha){
 		//Colecao de usuarios
 		Usuario usuario = null;
+		
+		Log.i(TAG, "Login = " + login );
+		Log.i(TAG, "Senha = " + senha );
+		
 		//Definicao da instrucao SQL
-		String sql = "Select * from "+SQLiteDatabaseHelper.TABLE_USUARIO_NAME+" where "+SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.login+"='"+login+"' and "+SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.senha+"='"+senha+"' ";
+		String sql = "Select * from "+SQLiteDatabaseHelper.TABLE_USUARIO_NAME+
+				" where "+SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.login+"='"+login+"' and "+
+				SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.senha+"='"+senha+"' ";
 		
 		//Objeto que reebe os registros do banco de dados
 		Cursor cursor = getReadableDatabase().rawQuery(sql, null);
@@ -344,8 +361,7 @@ public class UsuarioDAO extends AbstractDataBase{
 				
 				if(cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.tipoUsuario )).equals(TipoUsuario.ADMINISTRADOR.toString()) ){
 					usuario = new Usuario();
-					usuario.setTipoUsuario(TipoUsuario.ADMINISTRADOR );
-					Log.i(TAG, "Tipo usuario = " + cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.tipoUsuario.toString()) ));
+					usuario.setTipoUsuario(TipoUsuario.ADMINISTRADOR );					
 				}else if(cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.tipoUsuario )).equals(TipoUsuario.PACIENTE.toString()) ){
 					usuario = new Paciente();					
 					usuario.setTipoUsuario(TipoUsuario.PACIENTE );

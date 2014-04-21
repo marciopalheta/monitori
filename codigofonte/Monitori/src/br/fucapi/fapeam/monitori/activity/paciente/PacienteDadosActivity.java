@@ -62,7 +62,6 @@ public class PacienteDadosActivity extends UsuarioDadosActivity {
 				Paciente paciente = (Paciente) helper.getPaciente();
 				//Criacao do objeto DAO
 				UsuarioDAO dao = new UsuarioDAO(PacienteDadosActivity.this);
-				long id;
 				//Validando os campos
 				if(helper.validar()==true){		
 					// Verificacao para salvar ou cadastrar o aluno

@@ -3,6 +3,7 @@ package br.fucapi.fapeam.monitori.activity.paciente;
 import java.util.List;
 import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.adapter.ListaAdapter;
+import br.fucapi.fapeam.monitori.model.bean.Medico;
 import br.fucapi.fapeam.monitori.model.bean.Paciente;
 import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
@@ -44,6 +45,8 @@ public class PacienteActivity extends Activity {
 	
 	//Usuario selecionando com o click longo
 	private Paciente pacienteSelecionado = null;	
+	
+	private Medico medicoSelecionado = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

@@ -93,7 +93,9 @@ public class UsuarioDAO extends AbstractDataBase{
 				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.numeroSus, usuario.getNumSus());
 				//values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.login, usuario.getNumSus());
 				//values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.senha, usuario.getNumSus());
-				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.idMedico, usuario.getMedico().getId());
+				if(usuario.getMedico() != null){
+					values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.idMedico, usuario.getMedico().getId());
+				}
 				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.hipertenso, String.valueOf( ((Paciente)usuario).isHipertenso() ) );
 				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.diabetico1, String.valueOf( ((Paciente)usuario).isDiabetico1() ) );
 				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.diabetico2, String.valueOf( ((Paciente)usuario).isDiabetico2() ) );			

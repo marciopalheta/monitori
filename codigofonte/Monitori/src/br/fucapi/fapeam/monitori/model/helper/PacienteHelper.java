@@ -1,13 +1,20 @@
 package br.fucapi.fapeam.monitori.model.helper;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.activity.paciente.PacienteDadosActivity;
+import br.fucapi.fapeam.monitori.model.bean.Bairro;
+import br.fucapi.fapeam.monitori.model.bean.Medico;
 import br.fucapi.fapeam.monitori.model.bean.Paciente;
 import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
+import br.fucapi.fapeam.monitori.model.dao.BairroDAO;
+import br.fucapi.fapeam.monitori.model.dao.UsuarioDAO;
 import br.fucapi.fapeam.monitori.utils.Funcoes;
+import br.fucapi.fapeam.monitori.utils.SpinnerAdapter;
+import br.fucapi.fapeam.monitori.utils.SpinnerObject;
 import android.app.Activity;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -170,9 +177,31 @@ public class PacienteHelper extends UsuarioHelper {
 		mapaDeCampos.put(numSus, "Campo Obrigat�rio");
 		
 		setMapaDeCampos(mapaDeCampos);
+		
+		atualizarListaMedicos();
+		
 	}
 
+	
+	
+	private void atualizarListaMedicos(){
 		
+		
+		UsuarioDAO daoMedico = new UsuarioDAO(activity); 
+		List<SpinnerObject> listaMedico = daoMedico.getUsuarioForSpinner(TipoUsuario.MEDICO);
+							
+		String[] StringArray = new String[listaMedico.size()];
+		int index=0;
+		for (SpinnerObject medicos : listaMedico) {			
+			StringArray[index++] = medicos.toString();			
+		}
+		//ArrayAdapter dataAdapter = new SpinnerAdapter(fragmentActivity, R.layout.spinner_generic, StringArray ,listaBairros);
+		//spinBairro.setAdapter(dataAdapter);
+		
+		adapter = new SpinnerAdapter(activity, R.layout.spinner_generic, StringArray ,listaMedico);
+		spinMedico.setAdapter(adapter);	    	    	    			    
+	    
+	}
 	
 	public Spinner getSpinMedico() {
 		return spinMedico;
@@ -195,6 +224,21 @@ public class PacienteHelper extends UsuarioHelper {
 		paciente.setDiabetico1(diabetico1.isChecked());
 		paciente.setDiabetico2(diabetico2.isChecked());
 		
+		SpinnerObject SpinAux;
+		int posicao;
+		
+		
+		if(!getSpinMedico().getAdapter().isEmpty()){
+			
+			posicao = getSpinMedico().getSelectedItemPosition();
+			SpinAux = (SpinnerObject)getSpinMedico().getAdapter().getItem(posicao);
+			if(SpinAux.getId() != 0){
+				Medico auxMedico = new Medico();
+				auxMedico.setId( SpinAux.getId() );
+				auxMedico.setNome( SpinAux.getValue() );
+				paciente.setMedico(auxMedico);
+			}
+		}
 		
 
 		return (Paciente) paciente;		
@@ -212,6 +256,21 @@ public class PacienteHelper extends UsuarioHelper {
 		diabetico1.setChecked(paciente.isDiabetico1() );
 		diabetico2.setChecked(paciente.isDiabetico2() );
 		
+		int index=0, indexKey=0;
+		
+		adapter = (br.fucapi.fapeam.monitori.utils.SpinnerAdapter) getSpinMedico().getAdapter();
+		List<SpinnerObject> list_medico = adapter.getSpinnerObjects();
+				
+		if(paciente.getMedico() !=null){
+			for (SpinnerObject soMedico : list_medico) {
+				if(soMedico.getId() == paciente.getMedico().getId() ){
+					indexKey = index;
+					break;	
+				}
+				index++;					
+			}
+		}
+		getSpinMedico().setSelection(indexKey);
 		
 		//paciente.setLogin(numSus.getText().toString());
 		//paciente.setSenha(numSus.getText().toString());

@@ -15,6 +15,7 @@ import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
 import br.fucapi.fapeam.monitori.model.bean.UnidadeSaude;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import br.fucapi.fapeam.monitori.sqlite.SQLiteDatabaseHelper;
+import br.fucapi.fapeam.monitori.utils.SpinnerObject;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -81,9 +82,7 @@ public class UsuarioDAO extends AbstractDataBase{
 			if(usuario.getUnidadeSaude() != null){
 				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.idUnidadeSaude, usuario.getUnidadeSaude().getId());
 			}
-			if(usuario.getMedico() != null){
-				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.idMedico, usuario.getMedico().getId());
-			}
+			
 			
 			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.tipoUsuario, usuario.getTipoUsuario().toString() );
 			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.login, usuario.getCpf());
@@ -94,6 +93,7 @@ public class UsuarioDAO extends AbstractDataBase{
 				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.numeroSus, usuario.getNumSus());
 				//values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.login, usuario.getNumSus());
 				//values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.senha, usuario.getNumSus());
+				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.idMedico, usuario.getMedico().getId());
 				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.hipertenso, String.valueOf( ((Paciente)usuario).isHipertenso() ) );
 				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.diabetico1, String.valueOf( ((Paciente)usuario).isDiabetico1() ) );
 				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.diabetico2, String.valueOf( ((Paciente)usuario).isDiabetico2() ) );			
@@ -203,6 +203,12 @@ public class UsuarioDAO extends AbstractDataBase{
 					((Paciente)usuario).setHipertenso( Boolean.parseBoolean( cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.hipertenso ))  ) );
 					((Paciente)usuario).setDiabetico1( Boolean.parseBoolean( cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.diabetico1 ))  ) );
 					((Paciente)usuario).setDiabetico2( Boolean.parseBoolean( cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.diabetico2 ))  ) );
+					
+					UnidadeSaudeDAO ubsDao = new UnidadeSaudeDAO(context);				
+					
+					Medico medico =  (Medico) getUsuario( cursor.getLong(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.idMedico) )) ;
+					usuario.setMedico(medico);
+					
 				}else if(tipoUsuario == TipoUsuario.AGENTE){
 					usuario = new Agente();				
 					((Agente)usuario).setMatricula( cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.matricula ))   );
@@ -327,11 +333,7 @@ public class UsuarioDAO extends AbstractDataBase{
 			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.idUnidadeSaude, "null");
 		}
 		
-		if(usuario.getMedico() != null){
-			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.idMedico, usuario.getMedico().getId());
-		}else{
-			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.idMedico, "null");
-		}
+		
 		
 		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.tipoUsuario, usuario.getTipoUsuario().toString() );
 		
@@ -339,6 +341,11 @@ public class UsuarioDAO extends AbstractDataBase{
 			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.hipertenso, String.valueOf( ((Paciente)usuario).isHipertenso() ) );
 			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.diabetico1, String.valueOf( ((Paciente)usuario).isDiabetico1() ) );
 			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.diabetico2, String.valueOf( ((Paciente)usuario).isDiabetico2() ) );
+			if(usuario.getMedico() != null){
+				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.idMedico, usuario.getMedico().getId());
+			}else{
+				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.idMedico, "null");
+			}
 		}
 		
 		if(usuario instanceof Medico){			
@@ -542,5 +549,46 @@ public class UsuarioDAO extends AbstractDataBase{
 		}
 		return usuario;
 	}
+	
+	
+	public List <SpinnerObject> getUsuarioForSpinner(TipoUsuario tipoUsuario){
+	    
+		//Colecao de bairros
+		List<SpinnerObject> list_usuario = new ArrayList<SpinnerObject>();		
+		//Definicao da instrucao SQL
+		
+		
+		//primeiro elemento da lista
+		String text = context.getString(R.string.medico_prompt);
+		list_usuario.add(new SpinnerObject(0, text));
+				
+		//Definicao da instrucao SQL		
+		String sql = "Select " +
+				SQLiteDatabaseHelper.ALL_FIELDS_TABLE_USUARIO + " "+					
+				" from "+SQLiteDatabaseHelper.TABLE_USUARIO_NAME +" " +					
+				"where "+SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.tipoUsuario+" = '"+tipoUsuario+"' "+
+				"order by "+SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.nome +" ";		
+	
+		
+		//Objeto que reebe os registros do banco de dados
+		Cursor cursor = getReadableDatabase().rawQuery(sql, null);
+		try{
+			while(cursor.moveToNext()){				
+				//Adiciona um novo bairro a lista								
+				list_usuario.add ( new SpinnerObject ( 
+						cursor.getLong(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.id) ) , 
+						cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_UBS.nome) )
+						) );
+			}
+		}catch(SQLException e){
+			Log.e(TAG, e.getMessage());
+		}finally{
+			cursor.close();
+		}
+		return list_usuario;
+	    	    
+	}
+
+	
 	
 }

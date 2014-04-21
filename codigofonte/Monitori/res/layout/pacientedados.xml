@@ -347,18 +347,20 @@
 				android:text="@string/unidadeSaude"/>
 			 
 			<Spinner
-	        android:id="@+id/spinUbs"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_marginLeft="@dimen/margem_editext"
-	        android:textSize="@dimen/fontes_para_textos"            
-	        android:entries="@array/ubs_arrays"
-	        android:prompt="@string/ubs_prompt" 
-	        android:background="#ebedea"
-	        android:focusable="true"
-	        android:focusableInTouchMode="true"
-	        android:layout_marginBottom="10dp"
+		        android:id="@+id/spinUbs"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginLeft="@dimen/margem_editext"
+		        android:textSize="@dimen/fontes_para_textos"            
+		        android:entries="@array/ubs_arrays"
+		        android:prompt="@string/ubs_prompt" 
+		        android:background="#ebedea"
+		        android:focusable="true"
+		        android:focusableInTouchMode="true"
+		        android:layout_marginBottom="10dp"
 	        />
+			
+			 
 			 
 			 <TextView
 			    android:id="@+id/tvSus"
@@ -381,7 +383,33 @@
 	                android:textSize="@dimen/fontes_para_textos" 
 	                android:inputType="number"
 	                />
+	        
+	       <TextView
+			    android:id="@+id/tvMedico"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:layout_marginLeft="@dimen/margem_editext"
+	            android:textSize="@dimen/fontes_para_textos"
+	            android:layout_marginBottom="10dp"
+				android:text="@string/medico"/>
+			 
+			<Spinner
+		        android:id="@+id/spinMedico"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginLeft="@dimen/margem_editext"
+		        android:textSize="@dimen/fontes_para_textos"            
+		        android:entries="@array/medico_arrays"
+		        android:prompt="@string/medico_prompt" 
+		        android:background="#ebedea"
+		        android:focusable="true"
+		        android:focusableInTouchMode="true"
+		        android:layout_marginBottom="10dp"
+	        />
+	        
 		</LinearLayout> 
+		
+	    
                   
 	</LinearLayout>
 </ScrollView>    

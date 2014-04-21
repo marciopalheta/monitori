@@ -25,6 +25,13 @@
 
 	<string name="ubs_prompt">Selecione uma UBS</string>
     <string name="ubs_novo">Incluir UBS</string>
+    
+    <string name="medico_prompt">Slecione um Médico</string>
+    <string name="medico">Medico do Paciente</string>
+    
+    <string-array name="medico_arrays">
+        <item>@string/medico_prompt</item>
+    </string-array>
 
     <string-array name="ubs_arrays">
         <item>@string/ubs_novo</item>

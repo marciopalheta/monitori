@@ -11,6 +11,7 @@ public class Usuario extends AbstractEntityBean {
 	private String numero;
 	private Bairro bairro;
 	private UnidadeSaude unidadeSaude;
+	private Medico medico;
 	private String cep;
 	private String celular;
 	private String telefone;
@@ -99,6 +100,14 @@ public class Usuario extends AbstractEntityBean {
 
 	public void setUnidadeSaude(UnidadeSaude unidadeSaude) {
 		this.unidadeSaude = unidadeSaude;
+	}
+
+	public Medico getMedico() {
+		return medico;
+	}
+
+	public void setMedico(Medico medico) {
+		this.medico = medico;
 	}
 
 	public String getTelefone() {

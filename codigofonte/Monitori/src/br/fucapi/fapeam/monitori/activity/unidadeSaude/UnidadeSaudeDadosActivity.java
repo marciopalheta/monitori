@@ -64,23 +64,17 @@ public class UnidadeSaudeDadosActivity extends FragmentActivity {
 				UnidadeSaude ubs = helper.getUnidadeSaude();
 				//Criacao do objeto DAO
 				UnidadeSaudeDAO dao = new UnidadeSaudeDAO(UnidadeSaudeDadosActivity.this);
-				long id;
 				//Validando os campos
 				if(helper.validar()==true){		
 					// Verificacao para salvar ou cadastrar o aluno
 					if (ubs.getId() == null) {
 						dao.cadastrar(ubs);
-						id = dao.getLastInsertId();
 					} else {
 						dao.alterar(ubs);
-						id = ubs.getId();
 					}//Fechando a conexao com o BD
 					dao.close();
 					
-					Intent result = new Intent();
-	                //System.out.println("from second activity: \"" + txtStr + "\"");
-	                result.putExtra("ID_UBS", id);
-	                setResult(Activity.RESULT_OK, result);
+	
 					
 					//Encerrando a activity
 					finish();

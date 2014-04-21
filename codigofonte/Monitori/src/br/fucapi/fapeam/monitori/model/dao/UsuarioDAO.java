@@ -81,6 +81,9 @@ public class UsuarioDAO extends AbstractDataBase{
 			if(usuario.getUnidadeSaude() != null){
 				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.idUnidadeSaude, usuario.getUnidadeSaude().getId());
 			}
+			if(usuario.getMedico() != null){
+				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.idMedico, usuario.getMedico().getId());
+			}
 			
 			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.tipoUsuario, usuario.getTipoUsuario().toString() );
 			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.login, usuario.getCpf());
@@ -150,6 +153,10 @@ public class UsuarioDAO extends AbstractDataBase{
 			}
 			if(usuario.getUnidadeSaude() != null){
 				Log.i(TAG, "idUbs: "+ usuario.getUnidadeSaude().getId() );
+			}
+			
+			if(usuario.getMedico() != null){
+				Log.i(TAG, "idMedico: "+ usuario.getMedico().getId());
 			}
 								
 			Log.i(TAG, "celular: "+ usuario.getCelular() );
@@ -224,6 +231,8 @@ public class UsuarioDAO extends AbstractDataBase{
 				UnidadeSaudeDAO ubsDao = new UnidadeSaudeDAO(context);				
 				UnidadeSaude ubs = ubsDao.getUnidadeSaude( cursor.getLong(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.idUnidadeSaude ) ) );
 				usuario.setUnidadeSaude(ubs);
+				
+				
 				
 				
 				usuario.setCep(cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.cep ))); 
@@ -318,6 +327,12 @@ public class UsuarioDAO extends AbstractDataBase{
 			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.idUnidadeSaude, "null");
 		}
 		
+		if(usuario.getMedico() != null){
+			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.idMedico, usuario.getMedico().getId());
+		}else{
+			values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.idMedico, "null");
+		}
+		
 		values.put(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.tipoUsuario, usuario.getTipoUsuario().toString() );
 		
 		if(usuario instanceof Paciente){									
@@ -402,6 +417,8 @@ public class UsuarioDAO extends AbstractDataBase{
 				UnidadeSaudeDAO ubsDao = new UnidadeSaudeDAO(context);				
 				UnidadeSaude ubs = ubsDao.getUnidadeSaude( cursor.getLong(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.idUnidadeSaude) ) );
 				usuario.setUnidadeSaude(ubs);
+				
+				
 				
 				usuario.setCep(cursor.getString(cursor.getColumnIndex(SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.cep))); 
 				//usuario.setUnidadeSaude(cursor.getString(5) );

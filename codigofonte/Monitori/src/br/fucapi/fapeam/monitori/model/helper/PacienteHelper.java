@@ -30,6 +30,7 @@ public class PacienteHelper extends UsuarioHelper {
 	private CheckBox hipertenso;
 	private CheckBox diabetico1;
 	private CheckBox diabetico2;
+	private Spinner spinMedico;
 	
 	private Spinner spinUbs;
 	private Activity activity;
@@ -55,8 +56,11 @@ public class PacienteHelper extends UsuarioHelper {
 		diabetico1 =(CheckBox) fragmentActivity.findViewById(R.id.chbTipo1);
 		diabetico2 =(CheckBox) fragmentActivity.findViewById(R.id.chbTipo2);		
 		nomeMae = (EditText) fragmentActivity.findViewById(R.id.edNomedamae);
-		spinUbs = getSpinUbs();		
+		spinUbs = getSpinUbs();	
+		spinMedico = (Spinner) fragmentActivity.findViewById(R.id.spinMedico);
 		
+		selectionCurrent = spinMedico.getSelectedItemPosition();
+		spinMedico.setNextFocusDownId(R.id.edit_sus);
 		spinUbs.setNextFocusForwardId( R.id.edit_sus );
 		selectionCurrent = spinUbs.getSelectedItemPosition();
 		
@@ -109,17 +113,52 @@ public class PacienteHelper extends UsuarioHelper {
 					}
 					
 				}
-				
-
-			} 			
+			} 
 
 			@Override
 			public void onNothingSelected(AdapterView<?> parentView) {
 				
 			}
-
 			});
 		
+		spinMedico.setOnTouchListener(new View.OnTouchListener() {            
+			@Override
+			public boolean onTouch(View view, MotionEvent event) {
+				if(view !=null){
+					
+					Funcoes.hideKeyboard(spinMedico );
+					spinMedico.requestFocusFromTouch();
+					
+					//return true;
+				}
+				return false;
+			}
+        });		
+		
+		spinMedico.setOnItemSelectedListener(new OnItemSelectedListener() {
+			@Override
+			public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+								
+								
+				if(selectedItemView !=null){
+					if(selectionCurrent!=position){
+						selectionCurrent = position;
+						getNumSus().requestFocus();		            																						           
+						getNumSus().performClick();
+						//Funcoes.showKeyboard(activity);
+						Funcoes.showKeyboard(getNumSus());
+		            //showKeyboard
+					}
+					
+				}
+			} 
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parentView) {
+				
+			}
+			}
+		);
 
 		Map<View, String> mapaDeCampos = new LinkedHashMap<View, String>();
 		
@@ -135,6 +174,14 @@ public class PacienteHelper extends UsuarioHelper {
 
 		
 	
+	public Spinner getSpinMedico() {
+		return spinMedico;
+	}
+
+	public void setSpinMedico(Spinner spinMedico) {
+		this.spinMedico = spinMedico;
+	}
+
 	public Paciente getPaciente(){
 		
 		paciente = (Paciente) getUsuario();

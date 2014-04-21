@@ -58,6 +58,7 @@ public class UsuarioHelper {
 	private ImageButton ibDataNascimento;	
 	private Spinner spinBairro;			
 	private Spinner spinUbs;
+	
 			
 	private String DATE_FORMAT;	    
     private SimpleDateFormat dateFormat;           
@@ -160,6 +161,7 @@ public class UsuarioHelper {
 		
 		spinUbs = (Spinner) fragmentActivity.findViewById(R.id.spinUbs);		
 		spinBairro = (Spinner) fragmentActivity.findViewById(R.id.spinBairro);
+		
 		sexo = (Spinner) fragmentActivity.findViewById(R.id.spinSexo);		
 		
 		sexo.setOnTouchListener(new View.OnTouchListener() {            
@@ -466,7 +468,6 @@ public class UsuarioHelper {
 	public void setSpinUbs(Spinner spinUbs) {
 		this.spinUbs= spinUbs;
 	}
-	
 
 	public void carregarFoto(String localFoto) {
 		try {			
@@ -617,7 +618,9 @@ public class UsuarioHelper {
 				index++;					
 			}
 		}
-		getSpinUbs().setSelection(indexKey);						
+		getSpinUbs().setSelection(indexKey);	
+		
+		
 		
 		//usuario.setLogin(usuario.getCpf());
 		//usuario.setSenha(usuario.getCpf());

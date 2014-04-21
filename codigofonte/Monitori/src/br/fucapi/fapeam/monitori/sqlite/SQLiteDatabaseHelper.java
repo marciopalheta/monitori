@@ -39,6 +39,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
         String cep = "cep";        
         String idBairro = "idBairro";
         String idUnidadeSaude = "idUnidadeSaude";
+        String idMedico = "idMedico";
         String celular = "celular";
         String telefone = "telefone";
         String dataNascimento = "dataNascimento";
@@ -67,6 +68,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
     		TABLE_USUARIO_NAME +"."+FIELDS_TABLE_USUARIO.cep+","+    		
     		TABLE_USUARIO_NAME +"."+FIELDS_TABLE_USUARIO.idBairro+","+
     		TABLE_USUARIO_NAME +"."+FIELDS_TABLE_USUARIO.idUnidadeSaude+","+
+    		TABLE_USUARIO_NAME +"."+FIELDS_TABLE_USUARIO.idMedico+","+
     		TABLE_USUARIO_NAME +"."+FIELDS_TABLE_USUARIO.celular+","+
     		TABLE_USUARIO_NAME +"."+FIELDS_TABLE_USUARIO.telefone+","+
     		TABLE_USUARIO_NAME +"."+FIELDS_TABLE_USUARIO.dataNascimento+","+
@@ -89,7 +91,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
     private static final String CREATE_TABLE_USUARIO = "CREATE TABLE "
             + TABLE_USUARIO_NAME + "(" + FIELDS_TABLE_USUARIO.id + " INTEGER PRIMARY KEY," 
             + FIELDS_TABLE_USUARIO.nome+ "  TEXT, "+ FIELDS_TABLE_USUARIO.cpf+ " TEXT, " +FIELDS_TABLE_USUARIO.endereco+" TEXT, "+FIELDS_TABLE_USUARIO.numero+" TEXT, "+FIELDS_TABLE_USUARIO.idBairro+" INTEGER, "
-            + FIELDS_TABLE_USUARIO.cep+ " TEXT, "+FIELDS_TABLE_USUARIO.idUnidadeSaude+" INTEGER, "+FIELDS_TABLE_USUARIO.celular+" TEXT, "
+            + FIELDS_TABLE_USUARIO.cep+ " TEXT, "+FIELDS_TABLE_USUARIO.idUnidadeSaude+" INTEGER, "+FIELDS_TABLE_USUARIO.idMedico+" INTEGER, "+FIELDS_TABLE_USUARIO.celular+" TEXT, "
 			+ FIELDS_TABLE_USUARIO.telefone+" TEXT, "+FIELDS_TABLE_USUARIO.dataNascimento+" TEXT, "+FIELDS_TABLE_USUARIO.login+" TEXT, "
 			+ FIELDS_TABLE_USUARIO.senha+" TEXT, "+FIELDS_TABLE_USUARIO.numeroSus+" TEXT, "
 			+ FIELDS_TABLE_USUARIO.nomeMae+" TEXT, "+FIELDS_TABLE_USUARIO.foto+" TEXT, "+FIELDS_TABLE_USUARIO.hipertenso+" TEXT, "+FIELDS_TABLE_USUARIO.sexo+" TEXT, "

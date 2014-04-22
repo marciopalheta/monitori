@@ -33,18 +33,29 @@ import br.fucapi.fapeam.monitori.utils.RequestCodes;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.widget.Toast;
 
 public class AppMainActivity extends AbstractNavDrawerActivity {
 	
 	private Usuario usuarioLogado = null;	
-	
+		
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+					
+		
 		if ( savedInstanceState == null ) {
-			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new MenuPrincipalFragment()).commit();
+			
+			Fragment frag = new MenuPrincipalFragment();
+			Bundle args = new Bundle();			
+			args.putSerializable(PutExtras.USUARIO_LOGADO, usuarioLogado);
+			frag.setArguments(args);
+	
+			
+			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, frag ).commit();
+			
+			//getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new MenuPrincipalFragment()).commit();
 			Eula.show(this, R.string.eula_title, R.string.eula_accept, R.string.eula_refuse);
 		}
 	}
@@ -63,10 +74,10 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 		NavDrawerItem menuAgente = NavMenuItem.create(RequestCodes.MENU_AGENTE , getString(R.string.menu_agente) , R.drawable.ic_agente, true, this);
 		NavDrawerItem menuMedico = NavMenuItem.create(RequestCodes.MENU_MEDICO,getString(R.string.menu_medico), R.drawable.ic_medico, true, this);						
 		NavDrawerItem menuBairro = NavMenuItem.create(RequestCodes.MENU_BAIRRO,getString(R.string.menu_bairro), R.drawable.ic_bairro, true, this);
-		NavDrawerItem menuUbs = NavMenuItem.create(RequestCodes.MENU_UBS,getString(R.string.menu_ubs), R.drawable.ic_ubs, true, this);
+		NavDrawerItem menuUbs = NavMenuItem.create(RequestCodes.MENU_UBS,getString(R.string.menu_ubs_long), R.drawable.ic_ubs, true, this);
 		NavDrawerItem secaoFuncionalidades = NavMenuSection.create(300, "Funcionalidades");
 		
-		NavDrawerItem menuHistorico = NavMenuItem.create(RequestCodes.MENU_HISTORICO,getString(R.string.title_activity_historico), android.R.drawable.sym_def_app_icon, true, this);
+		NavDrawerItem menuHistorico = NavMenuItem.create(RequestCodes.MENU_HISTORICO_COLETA,getString(R.string.title_activity_historico), android.R.drawable.sym_def_app_icon, true, this);
 		NavDrawerItem menuColetaDados = NavMenuItem.create(RequestCodes.MENU_COLETA_DADOS,getString(R.string.title_activity_coletar_dados), R.drawable.ic_coleta, true, this);						
 		NavDrawerItem menuDiagnosticar = NavMenuItem.create(RequestCodes.MENU_DIAGNOSTICAR, getString(R.string.title_activity_diagnosticar_dados), android.R.drawable.ic_popup_sync, true, this);
 		NavDrawerItem menuHistDiagnostico = NavMenuItem.create(RequestCodes.MENU_HISTORICO_DIAGNOSTICO, getString(R.string.title_activity_diagnosticar), android.R.drawable.ic_popup_sync, true, this);
@@ -177,20 +188,50 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 		Intent intent;
 		Fragment frag;
 		Bundle args;
+		
+		FragmentTransaction  transaction;
+		
 		switch ((int)id) {
 		case RequestCodes.MENU_PACIENTE:		
 			frag = new PacienteFragment();
 			args = new Bundle();			
 			args.putSerializable(PutExtras.USUARIO_LOGADO, usuarioLogado);
 			frag.setArguments(args);
-			
-			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, frag ).commit();			
+					
+			transaction = getSupportFragmentManager().beginTransaction();
+			 
+	        transaction.replace(R.id.content_frame, frag );
+	        transaction.addToBackStack(null);
+	 
+	        transaction.commit();
+						
+						
+			//getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, frag ).commit();			
 			break;
 		case RequestCodes.MENU_AGENTE:
-			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new AgenteFragment()).commit();			//
+			//getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new AgenteFragment()).commit();			//
+			
+			frag = new AgenteFragment();
+			
+			transaction = getSupportFragmentManager().beginTransaction();
+			 
+	        transaction.replace(R.id.content_frame, frag );
+	        transaction.addToBackStack(null);
+	 
+	        transaction.commit();
+			
 			break;
 		case RequestCodes.MENU_MEDICO:
-			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new MedicoFragment()).commit();			
+			frag = new MedicoFragment();
+			
+			transaction = getSupportFragmentManager().beginTransaction();
+			 
+	        transaction.replace(R.id.content_frame, frag );
+	        transaction.addToBackStack(null);
+	 
+	        transaction.commit();
+			
+			//getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new MedicoFragment()).commit();			
 			break;
 			
 		case RequestCodes.MENU_DIAGNOSTICAR:
@@ -198,6 +239,14 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 			args = new Bundle();			
 			args.putSerializable(PutExtras.USUARIO_LOGADO, usuarioLogado);
 			frag.setArguments(args);
+			
+			
+			transaction = getSupportFragmentManager().beginTransaction();
+			 
+	        transaction.replace(R.id.content_frame, frag );
+	        transaction.addToBackStack(null);
+	 
+	        transaction.commit();
 			
 			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, frag ).commit();			
 			break;
@@ -213,12 +262,18 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 		case 204:
 			NavigationController.getInstance().showExitDialog(this);
 			break;
-			
-		case 301:
-			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new MenuPrincipalFragment()).commit();		
-			break;
+					
 		case RequestCodes.MENU_LOGIN:			
-			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new LoginFragment()).commit();								
+			
+			frag = new LoginFragment();
+			transaction = getSupportFragmentManager().beginTransaction();
+			 
+	        transaction.replace(R.id.content_frame, frag );
+	        transaction.addToBackStack(null);
+	 
+	        transaction.commit();
+	        
+			//getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new LoginFragment()).commit();								
 			break;
 		case RequestCodes.MENU_COLETA_DADOS:
 			
@@ -233,7 +288,7 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 			//getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new AgenteFragment()).commit();
 			
 			break;
-		case RequestCodes.MENU_HISTORICO:
+		case RequestCodes.MENU_HISTORICO_COLETA:
 			if(usuarioLogado!=null){
 							
 				if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.PACIENTE)){
@@ -241,7 +296,17 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 					args = new Bundle();			
 					args.putSerializable(PutExtras.PACIENTE_SELECIONADO, usuarioLogado);
 					frag.setArguments(args);
-					getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, frag ).commit();
+					//getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, frag ).commit();
+															
+					transaction = getSupportFragmentManager().beginTransaction();
+					 
+			        transaction.replace(R.id.content_frame, frag );
+			        transaction.addToBackStack(null);
+			 
+			        transaction.commit();
+					
+					
+					
 				}else{
 					
 					intent = new Intent(this, ColetarActivity.class);
@@ -258,11 +323,29 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 			break;
 		
 		case RequestCodes.MENU_UBS:			
-			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new UnidadeSaudeFragment()).commit();
+			//getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new UnidadeSaudeFragment()).commit();
+			
+			frag = new UnidadeSaudeFragment();
+			transaction = getSupportFragmentManager().beginTransaction();
+			 
+	        transaction.replace(R.id.content_frame, frag );
+	        transaction.addToBackStack(null);
+	 
+	        transaction.commit();
+			
 			break;					
 		
 		case RequestCodes.MENU_BAIRRO:			
-			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new BairroFragment()).commit();
+			//getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new BairroFragment()).commit();
+			
+			frag = new BairroFragment();
+			transaction = getSupportFragmentManager().beginTransaction();
+			 
+	        transaction.replace(R.id.content_frame, frag );
+	        transaction.addToBackStack(null);
+	 
+	        transaction.commit();
+	        
 			break;
 			
 		}

@@ -35,11 +35,12 @@ public class AgenteHelper extends UsuarioHelper {
 		
 		Map<View, String> mapaDeCampos = new LinkedHashMap<View, String>();
 		
-		mapaDeCampos.put(getNome(), "Nome Obrigat�rio");
-		mapaDeCampos.put(matricula, "Campo Obrigat�rio");
-		mapaDeCampos.put(getEditTextDataNascimento(), "Campo Obrigat�rio");
-		mapaDeCampos.put(getTelefone(), "Telefone Obrigat�rio");		
-		mapaDeCampos.put(getCep(), "Cep Obrigat�rio");
+		mapaDeCampos.put(getNome(), "Nome Obrigatorio");
+		mapaDeCampos.put(getCpf(), "CPF Obrigatorio");
+		mapaDeCampos.put(matricula, "Campo Obrigatorio");
+		mapaDeCampos.put(getEditTextDataNascimento(), "Campo Obrigatorio");
+		mapaDeCampos.put(getTelefone(), "Telefone Obrigatorio");		
+		mapaDeCampos.put(getCep(), "Cep Obrigatorio");
 		
 		
 		

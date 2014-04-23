@@ -420,10 +420,10 @@ public class UsuarioHelper {
 
 		//Map<View, String> mapaDeCampos = new LinkedHashMap<View, String>();
 		
-		mapaDeCampos.put(nome, "Nome Obrigat�rio");
-		mapaDeCampos.put(cpf, "CPF Obrigat�rio");
-		mapaDeCampos.put(dataNascimento, "Campo Obrigat�rio");
-		mapaDeCampos.put(telefone, "Telefone Obrigat�rio");		
+		mapaDeCampos.put(nome, "Nome Obrigatorio");
+		mapaDeCampos.put(cpf, "CPF Obrigatorio");
+		mapaDeCampos.put(dataNascimento, "Campo Obrigatorio");
+		mapaDeCampos.put(telefone, "Telefone Obrigatorio");		
 		mapaDeCampos.put(cep, "Cep Obrigat�rio");
 			
 		for(View chave: mapaDeCampos.keySet()){

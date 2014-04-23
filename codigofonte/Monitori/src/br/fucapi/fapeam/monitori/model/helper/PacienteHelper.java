@@ -169,12 +169,12 @@ public class PacienteHelper extends UsuarioHelper {
 
 		Map<View, String> mapaDeCampos = new LinkedHashMap<View, String>();
 		
-		mapaDeCampos.put(getNome(), "Nome Obrigat�rio");
-		mapaDeCampos.put(getCpf(), "CPF Obrigat�rio");
-		mapaDeCampos.put(getEditTextDataNascimento(), "Campo Obrigat�rio");
-		mapaDeCampos.put(getTelefone(), "Telefone Obrigat�rio");		
-		mapaDeCampos.put(getCep(), "Cep Obrigat�rio");
-		mapaDeCampos.put(numSus, "Campo Obrigat�rio");
+		mapaDeCampos.put(getNome(), "Nome Obrigatorio");
+		mapaDeCampos.put(getCpf(), "CPF Obrigatorio");
+		mapaDeCampos.put(getEditTextDataNascimento(), "Campo Obrigatorio");
+		mapaDeCampos.put(getTelefone(), "Telefone Obrigatorio");		
+		mapaDeCampos.put(getCep(), "Cep Obrigatorio");
+		mapaDeCampos.put(numSus, "Campo Obrigatorio");
 		
 		setMapaDeCampos(mapaDeCampos);
 		

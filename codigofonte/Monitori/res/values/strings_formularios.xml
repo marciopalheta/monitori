@@ -95,6 +95,8 @@
     <string name="cadastrar_medico">Novo Médico</string>
     <string name="cancelar">Cancelar</string>
     <string name="title_activity_coletar_dados">Coletar Dados</string>
+    
+    <string name="ast">*</string>
 
     <!-- coletar dados -->
     <string name="coletar_dados">Coleta de dados</string>

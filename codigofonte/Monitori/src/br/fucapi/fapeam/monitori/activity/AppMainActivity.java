@@ -125,7 +125,6 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 								
 				listMenu.add(menuColetaDados);
 				listMenu.add(menuHistorico);
-				listMenu.add(menuHistDiagnostico);
 				listMenu.add(menuAlterarDados);
 				
 				listMenu.add(secaoApp);
@@ -142,6 +141,7 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 				listMenu.add(secaoFuncionalidades);
 								
 				listMenu.add(menuDiagnosticar);
+				listMenu.add(menuHistorico);
 				listMenu.add(menuHistDiagnostico);
 				
 				listMenu.add(secaoApp);

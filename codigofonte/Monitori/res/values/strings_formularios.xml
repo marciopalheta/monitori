@@ -132,6 +132,7 @@
     <string name="menu_agente">Agente de Saúde</string>
     <string name="menu_paciente">Paciente</string>
     <string name="menu_medico">Médico</string>
+    <string name="menu_alterar">Alterar Dados</string>
     
     <string name="menu_bairro">Bairros</string>
     <string name="menu_ubs_long">Unidade Basica de Saude</string>

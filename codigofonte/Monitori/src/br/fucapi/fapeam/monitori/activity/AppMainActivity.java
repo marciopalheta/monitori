@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.fucapi.fapeam.monitori.R;
+import br.fucapi.fapeam.monitori.activity.paciente.PacienteDadosActivity;
 import br.fucapi.fapeam.monitori.controller.NavigationController;
 import br.fucapi.fapeam.monitori.eula.Eula;
 import br.fucapi.fapeam.monitori.fragment.AgenteFragment;
@@ -30,6 +31,7 @@ import br.fucapi.fapeam.monitori.utils.RequestCodes;
 
 //import com.myappnavdrower.friends.FriendMainFragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -77,6 +79,8 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 		NavDrawerItem menuUbs = NavMenuItem.create(RequestCodes.MENU_UBS,getString(R.string.menu_ubs_long), R.drawable.ic_ubs, true, this);
 		NavDrawerItem secaoFuncionalidades = NavMenuSection.create(300, "Funcionalidades");
 		
+		NavDrawerItem menuAlterarDados = NavMenuItem.create(RequestCodes.MENU_ALTERAR_DADOS, getString(R.string.menu_alterar), R.drawable.drawer_shadow, true, this);
+		
 		NavDrawerItem menuHistorico = NavMenuItem.create(RequestCodes.MENU_HISTORICO_COLETA,getString(R.string.title_activity_historico), android.R.drawable.sym_def_app_icon, true, this);
 		NavDrawerItem menuColetaDados = NavMenuItem.create(RequestCodes.MENU_COLETA_DADOS,getString(R.string.title_activity_coletar_dados), R.drawable.ic_coleta, true, this);						
 		NavDrawerItem menuDiagnosticar = NavMenuItem.create(RequestCodes.MENU_DIAGNOSTICAR, getString(R.string.title_activity_diagnosticar_dados), android.R.drawable.ic_popup_sync, true, this);
@@ -122,6 +126,7 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 				listMenu.add(menuColetaDados);
 				listMenu.add(menuHistorico);
 				listMenu.add(menuHistDiagnostico);
+				listMenu.add(menuAlterarDados);
 				
 				listMenu.add(secaoApp);
 				listMenu.add(menuLogin);
@@ -137,6 +142,7 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 				listMenu.add(secaoFuncionalidades);
 								
 				listMenu.add(menuDiagnosticar);
+				listMenu.add(menuHistDiagnostico);
 				
 				listMenu.add(secaoApp);
 				listMenu.add(menuLogin);
@@ -190,6 +196,7 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 		Bundle args;
 		
 		FragmentTransaction  transaction;
+		
 		
 		switch ((int)id) {
 		case RequestCodes.MENU_PACIENTE:		
@@ -322,6 +329,39 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 			
 			break;
 		
+		case RequestCodes.MENU_HISTORICO_DIAGNOSTICO:
+			if(usuarioLogado!=null){
+							
+				if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.PACIENTE)){
+					frag = new DiagnosticarFragment();
+					args = new Bundle();			
+					args.putSerializable(PutExtras.PACIENTE_SELECIONADO, usuarioLogado);
+					frag.setArguments(args);
+					//getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, frag ).commit();
+															
+					transaction = getSupportFragmentManager().beginTransaction();
+					 
+			        transaction.replace(R.id.content_frame, frag );
+			        transaction.addToBackStack(null);
+			 
+			        transaction.commit();
+					
+					
+					
+				}else{
+					
+					intent = new Intent(this, DiagnosticarActivity.class);
+					//intent.putExtra(PutExtras.PACIENTE_SELECIONADO, usuarioLogado);
+					//intent = new Intent(this,MenuPrincipalActivity.class);
+					//Carrega a nova tela
+					this.startActivity(intent);
+					
+				}
+			}
+		
+						
+			
+			break;
 		case RequestCodes.MENU_UBS:			
 			//getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new UnidadeSaudeFragment()).commit();
 			
@@ -347,9 +387,12 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 	        transaction.commit();
 	        
 			break;
-			
+		
+		
 		}
 		
+		
+			
 	}
 	
 	@Override

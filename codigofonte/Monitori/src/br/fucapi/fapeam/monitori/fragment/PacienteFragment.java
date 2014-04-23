@@ -198,6 +198,7 @@ public class PacienteFragment extends Fragment {
 		MenuItem coletar = menu.findItem(R.id.menu_coletar);
 		MenuItem historico = menu.findItem(R.id.menu_historico);
 		MenuItem diagnostico = menu.findItem(R.id.menu_diagnostico);
+		MenuItem his_diagnostico = menu.findItem(R.id.menu_hist_diagnostico);
 		   if(coletar!=null){
 			   //if() //caso o usuario Logado seja do tipo Agente, setar a coleta de dados como Visivel
 			   
@@ -217,6 +218,7 @@ public class PacienteFragment extends Fragment {
 					if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.MEDICO)){	
 						diagnostico.setVisible(true);
 						historico.setVisible(true);
+						his_diagnostico.setVisible(true);
 					}
 				}
 			   			   

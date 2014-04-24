@@ -119,7 +119,7 @@
     <!-- diagnosticar -->
     <string name="diagnosticar">Diagnósticar</string>
     <string name="descrever">Descrever diagnóstico:</string>
-    <string name="title_activity_historico">Historico</string>
+    <string name="title_activity_historico">Historico de Coleta</string>
     <string name="editar">Editar</string>
     <string name="sexo_prompt">Selecione um sexo</string>
     <string name="title_activity_diagnosticar">Historico Diagnostico</string>

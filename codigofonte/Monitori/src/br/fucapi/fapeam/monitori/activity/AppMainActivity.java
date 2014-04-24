@@ -81,10 +81,10 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 		
 		NavDrawerItem menuAlterarDados = NavMenuItem.create(RequestCodes.MENU_ALTERAR_DADOS, getString(R.string.menu_alterar), R.drawable.drawer_shadow, true, this);
 		
-		NavDrawerItem menuHistorico = NavMenuItem.create(RequestCodes.MENU_HISTORICO_COLETA,getString(R.string.title_activity_historico), android.R.drawable.sym_def_app_icon, true, this);
+		NavDrawerItem menuHistorico = NavMenuItem.create(RequestCodes.MENU_HISTORICO_COLETA,getString(R.string.title_activity_historico), R.drawable.historico, true, this);
 		NavDrawerItem menuColetaDados = NavMenuItem.create(RequestCodes.MENU_COLETA_DADOS,getString(R.string.title_activity_coletar_dados), R.drawable.ic_coleta, true, this);						
-		NavDrawerItem menuDiagnosticar = NavMenuItem.create(RequestCodes.MENU_DIAGNOSTICAR, getString(R.string.title_activity_diagnosticar_dados), android.R.drawable.ic_popup_sync, true, this);
-		NavDrawerItem menuHistDiagnostico = NavMenuItem.create(RequestCodes.MENU_HISTORICO_DIAGNOSTICO, getString(R.string.title_activity_diagnosticar), android.R.drawable.ic_popup_sync, true, this);
+		NavDrawerItem menuDiagnosticar = NavMenuItem.create(RequestCodes.MENU_DIAGNOSTICAR, getString(R.string.title_activity_diagnosticar_dados), R.drawable.diagnosticar, true, this);
+		NavDrawerItem menuHistDiagnostico = NavMenuItem.create(RequestCodes.MENU_HISTORICO_DIAGNOSTICO, getString(R.string.title_activity_diagnosticar), R.drawable.historico, true, this);
 		
 		NavDrawerItem secaoApp = NavMenuSection.create(200, "Aplicação");
 		

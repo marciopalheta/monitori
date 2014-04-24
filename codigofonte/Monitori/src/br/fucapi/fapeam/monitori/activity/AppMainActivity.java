@@ -242,7 +242,7 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 			break;
 			
 		case RequestCodes.MENU_DIAGNOSTICAR:
-			frag = new DiagnosticarFragment();
+			frag = new PacienteFragment();
 			args = new Bundle();			
 			args.putSerializable(PutExtras.USUARIO_LOGADO, usuarioLogado);
 			frag.setArguments(args);
@@ -284,16 +284,20 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 			break;
 		case RequestCodes.MENU_COLETA_DADOS:
 			
-			intent = new Intent(this, ColetarDadosActivity.class);
-			if(usuarioLogado!=null){
-				if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.PACIENTE)){
-					intent.putExtra(PutExtras.PACIENTE_SELECIONADO, usuarioLogado);
-				}
-			}
-			//Carrega a nova tela
-			this.startActivity(intent);
-			//getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new AgenteFragment()).commit();
+			frag = new PacienteFragment();
+			args = new Bundle();			
+			args.putSerializable(PutExtras.USUARIO_LOGADO, usuarioLogado);
+			frag.setArguments(args);
 			
+			
+			transaction = getSupportFragmentManager().beginTransaction();
+			 
+	        transaction.replace(R.id.content_frame, frag );
+	        transaction.addToBackStack(null);
+	 
+	        transaction.commit();
+			
+			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, frag ).commit();			
 			break;
 		case RequestCodes.MENU_HISTORICO_COLETA:
 			if(usuarioLogado!=null){

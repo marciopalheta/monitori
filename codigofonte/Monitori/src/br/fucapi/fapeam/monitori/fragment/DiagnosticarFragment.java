@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.activity.DiagnosticarDadosActivity;
+import br.fucapi.fapeam.monitori.activity.paciente.PacienteActivity;
 import br.fucapi.fapeam.monitori.model.bean.Diagnosticar;
 import br.fucapi.fapeam.monitori.model.bean.Paciente;
 import br.fucapi.fapeam.monitori.model.dao.DiagnosticarDAO;
@@ -62,8 +63,8 @@ public class DiagnosticarFragment extends Fragment{
 				
 				if (pacienteSelecionado == null) {
 					// Atualiza a tela com dados do Aluno			
-					Toast.makeText(getActivity(), "PACIENTE NAO INFORMADO", Toast.LENGTH_LONG).show();
-									
+					
+			
 				}
 
 				
@@ -188,6 +189,8 @@ public class DiagnosticarFragment extends Fragment{
 				//chamado do metodo listar
 							
 				this.listaDiagnosticar = dao.listar();
+				
+				
 				if(pacienteSelecionado!=null){
 					//this.listaColetar = dao.listar(pacienteSelecionado);
 				}else{

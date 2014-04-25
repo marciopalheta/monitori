@@ -117,20 +117,6 @@ public class MenuPrincipalFragment extends Fragment implements OnClickListener {
 			btMedico.setBackgroundColor(getResources().getColor( android.R.color.transparent ) );
 			//btMedico.setWidth(50);
 			
-			/*Botao Bairro*/
-			btBairro = new Button(this.getActivity());
-			
-			btBairro.setText( getResources().getString(R.string.menu_bairro) );
-			Drawable drawableTopBairro = getResources().getDrawable(R.drawable.ic_bairro);
-			
-			btBairro.setOnClickListener(this);		
-			btBairro.setLayoutParams(
-					new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 1f)		
-					);
-								
-			btBairro.setCompoundDrawablesWithIntrinsicBounds(null, drawableTopBairro, null, null);
-			btBairro.setBackgroundColor(getResources().getColor( android.R.color.transparent ) );
-			//btBairro.setWidth(50);			
 			/*Botao Ubs*/
 			btUbs = new Button(this.getActivity());
 			
@@ -145,12 +131,27 @@ public class MenuPrincipalFragment extends Fragment implements OnClickListener {
 			btUbs.setCompoundDrawablesWithIntrinsicBounds(null, drawableTopUbs , null, null);
 			btUbs.setBackgroundColor(getResources().getColor( android.R.color.transparent ) );
 			btUbs.setWidth(30);
+			
+			/*Botao Bairro*/
+			btBairro = new Button(this.getActivity());
+			
+			btBairro.setText( getResources().getString(R.string.menu_bairro) );
+			Drawable drawableTopBairro = getResources().getDrawable(R.drawable.ic_bairro);
+			
+			btBairro.setOnClickListener(this);		
+			btBairro.setLayoutParams(
+					new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 1f)		
+					);
+								
+			btBairro.setCompoundDrawablesWithIntrinsicBounds(null, drawableTopBairro, null, null);
+			btBairro.setBackgroundColor(getResources().getColor( android.R.color.transparent ) );
+			//btBairro.setWidth(50);			
 									
 			dash.addView(btPaciente);
 			dash.addView(btAgente);		
-			dash.addView(btMedico);
+			dash.addView(btMedico);	
+			dash.addView(btUbs);
 			dash.addView(btBairro);
-			dash.addView(btUbs);			
 			
 			
 		}else if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.PACIENTE)){
@@ -173,7 +174,7 @@ public class MenuPrincipalFragment extends Fragment implements OnClickListener {
 			btHistoricoColeta = new Button(this.getActivity());
 			
 			btHistoricoColeta.setText( getResources().getString(R.string.menu_historico_coleta) );
-			Drawable drawableTopHistoricoColeta = getResources().getDrawable(R.drawable.ic_coleta);
+			Drawable drawableTopHistoricoColeta = getResources().getDrawable(R.drawable.historico);
 			
 			btHistoricoColeta.setOnClickListener(this);		
 			btHistoricoColeta.setLayoutParams(
@@ -184,11 +185,11 @@ public class MenuPrincipalFragment extends Fragment implements OnClickListener {
 			btHistoricoColeta.setBackgroundColor(getResources().getColor( android.R.color.transparent ) );
 			btHistoricoColeta.setWidth(30);
 			
-			/*Botao HistoricoDiagnostico*/
+			/*Botao HistoricoDiagnostico
 			btHistoricoDiagnostico = new Button(this.getActivity());
 			
 			btHistoricoDiagnostico.setText( getResources().getString(R.string.menu_historico_diagnostico) );
-			Drawable drawableTopHistoricoDiagnostico = getResources().getDrawable(R.drawable.ic_coleta);
+			Drawable drawableTopHistoricoDiagnostico = getResources().getDrawable(R.drawable.historico);
 			
 			btHistoricoDiagnostico.setOnClickListener(this);
 			
@@ -198,13 +199,13 @@ public class MenuPrincipalFragment extends Fragment implements OnClickListener {
 								
 			btHistoricoDiagnostico.setCompoundDrawablesWithIntrinsicBounds(null, drawableTopHistoricoDiagnostico , null, null);
 			btHistoricoDiagnostico.setBackgroundColor(getResources().getColor( android.R.color.transparent ) );
-			btHistoricoDiagnostico.setWidth(30);
+			btHistoricoDiagnostico.setWidth(30);*/
 												
 			
 			
 			dash.addView(btColetaDados);
 			dash.addView(btHistoricoColeta);		
-			dash.addView(btHistoricoDiagnostico);							
+			//dash.addView(btHistoricoDiagnostico);							
 			
 		}else if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.AGENTE)){
 			

@@ -36,7 +36,7 @@ public class ColetarDadosActivity extends FragmentActivity {
 		
 		if (pacienteSelecionado == null) {
 			// Atualiza a tela com dados do Aluno			
-			Toast.makeText(this, "PACIENTE NAO INFORMADO", Toast.LENGTH_LONG).show();
+			//Toast.makeText(this, "PACIENTE NAO INFORMADO", Toast.LENGTH_LONG).show();
 			finish();
 		}else{
 			//criacao do objeto helper

@@ -186,17 +186,23 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
 	   String id = KEY_ID;
 	   String idPaciente = "idPaciente";
 	   String descrever = "descrever";
+	   String datadiagnostico = "dataDiagnostico";
+   	   String horadiagnostico = "horaDiagnostico";
    }
    
    public static String ALL_FIELDS_TABLE_DIAGNOSTICAR =
 		   TABLE_DIAGNOSTICAR_NAME +"."+FIELDS_TABLE_DIAGNOSTICAR.id+","+
 		   TABLE_DIAGNOSTICAR_NAME +"."+FIELDS_TABLE_DIAGNOSTICAR.idPaciente+","+
-		   TABLE_DIAGNOSTICAR_NAME +"."+FIELDS_TABLE_DIAGNOSTICAR.descrever+" ";
+		   TABLE_DIAGNOSTICAR_NAME +"."+FIELDS_TABLE_DIAGNOSTICAR.descrever+", "+
+		   TABLE_DIAGNOSTICAR_NAME +"."+FIELDS_TABLE_DIAGNOSTICAR.datadiagnostico+", "+
+   		   TABLE_DIAGNOSTICAR_NAME +"."+FIELDS_TABLE_DIAGNOSTICAR.horadiagnostico+" ";
    
    private static final String CREATE_TABLE_DIAGNOSTICAR = "CREATE TABLE " + TABLE_DIAGNOSTICAR_NAME
 		   + "(" + FIELDS_TABLE_DIAGNOSTICAR.id + " INTEGER PRIMARY KEY,"
 		   + FIELDS_TABLE_DIAGNOSTICAR.idPaciente + " INTEGER, "
-		   + FIELDS_TABLE_DIAGNOSTICAR.descrever+" TEXT )";
+		   + FIELDS_TABLE_DIAGNOSTICAR.descrever+" TEXT, "
+		   + FIELDS_TABLE_DIAGNOSTICAR.datadiagnostico+" TEXT, " 
+		   + FIELDS_TABLE_DIAGNOSTICAR.horadiagnostico+" TEXT )";
     
 	private static final String TAG = "SqlLiteDataBase" ;
 	

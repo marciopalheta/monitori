@@ -1,8 +1,11 @@
 package br.fucapi.fapeam.monitori.model.dao;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
+import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.model.bean.Diagnosticar;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import br.fucapi.fapeam.monitori.sqlite.SQLiteDatabaseHelper;
@@ -19,10 +22,21 @@ public class DiagnosticarDAO extends AbstractDataBase{
 	
 	private Context context;
 	
+	private String DATE_FORMAT;	
+	
+	private SimpleDateFormat sdfDate;
+	private SimpleDateFormat sdfTime;
+	String dateFormated;
+	String timeFormated;
+	
 	public DiagnosticarDAO(Context context){
 		//chamando o construtor que sabe acessar o BD
 		super(context);
 		this.context = context;
+		
+		sdfDate = new SimpleDateFormat(context.getString(R.string.DATE_FORMAT_DATABASE));
+		sdfTime = new SimpleDateFormat(context.getString(R.string.TIME_FORMAT_APLICATION));						
+		
 	}
 	
 	/**
@@ -39,7 +53,15 @@ public class DiagnosticarDAO extends AbstractDataBase{
 				
 				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_DIAGNOSTICAR.descrever, diagnosticar.getDescrever());
 				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_DIAGNOSTICAR.idPaciente, diagnosticar.getUsuario().getId());
-																		
+				
+				dateFormated = sdfDate.format(diagnosticar.getDataHoraDiagnostico().getTime());
+				timeFormated = sdfTime.format(diagnosticar.getDataHoraDiagnostico().getTime());
+				
+				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_DIAGNOSTICAR.datadiagnostico, 
+						dateFormated );
+				values.put(SQLiteDatabaseHelper.FIELDS_TABLE_DIAGNOSTICAR.horadiagnostico, 
+						timeFormated );
+				
 				//Inserir dados do usuario
 				getWritableDatabase().insert(SQLiteDatabaseHelper.TABLE_DIAGNOSTICAR_NAME, null, values);
 				
@@ -53,6 +75,8 @@ public class DiagnosticarDAO extends AbstractDataBase{
 				
 				Log.i(TAG, "Paciente: "+ diagnosticar.getUsuario().getNome());
 				Log.i(TAG, "diagnostico: "+ diagnosticar.getDescrever());
+				Log.i(TAG, "DataDiagnostico: "+ dateFormated );
+				Log.i(TAG, "HoraDiagnostico: "+ timeFormated );	
 			}
 		}
 		
@@ -88,7 +112,19 @@ public class DiagnosticarDAO extends AbstractDataBase{
 									
 					UsuarioDAO usuarioDao = new UsuarioDAO(context);				
 					Usuario usuario = usuarioDao.getUsuario( cursor.getLong(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_DIAGNOSTICAR.idPaciente) )) ;
-					diagnosticar.setUsuario(usuario); 				
+					diagnosticar.setUsuario(usuario); 	
+					
+					String dataDiagnostico = cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_DIAGNOSTICAR.datadiagnostico));								
+					String horaDiagnostico = cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_DIAGNOSTICAR.horadiagnostico));
+					
+					String dataHora = dataDiagnostico + " " +horaDiagnostico;
+					
+					SimpleDateFormat sdfDateTime = new SimpleDateFormat( context.getString(R.string.DATE_FORMAT_DATABASE) +" " + context.getString(R.string.TIME_FORMAT_APLICATION) );
+									
+								
+					Calendar cal = Calendar.getInstance();
+					//cal.setTime(sdfDateTime.parse(dataHora));
+					diagnosticar.setDataHoraDiagnostico(cal);
 																								
 					lista.add(diagnosticar);
 				}

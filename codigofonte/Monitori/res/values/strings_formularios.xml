@@ -115,6 +115,7 @@
     <string name="historico_diagnostico">Histórico de diagnóstico</string>
     <string name="lorem_ipsum">Lorem ipsum loren</string>
     <string name="data">23/02/2014</string>
+    
 
     <!-- diagnosticar -->
     <string name="diagnosticar">Diagnósticar</string>
@@ -123,7 +124,8 @@
     <string name="editar">Editar</string>
     <string name="sexo_prompt">Selecione um sexo</string>
     <string name="title_activity_diagnosticar">Historico Diagnostico</string>
-    
+    <string name="data_diagnostico">15 de Fevereiro de 2014</string>
+    <string name="descricao">Descrição</string>
 
     <string name="title_activity_ubs">Lista de UBS</string>
     <string name="title_activity_ubs_dados">Dados de UBS</string>

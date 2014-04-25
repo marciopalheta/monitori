@@ -1,11 +1,13 @@
 package br.fucapi.fapeam.monitori.model.bean;
 
 import java.io.Serializable;
+import java.util.Calendar;
 
 @SuppressWarnings("serial")
 public class Diagnosticar extends AbstractEntityBean implements Serializable{
 	
 	private String descrever;
+	private Calendar dataHoraDiagnostico;
 	private Usuario usuario;
 
 	public String getDescrever() {
@@ -20,6 +22,14 @@ public class Diagnosticar extends AbstractEntityBean implements Serializable{
 	public String toString() {
 		
 		return getDescrever();
+	}
+	
+	public Calendar getDataHoraDiagnostico() {
+		return dataHoraDiagnostico;
+	}
+
+	public void setDataHoraDiagnostico(Calendar dataHoraDiagnostico) {
+		this.dataHoraDiagnostico = dataHoraDiagnostico;
 	}
 
 	public Usuario getUsuario() {

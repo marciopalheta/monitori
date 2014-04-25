@@ -3,6 +3,7 @@ package br.fucapi.fapeam.monitori.activity;
 import java.util.List;
 
 import br.fucapi.fapeam.monitori.R;
+import br.fucapi.fapeam.monitori.adapter.DiagnosticarAdapter;
 import br.fucapi.fapeam.monitori.model.bean.Diagnosticar;
 import br.fucapi.fapeam.monitori.model.bean.Paciente;
 import br.fucapi.fapeam.monitori.model.dao.DiagnosticarDAO;
@@ -21,6 +22,7 @@ import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
@@ -38,7 +40,7 @@ public class DiagnosticarActivity extends Activity {
 		private List<Diagnosticar> listaDiagnosticar;
 		
 		//ArrayAdapter para adaptar lista em view
-		private ArrayAdapter<Diagnosticar> adapter;
+		private DiagnosticarAdapter adapter;
 		
 		//definicao do layout de exibicao da lista
 		private int adapterLayout = android.R.layout.simple_list_item_1;
@@ -143,8 +145,8 @@ public class DiagnosticarActivity extends Activity {
 		dao.close();
 		
 		//objeto arrayAdapter converte array em view
-		this.adapter = new ArrayAdapter<Diagnosticar>(this,
-				adapterLayout, listaDiagnosticar);
+		this.adapter = new DiagnosticarAdapter(this,
+				 listaDiagnosticar);
 		//associacao do adapter ao listView
 		this.lvListagem.setAdapter(adapter);
 	}

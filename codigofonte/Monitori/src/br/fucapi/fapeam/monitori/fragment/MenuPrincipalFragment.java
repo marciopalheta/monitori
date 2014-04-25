@@ -391,11 +391,11 @@ public class MenuPrincipalFragment extends Fragment implements OnClickListener {
     		} 
     		
     		if(v == btBairro) {    			
-    			((AppMainActivity)MenuPrincipalFragment.this.getActivity()).selectItem( RequestCodes.MENU_BAIRRO );
+    			((AppMainActivity)MenuPrincipalFragment.this.getActivity()).selectItem( RequestCodes.MENU_UBS );
     		}
     		
     		if(v == btUbs) {    			
-    			((AppMainActivity)MenuPrincipalFragment.this.getActivity()).selectItem( RequestCodes.MENU_UBS );
+    			((AppMainActivity)MenuPrincipalFragment.this.getActivity()).selectItem( RequestCodes.MENU_BAIRRO );
     		}
     		
     		

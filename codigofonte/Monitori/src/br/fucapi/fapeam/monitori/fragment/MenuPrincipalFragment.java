@@ -399,12 +399,12 @@ public class MenuPrincipalFragment extends Fragment implements OnClickListener {
     		}
     		
     		
-    		if(v == btColetaDados){    			
-    			((AppMainActivity)MenuPrincipalFragment.this.getActivity()).selectItem( RequestCodes.MENU_COLETA_DADOS );
-    		}
+    		if(v == btColetaDados){    	
+    			((AppMainActivity)MenuPrincipalFragment.this.getActivity()).selectItem(RequestCodes.MENU_PACIENTE);
+    			}
  
     		if(v == btHistoricoColeta){    			
-    			((AppMainActivity)MenuPrincipalFragment.this.getActivity()).selectItem( RequestCodes.MENU_HISTORICO_COLETA );
+    			((AppMainActivity)MenuPrincipalFragment.this.getActivity()).selectItem( RequestCodes.MENU_AGENTE );
     		}
     		
     		if(v == btDiagnostico){    			

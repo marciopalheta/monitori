@@ -27,7 +27,13 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.support.v4.app.FragmentActivity;
+import android.text.Editable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -75,14 +81,14 @@ public class UsuarioHelper {
     //private Calendar myCalendar;
 
 
-	private Map<View, String> mapaDeCampos = new LinkedHashMap<View, String>();
+	private Map<View, String> mapCamposObrigatorios = new LinkedHashMap<View, String>();
 	
-	public Map<View, String> getMapaDeCampos() {
-		return mapaDeCampos;
+	public Map<View, String> getMapCamposObrigatorios() {
+		return mapCamposObrigatorios;
 	}
 
-	public void setMapaDeCampos(Map<View, String> mapaDeCampos) {
-		this.mapaDeCampos = mapaDeCampos;
+	public void setMapCamposObrigatorios(Map<View, String> mapCamposObrigatorios) {
+		this.mapCamposObrigatorios = mapCamposObrigatorios;
 	}
 
 	private DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
@@ -271,9 +277,46 @@ public class UsuarioHelper {
 		adapter = new SpinnerAdapter(fragmentActivity, R.layout.spinner_sexo,StringArray,listSexo );		
 	    sexo.setAdapter(adapter);
 	    atualizarListaBairros();
-	    		
+	    
+
+		mapCamposObrigatorios.put(nome, "Nome Obrigatorio");
+		mapCamposObrigatorios.put(cpf, "CPF Obrigatorio");
+		mapCamposObrigatorios.put(dataNascimento, "Campo Obrigatorio");
+		mapCamposObrigatorios.put(telefone, "Telefone Obrigatorio");		
+		mapCamposObrigatorios.put(cep, "Cep Obrigatorio");
+	    
+		//mudar nos helpers, add metodos
+		setViewCamposObrigatorios();	
 	}
 		
+public void setViewCamposObrigatorios(){
+		
+		
+		for(View chave: mapCamposObrigatorios.keySet()){
+		    //System.out.println("chave: "+chave+", valor: "+mapaDeCampos.get(chave)+".");
+												
+			if (chave instanceof EditText) {
+				
+				EditText edTexto = (EditText) chave;
+				Editable texto = edTexto.getText();
+				   if (texto != null) {				    				   								   				  
+					   String strTexto = texto.toString();
+					    if (TextUtils.isEmpty(strTexto)) {
+
+					    	Drawable errorIcon = fragmentActivity.getResources().getDrawable(R.drawable.indicator_input_error);
+					    	errorIcon.setBounds(new Rect(0, 0, errorIcon.getIntrinsicWidth(), errorIcon.getIntrinsicHeight()));
+					    	//errorIcon.setColorFilter(Color.RED ,PorterDuff.Mode.MULTIPLY);
+					    	
+					        edTexto.setError(null,errorIcon);					    	
+					    }					   
+				   }
+				   
+			}   
+		}													
+		
+	}
+
+	
 	
 	private void atualizarListaBairros(){
 		
@@ -416,19 +459,10 @@ public class UsuarioHelper {
 	}
 	
 	public boolean validar(){
-		// cria o mapa
-
-		//Map<View, String> mapaDeCampos = new LinkedHashMap<View, String>();
-		
-		mapaDeCampos.put(nome, "Nome Obrigatorio");
-		mapaDeCampos.put(cpf, "CPF Obrigatorio");
-		mapaDeCampos.put(dataNascimento, "Campo Obrigatorio");
-		mapaDeCampos.put(telefone, "Telefone Obrigatorio");		
-		mapaDeCampos.put(cep, "Cep Obrigat�rio");
 			
-		for(View chave: mapaDeCampos.keySet()){
+		for(View chave: mapCamposObrigatorios.keySet()){
 		    //System.out.println("chave: "+chave+", valor: "+mapaDeCampos.get(chave)+".");
-			if(Funcoes.validarDados(chave,  mapaDeCampos.get(chave) ) == false){
+			if(Funcoes.validarDados(chave,  mapCamposObrigatorios.get(chave) ) == false){
 				return false;
 			}else{
 				if(chave.equals(dataNascimento)){

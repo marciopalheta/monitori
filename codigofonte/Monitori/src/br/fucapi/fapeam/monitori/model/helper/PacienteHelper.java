@@ -176,8 +176,8 @@ public class PacienteHelper extends UsuarioHelper {
 		mapaDeCampos.put(getCep(), "Cep Obrigatorio");
 		mapaDeCampos.put(numSus, "Campo Obrigatorio");
 		
-		setMapaDeCampos(mapaDeCampos);
-		
+		setMapCamposObrigatorios(mapaDeCampos);
+		setViewCamposObrigatorios();
 		atualizarListaMedicos();
 		
 	}

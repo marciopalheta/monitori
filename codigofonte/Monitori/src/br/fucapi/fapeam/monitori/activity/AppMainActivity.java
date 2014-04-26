@@ -190,6 +190,20 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 	}
 	
 	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		super.onBackPressed();
+		Fragment frag = new MenuPrincipalFragment();
+		Bundle args = new Bundle();			
+		args.putSerializable(PutExtras.USUARIO_LOGADO, usuarioLogado);
+		frag.setArguments(args);
+
+		
+		getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, frag ).commit();
+		setNoItemChecked();
+	}
+	
+	@Override
 	protected void onNavItemSelected(int id) {
 		Intent intent;
 		Fragment frag;

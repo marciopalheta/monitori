@@ -32,8 +32,8 @@ public class MedicoHelper extends UsuarioHelper {
 		mapaDeCampos.put(getTelefone(), "Telefone Obrigatorio");		
 		mapaDeCampos.put(getCep(), "Cep Obrigatorio");
 		
-		setMapaDeCampos(mapaDeCampos);
-		
+		setMapCamposObrigatorios(mapaDeCampos);
+		setViewCamposObrigatorios();
 	}
 
 public Medico getMedico(){

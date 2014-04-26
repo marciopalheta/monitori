@@ -1,8 +1,11 @@
 package br.fucapi.fapeam.monitori.navdrawer;
 
 
+import java.util.List;
+
 import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
+import br.fucapi.fapeam.monitori.utils.SpinnerObject;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -161,6 +164,48 @@ public abstract class AbstractNavDrawerActivity extends FragmentActivity {
         	mDrawerLayout.closeDrawer(mDrawerList);
         }
     }
+    
+    public void executeItem(int idItem) {
+    	int position = -1;
+    	NavDrawerItem selectedItem = null;    
+    	List<NavDrawerItem> list = navConf.getNavItems();
+    	
+        for(int j = 0; j < list.size(); j++) {
+
+            if(list.get(j).getId() == idItem) {
+            	selectedItem = list.get(j);
+            	position = j;
+                  break;
+              }
+         }
+
+    	if(selectedItem==null){
+    		return;
+    	}
+    	//NavDrawerItem selectedItem = navConf.getNavItems().get(position);
+    	navConf.getNavItems().get(position);   	
+    	this.onNavItemSelected(idItem);
+        mDrawerList.setItemChecked(position, true);
+        
+        if ( selectedItem.updateActionBarTitle()) {
+        	setTitle(selectedItem.getLabel());
+        }
+        
+        if ( this.mDrawerLayout.isDrawerOpen(this.mDrawerList)) {
+        	mDrawerLayout.closeDrawer(mDrawerList);
+        }
+    }
+    
+    public void setNoItemChecked(){
+    	
+    	List<NavDrawerItem> list = navConf.getNavItems();
+    	
+        for(int j = 0; j < list.size(); j++) {
+        	mDrawerList.setItemChecked( j , false);            
+         }	
+        setTitle(mDrawerTitle);	
+    }
+    
     
     @Override
     public void setTitle(CharSequence title) {

@@ -21,6 +21,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 public class MenuPrincipalFragment extends Fragment implements OnClickListener {
 
@@ -68,222 +69,117 @@ public class MenuPrincipalFragment extends Fragment implements OnClickListener {
 		*/
 		
 		DashboardLayout dash = (DashboardLayout) layout.findViewById(R.id.dashboard);
+		LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 1f);
+		/*Botao Paciente*/
+		btPaciente = new Button(this.getActivity());		
+		btPaciente.setText( getResources().getString(R.string.menu_paciente) );
+		Drawable drawableTopPaciente = getResources().getDrawable(R.drawable.ic_paciente);
+		btPaciente.setCompoundDrawablesWithIntrinsicBounds(null, drawableTopPaciente , null, null);
+		btPaciente.setOnClickListener(this);		
+		btPaciente.setLayoutParams(layoutParams);								
+		btPaciente.setBackgroundColor(getResources().getColor( android.R.color.transparent ) );
+		
+		
+		/*Botao Agente Saude*/
+		btAgente = new Button(this.getActivity());		
+		btAgente.setText( getResources().getString(R.string.menu_agente) );
+		Drawable drawableTopAgente = getResources().getDrawable(R.drawable.ic_agente);
+		btAgente.setCompoundDrawablesWithIntrinsicBounds(null, drawableTopAgente , null, null);
+		btAgente.setOnClickListener(this);					
+		btAgente.setLayoutParams(layoutParams);						
+		btAgente.setBackgroundColor(getResources().getColor( android.R.color.transparent ) );
+		//btAgente.setWidth(30);
+		
+		
+		/*Botao Medico*/
+		btMedico = new Button(this.getActivity());		
+		btMedico.setText( getResources().getString(R.string.menu_medico) );
+		Drawable drawableTopMedico = getResources().getDrawable(R.drawable.ic_medico);
+		btMedico.setCompoundDrawablesWithIntrinsicBounds(null, drawableTopMedico , null, null);
+		btMedico.setOnClickListener(this);		
+		btMedico.setLayoutParams(layoutParams);
+		btMedico.setBackgroundColor(getResources().getColor( android.R.color.transparent ) );
+		
+		
+		/*Botao Bairro*/
+		btBairro = new Button(this.getActivity());		
+		btBairro.setText( getResources().getString(R.string.menu_bairro) );
+		Drawable drawableTopBairro = getResources().getDrawable(R.drawable.ic_bairro);						
+		btBairro.setCompoundDrawablesWithIntrinsicBounds(null, drawableTopBairro , null, null);
+		btBairro.setOnClickListener(this);		
+		btBairro.setLayoutParams(layoutParams);									
+		btBairro.setBackgroundColor(getResources().getColor( android.R.color.transparent ) );
+		
+		
+		/*Botao Ubs*/
+		btUbs = new Button(this.getActivity());		
+		btUbs.setText( getResources().getString(R.string.menu_ubs) );
+		Drawable drawableTopUbs = getResources().getDrawable(R.drawable.ic_ubs);
+		btUbs.setCompoundDrawablesWithIntrinsicBounds(null, drawableTopUbs, null, null);
+		btUbs.setOnClickListener(this);		
+		btUbs.setLayoutParams(layoutParams);
+		btUbs.setBackgroundColor(getResources().getColor( android.R.color.transparent ) );
+		
+		
+		
+		/*Botao ColetarDados*/
+		btColetaDados = new Button(this.getActivity());		
+		btColetaDados.setText( getResources().getString(R.string.menu_coletadados) );
+		Drawable drawableTopColetaDados = getResources().getDrawable(R.drawable.ic_coleta);
+		btColetaDados.setCompoundDrawablesWithIntrinsicBounds(null, drawableTopColetaDados , null, null);
+		btColetaDados.setOnClickListener(this);		
+		btColetaDados.setLayoutParams(layoutParams);									
+		btColetaDados.setBackgroundColor(getResources().getColor( android.R.color.transparent ) );			
+								
+		/*Botao HistoricoColeta*/
+		btHistoricoColeta = new Button(this.getActivity());		
+		btHistoricoColeta.setText( getResources().getString(R.string.menu_historico_coleta) );
+		Drawable drawableTopHistoricoColeta = getResources().getDrawable(R.drawable.historico);
+		btHistoricoColeta.setCompoundDrawablesWithIntrinsicBounds(null, drawableTopHistoricoColeta , null, null);
+		btHistoricoColeta.setOnClickListener(this);		
+		btHistoricoColeta.setLayoutParams(layoutParams);									
+		btHistoricoColeta.setBackgroundColor(getResources().getColor( android.R.color.transparent ) );
+		btHistoricoColeta.setWidth(30);
+		
+		
+		/*Botao Diagnostico*/
+		btDiagnostico = new Button(this.getActivity());		
+		btDiagnostico.setText( getResources().getString(R.string.menu_diagnosticar) );
+		Drawable drawableTopDiagnostico= getResources().getDrawable(R.drawable.ic_coleta);
+		btDiagnostico.setCompoundDrawablesWithIntrinsicBounds(null, drawableTopDiagnostico , null, null);
+		btDiagnostico.setOnClickListener(this);		
+		btDiagnostico.setLayoutParams(layoutParams);									
+		btDiagnostico.setBackgroundColor(getResources().getColor( android.R.color.transparent ) );
+		
+		/*Botao HistoricoDiagnostico*/
+		btHistoricoDiagnostico = new Button(this.getActivity());		
+		btHistoricoDiagnostico.setText( getResources().getString(R.string.menu_historico_diagnostico) );
+		Drawable drawableTopHistoricoDiagnostico = getResources().getDrawable(R.drawable.historico);
+		btHistoricoDiagnostico.setCompoundDrawablesWithIntrinsicBounds(null, drawableTopHistoricoDiagnostico , null, null);
+		btHistoricoDiagnostico.setOnClickListener(this);		
+		btHistoricoDiagnostico.setLayoutParams(layoutParams);									
+		btHistoricoDiagnostico.setBackgroundColor(getResources().getColor( android.R.color.transparent ) );
+		btHistoricoDiagnostico.setWidth(30);
 		
 		if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.ADMINISTRADOR)){
-			
-			/*Botao Paciente*/
-			btPaciente = new Button(this.getActivity());
-			
-			btPaciente.setText( getResources().getString(R.string.menu_paciente) );
-			btPaciente.setOnClickListener(this);		
-			btPaciente.setLayoutParams(
-					new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 1f)		
-					);
 					
-			Drawable drawableTopPaciente = getResources().getDrawable(R.drawable.ic_paciente);
-			btPaciente.setCompoundDrawablesWithIntrinsicBounds(null, drawableTopPaciente , null, null);
-			btPaciente.setBackgroundColor(getResources().getColor( android.R.color.transparent ) );
-			//btPaciente.setWidth(50);
-			
-			
-			/*Botao Agente Saude*/
-			btAgente = new Button(this.getActivity());
-			
-			btAgente.setText( getResources().getString(R.string.menu_agente) );
-			btAgente.setOnClickListener(this);
-						
-			btAgente.setLayoutParams(
-					new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 1f)
-					);
-					
-			Drawable drawableTopAgente = getResources().getDrawable(R.drawable.ic_agente);
-			btAgente.setCompoundDrawablesWithIntrinsicBounds(null, drawableTopAgente , null, null);
-			btAgente.setBackgroundColor(getResources().getColor( android.R.color.transparent ) );
-			btAgente.setWidth(30);
-			
-			
-			/*Botao Medico*/
-			btMedico = new Button(this.getActivity());
-			
-			btMedico.setText( getResources().getString(R.string.menu_medico) );
-			Drawable drawableTopMedico = getResources().getDrawable(R.drawable.ic_medico);
-			
-			btMedico.setOnClickListener(this);		
-			btMedico.setLayoutParams(
-					new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 1f)		
-					);
-								
-			btMedico.setCompoundDrawablesWithIntrinsicBounds(null, drawableTopMedico , null, null);
-			btMedico.setBackgroundColor(getResources().getColor( android.R.color.transparent ) );
-			//btMedico.setWidth(50);
-			
-			/*Botao Ubs*/
-			btUbs = new Button(this.getActivity());
-			
-			btUbs.setText( getResources().getString(R.string.menu_ubs_long) );
-			Drawable drawableTopUbs = getResources().getDrawable(R.drawable.ic_ubs);
-			
-			btUbs.setOnClickListener(this);		
-			btUbs.setLayoutParams(
-					new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 1f)		
-					);
-								
-			btUbs.setCompoundDrawablesWithIntrinsicBounds(null, drawableTopUbs , null, null);
-			btUbs.setBackgroundColor(getResources().getColor( android.R.color.transparent ) );
-			btUbs.setWidth(30);
-			
-			/*Botao Bairro*/
-			btBairro = new Button(this.getActivity());
-			
-			btBairro.setText( getResources().getString(R.string.menu_bairro) );
-			Drawable drawableTopBairro = getResources().getDrawable(R.drawable.ic_bairro);
-			
-			btBairro.setOnClickListener(this);		
-			btBairro.setLayoutParams(
-					new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 1f)		
-					);
-								
-			btBairro.setCompoundDrawablesWithIntrinsicBounds(null, drawableTopBairro, null, null);
-			btBairro.setBackgroundColor(getResources().getColor( android.R.color.transparent ) );
-			//btBairro.setWidth(50);			
-									
+															
 			dash.addView(btPaciente);
 			dash.addView(btAgente);		
 			dash.addView(btMedico);	
-			dash.addView(btUbs);
 			dash.addView(btBairro);
+			dash.addView(btUbs);
 			
 			
 		}else if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.PACIENTE)){
-			
-			/*Botao ColetarDados*/
-			btColetaDados = new Button(this.getActivity());
-			
-			btColetaDados.setText( getResources().getString(R.string.menu_coletadados) );
-			Drawable drawableTopColetaDados = getResources().getDrawable(R.drawable.ic_coleta);
-			
-			btColetaDados.setOnClickListener(this);		
-			btColetaDados.setLayoutParams(
-					new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 1f)		
-					);
-								
-			btColetaDados.setCompoundDrawablesWithIntrinsicBounds(null, drawableTopColetaDados , null, null);
-			btColetaDados.setBackgroundColor(getResources().getColor( android.R.color.transparent ) );			
-									
-			/*Botao HistoricoColeta*/
-			btHistoricoColeta = new Button(this.getActivity());
-			
-			btHistoricoColeta.setText( getResources().getString(R.string.menu_historico_coleta) );
-			Drawable drawableTopHistoricoColeta = getResources().getDrawable(R.drawable.historico);
-			
-			btHistoricoColeta.setOnClickListener(this);		
-			btHistoricoColeta.setLayoutParams(
-					new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 1f)		
-					);
-								
-			btHistoricoColeta.setCompoundDrawablesWithIntrinsicBounds(null, drawableTopHistoricoColeta , null, null);
-			btHistoricoColeta.setBackgroundColor(getResources().getColor( android.R.color.transparent ) );
-			btHistoricoColeta.setWidth(30);
-			
-			/*Botao HistoricoDiagnostico
-			btHistoricoDiagnostico = new Button(this.getActivity());
-			
-			btHistoricoDiagnostico.setText( getResources().getString(R.string.menu_historico_diagnostico) );
-			Drawable drawableTopHistoricoDiagnostico = getResources().getDrawable(R.drawable.historico);
-			
-			btHistoricoDiagnostico.setOnClickListener(this);
-			
-			btHistoricoDiagnostico.setLayoutParams(
-					new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 1f)		
-					);
-								
-			btHistoricoDiagnostico.setCompoundDrawablesWithIntrinsicBounds(null, drawableTopHistoricoDiagnostico , null, null);
-			btHistoricoDiagnostico.setBackgroundColor(getResources().getColor( android.R.color.transparent ) );
-			btHistoricoDiagnostico.setWidth(30);*/
-												
-			
-			
+																					
 			dash.addView(btColetaDados);
 			dash.addView(btHistoricoColeta);		
 			//dash.addView(btHistoricoDiagnostico);							
 			
 		}else if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.AGENTE)){
 			
-			
-			/*Botao Paciente*/
-			btPaciente = new Button(this.getActivity());
-			
-			btPaciente.setText( getResources().getString(R.string.menu_paciente) );
-			btPaciente.setOnClickListener(this);		
-			btPaciente.setLayoutParams(
-					new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 1f)		
-					);
-					
-			Drawable drawableTopPaciente = getResources().getDrawable(R.drawable.ic_paciente);
-			btPaciente.setCompoundDrawablesWithIntrinsicBounds(null, drawableTopPaciente , null, null);
-			btPaciente.setBackgroundColor(getResources().getColor( android.R.color.transparent ) );
-			//btPaciente.setWidth(50);
-									
-			
-			/*Botao Medico*/
-			btMedico = new Button(this.getActivity());
-			
-			btMedico.setText( getResources().getString(R.string.menu_medico) );
-			Drawable drawableTopMedico = getResources().getDrawable(R.drawable.ic_medico);
-			
-			btMedico.setOnClickListener(this);		
-			btMedico.setLayoutParams(
-					new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 1f)		
-					);
-								
-			btMedico.setCompoundDrawablesWithIntrinsicBounds(null, drawableTopMedico , null, null);
-			btMedico.setBackgroundColor(getResources().getColor( android.R.color.transparent ) );
-			//btMedico.setWidth(50);
-			
-			/*Botao Bairro*/
-			btBairro = new Button(this.getActivity());
-			
-			btBairro.setText( getResources().getString(R.string.menu_bairro) );
-			Drawable drawableTopBairro = getResources().getDrawable(R.drawable.ic_bairro);
-			
-			btBairro.setOnClickListener(this);		
-			btBairro.setLayoutParams(
-					new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 1f)		
-					);
-								
-			btBairro.setCompoundDrawablesWithIntrinsicBounds(null, drawableTopBairro, null, null);
-			btBairro.setBackgroundColor(getResources().getColor( android.R.color.transparent ) );
-			//btBairro.setWidth(50);			
-			/*Botao Ubs*/
-			btUbs = new Button(this.getActivity());
-			
-			btUbs.setText( getResources().getString(R.string.menu_ubs) );
-			Drawable drawableTopUbs = getResources().getDrawable(R.drawable.ic_ubs);
-			
-			btUbs.setOnClickListener(this);		
-			btUbs.setLayoutParams(
-					new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 1f)		
-					);
-								
-			btUbs.setCompoundDrawablesWithIntrinsicBounds(null, drawableTopUbs , null, null);
-			btUbs.setBackgroundColor(getResources().getColor( android.R.color.transparent ) );
-			//btUbs.setWidth(30);
-						
-			
-			/*Botao ColetarDados*/
-			btColetaDados = new Button(this.getActivity());
-			
-			btColetaDados.setText( getResources().getString(R.string.menu_coletadados) );
-			Drawable drawableTopColetaDados = getResources().getDrawable(R.drawable.ic_coleta);
-			
-			btColetaDados.setOnClickListener(this);		
-			btColetaDados.setLayoutParams(
-					new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 1f)		
-					);
-								
-			btColetaDados.setCompoundDrawablesWithIntrinsicBounds(null, drawableTopColetaDados , null, null);
-			btColetaDados.setBackgroundColor(getResources().getColor( android.R.color.transparent ) );
-			
+														
 			
 			dash.addView(btPaciente);					
 			dash.addView(btMedico);
@@ -293,51 +189,7 @@ public class MenuPrincipalFragment extends Fragment implements OnClickListener {
 			
 		}else if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.MEDICO)){
 			
-			/*Botao ColetarDados*/
-			btDiagnostico = new Button(this.getActivity());
-			
-			btDiagnostico.setText( getResources().getString(R.string.menu_diagnosticar) );
-			Drawable drawableTopColetaDados = getResources().getDrawable(R.drawable.ic_drawer);
-			
-			btDiagnostico.setOnClickListener(this);		
-			btDiagnostico.setLayoutParams(
-					new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 1f)		
-					);
-								
-			btDiagnostico.setCompoundDrawablesWithIntrinsicBounds(null, drawableTopColetaDados , null, null);
-			btDiagnostico.setBackgroundColor(getResources().getColor( android.R.color.transparent ) );			
-									
-			/*Botao HistoricoColeta*/
-			btHistoricoColeta = new Button(this.getActivity());
-			
-			btHistoricoColeta.setText( getResources().getString(R.string.menu_historico_coleta) );
-			Drawable drawableTopHistoricoColeta = getResources().getDrawable(R.drawable.ic_coleta);
-			
-			btHistoricoColeta.setOnClickListener(this);		
-			btHistoricoColeta.setLayoutParams(
-					new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 1f)		
-					);
-								
-			btHistoricoColeta.setCompoundDrawablesWithIntrinsicBounds(null, drawableTopHistoricoColeta , null, null);
-			btHistoricoColeta.setBackgroundColor(getResources().getColor( android.R.color.transparent ) );
-			btHistoricoColeta.setWidth(30);
-			
-			/*Botao HistoricoDiagnostico*/
-			btHistoricoDiagnostico = new Button(this.getActivity());
-			
-			btHistoricoDiagnostico.setText( getResources().getString(R.string.menu_historico_diagnostico) );
-			Drawable drawableTopHistoricoDiagnostico = getResources().getDrawable(R.drawable.ic_coleta);
-			
-			btHistoricoDiagnostico.setOnClickListener(this);
-			
-			btHistoricoDiagnostico.setLayoutParams(
-					new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 1f)		
-					);
-								
-			btHistoricoDiagnostico.setCompoundDrawablesWithIntrinsicBounds(null, drawableTopHistoricoDiagnostico , null, null);
-			btHistoricoDiagnostico.setBackgroundColor(getResources().getColor( android.R.color.transparent ) );
-			btHistoricoDiagnostico.setWidth(30);
-												
+													
 			
 			
 			dash.addView(btDiagnostico);					
@@ -374,45 +226,26 @@ public class MenuPrincipalFragment extends Fragment implements OnClickListener {
 
 	
 	@Override
-	public void onClick(View v) {
-        	
-			
-    		if(v == btAgente) {    			
-    			((AppMainActivity)MenuPrincipalFragment.this.getActivity()).selectItem( RequestCodes.MENU_AGENTE );    			
-    			
-    		}
-    		
-    		if(v == btPaciente) {
-    			((AppMainActivity)MenuPrincipalFragment.this.getActivity()).selectItem( RequestCodes.MENU_PACIENTE );    			
-    		}
-    		    		
-    		if(v == btMedico) {    			
-    			((AppMainActivity)MenuPrincipalFragment.this.getActivity()).selectItem( RequestCodes.MENU_MEDICO );
-    		} 
-    		
-    		if(v == btBairro) {    			
-    			((AppMainActivity)MenuPrincipalFragment.this.getActivity()).selectItem( RequestCodes.MENU_UBS );
-    		}
-    		
-    		if(v == btUbs) {    			
-    			((AppMainActivity)MenuPrincipalFragment.this.getActivity()).selectItem( RequestCodes.MENU_BAIRRO );
-    		}
-    		
-    		
-    		if(v == btColetaDados){    	
-    			((AppMainActivity)MenuPrincipalFragment.this.getActivity()).selectItem(RequestCodes.MENU_PACIENTE);
-    			}
- 
-    		if(v == btHistoricoColeta){    			
-    			((AppMainActivity)MenuPrincipalFragment.this.getActivity()).selectItem( RequestCodes.MENU_AGENTE );
-    		}
-    		
-    		if(v == btDiagnostico){    			
-    			((AppMainActivity)MenuPrincipalFragment.this.getActivity()).selectItem( RequestCodes.MENU_DIAGNOSTICAR );
-    		}
-    		
-    		if(v == btHistoricoDiagnostico){    			
-    			((AppMainActivity)MenuPrincipalFragment.this.getActivity()).selectItem( RequestCodes.MENU_HISTORICO_DIAGNOSTICO );
+	public void onClick(View view) {
+			 
+			if(view.equals(btPaciente)) {				    			
+				((AppMainActivity)MenuPrincipalFragment.this.getActivity()).executeItem( RequestCodes.MENU_PACIENTE );    			
+			}else if(view.equals(btMedico)) {    			
+    			((AppMainActivity)MenuPrincipalFragment.this.getActivity()).executeItem( RequestCodes.MENU_MEDICO );
+    		}else if(view.equals(btAgente)) {    			    			
+    			((AppMainActivity)MenuPrincipalFragment.this.getActivity()).executeItem( RequestCodes.MENU_AGENTE );    			    			
+    		}else if(view.equals(btBairro)) {    			    			
+    			((AppMainActivity)MenuPrincipalFragment.this.getActivity()).executeItem( RequestCodes.MENU_BAIRRO );
+    		}else if(view.equals(btUbs)) {    			    			
+    			((AppMainActivity)MenuPrincipalFragment.this.getActivity()).executeItem( RequestCodes.MENU_UBS );
+    		}else if(view.equals(btColetaDados)){    	
+    			((AppMainActivity)MenuPrincipalFragment.this.getActivity()).executeItem(RequestCodes.MENU_COLETA_DADOS);
+    		}else if(view.equals(btHistoricoColeta)){    			
+    			((AppMainActivity)MenuPrincipalFragment.this.getActivity()).executeItem( RequestCodes.MENU_HISTORICO_COLETA );
+    		}else if(view.equals(btDiagnostico)){    			
+    			((AppMainActivity)MenuPrincipalFragment.this.getActivity()).executeItem( RequestCodes.MENU_DIAGNOSTICAR );
+    		}else if(view.equals(btHistoricoDiagnostico)){    			
+    			((AppMainActivity)MenuPrincipalFragment.this.getActivity()).executeItem( RequestCodes.MENU_HISTORICO_DIAGNOSTICO );
     		}    				
     		
 	}

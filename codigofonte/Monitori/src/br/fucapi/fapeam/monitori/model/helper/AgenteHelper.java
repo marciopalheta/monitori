@@ -44,8 +44,8 @@ public class AgenteHelper extends UsuarioHelper {
 		
 		
 		
-		setMapaDeCampos(mapaDeCampos);
-		
+		setMapCamposObrigatorios(mapaDeCampos);
+		setViewCamposObrigatorios();
 	}
 	
 	public Agente getAgente(){

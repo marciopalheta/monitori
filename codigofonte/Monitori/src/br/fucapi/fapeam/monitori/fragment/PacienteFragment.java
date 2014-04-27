@@ -137,20 +137,27 @@ public class PacienteFragment extends Fragment {
 	
 	public boolean onOptionsItemSelected(MenuItem item){
 		//Verifica o item do menu selecionado
+		 
 		switch(item.getItemId()){
 			//Verifica se foi selecionado um item novo
 			case R.id.menu_novo:
 				//Especialista em mudanca de tela
+				if(usuarioLogado!=null){									
+					if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.AGENTE)||
+							(usuarioLogado.getTipoUsuario().equals(TipoUsuario.ADMINISTRADOR))){	
+			
 				Intent intent = new Intent(getActivity() ,
 						PacienteDadosActivity.class);
 				//Carrega a nova tela
-				startActivity(intent);
+				startActivity(intent);}
+					}
 				
 				return false;
 			default:
-				return super.onOptionsItemSelected(item);
-		}
+				return super.onOptionsItemSelected(item);}
+		
 	}
+		
 	
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

@@ -102,12 +102,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
     		"CREATE UNIQUE INDEX index_"+FIELDS_TABLE_USUARIO.numeroSus+" on "+TABLE_USUARIO_NAME+" ("+FIELDS_TABLE_USUARIO.numeroSus+"); " +
     		"CREATE UNIQUE INDEX index_"+FIELDS_TABLE_USUARIO.cpf+" on "+TABLE_USUARIO_NAME+" ("+FIELDS_TABLE_USUARIO.cpf+"); " +
     		"CREATE UNIQUE INDEX index_"+FIELDS_TABLE_USUARIO.matricula+" on "+TABLE_USUARIO_NAME+" ("+FIELDS_TABLE_USUARIO.matricula+"); " +
-    		"CREATE UNIQUE INDEX index_"+FIELDS_TABLE_USUARIO.crm+" on "+TABLE_USUARIO_NAME+" ("+FIELDS_TABLE_USUARIO.crm+"); "; 
-    private static final String CREATE_ADMIN_USER = 
-    		"INSERT INTO "+TABLE_USUARIO_NAME+
-    		"("+FIELDS_TABLE_USUARIO.nome+","+FIELDS_TABLE_USUARIO.tipoUsuario+","+FIELDS_TABLE_USUARIO.login+","+FIELDS_TABLE_USUARIO.senha+") " +
-    		"VALUES('admin','"+TipoUsuario.ADMINISTRADOR+"','admin','admin');";	
-    
+    		"CREATE UNIQUE INDEX index_"+FIELDS_TABLE_USUARIO.crm+" on "+TABLE_USUARIO_NAME+" ("+FIELDS_TABLE_USUARIO.crm+"); ";     
     
     
     public static interface FIELDS_TABLE_UBS {
@@ -205,6 +200,40 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
 		   + FIELDS_TABLE_DIAGNOSTICAR.horadiagnostico+" TEXT )";
     
 	private static final String TAG = "SqlLiteDataBase" ;
+
+	private static final String CREATE_ADMIN_USER = 
+    		"INSERT INTO "+TABLE_USUARIO_NAME+
+    		"("+FIELDS_TABLE_USUARIO.id+","+FIELDS_TABLE_USUARIO.nome+","+FIELDS_TABLE_USUARIO.tipoUsuario+","+FIELDS_TABLE_USUARIO.login+","+FIELDS_TABLE_USUARIO.senha+") " +
+    		"VALUES(1,'admin','"+TipoUsuario.ADMINISTRADOR+"','123.456.789-00','123.456.789-00');";	
+    
+	
+	private static final String CREATE_DUMP_BAIRROS = 
+    		"INSERT INTO "+TABLE_BAIRRO_NAME+
+    		"("+FIELDS_TABLE_BAIRRO.id+","+FIELDS_TABLE_BAIRRO.nome+") " +
+    		"VALUES (1,'Centro'),(2,'Santa Luzia'),(3,'Planalto'),(4,'Adrianópolis')  ;";		
+	
+	private static final String CREATE_DUMP_UBS = 
+    		"INSERT INTO "+TABLE_UBS_NAME+
+    		"("+FIELDS_TABLE_UBS.nome+","+FIELDS_TABLE_UBS.endereco+","+FIELDS_TABLE_UBS.numero+","+FIELDS_TABLE_UBS.cep+","+FIELDS_TABLE_UBS.telefone+","+FIELDS_TABLE_UBS.idBairro+") " +
+    		"VALUES ('Centro','xxx','123','69000-000','(92)12345678',1), " +
+    		"('Santa Luzia','xxx','123','69000-000','(92)12345678',2);";
+    		
+	private static final String CREATE_DUMP_USUARIOS = 
+    		"INSERT INTO "+TABLE_USUARIO_NAME+
+    		"("+FIELDS_TABLE_USUARIO.id+","+FIELDS_TABLE_USUARIO.tipoUsuario+","+FIELDS_TABLE_USUARIO.nome+","+FIELDS_TABLE_USUARIO.cpf+","+FIELDS_TABLE_USUARIO.crm+", " +
+    		""+FIELDS_TABLE_USUARIO.dataNascimento+","+FIELDS_TABLE_USUARIO.telefone+","+FIELDS_TABLE_USUARIO.celular+","+FIELDS_TABLE_USUARIO.endereco+"," +FIELDS_TABLE_USUARIO.cep+","+
+    		""+FIELDS_TABLE_USUARIO.numero+","+FIELDS_TABLE_USUARIO.idBairro+","+FIELDS_TABLE_USUARIO.sexo+","+FIELDS_TABLE_USUARIO.idUnidadeSaude+"," +
+    		""+FIELDS_TABLE_USUARIO.login+","+FIELDS_TABLE_USUARIO.senha+", " +
+    		""+FIELDS_TABLE_USUARIO.hipertenso+","+FIELDS_TABLE_USUARIO.diabetico1+", " +
+    		""+FIELDS_TABLE_USUARIO.diabetico2+","+FIELDS_TABLE_USUARIO.nomeMae+", " +
+    		""+FIELDS_TABLE_USUARIO.numeroSus+","+FIELDS_TABLE_USUARIO.idMedico+","+FIELDS_TABLE_USUARIO.matricula+") " +
+    		"VALUES  (2,'"+TipoUsuario.MEDICO+"','Medico 1','222.222.222-22','222','1976-02-02','(92)12345678','(92)12345678','xxx','123','69000-000',4,'FEMENINO',1,'222.222.222-22','222.222.222-22',null,null,null,null,null,null,null)," +
+    				"(3,'"+TipoUsuario.MEDICO+"','Medico 2','333.333.333-33','333','1968-03-03','(92)87654321','(92)99990000','xxx','123','69000-000',3,'MASCULINO',2,'333.333.333-33','333.333.333-33',null,null,null,null,null,null,null)," +
+    				"(4,'"+TipoUsuario.PACIENTE+"','Paciente 1','111.111.111-11',null,'1987-01-01','(92)12345678','(92)999999','xxx','123','69000-000',1,'MASCULINO',1,'111.111.111-11','111.111.111-11','true','true','false','mae',111,2,null)," +
+    				"(5,'"+TipoUsuario.PACIENTE+"','Paciente 2','444.444.444-44',null,'1984-04-04','(92)44444444','(92)449999','xxx','123','69000-000',3,'MASCULINO',2,'444.444.444-44','444.444.444-44','true','true','false','mae',444,3,null)," +
+    				"(6,'"+TipoUsuario.AGENTE+"','Agente 1','555.555.555-55',null,'1975-05-05','(92)555','(92)559999','xxx','123','69000-000',4,'MASCULINO',1,'555.555.555-55','555.555.555-55',null,null,null,null,null,null,555)," +
+    				"(7,'"+TipoUsuario.AGENTE+"','Agente 2','666.666.666-66',null,'1976-06-06','(92)555','(92)559999','xxx','123','69000-000',3,'FEMENINO',2,'666.666.666-66','666.666.666-66',null,null,null,null,null,null,666);" ;
+				
 	
 	/**
 	 * @param context androdi context
@@ -235,6 +264,10 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
 		database.execSQL(CREATE_TABLE_COLETAR_DADOS);
 		database.execSQL(CREATE_TABLE_BAIRRO);
 		database.execSQL(CREATE_TABLE_DIAGNOSTICAR);
+		
+		database.execSQL(CREATE_DUMP_BAIRROS);
+		database.execSQL(CREATE_DUMP_UBS);
+		database.execSQL(CREATE_DUMP_USUARIOS);
 	}
 
 	/**

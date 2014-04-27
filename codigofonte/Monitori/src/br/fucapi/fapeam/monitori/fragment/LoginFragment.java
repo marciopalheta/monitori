@@ -54,8 +54,8 @@ public class LoginFragment extends Fragment {
 			senha = (EditText) layout.findViewById(R.id.edt_senha);
 			bt_Logar = (Button) layout.findViewById(R.id.btValidar);
 			
-			login.setText("admin");				
-			senha.setText("admin");
+			login.setText("123.456.789-00");				
+			senha.setText("123.456.789-00");
 
 			
 			login.addTextChangedListener(Mask.insert("###.###.###-##", login));

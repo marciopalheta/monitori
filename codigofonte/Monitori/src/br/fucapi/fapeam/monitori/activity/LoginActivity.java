@@ -35,8 +35,8 @@ public class LoginActivity extends Activity {
 		login = (EditText) findViewById(R.id.edt_login);
 		senha = (EditText) findViewById(R.id.edt_senha);
 		bt_Logar = (Button) findViewById(R.id.btValidar);
-		login.setText("admin");				
-		senha.setText("admin");
+		login.setText("123.456.789-00");				
+		senha.setText("123.456.789-00");
 		
 		login.addTextChangedListener(Mask.insert("###.###.###-##", login));
 		senha.addTextChangedListener(Mask.insert("###.###.###-##", senha));

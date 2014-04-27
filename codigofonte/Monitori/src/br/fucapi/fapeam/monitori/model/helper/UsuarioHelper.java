@@ -34,6 +34,7 @@ import android.graphics.drawable.Drawable;
 import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -292,30 +293,50 @@ public class UsuarioHelper {
 public void setViewCamposObrigatorios(){
 		
 		
-		for(View chave: mapCamposObrigatorios.keySet()){
+		for(final View chave: mapCamposObrigatorios.keySet()){
 		    //System.out.println("chave: "+chave+", valor: "+mapaDeCampos.get(chave)+".");
 												
 			if (chave instanceof EditText) {
 				
-				EditText edTexto = (EditText) chave;
-				Editable texto = edTexto.getText();
-				   if (texto != null) {				    				   								   				  
-					   String strTexto = texto.toString();
-					    if (TextUtils.isEmpty(strTexto)) {
+				final EditText edTexto = (EditText) chave;
+				//final Editable texto = edTexto.getText();
+								
+				
+				final Drawable errorIcon = fragmentActivity.getResources().getDrawable(R.drawable.ic_obrigatorio);
+		    	errorIcon.setBounds(new Rect(0, 0, errorIcon.getIntrinsicWidth(), errorIcon.getIntrinsicHeight()));
+		    	//errorIcon.setColorFilter(Color.RED ,PorterDuff.Mode.MULTIPLY);
+		    	
+		    	edTexto.setError(null,errorIcon);
+				
+		    	edTexto.addTextChangedListener(new TextWatcher() {
+		    	    public void onTextChanged(CharSequence s, int start, int before, int count) {
+		    	    	edTexto.setError(null,errorIcon);
+		    	    }
+		    	    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+		    	    	edTexto.setError(null,errorIcon);
+		    	    }
 
-					    	Drawable errorIcon = fragmentActivity.getResources().getDrawable(R.drawable.indicator_input_error);
-					    	errorIcon.setBounds(new Rect(0, 0, errorIcon.getIntrinsicWidth(), errorIcon.getIntrinsicHeight()));
-					    	//errorIcon.setColorFilter(Color.RED ,PorterDuff.Mode.MULTIPLY);
-					    	
-					        edTexto.setError(null,errorIcon);					    	
-					    }					   
-				   }
+		    	    public void afterTextChanged(Editable s) {
+		    	        // set oid value now
+		    	    	//edTexto.setError(null,errorIcon);
+		    	    	
+		    	    	if(Funcoes.validarDados(chave,  mapCamposObrigatorios.get(chave) ) == false){
+		    				//return false;
+		    				//edTexto.setError(null,errorIcon);
+		    			}
+		    	    	
+		    	    	
+		    	    	
+		    	    	
+		    	    }
+		    	});
+		    			    	
+				
 				   
 			}   
 		}													
 		
 	}
-
 	
 	
 	private void atualizarListaBairros(){

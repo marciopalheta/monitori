@@ -3,6 +3,8 @@ package br.fucapi.fapeam.monitori.activity.paciente;
 import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.activity.UsuarioDadosActivity;
 import br.fucapi.fapeam.monitori.model.bean.Paciente;
+import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
+import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import br.fucapi.fapeam.monitori.model.dao.UsuarioDAO;
 import br.fucapi.fapeam.monitori.model.helper.PacienteHelper;
 import br.fucapi.fapeam.monitori.model.helper.UsuarioHelper;
@@ -16,6 +18,7 @@ public class PacienteDadosActivity extends UsuarioDadosActivity {
 	//Atributos para manipulacao de tela
 	private PacienteHelper helper;
 	private Paciente pacienteParaSerAlterado = null;
+	private Usuario usuarioLogado = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +31,7 @@ public class PacienteDadosActivity extends UsuarioDadosActivity {
 		// Busca o paciente a ser alterado
 		pacienteParaSerAlterado = (Paciente) getIntent().getSerializableExtra(
 						"PACIENTE_SELECIONADO");
-
+		
 				if (pacienteParaSerAlterado != null) {
 					// Atualiza a tela com dados do Aluno
 					helper.setPaciente(pacienteParaSerAlterado);

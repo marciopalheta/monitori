@@ -214,6 +214,15 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 		
 		
 		switch ((int)id) {
+		case RequestCodes.MENU_ALTERAR_DADOS:
+			intent = new Intent(this, PacienteDadosActivity.class);
+			if(usuarioLogado!=null){
+				
+				if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.PACIENTE)){
+					intent.putExtra(PutExtras.PACIENTE_SELECIONADO, usuarioLogado);
+				}}
+			this.startActivity(intent);
+				break;
 		case RequestCodes.MENU_PACIENTE:		
 			frag = new PacienteFragment();
 			args = new Bundle();			

@@ -186,6 +186,7 @@ public class MenuPrincipalFragment extends Fragment implements OnClickListener {
 			dash.addView(btBairro);
 			dash.addView(btUbs);
 			dash.addView(btColetaDados);
+			dash.addView(btHistoricoColeta);
 			
 		}else if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.MEDICO)){
 			

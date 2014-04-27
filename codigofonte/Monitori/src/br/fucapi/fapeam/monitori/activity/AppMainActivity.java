@@ -433,12 +433,23 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 					
 				}else{
 					
-					intent = new Intent(this, DiagnosticarActivity.class);
+					if(usuarioLogado!=null){
+						
+						if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.MEDICO)){
 					//intent.putExtra(PutExtras.PACIENTE_SELECIONADO, usuarioLogado);
-					//intent = new Intent(this,MenuPrincipalActivity.class);
-					//Carrega a nova tela
-					this.startActivity(intent);
-					
+							frag = new PacienteFragment();
+							args = new Bundle();			
+							args.putSerializable(PutExtras.USUARIO_LOGADO, usuarioLogado);
+							frag.setArguments(args);
+									
+							transaction = getSupportFragmentManager().beginTransaction();
+							 
+					        transaction.replace(R.id.content_frame, frag );
+					        transaction.addToBackStack(null);
+					 
+					        transaction.commit();
+						}
+					}
 				}
 			}
 		

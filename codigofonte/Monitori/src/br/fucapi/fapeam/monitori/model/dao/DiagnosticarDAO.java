@@ -1,5 +1,6 @@
 package br.fucapi.fapeam.monitori.model.dao;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -159,12 +160,27 @@ public class DiagnosticarDAO extends AbstractDataBase{
 					//Carregar os atributos dos usuarios
 					diagnosticar.setId( cursor.getLong(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_DIAGNOSTICAR.id) )); 
 					diagnosticar.setDescrever(cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_DIAGNOSTICAR.descrever)));
-													
+					
+					//diagnosticar.setDataHoraDiagnostico(dataHoraDiagnostico)''		
+					
+					String dataDiagnostico = cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_DIAGNOSTICAR.datadiagnostico));								
+					String horaDiagnostico = cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_DIAGNOSTICAR.horadiagnostico));
+				
+					String dataHora = dataDiagnostico + " " +horaDiagnostico;
+				
+					SimpleDateFormat sdfDateTime = new SimpleDateFormat( context.getString(R.string.DATE_FORMAT_DATABASE) +" " + context.getString(R.string.TIME_FORMAT_APLICATION) );
+															
+					Calendar cal = Calendar.getInstance();
+					cal.setTime(sdfDateTime.parse(dataHora));
+					diagnosticar.setDataHoraDiagnostico(cal);
+					
 					diagnosticar.setUsuario(paciente); 					
 																				
 					lista.add(diagnosticar);
 				}
 			}catch(SQLException e){
+				Log.e(TAG, e.getMessage());
+			} catch (ParseException e) {
 				Log.e(TAG, e.getMessage());
 			}finally{
 				cursor.close();

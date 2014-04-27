@@ -390,7 +390,21 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 					        transaction.addToBackStack(null);
 					 
 					        transaction.commit();
-						}}
+						}
+						if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.MEDICO)){
+							//intent.putExtra(PutExtras.PACIENTE_SELECIONADO, usuarioLogado);
+									frag = new PacienteFragment();
+									args = new Bundle();			
+									args.putSerializable(PutExtras.USUARIO_LOGADO, usuarioLogado);
+									frag.setArguments(args);
+											
+									transaction = getSupportFragmentManager().beginTransaction();
+									 
+							        transaction.replace(R.id.content_frame, frag );
+							        transaction.addToBackStack(null);
+							 
+							        transaction.commit();	
+					}}
 				}
 			}
 		

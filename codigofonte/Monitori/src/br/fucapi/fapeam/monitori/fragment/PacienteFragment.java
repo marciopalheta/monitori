@@ -1,5 +1,6 @@
 package br.fucapi.fapeam.monitori.fragment;
 
+import java.util.ArrayList;
 import java.util.List;
 import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.activity.ColetarActivity;
@@ -12,6 +13,7 @@ import br.fucapi.fapeam.monitori.model.bean.Paciente;
 import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import br.fucapi.fapeam.monitori.model.dao.UsuarioDAO;
+import br.fucapi.fapeam.monitori.navdrawer.NavDrawerItem;
 import android.os.Bundle;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -36,6 +38,8 @@ public class PacienteFragment extends Fragment {
 
 	//Definicao das constantes
 	private final String TAG = "CADASTRO_PACIENTE";
+	
+	List<Usuario> listMenu = new ArrayList<Usuario>();
 	
 	//Atributos de Tela
 	private ListView lvListagem;
@@ -193,12 +197,14 @@ public class PacienteFragment extends Fragment {
 			ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, view, menuInfo);
 		
-		getActivity().getMenuInflater().inflate(R.menu.menu_contexto, menu);
+		 getActivity().getMenuInflater().inflate(R.menu.menu_contexto, menu);
 		//getMenuInflater().inflate(R.menu.menu_contexto, menu);
 		MenuItem coletar = menu.findItem(R.id.menu_coletar);
 		MenuItem historico = menu.findItem(R.id.menu_historico);
 		MenuItem diagnostico = menu.findItem(R.id.menu_diagnostico);
 		MenuItem his_diagnostico = menu.findItem(R.id.menu_hist_diagnostico);
+		MenuItem editar = menu.findItem(R.id.menu_editar);
+		MenuItem deletar = menu.findItem(R.id.menu_deletar);
 		   if(coletar!=null){
 			   //if() //caso o usuario Logado seja do tipo Agente, setar a coleta de dados como Visivel
 			   
@@ -206,6 +212,7 @@ public class PacienteFragment extends Fragment {
 					if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.AGENTE)){	
 						coletar.setVisible(true);
 						historico.setVisible(true);
+						
 					}
 				}
 			   			   
@@ -219,6 +226,9 @@ public class PacienteFragment extends Fragment {
 						diagnostico.setVisible(true);
 						historico.setVisible(true);
 						his_diagnostico.setVisible(true);
+						editar.setVisible(false);
+						deletar.setVisible(false);
+						
 					}
 				}
 			   			   
@@ -278,9 +288,6 @@ public class PacienteFragment extends Fragment {
 			startActivity(form);	
 			break;
 			
-			
-
-			
 			case R.id.menu_editar:
 				
 				form = new Intent(getActivity(),
@@ -296,6 +303,7 @@ public class PacienteFragment extends Fragment {
 			default:
 				break;
 		}
+		
 		return super.onContextItemSelected(item);
 	}
 	

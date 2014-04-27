@@ -3,7 +3,6 @@ package br.fucapi.fapeam.monitori.activity.paciente;
 import java.util.List;
 import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.adapter.ListaAdapter;
-import br.fucapi.fapeam.monitori.model.bean.Medico;
 import br.fucapi.fapeam.monitori.model.bean.Paciente;
 import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
@@ -46,7 +45,6 @@ public class PacienteActivity extends Activity {
 	//Usuario selecionando com o click longo
 	private Paciente pacienteSelecionado = null;	
 	
-	private Medico medicoSelecionado = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -167,13 +165,16 @@ public class PacienteActivity extends Activity {
 	public void onCreateContextMenu(ContextMenu menu, View view,
 			ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, view, menuInfo);
-
+		
 		getMenuInflater().inflate(R.menu.menu_contexto, menu);
+			
 	}
 
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
+		
+		
+				switch (item.getItemId()) {
 			case R.id.menu_editar:
 				
 				Intent form = new Intent(PacienteActivity.this,
@@ -182,13 +183,14 @@ public class PacienteActivity extends Activity {
 
 				startActivity(form);	
 				break;
-				
+					
 			case R.id.menu_deletar:
 				excluirUsuario();
 				break;
 			default:
 				break;
 		}
+					
 		return super.onContextItemSelected(item);
 	}
 	protected void onResume(){

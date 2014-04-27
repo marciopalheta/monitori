@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.fucapi.fapeam.monitori.R;
+import br.fucapi.fapeam.monitori.activity.agente.AgenteDadosActivity;
+import br.fucapi.fapeam.monitori.activity.medico.MedicoDadosActivity;
 import br.fucapi.fapeam.monitori.activity.paciente.PacienteActivity;
 import br.fucapi.fapeam.monitori.activity.paciente.PacienteDadosActivity;
 import br.fucapi.fapeam.monitori.controller.NavigationController;
@@ -144,6 +146,7 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 				listMenu.add(menuDiagnosticar);
 				listMenu.add(menuHistorico);
 				listMenu.add(menuHistDiagnostico);
+				listMenu.add(menuAlterarDados);
 				
 				listMenu.add(secaoApp);
 				listMenu.add(menuLogin);
@@ -161,7 +164,8 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 				listMenu.add(secaoFuncionalidades);
 				
 				listMenu.add(menuHistorico);
-				listMenu.add(menuColetaDados);				
+				listMenu.add(menuColetaDados);			
+				listMenu.add(menuAlterarDados);
 				
 				listMenu.add(secaoApp);
 				listMenu.add(menuLogin);
@@ -216,12 +220,24 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 		switch ((int)id) {
 		case RequestCodes.MENU_ALTERAR_DADOS:
 			intent = new Intent(this, PacienteDadosActivity.class);
+			intent = new Intent(this, AgenteDadosActivity.class);
+			intent = new Intent(this, MedicoDadosActivity.class);
 			if(usuarioLogado!=null){
 				
 				if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.PACIENTE)){
 					intent.putExtra(PutExtras.PACIENTE_SELECIONADO, usuarioLogado);
-				}}
-			this.startActivity(intent);
+					this.startActivity(intent);
+				}
+				if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.AGENTE)){
+					intent.putExtra(PutExtras.AGENTE_SELECIONADO, usuarioLogado);
+					this.startActivity(intent);
+				}
+				if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.MEDICO)){
+					intent.putExtra(PutExtras.MEDICO_SELECIONADO, usuarioLogado);
+					this.startActivity(intent);
+				}
+				}
+			
 				break;
 		case RequestCodes.MENU_PACIENTE:		
 			frag = new PacienteFragment();

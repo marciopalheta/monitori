@@ -103,6 +103,9 @@ public class PacienteFragment extends Fragment {
 				});
 
 				// Metodo que "escuta" o evento de Click SIMPLES
+				 if(usuarioLogado!=null){									
+						if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.AGENTE)||
+								(usuarioLogado.getTipoUsuario().equals(TipoUsuario.ADMINISTRADOR))){	
 				lvListagem.setOnItemClickListener(new OnItemClickListener() {
 					@Override
 					public void onItemClick(AdapterView<?> adapter, View view,
@@ -119,7 +122,7 @@ public class PacienteFragment extends Fragment {
 						startActivity(form);
 					}
 				});
-		
+						}}		
 		return layout;		
 	}
 		

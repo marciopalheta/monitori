@@ -6,6 +6,8 @@ import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.adapter.ColetaAdapter;
 import br.fucapi.fapeam.monitori.model.bean.ColetarDados;
 import br.fucapi.fapeam.monitori.model.bean.Paciente;
+import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
+import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import br.fucapi.fapeam.monitori.model.dao.ColetarDadosDAO;
 import android.os.Bundle;
 import android.app.Activity;
@@ -30,6 +32,8 @@ public class ColetarActivity extends Activity {
 
 	//definicao das constantes
 	private final String TAG = "CADASTRO_COLETARDADOS";
+	
+	private Usuario usuarioLogado = null;
 	
 	//atributos de tela
 	private ListView lvListagem;
@@ -84,6 +88,10 @@ public class ColetarActivity extends Activity {
 		});
 		
 		//metodo do click simples
+		if(usuarioLogado!=null){									
+			if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.AGENTE)||
+					(usuarioLogado.getTipoUsuario().equals(TipoUsuario.PACIENTE))){	
+	
 		lvListagem.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -97,6 +105,7 @@ public class ColetarActivity extends Activity {
 				startActivity(form);
 			}			
 		});
+			}}
 	}
 
 	protected void onSaveInstanceState(Bundle outState){

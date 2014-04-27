@@ -88,10 +88,7 @@ public class ColetarActivity extends Activity {
 		});
 		
 		//metodo do click simples
-		if(usuarioLogado!=null){									
-			if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.AGENTE)||
-					(usuarioLogado.getTipoUsuario().equals(TipoUsuario.PACIENTE))){	
-	
+		
 		lvListagem.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -105,7 +102,7 @@ public class ColetarActivity extends Activity {
 				startActivity(form);
 			}			
 		});
-			}}
+			
 	}
 
 	protected void onSaveInstanceState(Bundle outState){

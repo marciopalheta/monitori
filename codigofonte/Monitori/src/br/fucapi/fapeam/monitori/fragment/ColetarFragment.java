@@ -99,10 +99,7 @@ public class ColetarFragment extends Fragment {
 			});
 			
 			//metodo do click simples
-			 if(usuarioLogado!=null){									
-					if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.AGENTE)||
-							(usuarioLogado.getTipoUsuario().equals(TipoUsuario.PACIENTE))){	
-			
+			 
 			lvListagem.setOnItemClickListener(new OnItemClickListener() {
 
 				@Override
@@ -116,7 +113,7 @@ public class ColetarFragment extends Fragment {
 					startActivity(form);
 				}			
 			});
-					}}	
+					
 			return layout;
 		}
 		

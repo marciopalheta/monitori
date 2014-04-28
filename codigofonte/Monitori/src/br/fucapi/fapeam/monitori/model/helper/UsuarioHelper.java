@@ -280,11 +280,11 @@ public class UsuarioHelper {
 	    atualizarListaBairros();
 	    
 
-		mapCamposObrigatorios.put(nome, "Nome Obrigatorio");
-		mapCamposObrigatorios.put(cpf, "CPF Obrigatorio");
-		mapCamposObrigatorios.put(dataNascimento, "Campo Obrigatorio");
-		mapCamposObrigatorios.put(telefone, "Telefone Obrigatorio");		
-		mapCamposObrigatorios.put(cep, "Cep Obrigatorio");
+		mapCamposObrigatorios.put(nome, fragmentActivity.getResources().getString(R.string.erro_campo_requerido));
+		mapCamposObrigatorios.put(cpf, fragmentActivity.getResources().getString(R.string.erro_campo_requerido));
+		mapCamposObrigatorios.put(dataNascimento, fragmentActivity.getResources().getString(R.string.erro_campo_requerido));
+		mapCamposObrigatorios.put(telefone, fragmentActivity.getResources().getString(R.string.erro_campo_requerido));		
+		mapCamposObrigatorios.put(cep, fragmentActivity.getResources().getString(R.string.erro_campo_requerido));
 	    
 		//mudar nos helpers, add metodos
 		setViewCamposObrigatorios();	
@@ -317,16 +317,14 @@ public void setViewCamposObrigatorios(){
 		    	    }
 
 		    	    public void afterTextChanged(Editable s) {
-		    	        // set oid value now
-		    	    	//edTexto.setError(null,errorIcon);
-		    	    	
-		    	    	if(Funcoes.validarDados(chave,  mapCamposObrigatorios.get(chave) ) == false){
-		    				//return false;
-		    				//edTexto.setError(null,errorIcon);
+		    	        
+		    	    	/*		    	    	
+		    	    	if(Funcoes.validarDados(chave,  mapCamposObrigatorios.get(chave) ) == true){
+		    	    		if(chave.equals(dataNascimento)){		    							    					
+		    	    			Funcoes.validarDateFormat(chave, DATE_FORMAT, fragmentActivity.getResources().getString(R.string.erro_data_invalida));
+		    	    		}		    				
 		    			}
-		    	    	
-		    	    	
-		    	    	
+		    	    	*/		    	    			    	    	
 		    	    	
 		    	    }
 		    	});
@@ -366,9 +364,9 @@ public void setViewCamposObrigatorios(){
 				dateForButton = dateFormat.format(dtCalendar.getTime());
 			}else{
 				dateForButton = context.getString(R.string.dtNascimento);
-			}
-		 			 	
-			dataNascimento.setText(dateForButton);	        	       
+			}		 				
+			
+			dataNascimento.setText(dateForButton+" ");
 	 }		
 		
 	public EditText getEditTextDataNascimento() {
@@ -487,7 +485,7 @@ public void setViewCamposObrigatorios(){
 				return false;
 			}else{
 				if(chave.equals(dataNascimento)){
-					if(Funcoes.validarDateFormat(chave, DATE_FORMAT, "Data Invalida") == false){
+					if(Funcoes.validarDateFormat(chave, DATE_FORMAT, fragmentActivity.getResources().getString(R.string.erro_data_invalida)) == false){
 						return false;
 					}
 					

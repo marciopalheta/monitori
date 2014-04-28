@@ -6,7 +6,11 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import android.annotation.SuppressLint;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.support.v4.app.FragmentActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
@@ -30,8 +34,8 @@ public class ColetarDadosHelper{
 	
 	private SimpleDateFormat sdfDate;
 	private SimpleDateFormat sdfTime;
-	
-	
+	private Map<View, String> mapCamposObrigatorios = new LinkedHashMap<View, String>();
+		
 	private TextView dataColeta;
 	private TextView horaColeta;
 	
@@ -54,9 +58,62 @@ public class ColetarDadosHelper{
 		dataColeta = (TextView) fragmentActivity.findViewById(R.id.dataColeta);
 		horaColeta = (TextView) fragmentActivity.findViewById(R.id.horaColeta);
 		
+		mapCamposObrigatorios.put(sis, fragmentActivity.getResources().getString(R.string.erro_campo_requerido) );		
+		mapCamposObrigatorios.put(sistole, fragmentActivity.getResources().getString(R.string.erro_campo_requerido));
+		mapCamposObrigatorios.put(glicose, fragmentActivity.getResources().getString(R.string.erro_campo_requerido));
+		
 		updateLabel();
 	}
 
+public void setViewCamposObrigatorios(){
+		
+		
+		for(final View chave: mapCamposObrigatorios.keySet()){
+		    //System.out.println("chave: "+chave+", valor: "+mapaDeCampos.get(chave)+".");
+												
+			if (chave instanceof EditText) {
+				
+				final EditText edTexto = (EditText) chave;
+				//final Editable texto = edTexto.getText();
+								
+				
+				final Drawable errorIcon = fragmentActivity.getResources().getDrawable(R.drawable.ic_obrigatorio);
+		    	errorIcon.setBounds(new Rect(0, 0, errorIcon.getIntrinsicWidth(), errorIcon.getIntrinsicHeight()));
+		    	//errorIcon.setColorFilter(Color.RED ,PorterDuff.Mode.MULTIPLY);
+		    	
+		    	edTexto.setError(null,errorIcon);
+				
+		    	edTexto.addTextChangedListener(new TextWatcher() {
+		    	    public void onTextChanged(CharSequence s, int start, int before, int count) {
+		    	    	edTexto.setError(null,errorIcon);
+		    	    }
+		    	    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+		    	    	edTexto.setError(null,errorIcon);
+		    	    }
+
+		    	    public void afterTextChanged(Editable s) {
+		    	        // set oid value now
+		    	    	//edTexto.setError(null,errorIcon);
+		    	    	
+		    	    	if(Funcoes.validarDados(chave,  mapCamposObrigatorios.get(chave) ) == false){
+		    				//return false;
+		    				//edTexto.setError(null,errorIcon);
+		    			}
+		    	    	
+		    	    	
+		    	    	
+		    	    	
+		    	    }
+		    	});
+		    			    	
+				
+				   
+			}   
+		}													
+		
+	}
+
+	
 
 	public EditText getSis() {
 		return sis;
@@ -104,7 +161,7 @@ public class ColetarDadosHelper{
 		getSistole().setText(coletaDados.getSistole());
 		getGlicose().setText(coletaDados.getGlicose());
 		
-		Log.e("TESTE", "is Jejum: " + coletaDados.isJejum() );
+		//Log.e("TESTE", "is Jejum: " + coletaDados.isJejum() );
 		jejum.setChecked(coletaDados.isJejum() );
 		pos_pandrial.setChecked(coletaDados.isPos_pandrial() );
 		
@@ -118,16 +175,10 @@ public class ColetarDadosHelper{
 		
 	
 	public boolean validar(){
-				
-		// cria o mapa
-		Map<View, String> mapaDeCampos = new LinkedHashMap<View, String>();
-		mapaDeCampos.put(sis, "Campo Obrigatório");		
-		mapaDeCampos.put(sistole, "Campo Obrigatório");
-		mapaDeCampos.put(glicose, "Campo Obrigatório");
-		
-		for(View chave: mapaDeCampos.keySet()){
+								
+		for(View chave: mapCamposObrigatorios.keySet()){
 		    //System.out.println("chave: "+chave+", valor: "+mapaDeCampos.get(chave)+".");
-		    if(Funcoes.validarDados(chave,  mapaDeCampos.get(chave) ) == false){
+		    if(Funcoes.validarDados(chave,  mapCamposObrigatorios.get(chave) ) == false){
 				return false;
 			}
 		}

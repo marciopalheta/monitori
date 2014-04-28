@@ -24,14 +24,7 @@
     android:layout_height="wrap_content"
     android:layout_centerInParent="true"
     android:orientation="vertical">
-    
-     <TextView
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-			android:text="@string/ast"
-			android:textColor="#ff0000"
-            android:layout_marginLeft="@dimen/margem_editext"
-            android:textSize="@dimen/fontes_para_textos" />
+         
      
       <TextView 
          android:id="@+id/pa"
@@ -59,14 +52,7 @@
         android:background="#e1e0e0"
         android:layout_marginTop="10dp"
         android:padding="@dimen/padding"/>
-     
-     <TextView
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-			android:text="@string/ast"
-			android:textColor="#ff0000"
-            android:layout_marginLeft="@dimen/margem_editext"
-            android:textSize="@dimen/fontes_para_textos" />
+          
      
      <TextView 
          android:id="@+id/glicose"

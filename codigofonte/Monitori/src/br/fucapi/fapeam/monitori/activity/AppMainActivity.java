@@ -37,14 +37,17 @@ import br.fucapi.fapeam.monitori.utils.RequestCodes;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.Toast;
 
 public class AppMainActivity extends AbstractNavDrawerActivity {
 	
-	private Usuario usuarioLogado = null;	
-		
+	private Usuario usuarioLogado = null;		
+	private Fragment fragManager=null;
+	private FragmentTransaction  transaction;
+	private boolean doubleBackToExitPressedOnce=false;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -52,15 +55,16 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 		
 		if ( savedInstanceState == null ) {
 			
-			Fragment frag = new MenuPrincipalFragment();
+			fragManager = new MenuPrincipalFragment();
 			Bundle args = new Bundle();			
 			args.putSerializable(PutExtras.USUARIO_LOGADO, usuarioLogado);
-			frag.setArguments(args);
+			fragManager.setArguments(args);
 	
+			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, fragManager ).commit();
 			
-			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, frag ).commit();
+					
+			//getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, fragManager ).commit();
 			
-			//getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new MenuPrincipalFragment()).commit();
 			Eula.show(this, R.string.eula_title, R.string.eula_accept, R.string.eula_refuse);
 		}
 	}
@@ -197,25 +201,48 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 	
 	@Override
 	public void onBackPressed() {
-		// TODO Auto-generated method stub
-		super.onBackPressed();
-		Fragment frag = new MenuPrincipalFragment();
-		Bundle args = new Bundle();			
-		args.putSerializable(PutExtras.USUARIO_LOGADO, usuarioLogado);
-		frag.setArguments(args);
-
 		
-		getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, frag ).commit();
-		setNoItemChecked();
+		if(fragManager instanceof MenuPrincipalFragment){        	
+        	
+    		if (doubleBackToExitPressedOnce) {
+    	        super.onBackPressed();
+    	        return;
+    	    }
+    		Toast.makeText(this, "Precione novamente para sair", Toast.LENGTH_SHORT).show();
+    	    //Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+    		this.doubleBackToExitPressedOnce = true;
+    	    
+    	    new Handler().postDelayed(new Runnable() {
+
+    	        @Override
+    	        public void run() {
+    	            doubleBackToExitPressedOnce=false;                       
+    	        }
+    	    }, 2000);
+    		
+        	
+        	
+        }else{
+    		super.onBackPressed();
+    		fragManager = new MenuPrincipalFragment();
+    		Bundle args = new Bundle();			
+    		args.putSerializable(PutExtras.USUARIO_LOGADO, usuarioLogado);
+    		fragManager.setArguments(args);
+
+    		
+    		getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, fragManager ).commit();
+    		setNoItemChecked();        	
+        	
+        }	    
+				
+		
+		
 	}
 	
 	@Override
 	protected void onNavItemSelected(int id) {
-		Intent intent;
-		Fragment frag;
-		Bundle args;
-		
-		FragmentTransaction  transaction;
+		Intent intent;		
+		Bundle args;				
 		
 		
 		switch ((int)id) {
@@ -242,14 +269,14 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 			
 				break;
 		case RequestCodes.MENU_PACIENTE:		
-			frag = new PacienteFragment();
+			fragManager = new PacienteFragment();
 			args = new Bundle();			
 			args.putSerializable(PutExtras.USUARIO_LOGADO, usuarioLogado);
-			frag.setArguments(args);
+			fragManager.setArguments(args);
 					
 			transaction = getSupportFragmentManager().beginTransaction();
 			 
-	        transaction.replace(R.id.content_frame, frag );
+	        transaction.replace(R.id.content_frame, fragManager );
 	        transaction.addToBackStack(null);
 	 
 	        transaction.commit();
@@ -260,22 +287,22 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 		case RequestCodes.MENU_AGENTE:
 			//getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new AgenteFragment()).commit();			//
 			
-			frag = new AgenteFragment();
+			fragManager = new AgenteFragment();
 			
 			transaction = getSupportFragmentManager().beginTransaction();
 			 
-	        transaction.replace(R.id.content_frame, frag );
+	        transaction.replace(R.id.content_frame, fragManager );
 	        transaction.addToBackStack(null);
 	 
 	        transaction.commit();
 			
 			break;
 		case RequestCodes.MENU_MEDICO:
-			frag = new MedicoFragment();
+			fragManager = new MedicoFragment();
 			
 			transaction = getSupportFragmentManager().beginTransaction();
 			 
-	        transaction.replace(R.id.content_frame, frag );
+	        transaction.replace(R.id.content_frame, fragManager );
 	        transaction.addToBackStack(null);
 	 
 	        transaction.commit();
@@ -284,20 +311,20 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 			break;
 			
 		case RequestCodes.MENU_DIAGNOSTICAR:
-			frag = new PacienteFragment();
+			fragManager = new PacienteFragment();
 			args = new Bundle();			
 			args.putSerializable(PutExtras.USUARIO_LOGADO, usuarioLogado);
-			frag.setArguments(args);
+			fragManager.setArguments(args);
 			
 			
 			transaction = getSupportFragmentManager().beginTransaction();
 			 
-	        transaction.replace(R.id.content_frame, frag );
+	        transaction.replace(R.id.content_frame, fragManager );
 	        transaction.addToBackStack(null);
 	 
 	        transaction.commit();
 			
-			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, frag ).commit();			
+			//getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, fragManager ).commit();			
 			break;
 		case 201:
 			//NavigationController.getInstance().showSettings(this);
@@ -314,10 +341,10 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 					
 		case RequestCodes.MENU_LOGIN:			
 			
-			frag = new LoginFragment();
+			fragManager = new LoginFragment();
 			transaction = getSupportFragmentManager().beginTransaction();
 			 
-	        transaction.replace(R.id.content_frame, frag );
+	        transaction.replace(R.id.content_frame, fragManager );
 	        transaction.addToBackStack(null);
 	 
 	        transaction.commit();
@@ -330,27 +357,28 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 			if(usuarioLogado!=null){
 				if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.PACIENTE)){
 					intent.putExtra(PutExtras.PACIENTE_SELECIONADO, usuarioLogado);
+					//Carrega a nova tela
+					this.startActivity(intent);
+					
 				}
 				if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.AGENTE)){
-					frag = new PacienteFragment();
+					fragManager = new PacienteFragment();
 					args = new Bundle();			
 					args.putSerializable(PutExtras.USUARIO_LOGADO, usuarioLogado);
-					frag.setArguments(args);
+					fragManager.setArguments(args);
 					
 					
 					transaction = getSupportFragmentManager().beginTransaction();
 					 
-			        transaction.replace(R.id.content_frame, frag );
+			        transaction.replace(R.id.content_frame, fragManager );
 			        transaction.addToBackStack(null);
 			 
 			        transaction.commit();
 					
-					getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, frag ).commit();			
+					//getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, frag ).commit();			
 					
 				}
 			}
-			//Carrega a nova tela
-			this.startActivity(intent);
 			
 			//getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new AgenteFragment()).commit();
 			
@@ -359,15 +387,15 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 			if(usuarioLogado!=null){
 							
 				if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.PACIENTE)){
-					frag = new ColetarFragment();
+					fragManager = new ColetarFragment();
 					args = new Bundle();			
 					args.putSerializable(PutExtras.PACIENTE_SELECIONADO, usuarioLogado);
-					frag.setArguments(args);
+					fragManager.setArguments(args);
 					//getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, frag ).commit();
 															
 					transaction = getSupportFragmentManager().beginTransaction();
 					 
-			        transaction.replace(R.id.content_frame, frag );
+			        transaction.replace(R.id.content_frame, fragManager );
 			        transaction.addToBackStack(null);
 			 
 			        transaction.commit();
@@ -381,28 +409,28 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 						
 						if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.AGENTE)){
 					//intent.putExtra(PutExtras.PACIENTE_SELECIONADO, usuarioLogado);
-							frag = new PacienteFragment();
+							fragManager = new PacienteFragment();
 							args = new Bundle();			
 							args.putSerializable(PutExtras.USUARIO_LOGADO, usuarioLogado);
-							frag.setArguments(args);
+							fragManager.setArguments(args);
 									
 							transaction = getSupportFragmentManager().beginTransaction();
 							 
-					        transaction.replace(R.id.content_frame, frag );
+					        transaction.replace(R.id.content_frame, fragManager );
 					        transaction.addToBackStack(null);
 					 
 					        transaction.commit();
 						}
 						if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.MEDICO)){
 							//intent.putExtra(PutExtras.PACIENTE_SELECIONADO, usuarioLogado);
-									frag = new PacienteFragment();
+							fragManager = new PacienteFragment();
 									args = new Bundle();			
 									args.putSerializable(PutExtras.USUARIO_LOGADO, usuarioLogado);
-									frag.setArguments(args);
+									fragManager.setArguments(args);
 											
 									transaction = getSupportFragmentManager().beginTransaction();
 									 
-							        transaction.replace(R.id.content_frame, frag );
+							        transaction.replace(R.id.content_frame, fragManager );
 							        transaction.addToBackStack(null);
 							 
 							        transaction.commit();	
@@ -418,15 +446,15 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 			if(usuarioLogado!=null){
 							
 				if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.PACIENTE)){
-					frag = new DiagnosticarFragment();
+					fragManager = new DiagnosticarFragment();
 					args = new Bundle();			
 					args.putSerializable(PutExtras.PACIENTE_SELECIONADO, usuarioLogado);
-					frag.setArguments(args);
+					fragManager.setArguments(args);
 					//getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, frag ).commit();
 															
 					transaction = getSupportFragmentManager().beginTransaction();
 					 
-			        transaction.replace(R.id.content_frame, frag );
+			        transaction.replace(R.id.content_frame, fragManager );
 			        transaction.addToBackStack(null);
 			 
 			        transaction.commit();
@@ -439,14 +467,14 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 						
 						if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.MEDICO)){
 					//intent.putExtra(PutExtras.PACIENTE_SELECIONADO, usuarioLogado);
-							frag = new PacienteFragment();
+							fragManager = new PacienteFragment();
 							args = new Bundle();			
 							args.putSerializable(PutExtras.USUARIO_LOGADO, usuarioLogado);
-							frag.setArguments(args);
+							fragManager.setArguments(args);
 									
 							transaction = getSupportFragmentManager().beginTransaction();
 							 
-					        transaction.replace(R.id.content_frame, frag );
+					        transaction.replace(R.id.content_frame, fragManager );
 					        transaction.addToBackStack(null);
 					 
 					        transaction.commit();
@@ -461,10 +489,10 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 		case RequestCodes.MENU_UBS:			
 			//getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new UnidadeSaudeFragment()).commit();
 			
-			frag = new UnidadeSaudeFragment();
+			fragManager = new UnidadeSaudeFragment();
 			transaction = getSupportFragmentManager().beginTransaction();
 			 
-	        transaction.replace(R.id.content_frame, frag );
+	        transaction.replace(R.id.content_frame, fragManager );
 	        transaction.addToBackStack(null);
 	 
 	        transaction.commit();
@@ -474,10 +502,10 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 		case RequestCodes.MENU_BAIRRO:			
 			//getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new BairroFragment()).commit();
 			
-			frag = new BairroFragment();
+			fragManager = new BairroFragment();
 			transaction = getSupportFragmentManager().beginTransaction();
 			 
-	        transaction.replace(R.id.content_frame, frag );
+	        transaction.replace(R.id.content_frame, fragManager );
 	        transaction.addToBackStack(null);
 	 
 	        transaction.commit();

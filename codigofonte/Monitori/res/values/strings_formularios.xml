@@ -166,10 +166,7 @@
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
 
-    <!-- For sample -->
 
-    <string name="mainmenu_button1">@string/title_activity_paciente </string>
-    <string name="mainmenu_button2">Airport (AsyncTask)</string>
     <string name="eula_title">Contrato de Licença de Usuário Final</string>
     <string name="eula_accept">Aceitar</string>
     <string name="eula_refuse">Recusar</string>
@@ -183,5 +180,9 @@
     <string name="camera_foto">Tirar Foto</string>
     <string name="camera_galeria">Escolher da Galeria de Fotos</string>
     <string name="camera_cancelar">Cancelar</string>
+    
+    <!-- strings validacao -->
+    <string name="erro_campo_requerido">Este campo é Obrigatório</string>
+    <string name="erro_data_invalida">Data Inválida</string>
     
 </resources>

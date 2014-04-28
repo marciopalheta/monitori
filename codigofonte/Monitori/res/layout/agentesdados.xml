@@ -40,15 +40,7 @@
     		android:layout_gravity="center_horizontal"
    			android:src="@drawable/ic_no_image"
     		android:contentDescription="@string/foto"/>
-        
-        <TextView
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-			android:text="@string/ast"
-			android:textColor="#ff0000"
-            android:layout_marginLeft="@dimen/margem_editext"
-            android:textSize="@dimen/fontes_para_textos" />
-		
+                		
         <TextView
 		    android:id="@+id/tvNome"
 		    android:layout_width="wrap_content"
@@ -69,15 +61,7 @@
             android:inputType="text"
 			android:hint="@string/nome"
 			android:layout_marginBottom="10dp" />
-        
-        <TextView
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-			android:text="@string/ast"
-			android:textColor="#ff0000"
-            android:layout_marginLeft="@dimen/margem_editext"
-            android:textSize="@dimen/fontes_para_textos" />
-        
+                        
         <TextView
 			    android:id="@+id/tvCpf"
 			    android:layout_width="wrap_content"
@@ -98,14 +82,7 @@
 	            android:inputType="number"
 				android:hint="@string/cpf"
 				android:layout_marginBottom="10dp" />
-	        
-        <TextView
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-			android:text="@string/ast"
-			android:textColor="#ff0000"
-            android:layout_marginLeft="@dimen/margem_editext"
-            android:textSize="@dimen/fontes_para_textos" />
+	                
         
         <TextView
 		    android:id="@+id/tvMatricula"
@@ -128,14 +105,7 @@
 			android:layout_marginBottom="10dp" 
 			android:inputType="number"
 			/>
-        
-        <TextView
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-			android:text="@string/ast"
-			android:textColor="#ff0000"
-            android:layout_marginLeft="@dimen/margem_editext"
-            android:textSize="@dimen/fontes_para_textos" />
+                
         		                	        	        
 			<TextView
 			    android:id="@+id/tvDataNascimento"
@@ -167,19 +137,11 @@
 			        	android:id="@+id/ibDataNascimento"
 			        	android:layout_width="wrap_content"
 			        	android:layout_height="wrap_content"	        	
-			        	android:src="@android:drawable/ic_menu_today" 
+			        	android:src="@drawable/ic_calendario"  
 			        	android:contentDescription="@string/dtNascimento"
 			        	/>	        
 		        </LinearLayout>                
-	    
-		    <TextView
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-			android:text="@string/ast"
-			android:textColor="#ff0000"
-            android:layout_marginLeft="@dimen/margem_editext"
-            android:textSize="@dimen/fontes_para_textos" />
-		    
+	    		    		    
 	        <TextView
 			    android:id="@+id/tvTelefone"
 			    android:layout_width="wrap_content"
@@ -262,15 +224,7 @@
 				android:layout_marginBottom="10dp"
 				android:inputType="text|number"
 				android:hint="@string/numero"/>
-			
-			<TextView
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-			android:text="@string/ast"
-			android:textColor="#ff0000"
-            android:layout_marginLeft="@dimen/margem_editext"
-            android:textSize="@dimen/fontes_para_textos" />
-			
+									
 			<TextView
 			    android:id="@+id/tvCep"
 			    android:layout_width="wrap_content"

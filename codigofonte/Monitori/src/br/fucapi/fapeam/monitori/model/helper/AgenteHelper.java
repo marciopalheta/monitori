@@ -32,15 +32,16 @@ public class AgenteHelper extends UsuarioHelper {
 		agente= new Agente();	
 		matricula =(EditText) activity.findViewById(R.id.edMatricula);
 		
+		//activity.getResources().getString(R.string.erro_campo_requerido)
 		
 		Map<View, String> mapaDeCampos = new LinkedHashMap<View, String>();
 		
-		mapaDeCampos.put(getNome(), "Nome Obrigatorio");
-		mapaDeCampos.put(getCpf(), "CPF Obrigatorio");
-		mapaDeCampos.put(matricula, "Campo Obrigatorio");
-		mapaDeCampos.put(getEditTextDataNascimento(), "Campo Obrigatorio");
-		mapaDeCampos.put(getTelefone(), "Telefone Obrigatorio");		
-		mapaDeCampos.put(getCep(), "Cep Obrigatorio");
+		mapaDeCampos.put(getNome(), activity.getResources().getString(R.string.erro_campo_requerido));
+		mapaDeCampos.put(getCpf(), activity.getResources().getString(R.string.erro_campo_requerido));
+		mapaDeCampos.put(matricula, activity.getResources().getString(R.string.erro_campo_requerido));
+		mapaDeCampos.put(getEditTextDataNascimento(), activity.getResources().getString(R.string.erro_campo_requerido));
+		mapaDeCampos.put(getTelefone(), activity.getResources().getString(R.string.erro_campo_requerido));		
+		mapaDeCampos.put(getCep(), activity.getResources().getString(R.string.erro_campo_requerido));
 		
 		
 		

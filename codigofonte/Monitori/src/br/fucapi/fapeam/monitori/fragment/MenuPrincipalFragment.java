@@ -145,7 +145,7 @@ public class MenuPrincipalFragment extends Fragment implements OnClickListener {
 		/*Botao Diagnostico*/
 		btDiagnostico = new Button(this.getActivity());		
 		btDiagnostico.setText( getResources().getString(R.string.menu_diagnosticar) );
-		Drawable drawableTopDiagnostico= getResources().getDrawable(R.drawable.ic_coleta);
+		Drawable drawableTopDiagnostico= getResources().getDrawable(R.drawable.ic_diagnostico);
 		btDiagnostico.setCompoundDrawablesWithIntrinsicBounds(null, drawableTopDiagnostico , null, null);
 		btDiagnostico.setOnClickListener(this);		
 		btDiagnostico.setLayoutParams(layoutParams);									
@@ -154,7 +154,7 @@ public class MenuPrincipalFragment extends Fragment implements OnClickListener {
 		/*Botao HistoricoDiagnostico*/
 		btHistoricoDiagnostico = new Button(this.getActivity());		
 		btHistoricoDiagnostico.setText( getResources().getString(R.string.menu_historico_diagnostico) );
-		Drawable drawableTopHistoricoDiagnostico = getResources().getDrawable(R.drawable.historico);
+		Drawable drawableTopHistoricoDiagnostico = getResources().getDrawable(R.drawable.ic_historico);
 		btHistoricoDiagnostico.setCompoundDrawablesWithIntrinsicBounds(null, drawableTopHistoricoDiagnostico , null, null);
 		btHistoricoDiagnostico.setOnClickListener(this);		
 		btHistoricoDiagnostico.setLayoutParams(layoutParams);									

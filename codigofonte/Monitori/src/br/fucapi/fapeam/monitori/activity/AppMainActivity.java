@@ -82,12 +82,12 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 		NavDrawerItem menuUbs = NavMenuItem.create(RequestCodes.MENU_UBS,getString(R.string.menu_ubs_long), R.drawable.ic_ubs, true, this);
 		NavDrawerItem secaoFuncionalidades = NavMenuSection.create(300, "Funcionalidades");
 		
-		NavDrawerItem menuAlterarDados = NavMenuItem.create(RequestCodes.MENU_ALTERAR_DADOS, getString(R.string.menu_alterar), R.drawable.drawer_shadow, true, this);
+		NavDrawerItem menuAlterarDados = NavMenuItem.create(RequestCodes.MENU_ALTERAR_DADOS, getString(R.string.menu_alterar), R.drawable.ic_user_folder, true, this);
 		
 		NavDrawerItem menuHistorico = NavMenuItem.create(RequestCodes.MENU_HISTORICO_COLETA,getString(R.string.title_activity_historico), R.drawable.historico, true, this);
 		NavDrawerItem menuColetaDados = NavMenuItem.create(RequestCodes.MENU_COLETA_DADOS,getString(R.string.title_activity_coletar_dados), R.drawable.ic_coleta, true, this);						
-		NavDrawerItem menuDiagnosticar = NavMenuItem.create(RequestCodes.MENU_DIAGNOSTICAR, getString(R.string.title_activity_diagnosticar_dados), R.drawable.diagnosticar, true, this);
-		NavDrawerItem menuHistDiagnostico = NavMenuItem.create(RequestCodes.MENU_HISTORICO_DIAGNOSTICO, getString(R.string.title_activity_diagnosticar), R.drawable.historico, true, this);
+		NavDrawerItem menuDiagnosticar = NavMenuItem.create(RequestCodes.MENU_DIAGNOSTICAR, getString(R.string.title_activity_diagnosticar_dados), R.drawable.ic_diagnostico, true, this);
+		NavDrawerItem menuHistDiagnostico = NavMenuItem.create(RequestCodes.MENU_HISTORICO_DIAGNOSTICO, getString(R.string.title_activity_diagnosticar), R.drawable.ic_historico, true, this);
 		
 		NavDrawerItem secaoApp = NavMenuSection.create(200, "Aplicação");
 		
@@ -127,10 +127,10 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 				listMenu.add(secaoFuncionalidades);				
 								
 				listMenu.add(menuColetaDados);
-				listMenu.add(menuHistorico);
-				listMenu.add(menuAlterarDados);
+				listMenu.add(menuHistorico);				
 				
 				listMenu.add(secaoApp);
+				listMenu.add(menuAlterarDados);
 				listMenu.add(menuLogin);
 				listMenu.add(menuAvaliar);
 				listMenu.add(menuEULA);
@@ -145,10 +145,10 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 								
 				listMenu.add(menuDiagnosticar);
 				listMenu.add(menuHistorico);
-				listMenu.add(menuHistDiagnostico);
-				listMenu.add(menuAlterarDados);
+				listMenu.add(menuHistDiagnostico);				
 				
 				listMenu.add(secaoApp);
+				listMenu.add(menuAlterarDados);
 				listMenu.add(menuLogin);
 				listMenu.add(menuAvaliar);
 				listMenu.add(menuEULA);
@@ -165,9 +165,10 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 				
 				listMenu.add(menuHistorico);
 				listMenu.add(menuColetaDados);			
-				listMenu.add(menuAlterarDados);
+				
 				
 				listMenu.add(secaoApp);
+				listMenu.add(menuAlterarDados);
 				listMenu.add(menuLogin);
 				listMenu.add(menuAvaliar);
 				listMenu.add(menuEULA);
@@ -219,20 +220,21 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 		
 		switch ((int)id) {
 		case RequestCodes.MENU_ALTERAR_DADOS:
-			intent = new Intent(this, PacienteDadosActivity.class);
-			intent = new Intent(this, AgenteDadosActivity.class);
-			intent = new Intent(this, MedicoDadosActivity.class);
+									
 			if(usuarioLogado!=null){
 				
 				if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.PACIENTE)){
+					intent = new Intent(this, PacienteDadosActivity.class);
 					intent.putExtra(PutExtras.PACIENTE_SELECIONADO, usuarioLogado);
 					this.startActivity(intent);
 				}
 				if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.AGENTE)){
+					intent = new Intent(this, AgenteDadosActivity.class);
 					intent.putExtra(PutExtras.AGENTE_SELECIONADO, usuarioLogado);
 					this.startActivity(intent);
 				}
 				if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.MEDICO)){
+					intent = new Intent(this, MedicoDadosActivity.class);
 					intent.putExtra(PutExtras.MEDICO_SELECIONADO, usuarioLogado);
 					this.startActivity(intent);
 				}

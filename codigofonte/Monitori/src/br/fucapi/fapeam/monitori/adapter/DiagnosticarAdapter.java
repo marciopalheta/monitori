@@ -7,10 +7,8 @@ import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 import br.fucapi.fapeam.monitori.R;
-import br.fucapi.fapeam.monitori.model.bean.ColetarDados;
 import br.fucapi.fapeam.monitori.model.bean.Diagnosticar;
 
 public class DiagnosticarAdapter extends BaseAdapter {

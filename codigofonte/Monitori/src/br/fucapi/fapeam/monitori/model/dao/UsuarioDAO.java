@@ -206,7 +206,7 @@ public class UsuarioDAO extends AbstractDataBase{
 					((Paciente)usuario).setDiabetico1( Boolean.parseBoolean( cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.diabetico1 ))  ) );
 					((Paciente)usuario).setDiabetico2( Boolean.parseBoolean( cursor.getString(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.diabetico2 ))  ) );
 					
-					UnidadeSaudeDAO ubsDao = new UnidadeSaudeDAO(context);				
+								
 					
 					Medico medico =  (Medico) getUsuario( cursor.getLong(cursor.getColumnIndex( SQLiteDatabaseHelper.FIELDS_TABLE_USUARIO.idMedico) )) ;
 					usuario.setMedico(medico);

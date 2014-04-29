@@ -1,9 +1,6 @@
 package br.fucapi.fapeam.monitori.activity;
 
 import br.fucapi.fapeam.monitori.R;
-import br.fucapi.fapeam.monitori.activity.agente.AgenteActivity;
-import br.fucapi.fapeam.monitori.activity.medico.MedicoActivity;
-import br.fucapi.fapeam.monitori.activity.paciente.PacienteActivity;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import br.fucapi.fapeam.monitori.model.dao.UsuarioDAO;
 import br.fucapi.fapeam.monitori.utils.Mask;
@@ -12,7 +9,6 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;

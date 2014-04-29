@@ -3,13 +3,10 @@ package br.fucapi.fapeam.monitori.activity.paciente;
 import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.activity.UsuarioDadosActivity;
 import br.fucapi.fapeam.monitori.model.bean.Paciente;
-import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
-import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import br.fucapi.fapeam.monitori.model.dao.UsuarioDAO;
 import br.fucapi.fapeam.monitori.model.helper.PacienteHelper;
 import br.fucapi.fapeam.monitori.model.helper.UsuarioHelper;
 import br.fucapi.fapeam.monitori.utils.PutExtras;
-import br.fucapi.fapeam.monitori.utils.RequestCodes;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,7 +19,6 @@ public class PacienteDadosActivity extends UsuarioDadosActivity {
 	//Atributos para manipulacao de tela
 	private PacienteHelper helper;
 	private Paciente pacienteParaSerAlterado = null;
-	private Usuario usuarioLogado = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

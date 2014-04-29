@@ -7,7 +7,6 @@ import java.util.List;
 import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.activity.agente.AgenteDadosActivity;
 import br.fucapi.fapeam.monitori.activity.medico.MedicoDadosActivity;
-import br.fucapi.fapeam.monitori.activity.paciente.PacienteActivity;
 import br.fucapi.fapeam.monitori.activity.paciente.PacienteDadosActivity;
 import br.fucapi.fapeam.monitori.controller.NavigationController;
 import br.fucapi.fapeam.monitori.eula.Eula;
@@ -72,7 +71,6 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 	@Override
 	protected NavDrawerActivityConfiguration getNavDrawerConfiguration() {
 		
-		NavDrawerItem[] menu = null;
 		
 		List<NavDrawerItem> listMenu = new ArrayList<NavDrawerItem>();
 		

@@ -67,7 +67,7 @@ public class PacienteHelper extends UsuarioHelper {
 		spinMedico = (Spinner) activity.findViewById(R.id.spinMedico);
 		
 		selectionCurrent = spinMedico.getSelectedItemPosition();
-		spinMedico.setNextFocusDownId(R.id.edit_sus);
+		spinMedico.setNextFocusDownId(R.id.edNome);
 		spinUbs.setNextFocusForwardId( R.id.edit_sus );
 		selectionCurrent = spinUbs.getSelectedItemPosition();
 		
@@ -150,8 +150,8 @@ public class PacienteHelper extends UsuarioHelper {
 				if(selectedItemView !=null){
 					if(selectionCurrent!=position){
 						selectionCurrent = position;
-						getNumSus().requestFocus();		            																						           
-						getNumSus().performClick();
+						getNome().requestFocus();		            																						           
+						getNome().performClick();
 						//Funcoes.showKeyboard(activity);
 						Funcoes.showKeyboard(getNumSus());
 		            //showKeyboard

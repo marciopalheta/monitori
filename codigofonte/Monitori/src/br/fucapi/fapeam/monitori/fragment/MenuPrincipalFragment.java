@@ -2,7 +2,6 @@ package br.fucapi.fapeam.monitori.fragment;
 
 import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.activity.AppMainActivity;
-import br.fucapi.fapeam.monitori.activity.Dashboard;
 import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import br.fucapi.fapeam.monitori.utils.DashboardLayout;
@@ -10,8 +9,6 @@ import br.fucapi.fapeam.monitori.utils.RequestCodes;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.AndroidCharacter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,7 +18,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 public class MenuPrincipalFragment extends Fragment implements OnClickListener {
 

@@ -22,8 +22,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
@@ -44,7 +42,6 @@ public class DiagnosticarActivity extends Activity {
 		private DiagnosticarAdapter adapter;
 		
 		//definicao do layout de exibicao da lista
-		private int adapterLayout = android.R.layout.simple_list_item_1;
 		
 		//selecao com o click longo
 		private Diagnosticar DiagnosticoSelecionado = null;

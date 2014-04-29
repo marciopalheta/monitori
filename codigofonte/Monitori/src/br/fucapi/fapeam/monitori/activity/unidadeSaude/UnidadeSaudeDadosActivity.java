@@ -6,8 +6,6 @@ import br.fucapi.fapeam.monitori.model.dao.UnidadeSaudeDAO;
 import br.fucapi.fapeam.monitori.model.helper.UnidadeSaudeHelper;
 import br.fucapi.fapeam.monitori.utils.PutExtras;
 import android.os.Bundle;
-import android.app.Activity;
-import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuInflater;

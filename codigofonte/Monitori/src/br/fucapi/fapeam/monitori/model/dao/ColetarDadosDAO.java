@@ -23,7 +23,6 @@ public class ColetarDadosDAO extends AbstractDataBase{
 		
     private Context context;
     
-	private String DATE_FORMAT;	
 	
 	private SimpleDateFormat sdfDate;
 	private SimpleDateFormat sdfTime;

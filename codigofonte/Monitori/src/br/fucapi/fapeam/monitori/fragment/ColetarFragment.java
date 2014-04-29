@@ -29,8 +29,6 @@ import br.fucapi.fapeam.monitori.activity.ColetarDadosActivity;
 import br.fucapi.fapeam.monitori.adapter.ColetaAdapter;
 import br.fucapi.fapeam.monitori.model.bean.ColetarDados;
 import br.fucapi.fapeam.monitori.model.bean.Paciente;
-import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
-import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import br.fucapi.fapeam.monitori.model.dao.ColetarDadosDAO;
 import br.fucapi.fapeam.monitori.utils.PutExtras;
 
@@ -40,8 +38,7 @@ public class ColetarFragment extends Fragment {
 		
 		//atributos de tela
 		private ListView lvListagem;
-		
-		private Usuario usuarioLogado =null;
+	
 		
 		//colecao de coletas a serem exibidas na tela
 		private List<ColetarDados> listaColetar;

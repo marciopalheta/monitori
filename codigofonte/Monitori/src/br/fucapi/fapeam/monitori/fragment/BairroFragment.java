@@ -2,18 +2,14 @@ package br.fucapi.fapeam.monitori.fragment;
 
 import java.util.List;
 import br.fucapi.fapeam.monitori.R;
-import br.fucapi.fapeam.monitori.activity.unidadeSaude.UnidadeSaudeDadosActivity;
 import br.fucapi.fapeam.monitori.model.bean.Bairro;
-import br.fucapi.fapeam.monitori.model.bean.UnidadeSaude;
 import br.fucapi.fapeam.monitori.model.dao.BairroDAO;
-import br.fucapi.fapeam.monitori.model.dao.UnidadeSaudeDAO;
 import br.fucapi.fapeam.monitori.utils.BairroDialog;
 import br.fucapi.fapeam.monitori.utils.PutExtras;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
 import android.support.v4.app.Fragment;
 import android.util.AttributeSet;

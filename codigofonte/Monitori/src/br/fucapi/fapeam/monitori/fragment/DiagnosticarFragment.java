@@ -4,7 +4,6 @@ import java.util.List;
 
 import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.activity.DiagnosticarDadosActivity;
-import br.fucapi.fapeam.monitori.activity.paciente.PacienteActivity;
 import br.fucapi.fapeam.monitori.adapter.DiagnosticarAdapter;
 import br.fucapi.fapeam.monitori.model.bean.Diagnosticar;
 import br.fucapi.fapeam.monitori.model.bean.Paciente;
@@ -28,9 +27,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 

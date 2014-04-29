@@ -6,8 +6,6 @@ import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.adapter.ColetaAdapter;
 import br.fucapi.fapeam.monitori.model.bean.ColetarDados;
 import br.fucapi.fapeam.monitori.model.bean.Paciente;
-import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
-import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import br.fucapi.fapeam.monitori.model.dao.ColetarDadosDAO;
 import br.fucapi.fapeam.monitori.utils.PutExtras;
 import android.os.Bundle;
@@ -33,8 +31,6 @@ public class ColetarActivity extends Activity {
 
 	//definicao das constantes
 	private final String TAG = "CADASTRO_COLETARDADOS";
-	
-	private Usuario usuarioLogado = null;
 	
 	//atributos de tela
 	private ListView lvListagem;

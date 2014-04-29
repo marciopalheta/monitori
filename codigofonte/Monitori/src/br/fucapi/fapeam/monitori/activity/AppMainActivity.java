@@ -93,12 +93,12 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 		NavDrawerItem menuDiagnosticar = NavMenuItem.create(RequestCodes.MENU_DIAGNOSTICAR, getString(R.string.title_activity_diagnosticar_dados), R.drawable.ic_diagnostico, true, this);
 		NavDrawerItem menuHistDiagnostico = NavMenuItem.create(RequestCodes.MENU_HISTORICO_DIAGNOSTICO, getString(R.string.title_activity_diagnosticar), R.drawable.ic_historico, true, this);
 		
-		NavDrawerItem secaoApp = NavMenuSection.create(200, "Aplicação");
+		NavDrawerItem secaoApp = NavMenuSection.create(200, getString(R.string.aplicacao));
 		
 		NavDrawerItem menuLogin = NavMenuItem.create(RequestCodes.MENU_LOGIN, getString(R.string.menu_login), R.drawable.navdrawer_friends, true, this);
 		
 		NavDrawerItem menuAvaliar = NavMenuItem.create(202, "Avaliar este app", "navdrawer_rating", false, this);
-		NavDrawerItem menuEULA = NavMenuItem.create(203, "Licença de Uso", "navdrawer_eula", false, this);
+		NavDrawerItem menuEULA = NavMenuItem.create(203, getString(R.string.licenca_uso), "navdrawer_eula", false, this);
 		NavDrawerItem menuSair = NavMenuItem.create(204, "Quit", "navdrawer_quit", false, this);
 		
 		

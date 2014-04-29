@@ -150,7 +150,8 @@
     
     
     <string name="erro_conexao_indisponivel">Conexão indisponível, por favor ative sua rede móvel ou Wi-Fi.</string>
-
+	<string name="aplicacao">Aplicação</string>
+	<string name="licenca_uso">Licença de Uso</string>
     <!-- novas strings -->
 
     <string name="splashscreen_text">Carregando aplicação</string>

@@ -6,6 +6,9 @@ import br.fucapi.fapeam.monitori.model.bean.Medico;
 import br.fucapi.fapeam.monitori.model.dao.UsuarioDAO;
 import br.fucapi.fapeam.monitori.model.helper.MedicoHelper;
 import br.fucapi.fapeam.monitori.model.helper.UsuarioHelper;
+import br.fucapi.fapeam.monitori.utils.PutExtras;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -26,7 +29,7 @@ public class MedicoDadosActivity extends UsuarioDadosActivity {
 			
 			// Busca o paciente a ser alterado
 			medicoParaSerAlterado = (Medico) getIntent().getSerializableExtra(
-							"MEDICO_SELECIONADO");
+							PutExtras.MEDICO_SELECIONADO);
 
 					if (medicoParaSerAlterado != null) {
 						// Atualiza a tela com dados do Aluno
@@ -70,6 +73,9 @@ public class MedicoDadosActivity extends UsuarioDadosActivity {
 							dao.cadastrar(medico);
 						} else {
 							dao.alterar(medico);
+							Intent result = new Intent();
+			                result.putExtra( PutExtras.ALTERAR_USUARIO ,medico);
+			                setResult(Activity.RESULT_OK, result);
 						}//Fechando a conexao com o BD
 						dao.close();
 						//Encerrando a activity

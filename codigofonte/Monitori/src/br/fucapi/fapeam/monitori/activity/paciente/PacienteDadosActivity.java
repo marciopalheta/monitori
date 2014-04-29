@@ -8,6 +8,10 @@ import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import br.fucapi.fapeam.monitori.model.dao.UsuarioDAO;
 import br.fucapi.fapeam.monitori.model.helper.PacienteHelper;
 import br.fucapi.fapeam.monitori.model.helper.UsuarioHelper;
+import br.fucapi.fapeam.monitori.utils.PutExtras;
+import br.fucapi.fapeam.monitori.utils.RequestCodes;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,7 +34,7 @@ public class PacienteDadosActivity extends UsuarioDadosActivity {
 		 helper = (PacienteHelper) getHelper();				
 		// Busca o paciente a ser alterado
 		pacienteParaSerAlterado = (Paciente) getIntent().getSerializableExtra(
-						"PACIENTE_SELECIONADO");
+						PutExtras.PACIENTE_SELECIONADO);
 		
 				if (pacienteParaSerAlterado != null) {
 					// Atualiza a tela com dados do Aluno
@@ -72,10 +76,15 @@ public class PacienteDadosActivity extends UsuarioDadosActivity {
 						dao.cadastrar(paciente);
 					} else {
 						dao.alterar(paciente);
+						Intent result = new Intent();
+		                result.putExtra( PutExtras.ALTERAR_USUARIO ,paciente);
+		                setResult(Activity.RESULT_OK, result);
 					}//Fechando a conexao com o BD
 					dao.close();
 					//Encerrando a activity
 					finish();
+										
+					
 				}
 				return true;
 			case R.id.menu_cancelar:			

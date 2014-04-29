@@ -8,6 +8,7 @@ import br.fucapi.fapeam.monitori.model.bean.Medico;
 import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import br.fucapi.fapeam.monitori.model.dao.UsuarioDAO;
+import br.fucapi.fapeam.monitori.utils.PutExtras;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -84,7 +85,7 @@ public class MedicoActivity extends Activity {
 					usuarioSelecionado = (Medico) lvListagem
 							.getItemAtPosition(posicao);
 
-					form.putExtra("MEDICO_SELECIONADO", usuarioSelecionado);
+					form.putExtra(PutExtras.MEDICO_SELECIONADO, usuarioSelecionado);
 
 					startActivity(form);
 				}
@@ -176,7 +177,7 @@ public class MedicoActivity extends Activity {
 					
 					Intent form = new Intent(MedicoActivity.this,
 							MedicoDadosActivity.class);				
-					form.putExtra("MEDICO_SELECIONADO", usuarioSelecionado);
+					form.putExtra(PutExtras.MEDICO_SELECIONADO, usuarioSelecionado);
 
 					startActivity(form);
 

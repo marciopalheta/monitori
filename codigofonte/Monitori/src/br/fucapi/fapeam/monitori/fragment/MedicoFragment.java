@@ -9,6 +9,7 @@ import br.fucapi.fapeam.monitori.model.bean.Medico;
 import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import br.fucapi.fapeam.monitori.model.dao.UsuarioDAO;
+import br.fucapi.fapeam.monitori.utils.PutExtras;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -93,7 +94,7 @@ public class MedicoFragment extends Fragment {
 							usuarioSelecionado = (Medico) lvListagem
 									.getItemAtPosition(posicao);
 
-							form.putExtra("MEDICO_SELECIONADO", usuarioSelecionado);
+							form.putExtra(PutExtras.MEDICO_SELECIONADO, usuarioSelecionado);
 
 							startActivity(form);
 						}
@@ -189,7 +190,7 @@ public class MedicoFragment extends Fragment {
 					
 					Intent form = new Intent(getActivity(),
 							MedicoDadosActivity.class);				
-					form.putExtra("MEDICO_SELECIONADO", usuarioSelecionado);
+					form.putExtra(PutExtras.MEDICO_SELECIONADO, usuarioSelecionado);
 
 					startActivity(form);	
 					break;

@@ -10,6 +10,7 @@ import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.model.dao.UnidadeSaudeDAO;
 import br.fucapi.fapeam.monitori.model.helper.UsuarioHelper;
 import br.fucapi.fapeam.monitori.utils.Funcoes;
+import br.fucapi.fapeam.monitori.utils.PutExtras;
 import br.fucapi.fapeam.monitori.utils.RequestCodes;
 import br.fucapi.fapeam.monitori.utils.SpinnerAdapter;
 import br.fucapi.fapeam.monitori.utils.SpinnerObject;
@@ -61,7 +62,7 @@ public abstract class UsuarioDadosActivity extends FragmentActivity {
 						
 			if (savedInstanceState != null) {
 				localArquivo = (String) savedInstanceState
-						.getSerializable("localArquivo");
+						.getSerializable(PutExtras.FILE_PATH);
 			}
 			if (localArquivo != null) {
 				helper.carregarFoto(localArquivo);
@@ -280,7 +281,7 @@ public abstract class UsuarioDadosActivity extends FragmentActivity {
 			@Override
 			protected void onSaveInstanceState(Bundle outState) {
 				super.onSaveInstanceState(outState);
-				outState.putSerializable("localArquivo", localArquivo);
+				outState.putSerializable(PutExtras.FILE_PATH, localArquivo);
 			}
 											
 			

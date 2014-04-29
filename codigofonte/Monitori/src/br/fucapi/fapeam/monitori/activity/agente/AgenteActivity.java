@@ -6,6 +6,7 @@ import br.fucapi.fapeam.monitori.adapter.ListaAdapter;
 import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import br.fucapi.fapeam.monitori.model.dao.UsuarioDAO;
+import br.fucapi.fapeam.monitori.utils.PutExtras;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -82,7 +83,7 @@ public class AgenteActivity extends Activity {
 						usuarioSelecionado = (Usuario) lvListagem
 								.getItemAtPosition(posicao);
 
-						form.putExtra("AGENTE_SELECIONADO", usuarioSelecionado);
+						form.putExtra(PutExtras.AGENTE_SELECIONADO, usuarioSelecionado);
 						startActivity(form);
 					}
 				});			
@@ -173,7 +174,7 @@ public class AgenteActivity extends Activity {
 				
 				Intent form = new Intent(AgenteActivity.this,
 						AgenteDadosActivity.class);				
-				form.putExtra("AGENTE_SELECIONADO", usuarioSelecionado);
+				form.putExtra(PutExtras.AGENTE_SELECIONADO, usuarioSelecionado);
 
 				startActivity(form);
 	

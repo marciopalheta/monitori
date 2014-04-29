@@ -7,6 +7,7 @@ import br.fucapi.fapeam.monitori.adapter.DiagnosticarAdapter;
 import br.fucapi.fapeam.monitori.model.bean.Diagnosticar;
 import br.fucapi.fapeam.monitori.model.bean.Paciente;
 import br.fucapi.fapeam.monitori.model.dao.DiagnosticarDAO;
+import br.fucapi.fapeam.monitori.utils.PutExtras;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -55,7 +56,7 @@ public class DiagnosticarActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.diagnosticar);
 		pacienteSelecionado = (Paciente) getIntent().getSerializableExtra(
-				"PACIENTE_SELECIONADO");
+				PutExtras.PACIENTE_SELECIONADO);
 		
 		
 		if (pacienteSelecionado == null) {
@@ -95,7 +96,7 @@ public class DiagnosticarActivity extends Activity {
 				Intent form = new Intent(DiagnosticarActivity.this, DiagnosticarDadosActivity.class);
 				
 				DiagnosticoSelecionado = (Diagnosticar) lvListagem.getItemAtPosition(posicao);
-				form.putExtra("DIAGNOSTICO_SELECIONADO", DiagnosticoSelecionado);
+				form.putExtra(PutExtras.DIAGNOSTICO_SELECIONADO, DiagnosticoSelecionado);
 				startActivity(form);
 			}			
 		});
@@ -186,7 +187,7 @@ public class DiagnosticarActivity extends Activity {
 				
 				Intent form = new Intent(DiagnosticarActivity.this,
 						ColetarDadosActivity.class);				
-				form.putExtra("DIAGNOSTICO_SELECIONADO", DiagnosticoSelecionado);
+				form.putExtra(PutExtras.DIAGNOSTICO_SELECIONADO, DiagnosticoSelecionado);
 
 				startActivity(form);
 				break;

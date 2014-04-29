@@ -11,6 +11,7 @@ import br.fucapi.fapeam.monitori.activity.paciente.PacienteActivity;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import br.fucapi.fapeam.monitori.model.dao.UsuarioDAO;
 import br.fucapi.fapeam.monitori.utils.Mask;
+import br.fucapi.fapeam.monitori.utils.PutExtras;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -167,7 +168,7 @@ public class LoginFragment extends Fragment {
 			
 			Intent intent = new Intent(getActivity(), AppMainActivity.class);
 						
-			intent.putExtra("USUARIO_LOGADO", usuarioLogado);
+			intent.putExtra(PutExtras.USUARIO_LOGADO, usuarioLogado);
 			startActivity(intent);//Carrega a nova tela		
 			getActivity().finish();					
 			

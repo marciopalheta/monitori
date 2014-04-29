@@ -4,6 +4,7 @@ import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.model.bean.UnidadeSaude;
 import br.fucapi.fapeam.monitori.model.dao.UnidadeSaudeDAO;
 import br.fucapi.fapeam.monitori.model.helper.UnidadeSaudeHelper;
+import br.fucapi.fapeam.monitori.utils.PutExtras;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -29,7 +30,7 @@ public class UnidadeSaudeDadosActivity extends FragmentActivity {
 						
 		// Busca o paciente a ser alterado
 		ubsParaSerAlterado = (UnidadeSaude) getIntent().getSerializableExtra(
-						"UBS_SELECIONADO");
+				PutExtras.UBS_SELECIONADO);
 
 				if (ubsParaSerAlterado != null) {
 					// Atualiza a tela com dados do Aluno

@@ -8,6 +8,7 @@ import br.fucapi.fapeam.monitori.model.bean.Agente;
 import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import br.fucapi.fapeam.monitori.model.dao.UsuarioDAO;
+import br.fucapi.fapeam.monitori.utils.PutExtras;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -93,7 +94,7 @@ public class AgenteFragment extends Fragment {
 						usuarioSelecionado = (Agente) lvListagem
 								.getItemAtPosition(posicao);
 
-						form.putExtra("AGENTE_SELECIONADO", usuarioSelecionado);
+						form.putExtra(PutExtras.AGENTE_SELECIONADO, usuarioSelecionado);
 
 						startActivity(form);
 					}
@@ -189,7 +190,7 @@ public class AgenteFragment extends Fragment {
 				
 				Intent form = new Intent(getActivity(),
 						AgenteDadosActivity.class);				
-				form.putExtra("AGENTE_SELECIONADO", usuarioSelecionado);
+				form.putExtra(PutExtras.AGENTE_SELECIONADO, usuarioSelecionado);
 
 				startActivity(form);	
 				break;

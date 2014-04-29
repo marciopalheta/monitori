@@ -6,6 +6,9 @@ import br.fucapi.fapeam.monitori.model.bean.Agente;
 import br.fucapi.fapeam.monitori.model.dao.UsuarioDAO;
 import br.fucapi.fapeam.monitori.model.helper.AgenteHelper;
 import br.fucapi.fapeam.monitori.model.helper.UsuarioHelper;
+import br.fucapi.fapeam.monitori.utils.PutExtras;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,7 +27,7 @@ public class AgenteDadosActivity extends UsuarioDadosActivity {
 		helper = (AgenteHelper) getHelper();				
 		// Busca o paciente a ser alterado
 		agenteParaSerAlterado = (Agente) getIntent().getSerializableExtra(
-						"AGENTE_SELECIONADO");
+						PutExtras.AGENTE_SELECIONADO);
 
 				if (agenteParaSerAlterado != null) {
 					// Atualiza a tela com dados do Aluno
@@ -67,6 +70,9 @@ public class AgenteDadosActivity extends UsuarioDadosActivity {
 						dao.cadastrar(agente);
 					} else {
 						dao.alterar(agente);
+						Intent result = new Intent();
+		                result.putExtra( PutExtras.ALTERAR_USUARIO ,agente);
+		                setResult(Activity.RESULT_OK, result);
 					}//Fechando a conexao com o BD
 					dao.close();
 					//Encerrando a activity

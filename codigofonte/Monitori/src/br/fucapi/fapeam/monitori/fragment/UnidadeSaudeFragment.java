@@ -5,6 +5,7 @@ import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.activity.unidadeSaude.UnidadeSaudeDadosActivity;
 import br.fucapi.fapeam.monitori.model.bean.UnidadeSaude;
 import br.fucapi.fapeam.monitori.model.dao.UnidadeSaudeDAO;
+import br.fucapi.fapeam.monitori.utils.PutExtras;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -91,7 +92,7 @@ public class UnidadeSaudeFragment extends Fragment {
 						ubsSelecionado = (UnidadeSaude) lvListagem
 								.getItemAtPosition(posicao);
 
-						form.putExtra("UBS_SELECIONADO", ubsSelecionado);
+						form.putExtra(PutExtras.UBS_SELECIONADO, ubsSelecionado);
 
 						startActivity(form);
 					}
@@ -151,7 +152,7 @@ public class UnidadeSaudeFragment extends Fragment {
 				
 				Intent form = new Intent(getActivity(),
 						UnidadeSaudeDadosActivity.class);				
-				form.putExtra("UBS_SELECIONADO", ubsSelecionado);
+				form.putExtra(PutExtras.UBS_SELECIONADO, ubsSelecionado);
 
 				startActivity(form);
 				break;

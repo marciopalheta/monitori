@@ -253,17 +253,17 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 				if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.PACIENTE)){
 					intent = new Intent(this, PacienteDadosActivity.class);
 					intent.putExtra(PutExtras.PACIENTE_SELECIONADO, usuarioLogado);
-					this.startActivity(intent);
+					this.startActivityForResult(intent, RequestCodes.ALTERAR_USUARIO);
 				}
 				if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.AGENTE)){
 					intent = new Intent(this, AgenteDadosActivity.class);
 					intent.putExtra(PutExtras.AGENTE_SELECIONADO, usuarioLogado);
-					this.startActivity(intent);
+					this.startActivityForResult(intent, RequestCodes.ALTERAR_USUARIO);
 				}
 				if(usuarioLogado.getTipoUsuario().equals(TipoUsuario.MEDICO)){
 					intent = new Intent(this, MedicoDadosActivity.class);
 					intent.putExtra(PutExtras.MEDICO_SELECIONADO, usuarioLogado);
-					this.startActivity(intent);
+					this.startActivityForResult(intent, RequestCodes.ALTERAR_USUARIO);
 				}
 				}
 			
@@ -528,5 +528,17 @@ public class AppMainActivity extends AbstractNavDrawerActivity {
 					.show();
 
 		}
+		if (requestCode == RequestCodes.ALTERAR_USUARIO) {
+			
+			if(resultCode == Activity.RESULT_OK) {
+				//Toast.makeText(this, "Back from Activity Save", Toast.LENGTH_SHORT).show();
+				usuarioLogado = (Usuario) data.getSerializableExtra(PutExtras.ALTERAR_USUARIO);
+                //Log.e("REQUEST", nomeUBS);
+                
+            }
+						
+		}
+		
+		
 	}
 }

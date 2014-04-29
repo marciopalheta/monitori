@@ -5,6 +5,7 @@ import java.util.List;
 
 import br.fucapi.fapeam.monitori.R;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
+import br.fucapi.fapeam.monitori.utils.PutExtras;
 import br.fucapi.fapeam.monitori.utils.SpinnerObject;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -42,7 +43,7 @@ public abstract class AbstractNavDrawerActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		
 		usuarioLogado = (Usuario) getIntent().getSerializableExtra(
-				"USUARIO_LOGADO");		
+				PutExtras.USUARIO_LOGADO);		
 		
 		navConf = getNavDrawerConfiguration();
 		

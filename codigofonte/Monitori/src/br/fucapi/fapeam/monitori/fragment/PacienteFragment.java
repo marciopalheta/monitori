@@ -14,6 +14,7 @@ import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import br.fucapi.fapeam.monitori.model.dao.UsuarioDAO;
 import br.fucapi.fapeam.monitori.navdrawer.NavDrawerItem;
+import br.fucapi.fapeam.monitori.utils.PutExtras;
 import android.os.Bundle;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -117,7 +118,7 @@ public class PacienteFragment extends Fragment {
 						usuarioSelecionado = (Paciente) lvListagem
 								.getItemAtPosition(posicao);
 
-						form.putExtra("PACIENTE_SELECIONADO", usuarioSelecionado);
+						form.putExtra(PutExtras.PACIENTE_SELECIONADO, usuarioSelecionado);
 
 						startActivity(form);
 					}
@@ -266,7 +267,7 @@ public class PacienteFragment extends Fragment {
 			
 			form = new Intent(getActivity(),
 					ColetarDadosActivity.class);				
-			form.putExtra("PACIENTE_SELECIONADO", usuarioSelecionado);
+			form.putExtra(PutExtras.PACIENTE_SELECIONADO, usuarioSelecionado);
 
 			startActivity(form);	
 			break;
@@ -275,7 +276,7 @@ public class PacienteFragment extends Fragment {
 				
 				form = new Intent(getActivity(),
 						DiagnosticarDadosActivity.class);				
-				form.putExtra("PACIENTE_SELECIONADO", usuarioSelecionado);
+				form.putExtra(PutExtras.PACIENTE_SELECIONADO, usuarioSelecionado);
 
 				startActivity(form);	
 				break;
@@ -284,7 +285,7 @@ public class PacienteFragment extends Fragment {
 				
 				form = new Intent(getActivity(), 
 						DiagnosticarActivity.class);
-				form.putExtra("PACIENTE_SELECIONADO", usuarioSelecionado);
+				form.putExtra(PutExtras.PACIENTE_SELECIONADO, usuarioSelecionado);
 				
 				startActivity(form);
 				break;
@@ -293,7 +294,7 @@ public class PacienteFragment extends Fragment {
 				
 			form = new Intent(getActivity(),
 					ColetarActivity.class);				
-			form.putExtra("PACIENTE_SELECIONADO", usuarioSelecionado);
+			form.putExtra(PutExtras.PACIENTE_SELECIONADO, usuarioSelecionado);
 
 			startActivity(form);	
 			break;
@@ -302,7 +303,7 @@ public class PacienteFragment extends Fragment {
 				
 				form = new Intent(getActivity(),
 						PacienteDadosActivity.class);				
-				form.putExtra("PACIENTE_SELECIONADO", usuarioSelecionado);
+				form.putExtra(PutExtras.PACIENTE_SELECIONADO, usuarioSelecionado);
 
 				startActivity(form);	
 				break;

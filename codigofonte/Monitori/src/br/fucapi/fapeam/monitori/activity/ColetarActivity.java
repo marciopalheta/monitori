@@ -9,6 +9,7 @@ import br.fucapi.fapeam.monitori.model.bean.Paciente;
 import br.fucapi.fapeam.monitori.model.bean.TipoUsuario;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import br.fucapi.fapeam.monitori.model.dao.ColetarDadosDAO;
+import br.fucapi.fapeam.monitori.utils.PutExtras;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -57,7 +58,7 @@ public class ColetarActivity extends Activity {
 		setContentView(R.layout.coletar);
 		
 		pacienteSelecionado = (Paciente) getIntent().getSerializableExtra(
-				"PACIENTE_SELECIONADO");
+				PutExtras.PACIENTE_SELECIONADO);
 		
 		
 		if (pacienteSelecionado == null) {
@@ -98,7 +99,7 @@ public class ColetarActivity extends Activity {
 				Intent form = new Intent(ColetarActivity.this, ColetarDadosActivity.class);
 				
 				coletaSelecionada = (ColetarDados) lvListagem.getItemAtPosition(posicao);
-				form.putExtra("COLETA_SELECIONADA", coletaSelecionada);
+				form.putExtra(PutExtras.COLETA_SELECIONADA, coletaSelecionada);
 				startActivity(form);
 			}			
 		});
@@ -190,7 +191,7 @@ public class ColetarActivity extends Activity {
 				
 				Intent form = new Intent(ColetarActivity.this,
 						ColetarDadosActivity.class);				
-				form.putExtra("COLETAR_SELECIONADO", coletaSelecionada);
+				form.putExtra(PutExtras.COLETA_SELECIONADA, coletaSelecionada);
 
 				startActivity(form);
 				break;

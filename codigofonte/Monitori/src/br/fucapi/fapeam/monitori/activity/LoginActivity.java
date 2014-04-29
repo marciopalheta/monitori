@@ -7,6 +7,7 @@ import br.fucapi.fapeam.monitori.activity.paciente.PacienteActivity;
 import br.fucapi.fapeam.monitori.model.bean.Usuario;
 import br.fucapi.fapeam.monitori.model.dao.UsuarioDAO;
 import br.fucapi.fapeam.monitori.utils.Mask;
+import br.fucapi.fapeam.monitori.utils.PutExtras;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -135,7 +136,7 @@ public class LoginActivity extends Activity {
 		//Intent intent = new Intent(LoginActivity.this,MenuPrincipalActivity.class);
 		Intent intent = new Intent(this, AppMainActivity.class);
 		
-		intent.putExtra("USUARIO_LOGADO", usuarioLogado);
+		intent.putExtra(PutExtras.USUARIO_LOGADO, usuarioLogado);
 		startActivity(intent);//Carrega a nova tela		
 				
 		this.finish();

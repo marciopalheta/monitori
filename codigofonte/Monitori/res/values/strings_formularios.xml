@@ -101,8 +101,8 @@
     <!-- coletar dados -->
     <string name="coletar_dados">Coleta de dados</string>
     <string name="pa">PA</string>
-    <string name="sis">SIS</string>
-    <string name="sistole">DIA</string>
+    <string name="sis">BAIXA</string>
+    <string name="sistole">ALTA</string>
     <string name="glicose">Glicose</string>
     <string name="jejum">Jejum</string>
     <string name="pos_pandrial">Pós-pandrial</string>
